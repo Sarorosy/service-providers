@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import logo from '../assets/logo.jfif';
+import logo from '../assets/logo-login.png';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -88,13 +88,13 @@ export default function Login() {
       <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-gradient-to-br from-sky-300 to-green-300 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob"></div>
 
       {/* Glassmorphism form card */}
-      <div className="relative z-10 bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg rounded-xl p-8 w-full max-w-md mx-4 shadow-lg border border-white border-opacity-30">
+      <div className="relative z-10 bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg  p-8 w-full max-w-md mx-4 shadow-lg border border-white border-opacity-30">
         <div className="text-center mb-8">
           <img
             src={logo} // Adjust the path as necessary
             alt="Service Providers Logo"
-            className="mx-auto rounded-full bg-white p-2 mb-4"
-            style={{ width: '60px', height: '60px' }}
+            className="mx-auto  bg-white p-2 mb-4"
+            style={{  height: '60px' }}
           />
           <h2 className="text-3xl font-bold text-gray-800">Service Providers</h2>
           <p className="text-gray-600 mt-2">Sign in to your account</p>
