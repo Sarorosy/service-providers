@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: -apple-system, BlinkMacSystemFont, 'PT Serif', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -10,4 +10,170 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+/* ManageNotifications.css */
+.table-container {
+  background-color: #f9f9f9; /* Light background color for the container */
+  border-radius: 8px; /* Rounded corners */
+  padding: 20px; /* Padding around the container */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.dataTables_wrapper {
+  padding: 20px; /* Add padding inside the DataTable wrapper */
+}
+
+.dataTable {
+  border-radius: 8px; /* Rounded corners for the table */
+  overflow: hidden; /* Hide overflow to keep corners rounded */
+}
+
+.dataTable thead {
+  background-color: #C4E1F6; /* Sky blue header background color */
+  color: rgb(27, 71, 107); /* Header text color */
+}
+
+.dataTable th, .dataTable td {
+  padding: 12px 15px; /* Padding for table cells */
+  border: 1px solid #ddd; /* Border between cells */
+  
+}
+
+
+
+.dataTable .view-btn, .edit-btn, .dataTable .delete-btn {
+  padding: 3px 6px; /* Padding for buttons */
+  margin-right: 5px; /* Space between buttons */
+  border: none;
+  border-radius: 4px; /* Rounded corners for buttons */
+  
+  cursor: pointer; /* Pointer cursor for buttons */
+  font-size: 15px;
+}
+.dataTable .view-btn {
+  color: #0066ff; /* Green background for edit button */
+  background-color: #C4E1F6;
+}
+.dataTable .edit-btn {
+  color: #bd7b00; /* Green background for edit button */
+  background-color: #FFD09B;
+}
+.dataTable .workoff-button {
+  color: #30aa00; /* Green background for edit button */
+  background-color: #aeffb5;
+}
+.dataTable .delete-btn {
+  color: #c50700; /* Red background for delete button */
+  background-color:#FFB0B0 ;
+}
+.dataTable .view-button {
+  color: #0066ff; /* Green background for edit button */
+  background-color: #C4E1F6;
+  margin: 3px 0;
+  border-radius: 6px;
+}
+.dataTable .edit-button {
+  color: #bd7b00; /* Green background for edit button */
+  background-color: #FFD09B;
+  margin: 3px 0;
+  border-radius: 6px;
+}
+
+.dataTable .toggle-status-btn {
+  color: #6200bd; /* Green background for edit button */
+  background-color: #dcb7ff;
+  margin: 3px 0;
+  border-radius: 6px;
+}
+.dataTable .toggle-status-button {
+  color: #6200bd; /* Green background for edit button */
+  background-color: #dcb7ff;
+  margin: 3px 0;
+  border-radius: 6px;
+}
+
+.dataTable .delete-button {
+  color: #c50700; /* Red background for delete button */
+  background-color:#FFB0B0 ;
+  margin: 3px 0;
+  border-radius: 6px;
+}
+.activeclass {
+  background-color: #d1fae5; /* Light green background */
+  color: #065f46; /* Dark green text */
+  padding: 0.25rem 0.5rem; /* Padding for the tag */
+  border-radius: 0.5rem; /* Rounded corners */
+  display: inline-block; /* Display as inline-block */
+}
+
+.inactiveclass {
+  background-color: #fee2e2; /* Light red background */
+  color: #991b1b; /* Dark red text */
+  padding: 0.25rem 0.5rem; /* Padding for the tag */
+  border-radius: 0.5rem; /* Rounded corners */
+  display: inline-block; /* Display as inline-block */
+}
+.ul {
+  overflow-y: scroll;  /* Allows vertical scrolling */
+  scrollbar-width: none; /* For Firefox */
+}
+
+.ul::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Edge */
+}
+/* Add this CSS to your stylesheet or in a style tag */
+.table-container {
+  display: flex;
+  flex-wrap: wrap; /* Allows the content to wrap */
+  overflow: auto; /* Enables scrolling if content overflows */
+  max-width: 100%; /* Prevents overflowing beyond container */
+  margin-top: 20px; /* Adds space above the table */
+}
+.display {
+  width: 100%; 
+  table-layout: fixed;
+}
+.dataTables th, .dataTables td {
+  white-space: nowrap; /* Prevents text from wrapping in cells */
+  overflow: hidden; /* Hides overflow content */
+  text-overflow: ellipsis; /* Adds ellipsis for overflow text */
+}
+
+
+.ql-editor{
+  height: 200px !important;
+  background: white;
+}
+.fc-dayGridMonth-button , .fc-timeGridWeek-button, .fc-timeGridDay-button{
+  display: none !important;
+}
+.fc .fc-scroller-liquid-absolute{
+  position: unset;
+}
+.fc-day-other:not(.fc-day-sun) {
+  opacity: 0; 
+  cursor: default;
+}
+
+.fc-day-sun {
+  background-color: #adceff;
+}
+/* Adjust FullCalendar styles */
+.fc {
+  font-size: 0.875rem; /* Set a smaller base font size */
+}
+
+.fc-daygrid-event {
+  padding: 4px; /* Adjust padding for events */
+  text-align: center; /* Center align text */
+}
+
+.fc-daygrid-day {
+  min-height: 50px; /* Ensure a minimum height for day cells */
+}
+
+/* Customize the sidebar for better presentation */
+.sidebar {
+  max-height: 80vh; /* Limit sidebar height */
+  overflow-y: auto; /* Enable scrolling if content overflows */
 }
