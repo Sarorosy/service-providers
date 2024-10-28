@@ -20,22 +20,36 @@ const ManageReports = () => {
     }
 }, [navigate]);
 
-  const fetchUsers = async () => {
-    try {
-        setLoading(true);
-      const response = await fetch('https://serviceprovidersback.onrender.com/api/users/serviceproviders'); // API endpoint
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      const data = await response.json();
-      setUsers(Array.isArray(data) ? data : []);
-    } catch (error) {
-      console.error('Error fetching users:', error);
-      setUsers([]); // Empty array on error
-    } finally {
-      setLoading(false); // Stop loading indicator
+const fetchUsers = async () => {
+  try {
+    setLoading(true);
+    const response = await fetch('https://serviceprovidersback.onrender.com/api/users/serviceproviders'); // API endpoint
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
     }
-  };
+    const usersData = await response.json();
+    
+    // Fetch last report for each user
+    const usersWithLastReport = await Promise.all(usersData.map(async (user) => {
+      const reportResponse = await fetch(`https://serviceprovidersback.onrender.com/api/worksummaries/user/${user._id}`);
+      const reports = reportResponse.ok ? await reportResponse.json() : [];
+      const lastReport = reports.length > 0 ? reports[reports.length - 1] : null; // Get the last report if it exists
+      const lastReportDesc = lastReport ? lastReport.fld_description : 'No Report'; // Get description or set to 'No Report'
+      return { ...user, lastReportDesc }; // Combine user data with last report description
+    }));
+
+    setUsers(usersWithLastReport);
+  } catch (error) {
+    console.error('Error fetching users:', error);
+    setUsers([]); // Empty array on error
+  } finally {
+    setLoading(false); // Stop loading indicator
+  }
+};
+
+useEffect(() => {
+  fetchUsers();
+}, []);
 
   useEffect(() => {
     fetchUsers();
@@ -58,9 +72,17 @@ const ManageReports = () => {
   },
     { title: 'Name', data: 'fld_name' },
     {
+      title: 'Last Report',
+      data: 'lastReportDesc',
+      render: (data) => {
+        // Trim to 20 characters and append ellipsis if necessary
+        return data && data.length > 50 ? `${data.substring(0, 50)}...` : data;
+      },
+    },
+    {
       title: 'Actions',
       render: (data, type, row) => `
-        <button class="view-btn" data-id="${row._id}">View</button>
+        <button class="view-btn" data-id="${row._id}">View All</button>
       `,
     },
   ];

@@ -24,7 +24,7 @@ const AddNotificationForm = ({ onClose }) => {
     useEffect(() => {
       const fetchServiceProviders = async () => {
         try {
-          const response = await fetch('https://serviceprovidersback.onrender.com/api/users/serviceproviders');
+          const response = await fetch('https://serviceprovidersback.onrender.com/api/users/activeserviceproviders');
           if (!response.ok) {
             throw new Error('Network response was not ok');
           }
@@ -157,6 +157,7 @@ const AddNotificationForm = ({ onClose }) => {
                 id="dueDate"
                 name="fld_due_date"
                 value={formData.fld_due_date} // Updated
+                min={new Date().toISOString().split("T")[0]} 
                 onChange={handleChange}
                 className="border border-gray-300 rounded p-2 w-full"
                 required

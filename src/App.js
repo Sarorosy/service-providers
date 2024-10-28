@@ -41,6 +41,8 @@ function App() {
             <Route path="manage-reports" element={<ManageReports />} />
             <Route path="report/:id" element={<UserWorkSummary />} />
             <Route path="/manage-service-provider" element={< ManageServiceProvider />} />
+            <Route path="/manage-service-provider/active" element={<ManageServiceProvider />} />
+              <Route path="/manage-service-provider/inactive" element={<ManageServiceProvider />} />
             <Route path="/work-offs" element={< ManageWorkoffs />} />
             <Route path="/manage-work-off/:id" element={< ManageUserWorkoff />} />
             <Route path="/manage-work-days" element={<ManageWorkDays />} />
@@ -61,7 +63,7 @@ function App() {
   );
 }
 
-// Create a private route component to handle authentication
+// Create a private route component to handle authentication https://serviceprovidersback.onrender.com/
 const PrivateRoute = () => {
   const navigate = useNavigate();
   useEffect(() => {

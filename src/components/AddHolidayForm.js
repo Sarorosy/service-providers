@@ -20,7 +20,7 @@ const AddHolidayForm = ({ onClose }) => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch('https://serviceprovidersback.onrender.com/api/users/serviceproviders');
+        const response = await fetch('https://serviceprovidersback.onrender.com/api/users/activeserviceproviders');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -153,6 +153,7 @@ const AddHolidayForm = ({ onClose }) => {
             id="holidayDate"
             name="fld_holiday_date"
             value={formData.fld_holiday_date}
+            min={new Date().toISOString().split("T")[0]} 
             onChange={handleChange}
             className="border border-gray-300 rounded p-2 w-full"
             required

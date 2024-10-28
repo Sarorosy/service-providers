@@ -23,6 +23,7 @@ const ManageUserWorkoff = ({ onClose, serviceProviderId }) => {
     const fetchData = async () => {
         setLoading(true);
         try {
+            
             const [workoffResponse, serviceProviderResponse] = await Promise.all([
                 fetch(`https://serviceprovidersback.onrender.com/api/manageworkoffs/${serviceProviderId}`),
                 fetch('https://serviceprovidersback.onrender.com/api/users/serviceproviders/')
