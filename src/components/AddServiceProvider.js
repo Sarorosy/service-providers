@@ -147,7 +147,7 @@ const AddServiceProvider = ({ onClose }) => {
                             value={formData.fld_phone}
                             onChange={handleChange}
                             className="border border-gray-300 rounded p-2 w-full text-sm"
-                            required
+                            
                         />
                     </div>
                     <div className="mb-4">
@@ -167,8 +167,8 @@ const AddServiceProvider = ({ onClose }) => {
                         <input
                             type="password"
                             id="confirm_password"
-                            name="fld_decrypt_password"
-                            value={formData.fld_decrypt_password}
+                            name=""
+                            value={formData.fld_password}
                             onChange={handleChange}
                             className="border border-gray-300 rounded p-2 w-full text-sm"
                             required
@@ -194,7 +194,7 @@ const AddServiceProvider = ({ onClose }) => {
                             value={formData.fld_gender}
                             onChange={handleChange}
                             className="border border-gray-300 rounded p-2 w-full text-sm"
-                            required
+                            
                         >
                             <option value="">Select</option>
                             <option value="Male">Male</option>
@@ -212,7 +212,7 @@ const AddServiceProvider = ({ onClose }) => {
                             onChange={handleChange}
                             className="border border-gray-300 rounded p-2 w-full text-sm"
                             placeholder="Max. 4 words"
-                            required
+                            
                         />
                     </div>
                     <div className="mb-4">
@@ -224,7 +224,7 @@ const AddServiceProvider = ({ onClose }) => {
                             value={formData.fld_aadhar}
                             onChange={handleChange}
                             className="border border-gray-300 rounded p-2 w-full text-sm"
-                            required
+                            
                         />
                     </div>
                     <div className="mb-4">
@@ -236,7 +236,7 @@ const AddServiceProvider = ({ onClose }) => {
                             value={formData.fld_start_date}
                             onChange={handleChange}
                             className="border border-gray-300 rounded p-2 w-full text-sm"
-                            required
+                            
                         />
                     </div>
                     <div className="mb-4">
@@ -260,7 +260,7 @@ const AddServiceProvider = ({ onClose }) => {
                             value={formData.fld_bankname}
                             onChange={handleChange}
                             className="border border-gray-300 rounded p-2 w-full text-sm"
-                            required
+                            
                         />
                     </div>
                     <div className="mb-4">
@@ -272,7 +272,7 @@ const AddServiceProvider = ({ onClose }) => {
                             value={formData.fld_accountno}
                             onChange={handleChange}
                             className="border border-gray-300 rounded p-2 w-full text-sm"
-                            required
+                            
                         />
                     </div>
                     <div className="mb-4">
@@ -284,7 +284,7 @@ const AddServiceProvider = ({ onClose }) => {
                             value={formData.fld_branch}
                             onChange={handleChange}
                             className="border border-gray-300 rounded p-2 w-full text-sm"
-                            required
+                            
                         />
                     </div>
                     <div className="mb-4">
@@ -296,7 +296,7 @@ const AddServiceProvider = ({ onClose }) => {
                             value={formData.fld_ifsc}
                             onChange={handleChange}
                             className="border border-gray-300 rounded p-2 w-full text-sm"
-                            required
+                            
                         />
                     </div>
                     <div className="mb-4">

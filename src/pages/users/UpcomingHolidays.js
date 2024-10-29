@@ -26,23 +26,23 @@ const UpcomingHolidays = () => {
 
     return (
         <div className="bg-white shadow-md rounded-lg p-4">
-            <h2 className="text-lg font-semibold mb-4">Upcoming Holidays</h2>
+            <div className="bg-purple-100 shadow-md rounded p-4 flex items-center">
+                <Calendar1 className="h-8 w-8 text-purple-600 mr-3" />
+                <div>
+                    <h2 className="text-xl font-bold">Upcoming Holidays</h2>
+                    <p className="text-3xl">{holidays.length}</p>
+
+                </div>
+            </div>
             <ul className="space-y-2">
                 {holidays.map(holiday => (
                     <li key={holiday._id} className="flex flex-col text-gray-800">
-                        <div className="flex justify-between items-start">
-                            <strong className="mr-2 text-blue-600">{holiday.fld_title}</strong>
-                            <span className="text-sm text-gray-600 flex items-center">
-                                <Calendar1 className='mr-1 text-blue-600' />
-                                
-                                <span className="font-medium">
-                                    {new Intl.DateTimeFormat('en-GB', {
-                                        day: '2-digit',
-                                        month: 'short',
-                                        year: 'numeric',
-                                    }).format(new Date(holiday.fld_holiday_date))}
-                                </span>
-                            </span>
+                        <div key={holiday._id} className="bg-purple-50 p-3 rounded mt-2 shadow-md">
+                            <h3 className="text-lg font-semibold">{holiday.fld_title}</h3>
+                            <p className="text-gray-600">
+                                {/* Format the date correctly */}
+                                {new Date(holiday.fld_holiday_date).toLocaleDateString()}
+                            </p>
                         </div>
                     </li>
                 ))}

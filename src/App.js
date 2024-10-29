@@ -49,11 +49,13 @@ function App() {
             <Route path="/userworkdays/:id" element={<UserWorkDays />} />
             <Route path="/manage-service-charge" element={<ManageServiceCharge />} />
             <Route path="/admindashboard" element={<AdminDashboard />} />
+
+            {/* user routes below */}
             <Route path="/dashboard" element={<UserDashboard />} />
             <Route path="/work-summary" element={<ManageWorkSummary />} />
             <Route path="/manage-projects" element={<ManageProjects />} />
             <Route path="/manage-profile" element={<ManageProfile />} />
-            <Route path="/change-password" element={<ChangePassword />} />
+            {/* <Route path="/change-password" element={<ChangePassword />} /> */}
             <Route path="/manage-work-offs" element={<ManageUserWorkOffs />} />
             <Route path="/work-days" element={<UserWorkDayss />} />
           </Route>
@@ -69,10 +71,30 @@ const PrivateRoute = () => {
   useEffect(() => {
     const adminId = sessionStorage.getItem('userId');
     const adminEmail = sessionStorage.getItem('email');
+    const adminType = sessionStorage.getItem('adminType');
 
     if (!adminId || !adminEmail) {
       navigate('/login');
     }
+
+    if (adminType === "SERVICE_PROVIDER") {
+      const requiredFields = [
+        'username', 'name', 'email', 'phone', 'gender',
+        'address', 'designation', 'aadhar', 'bankName',
+        'accountNo', 'branch', 'ifsc'
+      ];
+
+      // Check for any empty or null fields
+      const isIncomplete = requiredFields.some(field => {
+        const value = sessionStorage.getItem(field);
+        return !value || value === "null";
+      });
+
+      if (isIncomplete) {
+        navigate('/manage-profile', { state: { message: "Please fill all the details to access other pages" } });
+      }
+    }
+
   }, [navigate]);
 
   return <Dashboard/>; 

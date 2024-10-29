@@ -162,18 +162,9 @@ const ManageWorkSummary = () => {
       },
     },
     {
-        title: 'Status',
-        data: 'status',
-        width: "50px",
-        render: (data) => {
-          if (data) {
-            // For Active
-            return `<span style="background-color: lightgreen; color: green; padding: 5px; border-radius: 5px;">Active</span>`;
-          } else {
-            // For Inactive
-            return `<span style="background-color: lightcoral; color: red; padding: 5px; border-radius: 5px;">Inactive</span>`;
-          }
-        },
+        title: 'Description',
+        data: 'fld_description',
+        width: "100px"
       },
       
     {
@@ -183,8 +174,7 @@ const ManageWorkSummary = () => {
         `<div style="width: 100%;display:flex;flex-direction:column;">
            <button class="edit-btn" data-id="${row._id}">Edit</button>
            <button class="delete-btn" data-id="${row._id}" style="margin-top: 10px;">Delete</button>
-           <button class="toggle-status-btn" data-id="${row._id}" style="margin-top: 10px;">Toggle Status</button>
-         </div>`
+           </div>`
       ),
     },
   ];
@@ -240,7 +230,7 @@ const ManageWorkSummary = () => {
             searching: false,
             paging: true,
             ordering: true,
-            order: [[1, 'Desc']],
+           order: [[1, 'Desc']],
             createdRow: (row, data) => {
               $(row).on('click', '.edit-btn', () => handleEditButtonClick(data));
               $(row).on('click', '.delete-btn', () => handleDeleteButtonClick(data));

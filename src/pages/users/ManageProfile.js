@@ -32,6 +32,7 @@ const ManageProfile = () => {
     const [loading, setLoading] = useState(false);
     const [adminId, setAdminId] = useState(1);
     const userId = sessionStorage.getItem('userId');
+    const adminType = sessionStorage.getItem("adminType");
 
     // Fetch service provider data for editing
     const fetchServiceProvider = async () => {
@@ -76,6 +77,14 @@ const ManageProfile = () => {
             [name]: files[0],
         }));
     };
+    const isFormComplete = () => {
+        // List of required fields to check
+        const requiredFields = ['fld_username', 'fld_name', 'fld_email', 'fld_phone', 'fld_gender', 'fld_address', 'fld_designation', 'fld_aadhar', 'fld_bankname', 'fld_accountno', 'fld_branch', 'fld_ifsc'];
+        
+        // Check if any required field is empty or null
+        return requiredFields.every(field => formData[field] !== '' && formData[field] !== null);
+    };
+    
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -93,6 +102,19 @@ const ManageProfile = () => {
 
         if (response.ok) {
             toast.success("Profile updated successfully!");
+            sessionStorage.setItem('username', formData.fld_username);
+            sessionStorage.setItem('name', formData.fld_name);
+            sessionStorage.setItem('userEmail', formData.fld_name);
+            sessionStorage.setItem('phone', formData.fld_phone);
+            sessionStorage.setItem('gender', formData.fld_gender);
+            sessionStorage.setItem('address', formData.fld_address);
+            sessionStorage.setItem('designation', formData.fld_designation);
+            sessionStorage.setItem('aadhar', formData.fld_aadhar);
+            sessionStorage.setItem('bankName', formData.fld_bankname);
+            sessionStorage.setItem('accountNo', formData.fld_accountno);
+            sessionStorage.setItem('branch', formData.fld_branch);
+            sessionStorage.setItem('ifsc', formData.fld_ifsc);
+            
             
         } else {
             toast.error("Error updating Profile!");
@@ -121,8 +143,17 @@ const ManageProfile = () => {
     return (
         <div className="p-6 bg-gray-100 rounded-lg shadow-md">
             {loading && <LoadingModal />} 
+
+           
         
             <h2 className="text-2xl font-bold mb-4">Edit Profile</h2>
+
+            { adminType == "SERVICE_PROVIDER" && !isFormComplete() && (
+                <div className="p-4 mb-4 text-red-700 bg-red-100 rounded-lg">
+                    <p>Please fill all the details to access other pages.</p>
+                </div>
+            )}
+
             <form onSubmit={handleSubmit} className="max-w-5xl mx-auto mt-2">
                 <input
                     type="hidden"

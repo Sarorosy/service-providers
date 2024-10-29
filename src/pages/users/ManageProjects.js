@@ -148,8 +148,7 @@ const ManageProjects = () => {
         `<div style="width: 100%;display:flex;flex-direction:column;">
            <button class="edit-btn" data-id="${row._id}">Edit</button>
            <button class="delete-btn" data-id="${row._id}" style="margin-top: 10px;">Delete</button>
-           <button class="toggle-status-btn" data-id="${row._id}" style="margin-top: 10px;">Toggle Status</button>
-         </div>`
+           </div>`
       ),
     },
   ];
@@ -189,10 +188,7 @@ const ManageProjects = () => {
             createdRow: (row, data) => {
               $(row).on('click', '.edit-btn', () => handleEditButtonClick(data));
               $(row).on('click', '.delete-btn', () => handleDeleteButtonClick(data));
-              $(row).on('click', '.toggle-status-btn', () => {
-                const currentStatus = data.status; // Get current status
-                toggleStatus(data._id, currentStatus); // Pass id and current status
-              });
+             
             },
           }}
         />

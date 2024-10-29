@@ -140,7 +140,7 @@ console.log("Full Profile Image URL:", displayProfileImage); // Log the full URL
           Manage Profile
         </NavLink>
       </li>
-      <li>
+      {/* <li>
         <NavLink
           to="/change-password"
           className="flex items-center p-2 hover:bg-sky-200 rounded transition duration-200 my-1 border border-gray-400 transform hover:scale-105 hover:shadow-md hover:text-blue-700"
@@ -148,7 +148,7 @@ console.log("Full Profile Image URL:", displayProfileImage); // Log the full URL
           <KeyRound className="mr-2 text-gray-600" />
           Change Password
         </NavLink>
-      </li>
+      </li> */}
       <li>
         <NavLink
           to="/manage-work-offs"

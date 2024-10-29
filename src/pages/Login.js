@@ -8,6 +8,7 @@ export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  const [loading,  setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,6 +19,7 @@ export default function Login() {
     };
   
     try {
+      setLoading(true);
       const response = await fetch('https://serviceprovidersback.onrender.com/api/users/login', {
         method: 'POST',
         headers: {
@@ -59,18 +61,25 @@ export default function Login() {
         sessionStorage.setItem('startDate', data.user.fld_start_date);
         sessionStorage.setItem('endDate', data.user.fld_end_date);
         sessionStorage.setItem('totalWorkOffs', data.user.fld_total_work_offs);
-        // Redirect or do something after successful login
-        if(sessionStorage.getItem('adminType') == "SUPERADMIN"){
-          navigate('/admindashboard');
-        }else{
-          navigate('/dashboard');
-        }
+
+          setTimeout(()=>{
+             // Redirect or do something after successful login
+              if(sessionStorage.getItem('adminType') == "SUPERADMIN"){
+                navigate('/admindashboard');
+              }else{
+                navigate('/dashboard');
+              }
+          }, 2000)
+       
+
       } else {
         console.error('Login failed:', data.message);
         toast.error("Login failed!");
       }
     } catch (error) {
       console.error('Error:', error);
+    }finally{
+      setLoading(false);
     }
   };
   
@@ -126,11 +135,35 @@ export default function Login() {
             />
           </div>
           <button
-            type="submit"
-            className="w-full bg-gradient-to-r from-sky-500 to-green-500 hover:from-sky-400 hover:to-green-400 text-white font-semibold py-2 px-4 rounded-md transition duration-300 shadow-md"
-          >
-            Sign In
-          </button>
+    type="submit"
+    className="w-full bg-gradient-to-r from-sky-500 to-green-500 hover:from-sky-400 hover:to-green-400 text-white font-semibold py-2 px-4 rounded-md transition duration-300 shadow-md flex items-center justify-center"
+    disabled={loading}
+>
+    {loading ? (
+        <svg
+            className="animate-spin h-5 w-5 text-white mr-2"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+        >
+            <circle
+                className="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                strokeWidth="4"
+            ></circle>
+            <path
+                className="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291l1.769 1.768A8.001 8.001 0 0112 20v-4a4 4 0 01-4-4H4v5.291z"
+            ></path>
+        </svg>
+    ) : null}
+    {loading ? "Signing In..." : "Sign In"}
+</button>
+
         </form>
       </div>
 
