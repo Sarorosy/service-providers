@@ -84,7 +84,7 @@ const ManageHolidays = () => {
             render: (data) => {
                 const options = { day: '2-digit', month: 'short', year: 'numeric' };
                 return new Date(data).toLocaleDateString('en-GB', options).replace(',', ''); // Customize locale and remove comma
-              }
+            }
         },
         {
             title: 'Added On',
@@ -93,20 +93,20 @@ const ManageHolidays = () => {
             render: (data) => {
                 const options = { day: '2-digit', month: 'short', year: 'numeric' };
                 return new Date(data).toLocaleDateString('en-GB', options).replace(',', ''); // Customize locale and remove comma
-              }
+            }
         },
         {
             title: 'Status',
             data: 'status',
             render: (data) => {
-              const isActive = data === 'Active'; // Check if status is Active
-              return `
+                const isActive = data === 'Active'; // Check if status is Active
+                return `
                 <span class="${isActive ? 'activeclass' : 'inactiveclass'}">
                   ${data}
                 </span>
               `;
             },
-          },
+        },
         {
             title: 'Actions',
             render: (data, type, row) => (
@@ -171,22 +171,25 @@ const ManageHolidays = () => {
     };
 
     return (
-        <div className="p-6 bg-gray-100 rounded-lg shadow-md">
-            <h1 className="text-3xl font-bold mb-6 text-gray-800">Manage Holidays</h1>
+        <div className="p-6 bg-white rounded-lg shadow-md ">
 
-            <div className="flex justify-end mb-4">
-                <button
-                    onClick={fetchHolidays}
-                    className="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-200 flex items-center mr-2"
-                >
-                    Refresh <RefreshCw className='ml-2' />
-                </button>
-                <button
-                    onClick={handleAddHolidayClick}
-                    className="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-200 flex items-center"
-                >
-                    Add Holiday <CalendarPlus className='ml-2' />
-                </button>
+            <div className="flex justify-content-between mb-6 but">
+                <h1 className="text-xl font-bold text-gray-800">Manage Holidays</h1>
+
+                <div className="flex justify-end">
+                    <button
+                        onClick={fetchHolidays}
+                        className="text-white text-sm py-1 px-2 rounded transition duration-200 flex items-center mr-2"
+                    >
+                        Refresh <RefreshCw className='ml-2' height="15" width="15" />
+                    </button>
+                    <button
+                        onClick={handleAddHolidayClick}
+                        className="text-white text-sm py-1 px-2 rounded transition duration-200 flex items-center"
+                    >
+                        Add Holiday <CalendarPlus className='ml-2' height="15" width="15" />
+                    </button>
+                </div>
             </div>
 
             <AnimatePresence>
@@ -238,7 +241,7 @@ const ManageHolidays = () => {
                                 });
                                 $(row).on('click', '.edit-btn', (e) => {
                                     e.stopPropagation(); // Prevent row click event
-                                    handleEditButtonClick(e, data._id); 
+                                    handleEditButtonClick(e, data._id);
                                 });
                                 $(row).on('click', '.delete-btn', (e) => {
                                     e.stopPropagation(); // Prevent row click event
@@ -247,7 +250,7 @@ const ManageHolidays = () => {
                                 });
                             },
                         }}
-                        className="display bg-white rounded-lg shadow-sm z-1"
+                        className="display bg-white rounded"
                     />
                 )}
             </div>

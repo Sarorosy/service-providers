@@ -66,7 +66,7 @@ const AddServiceCharge = ({ onClose }) => {
             });
         } catch (error) {
             console.error('Error fetching service providers:', error);
-        }finally{
+        } finally {
             setLoading(false)
         }
     };
@@ -93,7 +93,7 @@ const AddServiceCharge = ({ onClose }) => {
             if (response.ok) {
                 toast.success('Service charge added successfully!');
                 resetForm();
-                
+
             } else {
                 toast.error('Error adding service charge!');
             }
@@ -123,79 +123,86 @@ const AddServiceCharge = ({ onClose }) => {
         >
             <button
                 onClick={onClose}
-                className="absolute top-4 right-4 bg-red-500 text-white py-2 px-2 rounded-full"
+                className="absolute top-4 right-4 text-white py-2 px-2 rounded-full"
             >
-                <CircleX />
+                <CircleX className='colorr' />
             </button>
-            <h2 className="text-2xl font-bold mb-4">Add Service Charge</h2>
 
-            {selectedProvider && (
-                <div className="mb-4 flex items-center justify-between p-4 border border-gray-300 rounded bg-white shadow">
-                    <div className="flex items-center">
-                        <img
-                            src={selectedProvider.fld_profile_image ? `https://serviceprovidersback.onrender.com/uploads/profileimg/${selectedProvider.fld_profile_image}` : 'https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg'}
-                            alt={selectedProvider.text}
-                            className="w-16 h-16 rounded-full mr-4"
-                        />
+            <div className='db'>
+                <h2 className="text-2xl font-bold mb-3 text-center">Add Service Charge</h2>
 
-                        <span className="text-lg font-semibold">{selectedProvider.fld_name}</span>
+                {selectedProvider && (
+                    <div className="mb-2 flex items-center justify-between p-4 border border-gray-300 rounded bg-white shadow">
+                        <div className="flex items-center">
+                            <img
+                                src={selectedProvider.fld_profile_image ? `https://serviceprovidersback.onrender.com/uploads/profileimg/${selectedProvider.fld_profile_image}` : 'https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg'}
+                                alt={selectedProvider.text}
+                                className="w-16 h-16 rounded-full mr-4"
+                            />
+
+                            <span className="text-lg font-semibold">{selectedProvider.fld_name}</span>
+                        </div>
+                    </div>
+                )}
+
+                <div className='wen2 mx-auto bg-white p-6 rounded-lg shadow-md'>
+                    <form onSubmit={handleSubmit} className="grid">
+                        {loading ? <RevolvingDot height="20" width="20" color="blue" ariaLabel="loading" /> : (<div className="mb-3">
+                            <label htmlFor="serviceProvider" className="block text-gray-700">Service Provider</label>
+                            <select id="serviceProvider" className="w-full p-2 border border-gray-300 rounded">
+                                <option value="">Select a service provider</option>
+                            </select>
+                        </div>)}
+
+
+                        <div className="mb-3">
+                            <label htmlFor="fromDate" className="block text-gray-700">From Date</label>
+                            <input
+                                type="date"
+                                id="fromDate"
+                                name="fld_from_date"
+                                value={formData.fld_from_date}
+                                onChange={handleInputChange}
+                                className="w-full p-2 border border-gray-300 rounded"
+                                required
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="toDate" className="block text-gray-700">To Date</label>
+                            <input
+                                type="date"
+                                id="toDate"
+                                name="fld_to_date"
+                                value={formData.fld_to_date}
+                                onChange={handleInputChange}
+                                className="w-full p-2 border border-gray-300 rounded"
+                                required
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="serviceCharge" className="block text-gray-700">Service Charge</label>
+                            <input
+                                type="number"
+                                id="serviceCharge"
+                                name="fld_service_charge"
+                                value={formData.fld_service_charge}
+                                onChange={handleInputChange}
+                                className="w-full p-2 border border-gray-300 rounded"
+                                required
+                            />
+                        </div>
+                    </form>
+                    <div className='flex justify-end but mt-3'>
+                        <button
+                            type="submit"
+                            className="text-white py-1 px-2 rounded col-span-2 flex"
+                        >
+                            <Save className="mr-2" />
+                            Add Service Charge
+                        </button>
                     </div>
                 </div>
-            )}
-
-            <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
-                {loading ? <RevolvingDot height="20" width="20" color="blue" ariaLabel="loading" /> : (<div className="mb-4">
-                    <label htmlFor="serviceProvider" className="block text-gray-700">Service Provider</label>
-                    <select id="serviceProvider" className="w-full p-2 border border-gray-300 rounded">
-                        <option value="">Select a service provider</option>
-                    </select>
-                </div>)}
-                
-
-                <div className="mb-4">
-                    <label htmlFor="fromDate" className="block text-gray-700">From Date</label>
-                    <input
-                        type="date"
-                        id="fromDate"
-                        name="fld_from_date"
-                        value={formData.fld_from_date}
-                        onChange={handleInputChange}
-                        className="w-full p-2 border border-gray-300 rounded"
-                        required
-                    />
-                </div>
-                <div className="mb-4">
-                    <label htmlFor="toDate" className="block text-gray-700">To Date</label>
-                    <input
-                        type="date"
-                        id="toDate"
-                        name="fld_to_date"
-                        value={formData.fld_to_date}
-                        onChange={handleInputChange}
-                        className="w-full p-2 border border-gray-300 rounded"
-                        required
-                    />
-                </div>
-                <div className="mb-4">
-                    <label htmlFor="serviceCharge" className="block text-gray-700">Service Charge</label>
-                    <input
-                        type="number"
-                        id="serviceCharge"
-                        name="fld_service_charge"
-                        value={formData.fld_service_charge}
-                        onChange={handleInputChange}
-                        className="w-full p-2 border border-gray-300 rounded"
-                        required
-                    />
-                </div>
-                <button
-                    type="submit"
-                    className="bg-blue-500 text-white py-2 px-4 rounded col-span-2"
-                >
-                    <Save className="mr-2" />
-                    Add Service Charge
-                </button>
-            </form>
+            </div>
             <ToastContainer />
         </motion.div>
     );

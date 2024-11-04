@@ -23,9 +23,9 @@ const ManageServiceCharge = () => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); // State for delete modal
   const navigate = useNavigate();
   useEffect(() => {
-      if (sessionStorage.getItem("adminType") != "SUPERADMIN") {
-          navigate("/dashboard"); // Redirect to homepage if not SUPERADMIN
-      }
+    if (sessionStorage.getItem("adminType") != "SUPERADMIN") {
+      navigate("/dashboard"); // Redirect to homepage if not SUPERADMIN
+    }
   }, [navigate]);
 
 
@@ -159,23 +159,25 @@ const ManageServiceCharge = () => {
   ];
 
   return (
-    <div className="p-6 bg-gray-100 rounded-lg shadow-md">
-      <h2 className="text-2xl mb-4">Manage Service Charges</h2>
-      <div className='flex float-right'>
-        <button
-          onClick={fetchData}
-          className="bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center mb-4 mr-2"
-        >
-          <RefreshCw className="mr-2" />
-          Refresh
-        </button>
-        <button
-          onClick={handleAddButtonClick}
-          className="bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center mb-4"
-        >
-          <PlusCircle className="mr-2" />
-          Add Service Charge
-        </button>
+    <div className="p-6 bg-white rounded-lg shadow-md">
+      <div className="flex justify-content-between but">
+        <h2 className="text-xl font-bold text-gray-800">Manage Service Charges</h2>
+        <div className='flex float-right'>
+          <button
+            onClick={fetchData}
+            className="text-white text-sm py-1 px-2 rounded flex items-center mr-2"
+          >
+            <RefreshCw className="mr-2" height="15" width="15" />
+            Refresh
+          </button>
+          <button
+            onClick={handleAddButtonClick}
+            className="text-white text-sm py-1 px-2 rounded flex items-center"
+          >
+            <PlusCircle className="mr-2" height="15" width="15" />
+            Add Service Charge
+          </button>
+        </div>
       </div>
       {loading ? (
         <div className="flex justify-center">

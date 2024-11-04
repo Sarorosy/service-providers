@@ -11,190 +11,287 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
 /* ManageNotifications.css */
 .table-container {
-  background-color: #f9f9f9; /* Light background color for the container */
-  border-radius: 8px; /* Rounded corners */
-  padding: 20px; /* Padding around the container */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  /* background-color: #f9f9f9; */
+  /* Light background color for the container */
+  /* border-radius: 8px; */
+  /* Rounded corners */
+  /* padding: 20px; */
+  /* Padding around the container */
+  /* box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); */
+  /* Subtle shadow for depth */
 }
 
 .dataTables_wrapper {
-  padding: 20px; /* Add padding inside the DataTable wrapper */
+  padding: 20px;
+  /* Add padding inside the DataTable wrapper */
 }
 
 .dataTable {
-  border-radius: 8px; /* Rounded corners for the table */
-  overflow: hidden; /* Hide overflow to keep corners rounded */
+  border-radius: 8px;
+  /* Rounded corners for the table */
+  overflow: hidden;
+  /* Hide overflow to keep corners rounded */
 }
 
 .dataTable thead {
-  background-color: #C4E1F6; /* Sky blue header background color */
-  color: rgb(27, 71, 107); /* Header text color */
+  background-color: #C4E1F6;
+  /* Sky blue header background color */
+  color: rgb(27, 71, 107);
+  /* Header text color */
 }
 
-.dataTable th, .dataTable td {
-  padding: 12px 15px; /* Padding for table cells */
-  border: 1px solid #ddd; /* Border between cells */
-  
+.dataTable th,
+.dataTable td {
+  padding: 12px 15px;
+  /* Padding for table cells */
+  border: 1px solid #ddd;
+  /* Border between cells */
+
 }
 
 
 
-.dataTable .view-btn, .edit-btn, .dataTable .delete-btn {
-  padding: 3px 6px; /* Padding for buttons */
-  margin-right: 5px; /* Space between buttons */
+.dataTable .view-btn,
+.edit-btn,
+.dataTable .delete-btn {
+  padding: 3px 6px;
+  /* Padding for buttons */
+  margin-right: 5px;
+  /* Space between buttons */
   border: none;
-  border-radius: 4px; /* Rounded corners for buttons */
-  
-  cursor: pointer; /* Pointer cursor for buttons */
-  font-size: 15px;
+  border-radius: 4px;
+  /* Rounded corners for buttons */
+
+  cursor: pointer;
+  /* Pointer cursor for buttons */
+  /* font-size: 15px; */
 }
+
+.dataTable .view-btn:hover{
+background-color: #0066ff;
+color: #fff;
+}
+
 .dataTable .view-btn {
-  color: #0066ff; /* Green background for edit button */
+  /* color: #0066ff; */
+  color: #0066ff;
+  /* Green background for edit button */
   background-color: #C4E1F6;
 }
+
 .dataTable .edit-btn {
-  color: #bd7b00; /* Green background for edit button */
+  /* color: #bd7b00; */
+  color: #bd7b00;
+  /* Green background for edit button */
   background-color: #FFD09B;
 }
+
+.dataTable .edit-btn:hover {
+  /* color: #bd7b00; */
+  color: #fff;
+  /* Green background for edit button */
+  background-color: #dd9105;
+}
+
 .dataTable .workoff-button {
-  color: #30aa00; /* Green background for edit button */
+  /* color: #30aa00; */
+  color: #30aa00;
+  /* Green background for edit button */
   background-color: #aeffb5;
 }
+
 .dataTable .delete-btn {
-  color: #c50700; /* Red background for delete button */
-  background-color:#FFB0B0 ;
+  color: #c50700;
+  /* Red background for delete button */
+  background-color: #FFB0B0;
 }
+
+
+.dataTable .delete-btn:hover {
+  color: #fff;
+  background-color: #ff3535;
+}
+
+
 .dataTable .view-button {
-  color: #0066ff; /* Green background for edit button */
+  color: #0066ff;
+  /* Green background for edit button */
   background-color: #C4E1F6;
   margin: 3px 0;
   border-radius: 6px;
 }
+
 .dataTable .edit-button {
-  color: #bd7b00; /* Green background for edit button */
+  color: #bd7b00;
+  /* Green background for edit button */
   background-color: #FFD09B;
   margin: 3px 0;
   border-radius: 6px;
 }
 
 .dataTable .toggle-status-btn {
-  color: #6200bd; /* Green background for edit button */
+  color: #6200bd;
+  /* Green background for edit button */
   background-color: #dcb7ff;
   margin: 3px 0;
   border-radius: 6px;
 }
+
 .dataTable .toggle-status-button {
-  color: #6200bd; /* Green background for edit button */
+  color: #6200bd;
+  /* Green background for edit button */
   background-color: #dcb7ff;
   margin: 3px 0;
   border-radius: 6px;
 }
 
 .dataTable .delete-button {
-  color: #c50700; /* Red background for delete button */
-  background-color:#FFB0B0 ;
+  color: #c50700;
+  /* Red background for delete button */
+  background-color: #FFB0B0;
   margin: 3px 0;
   border-radius: 6px;
 }
+
 .activeclass {
-  background-color: #d1fae5; /* Light green background */
-  color: #065f46; /* Dark green text */
-  padding: 0.25rem 0.5rem; /* Padding for the tag */
-  border-radius: 0.5rem; /* Rounded corners */
-  display: inline-block; /* Display as inline-block */
+  background-color: #d1fae5;
+  /* Light green background */
+  color: #065f46;
+  /* Dark green text */
+  padding: 0.25rem 0.5rem;
+  /* Padding for the tag */
+  border-radius: 4px;
+  /* Rounded corners */
+  display: inline-block;
+  /* Display as inline-block */
 }
 
 .inactiveclass {
-  background-color: #fee2e2; /* Light red background */
-  color: #991b1b; /* Dark red text */
-  padding: 0.25rem 0.5rem; /* Padding for the tag */
-  border-radius: 0.5rem; /* Rounded corners */
-  display: inline-block; /* Display as inline-block */
+  background-color: #fee2e2;
+  /* Light red background */
+  color: #991b1b;
+  /* Dark red text */
+  padding: 0.25rem 0.5rem;
+  /* Padding for the tag */
+  border-radius: 0.5rem;
+  /* Rounded corners */
+  display: inline-block;
+  /* Display as inline-block */
 }
+
 .ul {
-  overflow-y: scroll;  /* Allows vertical scrolling */
-  scrollbar-width: none; /* For Firefox */
+  overflow-y: scroll;
+  /* Allows vertical scrolling */
+  scrollbar-width: none;
+  /* For Firefox */
 }
 
 .ul::-webkit-scrollbar {
-  display: none; /* For Chrome, Safari, and Edge */
+  display: none;
+  /* For Chrome, Safari, and Edge */
 }
+
 /* Add this CSS to your stylesheet or in a style tag */
 .table-container {
   display: flex;
-  flex-wrap: wrap; /* Allows the content to wrap */
-  overflow: auto; /* Enables scrolling if content overflows */
-  max-width: 100%; /* Prevents overflowing beyond container */
-  margin-top: 20px; /* Adds space above the table */
+  flex-wrap: wrap;
+  /* Allows the content to wrap */
+  overflow: auto;
+  /* Enables scrolling if content overflows */
+  max-width: 100%;
+  /* Prevents overflowing beyond container */
+  margin-top: 20px;
+  /* Adds space above the table */
 }
+
 .display {
-  width: 100%; 
+  width: 100%;
   table-layout: fixed;
 }
-.dataTables th, .dataTables td {
-  white-space: nowrap; /* Prevents text from wrapping in cells */
-  overflow: hidden; /* Hides overflow content */
-  text-overflow: ellipsis; /* Adds ellipsis for overflow text */
+
+.dataTables th,
+.dataTables td {
+  white-space: nowrap;
+  /* Prevents text from wrapping in cells */
+  overflow: hidden;
+  /* Hides overflow content */
+  text-overflow: ellipsis;
+  /* Adds ellipsis for overflow text */
 }
 
 
-.ql-editor{
+.ql-editor {
   height: 200px !important;
   background: white;
 }
-.fc-dayGridMonth-button , .fc-timeGridWeek-button, .fc-timeGridDay-button{
+
+.fc-dayGridMonth-button,
+.fc-timeGridWeek-button,
+.fc-timeGridDay-button {
   display: none !important;
 }
-.fc .fc-scroller-liquid-absolute{
+
+.fc .fc-scroller-liquid-absolute {
   position: unset;
 }
+
 .fc-day-other:not(.fc-day-sun) {
-  opacity: 0; 
+  opacity: 0;
   cursor: default;
 }
 
 .fc-day-sun {
   background-color: #adceff;
 }
+
 /* Adjust FullCalendar styles */
 .fc {
-  font-size: 0.875rem; /* Set a smaller base font size */
+  font-size: 0.875rem;
+  /* Set a smaller base font size */
 }
 
 .fc-daygrid-event {
-  padding: 4px; /* Adjust padding for events */
-  text-align: center; /* Center align text */
+  padding: 4px;
+  /* Adjust padding for events */
+  text-align: center;
+  /* Center align text */
 }
 
 .fc-daygrid-day {
-  min-height: 50px; /* Ensure a minimum height for day cells */
+  min-height: 50px;
+  /* Ensure a minimum height for day cells */
 }
 
 /* Customize the sidebar for better presentation */
 .sidebar {
-  max-height: 80vh; /* Limit sidebar height */
-  overflow-y: auto; /* Enable scrolling if content overflows */
+  max-height: 80vh;
+  /* Limit sidebar height */
+  overflow-y: auto;
+  /* Enable scrolling if content overflows */
 }
+
 #checklist {
-  --background: #fff;
-  --text: #414856;
-  --check: #4f29f0;
-  --disabled: #c3c8de;
+  --background: #C4E1F6;
+  --text: #2d6a9d;
+  --check: #2d6a9d;
+  /* --disabled: #c3c8de; */
   --width: 230px;
-  --height: 100px;
-  --border-radius: 10px;
+  --height: 30px;
+  --border-radius: 5px;
   background: var(--background);
   width: var(--width);
   height: var(--height);
   border-radius: var(--border-radius);
   position: relative;
   box-shadow: 0 10px 30px rgba(65, 72, 86, 0.05);
-  padding: 30px 85px;
+  padding: 20px 85px;
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 1px solid #2d6a9d;
 }
 
 #checklist label {
@@ -206,9 +303,15 @@ code {
   width: fit-content;
   transition: color 0.3s ease;
   margin-right: 20px;
+  font-weight: 500;
 }
 
-#checklist label::before, #checklist label::after {
+#checklist label:hover {
+  color: #000;
+}
+
+#checklist label::before,
+#checklist label::after {
   content: "";
   position: absolute;
 }
@@ -246,7 +349,8 @@ code {
   margin-right: 20px;
 }
 
-#checklist input[type="checkbox"]::before, #checklist input[type="checkbox"]::after {
+#checklist input[type="checkbox"]::before,
+#checklist input[type="checkbox"]::after {
   content: "";
   position: absolute;
   height: 2px;
@@ -275,17 +379,17 @@ code {
   animation: check-02 0.4s ease forwards;
 }
 
-#checklist input[type="checkbox"]:checked + label {
+#checklist input[type="checkbox"]:checked+label {
   color: var(--disabled);
   animation: move 0.3s ease 0.1s forwards;
 }
 
-#checklist input[type="checkbox"]:checked + label::before {
+#checklist input[type="checkbox"]:checked+label::before {
   background: var(--disabled);
   animation: slice 0.4s ease forwards;
 }
 
-#checklist input[type="checkbox"]:checked + label::after {
+#checklist input[type="checkbox"]:checked+label::after {
   animation: firework 0.5s ease forwards 0.1s;
 }
 
@@ -380,3 +484,210 @@ code {
     box-shadow: 0 -15px 0 0px #4f29f0, 14px -8px 0 0px #4f29f0, 14px 8px 0 0px #4f29f0, 0 15px 0 0px #4f29f0, -14px 8px 0 0px #4f29f0, -14px -8px 0 0px #4f29f0;
   }
 }
+
+.overflow-y-scroll li a {
+  padding: 12px 7px;
+}
+
+.overflow-y-scroll li a:hover {
+  /* color: #1b476b; */
+  color: #1d507a;
+}
+
+table.dataTable th.dt-type-date {
+  text-align: left !important;
+}
+
+table.dataTable.display>tbody>tr>* {
+  text-align: left !important;
+}
+
+.dt-length select {
+  margin-right: .7rem;
+}
+
+div.dt-container .dt-paging .dt-paging-button:hover {
+  border: none !important;
+  background-color: #fff !important;
+  text-decoration: underline !important;
+  color: #1b476b !important;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fff), color-stop(100%, #fff));
+}
+
+div.dt-container .dt-paging .dt-paging-button.current,
+div.dt-container .dt-paging .dt-paging-button.current,
+div.dt-container .dt-paging .dt-paging-button.current:hover {
+  color: #fff !important;
+  border: none;
+  background: #1b476b !important;
+}
+
+table.dataTable.display tbody tr {
+  font-size: 13px;
+}
+
+table.dataTable.display tbody tr span {
+  background-color: transparent !important;
+}
+
+.but button {
+  background-color: #2d6a9d;
+}
+
+.but button:hover {
+  background-color: #1d507a;
+  /* background-color: #3580bf; */
+}
+
+table.dataTable>thead>tr>th,
+table.dataTable>thead>tr>td {
+  font-size: 14px;
+}
+
+.hover\:bg-red-600:hover {
+  background-color: #ce0202 !important;
+}
+
+div.dt-container .dt-input {
+  outline: none;
+}
+
+table.dataTable th.dt-type-numeric,
+table.dataTable th.dt-type-date,
+table.dataTable td.dt-type-numeric,
+table.dataTable td.dt-type-date {
+  text-align: left;
+}
+
+div.dt-container .dt-info {
+  color: #707070;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+table.dataTable>tbody>tr>td {
+  padding: 6px 10px !important;
+}
+
+.fs {
+  font-size: 12px;
+}
+
+.fs span {
+  background-color: transparent !important;
+  font-size: 12px;
+}
+
+.db h2,
+h3,
+label {
+  color: #1b476b;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__display {
+  font-size: 13px;
+}
+
+.select2-container--default .select2-results__option--selected {
+  background-color: #fff;
+}
+
+.fthirteen span {
+  font-size: 13px;
+}
+
+div.dt-container .dt-paging .dt-paging-button {
+  padding: 0 .5em;
+}
+
+.wen {
+  width: 50rem;
+}
+
+.wen1 {
+  width: 40rem;
+}
+
+.wen2 {
+  width: 35rem;
+}
+
+.ic {
+  height: 25px;
+  width: 15px;
+}
+
+table.dataTable.display tbody tr:hover {
+  background-color: transparent !important;
+}
+
+div.dt-container .dt-search input {
+  height: 27px;
+}
+
+select.dt-input {
+  height: 25px;
+  padding: 0 !important;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__clear {
+  margin-right: 5px !important;
+  margin-top: -23px !important;
+  border: 1px solid #d5d5d5 !important;
+  border-radius: 4px;
+  width: 25px;
+  padding: 0 10px;
+  height: 30px !important;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__clear:hover {
+  background-color: #991b1b;
+  border: 1px solid #fff !important;
+  color: #fff;
+}
+
+.select2-container--default .select2-selection--multiple.select2-selection--clearable {
+  padding: 30px 31px 20px 15px !important;
+}
+
+.ql-toolbar.ql-snow {
+  background-color: #efefef;
+}
+
+.wen1 input {
+  height: 35px;
+}
+
+.wen2 input {
+  height: 35px;
+}
+
+.colorr{
+  /* color: #991b1b; */
+  color: #4b565f;
+}
+
+.colorr:hover{
+  color: #991b1b;
+}
+
+.select2-container--default .select2-selection--single {
+  background-color: #fff;
+  border: 1px solid #dee2e6 !important;
+  border-radius: 4px;
+  height: 35px !important;
+}
+
+.wen2 .select2-container--default .select2-selection--single .select2-selection__rendered {
+  color: #0000 !important;
+  line-height: 33px;
+}
+
+.wen2 .select2-container--default .select2-selection--single .select2-selection__arrow {
+  height: 26px;
+  position: absolute;
+  top: 7px;
+  right: 1px;
+  width: 20px;
+}
+

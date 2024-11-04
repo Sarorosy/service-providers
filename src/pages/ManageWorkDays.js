@@ -73,15 +73,17 @@ const ManageWorkDays = () => {
   };
 
   return (
-    <div className="p-6 bg-gray-100 rounded-lg shadow-md">
-      <h1 className="text-3xl font-bold mb-6 text-gray-800">Manage Work Days</h1>
-      <div className="flex justify-end mb-4">
+    <div className="p-6 bg-white rounded-lg shadow-md">
+                  <div className="flex justify-content-between mb-4 but">
+      <h1 className="text-xl font-bold text-gray-800">Manage Work Days</h1>
+      <div className="flex justify-end">
         <button
           onClick={fetchServiceProviders}
-          className="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-200 flex items-center mr-2"
+          className="text-white text-sm py-1 px-2 rounded transition duration-200 flex items-center mr-2"
         >
-          Refresh <RefreshCw className='ml-2' />
+          Refresh <RefreshCw className='ml-2' height="15" width="15"/>
         </button>
+      </div>
       </div>
 
       {loading ? (
@@ -107,7 +109,7 @@ const ManageWorkDays = () => {
               $(row).on('click', handleRowClick); // Handle row clicks
             },
           }}
-          className="display bg-white rounded-lg shadow-sm z-1"
+          className="display bg-white rounded"
         />
       )}
     </div>

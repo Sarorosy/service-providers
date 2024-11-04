@@ -8,9 +8,9 @@ import { useNavigate } from 'react-router-dom';
 
 import AddNotificationForm from '../components/AddNotificationForm';
 import EditNotificationForm from '../components/EditNotificationForm';
-import ViewNotification from '../components/ViewNotification'; 
-import ConfirmationModal from '../components/ConfirmationModal'; 
-import { BellPlus, RefreshCw, Eye, SettingsIcon, OctagonX } from 'lucide-react';
+import ViewNotification from '../components/ViewNotification';
+import ConfirmationModal from '../components/ConfirmationModal';
+import { BellPlus, RefreshCw, Eye, SettingsIcon, OctagonX, SquarePen } from 'lucide-react';
 import { RevolvingDot } from 'react-loader-spinner';
 
 const ManageNotifications = () => {
@@ -26,11 +26,11 @@ const ManageNotifications = () => {
   const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
-    useEffect(() => {
-        if (sessionStorage.getItem("adminType") != "SUPERADMIN") {
-            navigate("/dashboard"); // Redirect to homepage if not SUPERADMIN
-        }
-    }, [navigate]);
+  useEffect(() => {
+    if (sessionStorage.getItem("adminType") != "SUPERADMIN") {
+      navigate("/dashboard"); // Redirect to homepage if not SUPERADMIN
+    }
+  }, [navigate]);
 
   const handleAddNotificationClick = () => {
     setIsFormOpen(true); // Open the form when button is clicked
@@ -121,12 +121,12 @@ const ManageNotifications = () => {
     setIsViewOpen(false);
     setViewNotificationData(null); // Reset view data
   };
-  
+
 
   // Function to handle delete button click
   const handleDeleteButtonClick = (e) => {
     const button = e.target;
-    
+
     if (button.classList.contains("delete-btn")) {
       const id = button.getAttribute("data-id");
       setSelectedNotificationId(id); // Set selected notification ID
@@ -156,40 +156,44 @@ const ManageNotifications = () => {
   };
 
   return (
-    <div className="p-6 bg-gray-100 rounded-lg shadow-md">
-      <h1 className="text-3xl font-bold mb-6 text-gray-800">Manage Notifications</h1>
+    <div className="p-6 bg-white rounded-lg shadow-md ">
 
-      <div className="flex justify-end mb-4">
-        <button
-          onClick={fetchNotifications}
-          className="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-200 flex items-center mr-2"
-        >
-          Refresh <RefreshCw className='ml-2' />
-        </button>
-        <button
-          onClick={handleAddNotificationClick}
-          className="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-200 flex items-center"
-        >
-          Add Notification <BellPlus className='ml-2' />
-        </button>
+      <div className="flex justify-content-between mb-6 but">
+        <h1 className="text-xl font-bold text-gray-800">Manage Notifications</h1>
+
+        <div className='col-md-4 flex justify-content-end'>
+          <button
+            onClick={fetchNotifications}
+            className="text-white text-sm py-1 px-2 rounded transition duration-200 flex items-center mr-2"
+          >
+            Refresh <RefreshCw className='ml-2' height="15" width="15"/>
+          </button>
+          <button
+            onClick={handleAddNotificationClick}
+            className="text-white text-sm py-1 px-2 rounded transition duration-200 flex items-center "
+          >
+            Add Notification <BellPlus className='ml-2' height="15" width="15"/>
+          </button>
+        </div>
       </div>
+
 
       <AnimatePresence>
         {isFormOpen && <AddNotificationForm onClose={handleCloseForm} />}
         {isViewOpen && viewNotificationData && (
-          <ViewNotification 
-          notificationId={viewNotificationData._id} 
-            onClose={handleCloseView} 
+          <ViewNotification
+            notificationId={viewNotificationData._id}
+            onClose={handleCloseView}
           />
         )}
         {isEditFormOpen && <EditNotificationForm notificationId={selectedNotificationId} onClose={handleCloseEditForm} />}
         {isDeleteModalOpen && (
           <ConfirmationModal
-          isOpen={isDeleteModalOpen} // Pass isOpen prop
-          onConfirm={handleDeleteConfirmation}
-          onClose={() => setIsDeleteModalOpen(false)}
-          content = "want to delete this notification?"
-        isReversible = {true}
+            isOpen={isDeleteModalOpen} // Pass isOpen prop
+            onConfirm={handleDeleteConfirmation}
+            onClose={() => setIsDeleteModalOpen(false)}
+            content="want to delete this notification?"
+            isReversible={true}
           />
         )}
       </AnimatePresence>
@@ -217,16 +221,16 @@ const ManageNotifications = () => {
               createdRow: (row, data) => {
                 $(row).on('click', (e) => {
                   const button = e.target;
-                if (button.classList.contains('view-btn')) {
-                  const id = button.getAttribute('data-id');
-                  handleViewNotificationClick(id);
-                }
+                  if (button.classList.contains('view-btn')) {
+                    const id = button.getAttribute('data-id');
+                    handleViewNotificationClick(id);
+                  }
                   handleEditButtonClick(e, data);
                   handleDeleteButtonClick(e); // Check for delete button click
                 });
               },
             }}
-            className="display bg-white rounded-lg shadow-sm z-1"
+            className="display bg-white rounded"
           />
         )}
       </div>

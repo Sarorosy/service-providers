@@ -148,8 +148,9 @@ const EditServiceCharge = ({ onClose, id }) => {
             >
                 <CircleX />
             </button>
-            <h2 className="text-2xl font-bold mb-4">Edit Service Charge</h2>
+            <h2 className="text-2xl font-bold mb-4 text-center">Edit Service Charge</h2>
 
+<div className='wen1 mx-auto bg-white p-6 rounded-lg shadow-md'>
             {selectedProvider && (
                 <div className="mb-4 flex items-center justify-between p-4 border border-gray-300 rounded bg-white shadow">
                     <div className="flex items-center">
@@ -213,7 +214,7 @@ const EditServiceCharge = ({ onClose, id }) => {
                     <Save className="mr-2" />
                     Update 
                 </button>
-            </form>
+            </form></div>
             <ToastContainer />
         </motion.div>
     );

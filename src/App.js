@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import Dashboard from './pages/Dashboard'; // Import the new layout
 import ManageNotifications from './pages/ManageNotification';
 import './output.css';
+import './styles.css';
 import 'select2/dist/css/select2.min.css';
 import ManageHolidays from './pages/ManageHolidays';
 import ManageReports from './pages/ManageReports';

@@ -10,7 +10,7 @@ import EditServiceProvider from '../components/EditServiceProvider';
 import { AnimatePresence } from 'framer-motion';
 import { RefreshCw, UserPlus2 } from 'lucide-react';
 import ManageUserWorkoff from './ManageUserWorkoff';
-import { useLocation, useNavigate, useParams  } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 const ManageServiceProvider = () => {
     DataTable.use(DT); // Initialize DataTables
@@ -72,11 +72,11 @@ const ManageServiceProvider = () => {
 
     const handleCheckboxChange = (e) => {
         const { value, checked } = e.target;
-    
+
         // Determine the new filter state
         let newFilterActive = filterActive;
         let newFilterInactive = filterInactive;
-    
+
         if (value === 'active') {
             newFilterActive = checked;
             newFilterInactive = false; // Uncheck inactive if active is checked
@@ -84,11 +84,11 @@ const ManageServiceProvider = () => {
             newFilterInactive = checked;
             newFilterActive = false; // Uncheck active if inactive is checked
         }
-    
+
         // Set the new filter states
         setFilterActive(newFilterActive);
         setFilterInactive(newFilterInactive);
-    
+
         // Navigate based on the new filter states
         if (newFilterActive) {
             navigate('/manage-service-provider/active');
@@ -173,14 +173,14 @@ const ManageServiceProvider = () => {
             data: 'status',
             width: "80px",
             render: (data) => {
-                if (data== "Active") {
-                  // For Active
-                  return `<span style="background-color: lightgreen; color: green; padding: 5px; border-radius: 5px;">Active</span>`;
+                if (data == "Active") {
+                    // For Active
+                    return `<span style="background-color: lightgreen; color: green; padding: 5px; border-radius: 5px;">Active</span>`;
                 } else {
-                  // For Inactive
-                  return `<span style="background-color: lightcoral; color: red; padding: 5px; border-radius: 5px;">Inactive</span>`;
+                    // For Inactive
+                    return `<span style="background-color: lightcoral; color: red; padding: 5px; border-radius: 5px;">Inactive</span>`;
                 }
-              },
+            },
         },
         {
             title: 'Action',
@@ -275,39 +275,42 @@ const ManageServiceProvider = () => {
         }
     }
     return (
-        <div className="p-6 bg-gray-100 rounded-lg shadow-md">
-            <h1 className="text-3xl font-bold mb-6 text-gray-800">Manage Service Providers</h1>
-            <div id="checklist" className="mb-4">
-                <input 
-                    checked={filterActive} 
-                    value="active" 
-                    name="active" 
-                    type="checkbox" 
-                    id="active" 
-                    onChange={handleCheckboxChange} 
+        <div className="p-6 bg-white rounded-lg shadow-md">
+            <div className="flex justify-content-between mb-3 but">
+                <h1 className="text-xl font-bold text-gray-800">Manage Service Providers</h1>
+                <div className="flex justify-end">
+                    <button
+                        onClick={fetchServiceProviders}
+                        className="text-white text-sm py-1 px-2 rounded transition duration-200 flex items-center mr-2"
+                    >
+                        Refresh <RefreshCw className='ml-2' height="15" width="15" />
+                    </button>
+                    <button onClick={handleAddServiceProviderClick} className="flex text-white text-sm py-1 px-2 rounded transition duration-200">
+                        Add Service Provider <UserPlus2 className="ml-2 mt-1" height="15" width="15" />
+                    </button>
+                </div>
+            </div>
+            <div id="checklist">
+                <input
+                    checked={filterActive}
+                    value="active"
+                    name="active"
+                    type="checkbox"
+                    id="active"
+                    onChange={handleCheckboxChange}
                 />
                 <label htmlFor="active">Active</label>
-                <input 
-                    checked={filterInactive} 
-                    value="inactive" 
-                    name="inactive" 
-                    type="checkbox" 
-                    id="inactive" 
-                    onChange={handleCheckboxChange} 
+                <input
+                    checked={filterInactive}
+                    value="inactive"
+                    name="inactive"
+                    type="checkbox"
+                    id="inactive"
+                    onChange={handleCheckboxChange}
                 />
                 <label htmlFor="inactive">Inactive</label>
             </div>
-            <div className="flex justify-end mb-4">
-                <button
-                    onClick={fetchServiceProviders}
-                    className="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-200 flex items-center mr-2"
-                >
-                    Refresh <RefreshCw className='ml-2' />
-                </button>
-                <button onClick={handleAddServiceProviderClick} className="flex bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-200">
-                    Add Service Provider <UserPlus2 className="ml-2" />
-                </button>
-            </div>
+
             <AnimatePresence>
                 {isFormOpen && <AddServiceProvider onClose={handleCloseForm} />}
                 {isViewOpen && <ViewServiceProvider serviceProviderId={selectedServiceProvider._id} onClose={handleCloseView} />}
@@ -325,7 +328,7 @@ const ManageServiceProvider = () => {
                     />
                 </div>
             ) : (
-                <div className="table-container">
+                <div className="table-container mt-1">
                     <DataTable
                         data={serviceProviders}
                         columns={columns}
@@ -343,7 +346,7 @@ const ManageServiceProvider = () => {
                                         const id = button.getAttribute('data-id');
                                         handleView(id);
                                     }
-                                    
+
                                     if (button.classList.contains('workoff-button')) {
                                         const id = button.getAttribute('data-id');
                                         handleWorkoff(id);
@@ -362,7 +365,7 @@ const ManageServiceProvider = () => {
                                 });
                             },
                         }}
-                        className="display text-xsm datatables rounded-lg shadow-sm"
+                        className="display text-xsm datatables rounded"
                     />
                 </div>
             )}
