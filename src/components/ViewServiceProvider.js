@@ -132,9 +132,9 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
         >
             <button
                 onClick={onClose}
-                className="absolute top-4 right-4 bg-red-500 text-white py-2 px-2 rounded-full"
+                className="absolute top-4 right-4 text-white py-2 px-2 rounded-full"
             >
-                <CircleX />
+                <CircleX className='colorr'/>
             </button>
             <button
                 onClick={() => handleEditClick(serviceProviderId)} // Pass the service provider ID
@@ -167,13 +167,13 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
             </AnimatePresence>
 
             <div className='db'>
-                <h2 className="text-2xl font-bold mb-4 text-center">Service Provider Details</h2>
-                <div className="max-w-5xl mx-auto bg-white p-6 rounded-lg shadow-md">
+                <h2 className="text-2xl font-bold mb-3 text-center">Service Provider Details</h2>
+                <div className="wen mx-auto bg-white p-6 rounded-lg shadow-md">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
                         {/* Personal Information Section */}
-                        <div className="p-6 shadow-lg rounded-lg bg-white">
-                            <h3 className="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+                        <div className="p-3 viewinfo rounded-lg bg-white">
+                            <h3 className="text-lg font-semibold text-gray-700 mb-3 flex items-center">
                                 <User className="w-5 h-5 mr-2 text-blue-500" /> {/* Icon for Personal Info */}
                                 Personal Information
                             </h3>
@@ -211,8 +211,8 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
                         </div>
 
                         {/* Work Profile Section */}
-                        <div className="p-6 shadow-lg rounded-lg bg-white">
-                            <h3 className="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+                        <div className="p-3 viewinfo rounded-lg bg-white">
+                            <h3 className="text-lg font-semibold text-gray-700 mb-3 flex items-center">
                                 <Briefcase className="w-5 h-5 mr-2 text-blue-500" /> {/* Icon for Work Profile */}
                                 Work Profile
                             </h3>
@@ -225,8 +225,8 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
                         </div>
 
                         {/* Bank Details Section */}
-                        <div className="p-6 shadow-lg rounded-lg bg-white">
-                            <h3 className="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+                        <div className="p-3 viewinfo rounded-lg bg-white">
+                            <h3 className="text-lg font-semibold text-gray-700 mb-3 flex items-center">
                                 <Landmark className="w-5 h-5 mr-2 text-blue-500" /> {/* Icon for Bank Details */}
                                 Bank Details
                             </h3>
@@ -239,8 +239,8 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
                         </div>
 
                         {/* Profile Image Section */}
-                        <div className="p-6 shadow-lg rounded-lg bg-white">
-                            <h3 className="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+                        <div className="p-3 viewinfo rounded-lg bg-white">
+                            <h3 className="text-lg font-semibold text-gray-700 mb-3 flex items-center">
                                 <Image className="w-5 h-5 mr-2 text-blue-500" /> {/* Icon for Profile Image */}
                                 Profile Image
                             </h3>
@@ -256,8 +256,8 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
 
                         </div>
 
-                        <div className="bg-white shadow-md rounded-lg p-4">
-                            <h2 className="text-lg font-semibold mb-4">Manage Workoffs</h2>
+                        <div className="bg-white bxs rounded-lg p-4">
+                            <h2 className="text-lg font-semibold mb-1">Manage Workoffs</h2>
                             {workoffs.length > 0 ? ( // Check if workoffs array is not empty
                                 <ul className="space-y-4">
                                     {workoffs.map((workoff) => ( // Iterate through the workoffs
@@ -280,19 +280,20 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
                                     ))}
                                 </ul>
                             ) : (
-                                <p className="text-left text-gray-500">No workoffs found.</p> // Message when no workoffs
+                                <p className="text-left text-gray-500 mb-2">No workoffs found.</p> // Message when no workoffs
                             )}
-                            <button
-                                onClick={() => handleManageWorkOff(serviceProviderId)} // Pass the service provider ID
-                                data-id={serviceProviderId}
-                                className=" bg-blue-500 text-white py-2 px-2 rounded-full manageworkoffbutton flex w-xl"
-                            >
-                                <Settings2 /> Manage
-                            </button>
-
+                            <div className='but'>
+                                <button
+                                    onClick={() => handleManageWorkOff(serviceProviderId)} // Pass the service provider ID
+                                    data-id={serviceProviderId}
+                                    className="text-white text-sm py-1 px-2 rounded flex items-center mr-2"
+                                >
+                                    <Settings2 className='ic mr-1'/> Manage
+                                </button>
+                            </div>
                         </div>
-                        <div className="bg-white shadow-md rounded-lg p-4">
-                            <h2 className="text-lg font-semibold mb-4">Service Charge Details</h2>
+                        <div className="bg-white bxs rounded-lg p-4">
+                            <h2 className="text-lg font-semibold mb-1">Service Charge Details</h2>
                             {serviceCharges.length > 0 ? (
                                 <ul className="space-y-4">
                                     {serviceCharges.map((charge) => (
@@ -306,20 +307,21 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
                                     ))}
                                 </ul>
                             ) : (
-                                <p className="text-gray-500 text-center">No service charges found.</p>
+                                <p className="text-left text-gray-500 mb-2">No service charges found.</p>
                             )}
+                            <div className='but'>
                             <button
-                                className="mt-4 w-full py-2 px-4 bg-blue-500 text-white font-semibold rounded-full focus:outline-none hover:bg-blue-600"
+                                className="text-white text-sm py-1 px-2 rounded flex items-center mr-2"
                                 onClick={() => handleManageCharge(serviceProviderId)}
                             >
-                                Manage Service Charge
-                            </button>
+                               <Settings2 className='ic mr-1'/> Manage Service Charge 
+                            </button></div>
                         </div>
                     </div>
 
-                    <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4 detailimg">
                         {serviceProvider.fld_aadharcard && (
-                            <div className="p-4 shadow rounded-lg bg-gray-50">
+                            <div className="p-3 cent">
                                 <h3 className="text-lg font-semibold mb-2 text-gray-700">Aadhar Card</h3>
                                 <img
                                     src={`https://serviceprovidersback.onrender.com/uploads/aadharcard/${serviceProvider.fld_aadharcard}`}
@@ -329,7 +331,7 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
                             </div>
                         )}
                         {serviceProvider.fld_pancard && (
-                            <div className="p-2 shadow rounded-lg bg-gray-50">
+                            <div className="p-3 cent">
                                 <h3 className="text-lg font-semibold mb-2 text-gray-700">PAN Card</h3>
                                 <img
                                     src={`https://serviceprovidersback.onrender.com/uploads/pancard/${serviceProvider.fld_pancard}`}
@@ -339,7 +341,7 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
                             </div>
                         )}
                         {serviceProvider.fld_cancelledchequeimage && (
-                            <div className="p-4 shadow rounded-lg bg-gray-50">
+                            <div className="p-3 cent">
                                 <h3 className="text-lg font-semibold mb-2 text-gray-700">Cancelled Cheque</h3>
                                 <img
                                     src={`https://serviceprovidersback.onrender.com/uploads/cancelledchequeimage/${serviceProvider.fld_cancelledchequeimage}`}

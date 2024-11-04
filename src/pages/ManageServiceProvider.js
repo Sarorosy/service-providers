@@ -120,7 +120,7 @@ const ManageServiceProvider = () => {
             data: 'fld_name', // Field for the name
             width: '100px',
             render: (data) => (
-                `<div style="display: flex; flex-direction: column; font-size: 15px; overflow-wrap: break-word;">
+                `<div style="display: flex; flex-direction: column; font-size: 13px; overflow-wrap: break-word;">
                     <span>${data}</span>
                 </div>`
             ),
@@ -132,7 +132,7 @@ const ManageServiceProvider = () => {
 
             render: (data) => (
                 `<div style="display: flex; flex-direction: column; font-size: 13px; overflow-wrap: break-word;">
-                    <span>${data.fld_username}</span>
+                    <span style="font-weight:600;">${data.fld_username}</span>
                     <span style="font-size: 14px;">${data.fld_email}</span>
                 </div>`
             ),
@@ -299,7 +299,7 @@ const ManageServiceProvider = () => {
                     id="active"
                     onChange={handleCheckboxChange}
                 />
-                <label htmlFor="active">Active</label>
+                <label htmlFor="active" className='act'>Active</label>
                 <input
                     checked={filterInactive}
                     value="inactive"
@@ -308,7 +308,7 @@ const ManageServiceProvider = () => {
                     id="inactive"
                     onChange={handleCheckboxChange}
                 />
-                <label htmlFor="inactive">Inactive</label>
+                <label htmlFor="inactive"  className='inact'>Inactive</label>
             </div>
 
             <AnimatePresence>

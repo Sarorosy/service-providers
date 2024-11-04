@@ -86,15 +86,15 @@ const AddServiceProvider = ({ onClose }) => {
         >
             <button
                 onClick={onClose}
-                className="absolute top-4 right-4 bg-red-500 text-white py-2 px-2 rounded-full"
+                className="absolute top-4 right-4 text-white py-2 px-2 rounded-full"
             >
-                <CircleX />
+                <CircleX  className='colorr'/>
             </button>
 
             <div className='db'>
                 <h2 className="text-2xl font-bold mb-4 text-center">Add Service Provider</h2>
-                <div className='max-w-5xl mx-auto bg-white p-6 rounded-lg shadow-md'>
-                    <form onSubmit={handleSubmit} className='max-w-5xl mx-auto mt-2'>
+                <div className='wen mx-auto bg-white p-6 rounded-lg shadow-md'>
+                    <form onSubmit={handleSubmit} className=' mx-auto mt-2'>
                         <input
                             type="hidden"
                             id="adminid"

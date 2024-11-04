@@ -9,8 +9,6 @@ const ManageReports = () => {
   DataTable.use(DT); // Initialize DataTables
 
 
-
-
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();

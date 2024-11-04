@@ -11,7 +11,7 @@ import ConfirmationModal from '../components/ConfirmationModal'; // Import your 
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
-const ManageUserServiceCharge = ({serviceProviderId, onClose}) => {
+const ManageUserServiceCharge = ({ serviceProviderId, onClose }) => {
   DataTable.use(DT);
 
   const [serviceCharges, setServiceCharges] = useState([]);
@@ -23,9 +23,9 @@ const ManageUserServiceCharge = ({serviceProviderId, onClose}) => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); // State for delete modal
   const navigate = useNavigate();
   useEffect(() => {
-      if (sessionStorage.getItem("adminType") != "SUPERADMIN") {
-          navigate("/dashboard"); // Redirect to homepage if not SUPERADMIN
-      }
+    if (sessionStorage.getItem("adminType") != "SUPERADMIN") {
+      navigate("/dashboard"); // Redirect to homepage if not SUPERADMIN
+    }
   }, [navigate]);
 
 
@@ -160,74 +160,81 @@ const ManageUserServiceCharge = ({serviceProviderId, onClose}) => {
 
   return (
     <motion.div
-            initial={{ x: '100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '100%' }}
-            transition={{ duration: 0.5, ease: 'easeInOut' }}
-            className="bg-blue-100 w-full h-full p-6 fixed top-0 right-0 z-50 overflow-y-auto shadow-lg"
-        >
-      <h2 className="text-2xl mb-4">Manage Service Charges</h2>
-      <button
-                onClick={onClose}
-                className="absolute top-4 right-4 bg-red-500 text-white py-2 px-2 rounded-full"
+      initial={{ x: '100%' }}
+      animate={{ x: 0 }}
+      exit={{ x: '100%' }}
+      transition={{ duration: 0.5, ease: 'easeInOut' }}
+      className="bg-blue-100 w-full h-full p-6 fixed top-0 right-0 z-50 overflow-y-auto shadow-lg"
+    >
+    <button
+            onClick={onClose}
+            className="absolute top-4 right-4 text-white py-2 px-2 rounded-full"
+          >
+            <CircleX className='colorr'/>
+          </button>
+
+      <div className="went mt-5 mx-auto bg-white p-6 rounded-lg shadow-md">
+        <div className="flex justify-content-between but">
+          <h1 className="text-xl font-bold text-gray-800">Manage Service Charges</h1>
+      
+          <div className='flex float-right'>
+            <button
+              onClick={fetchData}
+              className="bg-blue-600 text-white px-2 py-1 rounded flex items-center mr-2"
             >
-                <CircleX />
+              <RefreshCw className="mr-2 ic" />
+              Refresh
             </button>
-      <div className='flex float-right'>
-        <button
-          onClick={fetchData}
-          className="bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center mb-4 mr-2"
-        >
-          <RefreshCw className="mr-2" />
-          Refresh
-        </button>
-        <button
-          onClick={handleAddButtonClick}
-          className="bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center mb-4"
-        >
-          <PlusCircle className="mr-2" />
-          Add Service Charge
-        </button>
-      </div>
-      {loading ? (
-        <div className="flex justify-center">
-          <RevolvingDot height="30" width="30" color="blue" ariaLabel="loading" />
+            <button
+              onClick={handleAddButtonClick}
+              className="bg-blue-600 text-white px-2 py-1 rounded flex items-center"
+            >
+              <PlusCircle className="mr-2 ic" />
+              Add Service Charge
+            </button>
+          </div>
         </div>
-      ) : (
-        <DataTable
-          data={serviceCharges}
-          columns={columns}
-          options={{
-            searching: false,
-            paging: true,
-            ordering: true,
-            order: [[0, 'asc']],
-            createdRow: (row, data) => {
-              $(row).on('click', '.edit-btn', () => handleEditButtonClick(data));
-              $(row).on('click', '.delete-btn', () => handleDeleteButtonClick(data));
-            },
-          }}
-        />
-      )}
-      <AnimatePresence>
-        {isFormOpen && <AddServiceCharge onClose={handleCloseForm} serviceProviderId={serviceProviderId}/>}
-        {isEditFormOpen && (
-          <EditServiceCharge
-            id={selectedServiceCharge._id}
-            onClose={handleEditFormClose}
-            onUpdate={handleUpdateServiceCharge}
+        {loading ? (
+          <div className="flex justify-center">
+            <RevolvingDot height="30" width="30" color="blue" ariaLabel="loading" />
+          </div>
+        ) : (
+          <DataTable
+            data={serviceCharges}
+            columns={columns}
+            options={{
+              searching: false,
+              paging: true,
+              ordering: true,
+              order: [[0, 'asc']],
+              createdRow: (row, data) => {
+                $(row).on('click', '.edit-btn', () => handleEditButtonClick(data));
+                $(row).on('click', '.delete-btn', () => handleDeleteButtonClick(data));
+              },
+            }}
           />
         )}
-        {isDeleteModalOpen && (
-          <ConfirmationModal
-            isOpen={isDeleteModalOpen}
-            onConfirm={handleDelete}
-            onClose={() => setIsDeleteModalOpen(false)}
-            content="Are you sure you want to delete this service charge?"
-            isReversible={true}
-          />
-        )}
-      </AnimatePresence>
+        <AnimatePresence>
+          {isFormOpen && <AddServiceCharge onClose={handleCloseForm} serviceProviderId={serviceProviderId} />}
+          {isEditFormOpen && (
+            <EditServiceCharge
+              id={selectedServiceCharge._id}
+              onClose={handleEditFormClose}
+              onUpdate={handleUpdateServiceCharge}
+            />
+          )}
+          {isDeleteModalOpen && (
+            <ConfirmationModal
+              isOpen={isDeleteModalOpen}
+              onConfirm={handleDelete}
+              onClose={() => setIsDeleteModalOpen(false)}
+              content="Are you sure you want to delete this service charge?"
+              isReversible={true}
+            />
+          )}
+        </AnimatePresence>
+      </div>
+
     </motion.div>
   );
 };

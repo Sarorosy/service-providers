@@ -37,19 +37,19 @@ const EditServiceCharge = ({ onClose, id }) => {
             setFormData(prevData => ({ ...prevData, fld_service_provider_id: selectedId }));
             setSelectedProvider(provider);
         });
-    
+
         return () => {
             $('#serviceProvider').select2('destroy');
         };
     }, [serviceProviders]);
-    
+
     useEffect(() => {
         if (serviceProviders.length > 0 && formData.fld_service_provider_id) {
             // Ensure Select2 is initialized and set the value after both are available
             $('#serviceProvider').val(formData.fld_service_provider_id).trigger('change');
         }
     }, [serviceProviders, formData.fld_service_provider_id]);
-    
+
 
     const fetchServiceProviders = async () => {
         try {
@@ -69,7 +69,7 @@ const EditServiceCharge = ({ onClose, id }) => {
                 throw new Error('Failed to fetch service charge');
             }
             const data = await response.json();
-    
+
             // Set form data with the fetched values
             setFormData({
                 fld_service_provider_id: data?.fld_service_provider_id || '',
@@ -77,7 +77,7 @@ const EditServiceCharge = ({ onClose, id }) => {
                 fld_to_date: data?.fld_to_date?.split('T')[0] || '',
                 fld_service_charge: data?.fld_service_charge || ''
             });
-    
+
             // Ensure you wait until the serviceProviders are set before trying to find the selected provider
             const selectedProvider = serviceProviders.find(provider => provider._id === data.fld_service_provider_id);
             if (selectedProvider) {
@@ -91,7 +91,7 @@ const EditServiceCharge = ({ onClose, id }) => {
             toast.error('Error fetching service charge data.');
         }
     };
-        
+
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -144,77 +144,82 @@ const EditServiceCharge = ({ onClose, id }) => {
         >
             <button
                 onClick={onClose}
-                className="absolute top-4 right-4 bg-red-500 text-white py-2 px-2 rounded-full"
+                className="absolute top-4 right-4 text-white py-2 px-2 rounded-full"
             >
-                <CircleX />
+                <CircleX className='colorr'/>
             </button>
-            <h2 className="text-2xl font-bold mb-4 text-center">Edit Service Charge</h2>
+            <h2 className="text-2xl font-bold mb-3 text-center">Edit Service Charge</h2>
 
-<div className='wen1 mx-auto bg-white p-6 rounded-lg shadow-md'>
-            {selectedProvider && (
-                <div className="mb-4 flex items-center justify-between p-4 border border-gray-300 rounded bg-white shadow">
-                    <div className="flex items-center">
-                        <img
-                            src={selectedProvider.fld_profile_image ? `https://serviceprovidersback.onrender.com/uploads/profileimg/${selectedProvider.fld_profile_image}` : 'https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg'}
-                            alt={selectedProvider.text}
-                            className="w-16 h-16 rounded-full mr-4"
-                        />
-                        <span className="text-lg font-semibold">{selectedProvider.fld_name}</span>
+            <div className='wen1 mx-auto bg-white p-6 rounded-lg shadow-md'>
+                {selectedProvider && (
+                    <div className="mb-4 p-2 cent">
+                        <div>
+                            <img
+                                src={selectedProvider.fld_profile_image ? `https://serviceprovidersback.onrender.com/uploads/profileimg/${selectedProvider.fld_profile_image}` : 'https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg'}
+                                alt={selectedProvider.text}
+                                className="rounded-full"
+                            />
+                            <span className="text-lg font-semibold">{selectedProvider.fld_name}</span>
+                        </div>
                     </div>
-                </div>
-            )}
+                )}
 
-            <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
-                <div className="mb-4">
-                    <label htmlFor="serviceProvider" className="block text-gray-700">Service Provider</label>
-                    <select id="serviceProvider" className="w-full p-2 border border-gray-300 rounded">
-                        <option value="">Select a service provider</option>
-                    </select>
-                </div>
-                <div className="mb-4">
-                    <label htmlFor="fromDate" className="block text-gray-700">From Date</label>
-                    <input
-                        type="date"
-                        id="fromDate"
-                        name="fld_from_date"
-                        value={formData.fld_from_date}
-                        onChange={handleInputChange}
-                        className="w-full p-2 border border-gray-300 rounded"
-                        required
-                    />
-                </div>
-                <div className="mb-4">
-                    <label htmlFor="toDate" className="block text-gray-700">To Date</label>
-                    <input
-                        type="date"
-                        id="toDate"
-                        name="fld_to_date"
-                        value={formData.fld_to_date}
-                        onChange={handleInputChange}
-                        className="w-full p-2 border border-gray-300 rounded"
-                        required
-                    />
-                </div>
-                <div className="mb-4">
-                    <label htmlFor="serviceCharge" className="block text-gray-700">Service Charge</label>
-                    <input
-                        type="number"
-                        id="serviceCharge"
-                        name="fld_service_charge"
-                        value={formData.fld_service_charge}
-                        onChange={handleInputChange}
-                        className="w-full p-2 border border-gray-300 rounded"
-                        required
-                    />
-                </div>
-                <button
-                    type="submit"
-                    className="bg-blue-700 text-white py-2 px-4 rounded w-40 flex float-right"
-                >
-                    <Save className="mr-2" />
-                    Update 
-                </button>
-            </form></div>
+                <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
+                    <div className="mb-4">
+                        <label htmlFor="serviceProvider" className="block text-gray-700">Service Provider</label>
+                        <select id="serviceProvider" className="w-full p-2 border border-gray-300 rounded">
+                            <option value="">Select a service provider</option>
+                        </select>
+                    </div>
+                    <div className="mb-4">
+                        <label htmlFor="fromDate" className="block text-gray-700">From Date</label>
+                        <input
+                            type="date"
+                            id="fromDate"
+                            name="fld_from_date"
+                            value={formData.fld_from_date}
+                            onChange={handleInputChange}
+                            className="w-full p-2 border border-gray-300 rounded"
+                            required
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <label htmlFor="toDate" className="block text-gray-700">To Date</label>
+                        <input
+                            type="date"
+                            id="toDate"
+                            name="fld_to_date"
+                            value={formData.fld_to_date}
+                            onChange={handleInputChange}
+                            className="w-full p-2 border border-gray-300 rounded"
+                            required
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <label htmlFor="serviceCharge" className="block text-gray-700">Service Charge</label>
+                        <input
+                            type="number"
+                            id="serviceCharge"
+                            name="fld_service_charge"
+                            value={formData.fld_service_charge}
+                            onChange={handleInputChange}
+                            className="w-full p-2 border border-gray-300 rounded"
+                            required
+                        />
+                    </div>
+
+                </form>
+
+                <div className='flex justify-end but mt-2'>
+                    <button
+                        type="submit"
+                        className="bg-blue-700 text-white py-1 px-2 rounded flex float-right"
+                    >
+                        <Save className="mr-2 ic" />
+                        Update
+                    </button></div>
+
+            </div>
             <ToastContainer />
         </motion.div>
     );

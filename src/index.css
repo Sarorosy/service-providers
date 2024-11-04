@@ -98,9 +98,10 @@ color: #fff;
 
 .dataTable .workoff-button {
   /* color: #30aa00; */
-  color: #30aa00;
+  color: #757575;
   /* Green background for edit button */
-  background-color: #aeffb5;
+  background-color: #cccecc;
+  border-radius: 3px;
 }
 
 .dataTable .delete-btn {
@@ -121,7 +122,7 @@ color: #fff;
   /* Green background for edit button */
   background-color: #C4E1F6;
   margin: 3px 0;
-  border-radius: 6px;
+  border-radius: 3px;
 }
 
 .dataTable .edit-button {
@@ -129,23 +130,22 @@ color: #fff;
   /* Green background for edit button */
   background-color: #FFD09B;
   margin: 3px 0;
-  border-radius: 6px;
+  border-radius: 3px;
 }
 
-.dataTable .toggle-status-btn {
+/* .dataTable .toggle-status-btn {
   color: #6200bd;
-  /* Green background for edit button */
   background-color: #dcb7ff;
   margin: 3px 0;
-  border-radius: 6px;
-}
+  border-radius: 3px;
+} */
 
 .dataTable .toggle-status-button {
-  color: #6200bd;
+  color: #fff;
   /* Green background for edit button */
-  background-color: #dcb7ff;
+  background-color: #4195da;
   margin: 3px 0;
-  border-radius: 6px;
+  border-radius: 3px;
 }
 
 .dataTable .delete-button {
@@ -153,7 +153,7 @@ color: #fff;
   /* Red background for delete button */
   background-color: #FFB0B0;
   margin: 3px 0;
-  border-radius: 6px;
+  border-radius: 3px;
 }
 
 .activeclass {
@@ -274,7 +274,7 @@ color: #fff;
 }
 
 #checklist {
-  --background: #C4E1F6;
+  --background: #fff;
   --text: #2d6a9d;
   --check: #2d6a9d;
   /* --disabled: #c3c8de; */
@@ -306,8 +306,19 @@ color: #fff;
   font-weight: 500;
 }
 
-#checklist label:hover {
+/* #checklist label:hover {
   color: #000;
+} */
+
+#checklist input[type="checkbox"]:checked+label.inact {
+  color: #ff0000;
+  animation: move 0.3s ease 0.1s forwards;
+}
+
+#checklist input[type="checkbox"]:checked+label.act {
+  /* color: var(--disabled); */
+  color: #008000;
+  animation: move 0.3s ease 0.1s forwards;
 }
 
 #checklist label::before,
@@ -604,6 +615,10 @@ div.dt-container .dt-paging .dt-paging-button {
   width: 50rem;
 }
 
+.went {
+  width: 70rem;
+}
+
 .wen1 {
   width: 40rem;
 }
@@ -691,3 +706,37 @@ select.dt-input {
   width: 20px;
 }
 
+.cent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.cent img{
+    height: auto;
+    width: 90px;
+}
+
+.viewinfo{
+  /* border: 1px solid #2d6a9d; */
+  border: 1px solid #d7d7d7;
+}
+
+.viewinfo strong{
+  color:#1b476b;
+}
+
+.viewinfo p{
+  font-size: 13px;
+}
+
+.detailimg img{
+  height: auto;
+  width: 7rem;
+}
+
+.bxs{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+}

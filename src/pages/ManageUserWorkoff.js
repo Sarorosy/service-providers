@@ -23,7 +23,7 @@ const ManageUserWorkoff = ({ onClose, serviceProviderId }) => {
     const fetchData = async () => {
         setLoading(true);
         try {
-            
+
             const [workoffResponse, serviceProviderResponse] = await Promise.all([
                 fetch(`https://serviceprovidersback.onrender.com/api/manageworkoffs/${serviceProviderId}`),
                 fetch('https://serviceprovidersback.onrender.com/api/users/serviceproviders/')
@@ -150,70 +150,77 @@ const ManageUserWorkoff = ({ onClose, serviceProviderId }) => {
             transition={{ duration: 0.5, ease: 'easeInOut' }}
             className="bg-sky-50 w-full h-full p-6 fixed top-0 right-0 z-50 overflow-y-auto shadow-lg"
         >
-            <h2 className="text-2xl mb-4">Manage Workoff Details</h2>
-            <button
-                onClick={onClose}
-                className="absolute top-4 right-4 bg-red-500 text-white py-2 px-2 rounded-full"
-            ><CircleX /></button>
-            <div className='flex float-right'>
-                <button
-                    onClick={fetchData}
-                    className="bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center mb-4 mr-2"
-                >
-                    <RefreshCw className="mr-2" />
-                    Refresh
-                </button>
-                <button
-                    onClick={handleAddButtonClick}
-                    className="bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center mb-4"
-                >
-                    <PlusCircle className="mr-2" />
-                    Add Workoff
-                </button>
-            </div>
-            {loading ? (
-                <div className='flex justify-center items-center h-64'>
-                    <RevolvingDot
-                        height="100"
-                        width="100"
-                        radius="6"
-                        color="blue"
-                        secondaryColor="gray"
-                        ariaLabel="revolving-dot-loading"
-                        visible={true}
-                    />
-                </div>
-            ) : (
-                <DataTable
-                    data={workoffData}
-                    columns={columns}
-                    options={{
-                        paging: true,
-                        searching: true,
-                        ordering: true,
-                        createdRow: (row, data) => {
-                            $(row).on('click', (e) => {
-                              const button = e.target;
-                            
-                              handleDeleteButtonClick(e); // Check for delete button click
-                            });
-                          },
-                    }}
+<button
+                        onClick={onClose}
+                        className="absolute top-4 right-4  text-white py-2 px-2 rounded-full"
+                    ><CircleX className='colorr'/></button>
+            <div className='went mt-5 mx-auto bg-white p-6 rounded-lg shadow-md'>
+                <div className='flex justify-content-between mb-6 but'>
+                    <h1 className="text-xl font-bold text-gray-800">Manage Workoff Details</h1>
                     
-                />
-            )}
-            <AnimatePresence>
-                {isFormOpen && <AddWorkoff serviceProviderId={serviceProviderId} onClose={handleCloseForm} />}
-                {isDeleteModalOpen && (
-                    <ConfirmationModal
-                        isOpen={isDeleteModalOpen}
-                        onConfirm={handleDelete}
-                        onClose={() => setIsDeleteModalOpen(false)}
-                        content="Are you sure you want to delete this workoff?"
-                        isReversible={true}
+                    <div className='flex float-right'>
+                        <button
+                            onClick={fetchData}
+                            className="bg-blue-600 text-white px-2 py-1 rounded flex items-center mr-2 text-sm"
+                        >
+                            <RefreshCw className="mr-2 ic" />
+                            Refresh
+                        </button>
+                        <button
+                            onClick={handleAddButtonClick}
+                            className="bg-blue-600 text-white px-2 py-1 rounded flex items-center text-sm"
+                        >
+                            <PlusCircle className="mr-2 ic" />
+                            Add Workoff
+                        </button>
+                    </div>
+                </div>
+
+                {loading ? (
+                    <div className='flex justify-center items-center h-64'>
+                        <RevolvingDot
+                            height="100"
+                            width="100"
+                            radius="6"
+                            color="blue"
+                            secondaryColor="gray"
+                            ariaLabel="revolving-dot-loading"
+                            visible={true}
+                        />
+                    </div>
+                ) : (
+                    <DataTable
+                        data={workoffData}
+                        columns={columns}
+                        options={{
+                            paging: true,
+                            searching: true,
+                            ordering: true,
+                            createdRow: (row, data) => {
+                                $(row).on('click', (e) => {
+                                    const button = e.target;
+
+                                    handleDeleteButtonClick(e); // Check for delete button click
+                                });
+                            },
+                        }}
+
                     />
                 )}
-            </AnimatePresence>
+                <AnimatePresence>
+                    {isFormOpen && <AddWorkoff serviceProviderId={serviceProviderId} onClose={handleCloseForm} />}
+                    {isDeleteModalOpen && (
+                        <ConfirmationModal
+                            isOpen={isDeleteModalOpen}
+                            onConfirm={handleDelete}
+                            onClose={() => setIsDeleteModalOpen(false)}
+                            content="Are you sure you want to delete this workoff?"
+                            isReversible={true}
+                        />
+                    )}
+                </AnimatePresence>
+            </div>
+
         </motion.div>
     );
 };
