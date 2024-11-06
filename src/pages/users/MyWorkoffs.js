@@ -8,7 +8,7 @@ const MyWorkoffs = () => {
 
     useEffect(() => {
         const userId = sessionStorage.getItem('userId');
-        fetch(`https://serviceprovidersback.onrender.com/api/workoffs/user/${userId}`)
+        fetch(`https://service-providers-panel.vercel.app/api/workoffs/user/${userId}`)
             .then(response => response.json())
             .then(data => {
                 setWorkoffs(data);

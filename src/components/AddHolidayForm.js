@@ -20,7 +20,7 @@ const AddHolidayForm = ({ onClose }) => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch('https://serviceprovidersback.onrender.com/api/users/activeserviceproviders');
+        const response = await fetch('https://service-providers-panel.vercel.app/api/users/activeserviceproviders');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -86,7 +86,7 @@ const AddHolidayForm = ({ onClose }) => {
     // Ensure unique selected user IDs as strings
     const selectedUserIds = [...new Set(formData.selectedUsers.map(userId => userId.toString()))];
 
-    const response = await fetch('https://serviceprovidersback.onrender.com/api/holidays', {
+    const response = await fetch('https://service-providers-panel.vercel.app/api/holidays', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -135,9 +135,9 @@ const AddHolidayForm = ({ onClose }) => {
 
       <div className='db'>
         <h2 className="text-2xl font-bold mb-3 text-center">Add Holiday</h2>
-        <div className='wen1 mx-auto bg-white p-6 rounded-lg shadow-md'>
+        <div className='wen mx-auto bg-white p-6 rounded-lg shadow-md'>
           <form onSubmit={handleSubmit} className='mx-auto mt-2'>
-            <div className="mb-4">
+            <div className="mb-3">
               <label className="block text-sm font-semibold mb-1" htmlFor="holidayName">Holiday Name</label>
               <input
                 type="text"
@@ -149,7 +149,7 @@ const AddHolidayForm = ({ onClose }) => {
                 required
               />
             </div>
-            <div className="mb-4">
+            <div className="mb-3">
               <label className="block text-sm font-semibold mb-1" htmlFor="holidayDate">Holiday Date</label>
               <input
                 type="date"
@@ -162,7 +162,7 @@ const AddHolidayForm = ({ onClose }) => {
                 required
               />
             </div>
-            <div className="mb-4">
+            <div className="mb-3">
               <label className="block text-sm font-semibold mb-1" htmlFor="serviceProvider">
                 Select Users
               </label>
@@ -178,7 +178,7 @@ const AddHolidayForm = ({ onClose }) => {
               </div>
             </div>
 
-            <div className="mb-4">
+            <div className="mb-3">
               <label className="block text-sm font-semibold mb-1" htmlFor="serviceProvider">
                 Select Users
               </label>
@@ -199,8 +199,8 @@ const AddHolidayForm = ({ onClose }) => {
             </div>
 
             {formData.selectedUsers.length > 0 && (
-              <div className="mb-4 max-w-5xl mx-auto">
-                <label className="text-sm font-medium my-3">Selected Users</label>
+              <div className="mb-3 max-w-5xl mx-auto fthirteen">
+                <label className="text-sm font-semibold my-3">Selected Users</label>
                 <div className="flex flex-wrap mb-2 p-2 bg-gray-50 rounded-xl shadow-md">
                   {formData.selectedUsers.map((userId) => {
                     const user = users.find(u => u._id === userId);
@@ -208,14 +208,14 @@ const AddHolidayForm = ({ onClose }) => {
                       user ? (
                         <div
                           key={user._id}
-                          className="flex items-center mr-2 mb-2 border border-gray-300 rounded-full bg-white p-2 shadow-sm hover:shadow-lg transition-shadow"
+                          className="flex items-center mr-2 mb-2 border border-gray-300 rounded-full bg-white px-1 py-1 shadow-sm hover:shadow-lg transition-shadow"
                         >
                           <img
                             src={user.fld_profile_image && user.fld_profile_image !== ""
-                              ? 'https://serviceprovidersback.onrender.com/uploads/profileimg/' + user.fld_profile_image
+                              ? 'https://service-providers-panel.vercel.app/uploads/profileimg/' + user.fld_profile_image
                               : "https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg"}
                             alt={user.fld_username || 'No Name'}
-                            className="w-10 h-10 rounded-full border border-gray-200"
+                            className="w-8 h-8 rounded-full border border-gray-200"
                           />
                           <span className="mx-2 text-gray-800 font-semibold">{user.fld_name}</span>
                           <button
@@ -223,7 +223,7 @@ const AddHolidayForm = ({ onClose }) => {
                             onClick={() => removeUser(user._id)}
                             className="text-red-500 hover:text-red-700 transition-colors"
                           >
-                            <CircleX />
+                            <CircleX size={15}/>
                           </button>
                         </div>
                       ) : (
@@ -236,17 +236,17 @@ const AddHolidayForm = ({ onClose }) => {
             )}
 
             <div className="flex justify-end">
-              <button
+              {/* <button
                 type="button"
                 onClick={onClose}
-                className="mr-2 bg-red-500 transition duration-300 
- hover:bg-red-600 hover:shadow-lg text-white py-1 px-2 rounded flex"
+                className="mr-2 bg-red-500 transition duration-300 ded
+ hover:bg-red-600 hover:shadow-lg text-white py-1 px-1 rounded flex items-center"
               >
-                <CircleX className='mr-2 ic' width="24" height="24" /> Cancel
-              </button>
+                <CircleX className='mr-1 ic' /> Cancel
+              </button> */}
               <div className='but'>
-                <button type="submit" className="bg-blue-600 text-white py-1 px-2 rounded flex">
-                  <Save className='mr-2 ic' width="24" height="24" /> Save
+                <button type="submit" className="bg-blue-600 text-white py-1 px-1 rounded flex items-center">
+                  <Save className='mr-1 ic' /> Save
                 </button>
               </div>
             </div>

@@ -8,7 +8,7 @@ const UpcomingHolidays = () => {
 
     useEffect(() => {
         const userId = sessionStorage.getItem('userId');
-        fetch(`https://serviceprovidersback.onrender.com/api/holidays/user/${userId}`)
+        fetch(`https://service-providers-panel.vercel.app/api/holidays/user/${userId}`)
             .then(response => response.json())
             .then(data => {
                 setHolidays(data);

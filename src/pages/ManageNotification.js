@@ -54,7 +54,7 @@ const ManageNotifications = () => {
   const fetchNotifications = async () => {
     setLoading(true); // Set loading to true while fetching
     try {
-      const response = await fetch('https://serviceprovidersback.onrender.com/api/notifications/');
+      const response = await fetch('https://service-providers-panel.vercel.app/api/notifications/');
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
@@ -137,7 +137,7 @@ const ManageNotifications = () => {
   const handleDeleteConfirmation = async () => {
     if (selectedNotificationId) {
       try {
-        const response = await fetch(`https://serviceprovidersback.onrender.com/api/notifications/${selectedNotificationId}`, {
+        const response = await fetch(`https://service-providers-panel.vercel.app/api/notifications/${selectedNotificationId}`, {
           method: 'DELETE',
         });
         if (response.ok) {
@@ -164,15 +164,15 @@ const ManageNotifications = () => {
         <div className='col-md-4 flex justify-content-end'>
           <button
             onClick={fetchNotifications}
-            className="text-white text-sm py-1 px-2 rounded transition duration-200 flex items-center mr-2"
+            className="text-white text-sm py-0 px-1 rounded transition duration-200 flex items-center mr-2"
           >
-            Refresh <RefreshCw className='ml-2' height="15" width="15"/>
+            Refresh <RefreshCw className='ml-2 ic'/>
           </button>
           <button
             onClick={handleAddNotificationClick}
-            className="text-white text-sm py-1 px-2 rounded transition duration-200 flex items-center "
+            className="text-white text-sm py-0 px-1 rounded transition duration-200 flex items-center "
           >
-            Add Notification <BellPlus className='ml-2' height="15" width="15"/>
+            Add Notification <BellPlus className='ml-2 ic'/>
           </button>
         </div>
       </div>

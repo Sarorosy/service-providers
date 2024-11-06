@@ -23,7 +23,7 @@ const EditHolidayForm = ({ holidayId, onClose }) => {
     useEffect(() => {
         const fetchServiceProviders = async () => {
             try {
-                const response = await fetch('https://serviceprovidersback.onrender.com/api/users/activeserviceproviders');
+                const response = await fetch('https://service-providers-panel.vercel.app/api/users/activeserviceproviders');
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -41,7 +41,7 @@ const EditHolidayForm = ({ holidayId, onClose }) => {
     useEffect(() => {
         const fetchHoliday = async () => {
             try {
-                const response = await fetch(`https://serviceprovidersback.onrender.com/api/holidays/${holidayId}`);
+                const response = await fetch(`https://service-providers-panel.vercel.app/api/holidays/${holidayId}`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -114,7 +114,7 @@ const EditHolidayForm = ({ holidayId, onClose }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = await fetch(`https://serviceprovidersback.onrender.com/api/holidays/${holidayId}`, {
+        const response = await fetch(`https://service-providers-panel.vercel.app/api/holidays/${holidayId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -242,11 +242,11 @@ const EditHolidayForm = ({ holidayId, onClose }) => {
                                                         animate={{ opacity: 1 }}
                                                         exit={{ opacity: 0, height: 0 }}
                                                         transition={{ duration: 0.3 }}
-                                                        className="flex items-center mr-2 mb-2 px-2 py-1 border border-gray-300 rounded-full py-1 px-2 mx-1 shadow-sm"
+                                                        className="flex items-center mr-2 mb-2 border bg-white border-gray-300 rounded-full py-1 px-1 mx-1 shadow-sm"
                                                     >
                                                         <img
                                                             src={provider.fld_profile_image && provider.fld_profile_image !== ""
-                                                                ? 'https://serviceprovidersback.onrender.com/uploads/profileimg/' + provider.fld_profile_image
+                                                                ? 'https://service-providers-panel.vercel.app/uploads/profileimg/' + provider.fld_profile_image
                                                                 : "https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg"}
                                                             alt={provider.fld_username || 'No Name'}
                                                             className="w-8 h-8 rounded-full border border-gray-200 mr-2"
@@ -257,7 +257,7 @@ const EditHolidayForm = ({ holidayId, onClose }) => {
                                                             onClick={() => removeProvider(provider._id)} // Use _id when removing
                                                             className="ml-2 text-red-500 hover:text-red-700"
                                                         >
-                                                            <CircleX size={18} />
+                                                            <CircleX size={15} />
                                                         </button>
                                                     </motion.div>
                                                 ) : null
@@ -270,9 +270,9 @@ const EditHolidayForm = ({ holidayId, onClose }) => {
                             <div className="flex justify-end but">
                                 <button
                                     type="submit"
-                                    className="bg-blue-500 text-white py-1 px-2 rounded flex items-center"
+                                    className="text-white py-1 px-1 rounded flex items-center"
                                 >
-                                    <Save className="mr-2 ic" />
+                                    <Save className="mr-1 ic" />
                                     Save Changes
                                 </button>
                             </div>

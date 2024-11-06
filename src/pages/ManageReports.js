@@ -21,7 +21,7 @@ const ManageReports = () => {
   const fetchUsers = async () => {
     try {
       setLoading(true);
-      const response = await fetch('https://serviceprovidersback.onrender.com/api/users/serviceproviders'); // API endpoint
+      const response = await fetch('https://service-providers-panel.vercel.app/api/users/serviceproviders'); // API endpoint
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
@@ -29,7 +29,7 @@ const ManageReports = () => {
 
       // Fetch last report for each user
       const usersWithLastReport = await Promise.all(usersData.map(async (user) => {
-        const reportResponse = await fetch(`https://serviceprovidersback.onrender.com/api/worksummaries/user/${user._id}`);
+        const reportResponse = await fetch(`https://service-providers-panel.vercel.app/api/worksummaries/user/${user._id}`);
         const reports = reportResponse.ok ? await reportResponse.json() : [];
         const lastReport = reports.length > 0 ? reports[reports.length - 1] : null; // Get the last report if it exists
         const lastReportDesc = lastReport ? lastReport.fld_description : 'No Report'; // Get description or set to 'No Report'
@@ -64,8 +64,8 @@ const ManageReports = () => {
       data: 'fld_profile_image',
       width: "100px",
       render: (data) => `
-          <img src="${data && data.trim() !== "" ? `https://serviceprovidersback.onrender.com/uploads/profileimg/${data}` : 'https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg'}" 
-          alt="Profile" style="width: 50px; height: auto; object-fit: cover;border-radius:50%" />
+          <img src="${data && data.trim() !== "" ? `https://service-providers-panel.vercel.app/uploads/profileimg/${data}` : 'https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg'}" 
+          alt="Profile" style="width: 40px; height: auto; object-fit: cover;border-radius:50%" />
       `,
     },
     { title: 'Name', data: 'fld_name' },
@@ -97,16 +97,16 @@ const ManageReports = () => {
   }
 
   return (
-    <div className="p-6 bg-white rounded-lg shadow-md">
+    <div className="p-6 bg-white rounded-lg shadow-md smt">
  
       <div className="flex justify-content-between mb-6 but">
         <h1 className="text-xl font-bold text-gray-800">Manage Reports</h1>
         <div className="flex justify-end">
           <button
             onClick={fetchUsers}
-            className="text-white text-sm py-1 px-2 rounded transition duration-200 flex items-center mr-2"
+            className="text-white text-sm py-0 px-1 rounded transition duration-200 flex items-center mr-2"
           >
-            Refresh <RefreshCw className='ml-2' height="15" width="15" />
+            Refresh <RefreshCw className='ml-2 ic' />
           </button>
 
         </div>

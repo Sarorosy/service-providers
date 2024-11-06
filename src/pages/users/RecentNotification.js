@@ -8,7 +8,7 @@ const RecentNotification = () => {
 
     useEffect(() => {
         const userId = sessionStorage.getItem('userId');
-        fetch(`https://serviceprovidersback.onrender.com/api/notifications/user/${userId}`)
+        fetch(`https://service-providers-panel.vercel.app/api/notifications/user/${userId}`)
             .then(response => response.json())
             .then(data => {
                 setNotifications(data);

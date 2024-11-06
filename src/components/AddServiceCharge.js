@@ -47,7 +47,7 @@ const AddServiceCharge = ({ onClose }) => {
     const fetchServiceProviders = async () => {
         try {
             setLoading(true);
-            const response = await fetch('https://serviceprovidersback.onrender.com/api/users/serviceproviders');
+            const response = await fetch('https://service-providers-panel.vercel.app/api/users/serviceproviders');
             const data = await response.json();
             const options = data.map(provider => ({
                 _id: provider._id, // Ensure _id is used here
@@ -79,7 +79,7 @@ const AddServiceCharge = ({ onClose }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('https://serviceprovidersback.onrender.com/api/servicecharge', {
+            const response = await fetch('https://service-providers-panel.vercel.app/api/servicecharge', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -131,22 +131,23 @@ const AddServiceCharge = ({ onClose }) => {
             <div className='db'>
                 <h2 className="text-2xl font-bold mb-3 text-center">Add Service Charge</h2>
 
-                {selectedProvider && (
-                    <div className="mb-2 flex items-center justify-between p-4 border border-gray-300 rounded bg-white shadow">
-                        <div className="flex items-center">
-                            <img
-                                src={selectedProvider.fld_profile_image ? `https://serviceprovidersback.onrender.com/uploads/profileimg/${selectedProvider.fld_profile_image}` : 'https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg'}
-                                alt={selectedProvider.text}
-                                className="w-16 h-16 rounded-full mr-4"
-                            />
 
-                            <span className="text-lg font-semibold">{selectedProvider.fld_name}</span>
-                        </div>
-                    </div>
-                )}
 
                 <div className='wen2 mx-auto bg-white p-6 rounded-lg shadow-md'>
                     <form onSubmit={handleSubmit} className="grid">
+                        {selectedProvider && (
+                            <div className="mb-2">
+                                <div className="cent1 items-center">
+                                    <img
+                                        src={selectedProvider.fld_profile_image ? `https://service-providers-panel.vercel.app/uploads/profileimg/${selectedProvider.fld_profile_image}` : 'https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg'}
+                                        alt={selectedProvider.text}
+                                        className="w-16 h-16 rounded-full mr-2"
+                                    />
+
+                                    <span className="text-lg font-semibold">{selectedProvider.fld_name}</span>
+                                </div>
+                            </div>
+                        )}
                         {loading ? <RevolvingDot height="20" width="20" color="blue" ariaLabel="loading" /> : (<div className="mb-3">
                             <label htmlFor="serviceProvider" className="block text-gray-700">Service Provider</label>
                             <select id="serviceProvider" className="w-full p-2 border border-gray-300 rounded">
@@ -195,9 +196,9 @@ const AddServiceCharge = ({ onClose }) => {
                     <div className='flex justify-end but mt-3'>
                         <button
                             type="submit"
-                            className="text-white py-1 px-2 rounded col-span-2 flex"
+                            className="text-white py-1 px-1 rounded col-span-2 flex items-center"
                         >
-                            <Save className="mr-2" />
+                            <Save className="mr-2 ic" />
                             Add Service Charge
                         </button>
                     </div>

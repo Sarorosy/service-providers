@@ -24,7 +24,7 @@ const EditNotificationForm = ({ notificationId, onClose }) => {
     useEffect(() => {
         const fetchServiceProviders = async () => {
             try {
-                const response = await fetch('https://serviceprovidersback.onrender.com/api/users/activeserviceproviders');
+                const response = await fetch('https://service-providers-panel.vercel.app/api/users/activeserviceproviders');
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -42,7 +42,7 @@ const EditNotificationForm = ({ notificationId, onClose }) => {
     useEffect(() => {
         const fetchNotification = async () => {
             try {
-                const response = await fetch(`https://serviceprovidersback.onrender.com/api/notifications/${notificationId}`);
+                const response = await fetch(`https://service-providers-panel.vercel.app/api/notifications/${notificationId}`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -128,7 +128,7 @@ const EditNotificationForm = ({ notificationId, onClose }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = await fetch(`https://serviceprovidersback.onrender.com/api/notifications/${notificationId}`, {
+        const response = await fetch(`https://service-providers-panel.vercel.app/api/notifications/${notificationId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -165,12 +165,12 @@ const EditNotificationForm = ({ notificationId, onClose }) => {
         >
             <button
                 onClick={onClose}
-                className="absolute top-4 right-4 bg-red-500 text-white py-2 px-2 rounded-full"
+                className="absolute top-4 right-4 text-white py-2 px-2 rounded-full"
             >
-                <CircleX />
+                <CircleX className='colorr'/>
             </button>
             <div className='db'>
-                <h2 className="text-2xl font-bold mb-4 text-center">Edit Notification</h2>
+                <h2 className="text-2xl font-bold mb-3 text-center">Edit Notification</h2>
                 <form onSubmit={handleSubmit} className='wen mx-auto mt-2'>
                     <div className='mx-auto bg-white p-6 rounded-lg shadow-md'>
                         <div className='flex w-full justify-center'>
@@ -220,7 +220,7 @@ const EditNotificationForm = ({ notificationId, onClose }) => {
                             />
                             <label htmlFor="selectAll" className="text-sm font-semibold">Select All Service Providers</label>
                         </div>
-                        <div className="mb-4">
+                        <div className="mb-4 mt-3">
                             <label className="block text-sm font-semibold mb-1" htmlFor="serviceProvider">Select Service Provider</label>
                             <select
                                 id="serviceProvider"
@@ -252,11 +252,11 @@ const EditNotificationForm = ({ notificationId, onClose }) => {
                                                     animate={{ opacity: 1 }}
                                                     exit={{ opacity: 0, height: 0 }}
                                                     transition={{ duration: 0.3 }}
-                                                    className="flex items-center bg-white border border-gray-300 mb-2 mb-2 rounded-full py-1 px-2 mx-1 shadow-sm"
+                                                    className="flex items-center bg-white border border-gray-300 mb-2 mb-2 rounded-full py-1 px-1 mx-1 shadow-sm"
                                                 >
                                                     <img
                                                         src={provider.fld_profile_image && provider.fld_profile_image !== ""
-                                                            ? 'https://serviceprovidersback.onrender.com/uploads/profileimg/' + provider.fld_profile_image
+                                                            ? 'https://service-providers-panel.vercel.app/uploads/profileimg/' + provider.fld_profile_image
                                                             : "https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg"}
                                                         alt={provider.fld_username || 'No Name'}
                                                         className="w-8 h-8 rounded-full border border-gray-200 mr-2"
@@ -280,7 +280,7 @@ const EditNotificationForm = ({ notificationId, onClose }) => {
                         <div className="flex justify-end but">
                             <button
                                 type="submit"
-                                className="text-white py-1 px-2 rounded hover:bg-blue-500 flex items-center text-sm"
+                                className="text-white py-1 px-1 rounded hover:bg-blue-500 flex items-center text-sm"
                             >
                                 <Save className="mr-1 ic" />
                                 Update Notification

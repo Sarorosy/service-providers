@@ -14,7 +14,7 @@ const ViewNotification = ({ onClose, notificationId }) => {
     useEffect(() => {
         const fetchNotification = async () => {
             try {
-                const response = await fetch(`https://serviceprovidersback.onrender.com/api/notifications/${notificationId}`);
+                const response = await fetch(`https://service-providers-panel.vercel.app/api/notifications/${notificationId}`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch notification');
                 }
@@ -34,7 +34,7 @@ const ViewNotification = ({ onClose, notificationId }) => {
         const fetchServiceProviders = async () => {
             try {
                 setLoading(true)
-                const response = await fetch('https://serviceprovidersback.onrender.com/api/users/serviceproviders');
+                const response = await fetch('https://service-providers-panel.vercel.app/api/users/serviceproviders');
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -60,7 +60,7 @@ const ViewNotification = ({ onClose, notificationId }) => {
     const getProfileImage = (userId) => {
         const user = serviceProviders.find((provider) => provider._id === userId._id);
         if (user && user.fld_profile_image && user.fld_profile_image !== '') {
-            return `https://serviceprovidersback.onrender.com/uploads/profileimg/${user.fld_profile_image}`;
+            return `https://service-providers-panel.vercel.app/uploads/profileimg/${user.fld_profile_image}`;
         }
         return 'https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg';
     };
@@ -73,13 +73,13 @@ const ViewNotification = ({ onClose, notificationId }) => {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ duration: 0.5, ease: 'easeInOut' }}
-            className="bg-blue-100 w-full h-full p-6 fixed top-0 right-0 z-50 overflow-y-auto shadow-lg"
+            className="bg-sky-50 w-full h-full p-6 fixed top-0 right-0 z-50 overflow-y-auto shadow-lg"
         >
             <button
                 onClick={onClose}
-                className="absolute top-4 right-4 bg-red-500 text-white py-2 px-2 rounded-full"
+                className="absolute top-4 right-4 text-white py-2 px-2 rounded-full"
             >
-                <CircleX />
+                <CircleX className='colorr'/>
             </button>
             {!notification ? (
                 <div className="flex justify-center mt-10">
@@ -94,7 +94,7 @@ const ViewNotification = ({ onClose, notificationId }) => {
             ) : (
                 <>
                     <div className='db'>
-                        <h2 className="text-2xl font-bold mb-4 text-center">View Notification</h2>
+                        <h2 className="text-2xl font-bold mb-3 text-center">View Notification</h2>
                         <div className="wen mx-auto bg-white p-6 rounded-lg shadow-md">
                             <h2 className="font-bold mb-3">Notification Details</h2>
 
@@ -117,7 +117,7 @@ const ViewNotification = ({ onClose, notificationId }) => {
 
                             <div className="mb-4">
                                 <h3 className="text-sm font-semibold mb-2">Description:</h3>
-                                <div className="border border-gray-300 rounded p-2 bg-gray-50">
+                                <div className="border border-gray-300 rounded qledit">
                                     <div
                                         dangerouslySetInnerHTML={{ __html: notification.fld_description }}
                                         className="text-gray-800 fs"
@@ -129,7 +129,7 @@ const ViewNotification = ({ onClose, notificationId }) => {
                                 <h3 className="text-sm font-semibold mb-4">Assigned Users: {notification.fld_userid.length}</h3>
                                 <ul className="list-disc pl-5 flex flex-wrap">
                                     {notification.fld_userid.map((user) => ( // Map over the user objects
-                                        <li key={user._id} className="flex items-center mb-2 mr-4 border border-gray-300 rounded-full p-2 bg-white shadow-sm hover:shadow-lg transition-shadow duration-200">
+                                        <li key={user._id} className="flex items-center mb-2 mr-4 border border-gray-300 rounded-full px-1 py-1 bg-white shadow-sm hover:shadow-lg transition-shadow duration-200">
                                             <img
                                                 src={getProfileImage(user)}
                                                 alt={getUsernameById(user)}

@@ -24,7 +24,7 @@ const AddNotificationForm = ({ onClose }) => {
   useEffect(() => {
     const fetchServiceProviders = async () => {
       try {
-        const response = await fetch('https://serviceprovidersback.onrender.com/api/users/activeserviceproviders');
+        const response = await fetch('https://service-providers-panel.vercel.app/api/users/activeserviceproviders');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -68,7 +68,7 @@ const AddNotificationForm = ({ onClose }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch('https://serviceprovidersback.onrender.com/api/notifications', {
+    const response = await fetch('https://service-providers-panel.vercel.app/api/notifications', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -130,16 +130,17 @@ const AddNotificationForm = ({ onClose }) => {
     >
       <button
         onClick={onClose}
-        className="absolute top-4 right-4 bg-red-500 text-white py-2 px-2 rounded-full"
+        className="absolute top-4 right-4 text-white py-2 px-2 rounded-full"
       >
-        <CircleX />
+        <CircleX className='colorr'/>
       </button>
+      
       <div className='db'>
-        <h2 className="text-2xl font-bold mb-4 text-center">Add Notification</h2>
-        <div className='wen1 mx-auto bg-white p-6 rounded-lg shadow-md'>
+        <h2 className="text-2xl font-bold mb-3 text-center">Add Notification</h2>
+        <div className='wen mx-auto bg-white p-6 rounded-lg shadow-md'>
           <form onSubmit={handleSubmit} className='mx-auto mt-2'>
             <div className='flex w-full justify-center'>
-              <div className="mb-4 w-1/2 mx-1">
+              <div className="mb-3 w-1/2 mx-1">
                 <input type='hidden' value="1" name="fld_adminid" />
                 <label className="block text-sm font-semibold mb-1" htmlFor="title">Title</label>
                 <input
@@ -152,7 +153,7 @@ const AddNotificationForm = ({ onClose }) => {
                   required
                 />
               </div>
-              <div className="mb-4 w-1/2 mx-1">
+              <div className="mb-3 w-1/2 mx-1">
                 <label className="block text-sm font-semibold mb-1" htmlFor="dueDate">Due Date</label>
                 <input
                   type="date"
@@ -166,7 +167,7 @@ const AddNotificationForm = ({ onClose }) => {
                 />
               </div>
             </div>
-            <div className="mb-4">
+            <div className="mb-3">
               <label className="block text-sm font-semibold mb-1" htmlFor="description">Description</label>
               <ReactQuill
                 id="description"
@@ -176,7 +177,7 @@ const AddNotificationForm = ({ onClose }) => {
                 required
               />
             </div>
-            <div className="mb-4">
+            <div className="mb-1">
               <label className="inline-flex items-center">
                 <input
                   type="checkbox"
@@ -188,7 +189,7 @@ const AddNotificationForm = ({ onClose }) => {
               </label>
             </div>
             {/* Dropdown for Service Providers */}
-            <div className="mb-4">
+            <div className="mb-3">
               <label className="block text-sm font-semibold mb-1" htmlFor="serviceProvider">
                 Select Service Provider
               </label>
@@ -210,7 +211,7 @@ const AddNotificationForm = ({ onClose }) => {
 
             {/* Display selected service providers */}
             {formData.fld_userid.length > 0 && (
-              <div className="mb-4 max-w-5xl mx-auto">
+              <div className="mb-3 max-w-5xl mx-auto fthirteen">
                 <label className="text-sm font-semibold my-3">Selected Service Providers</label>
                 <div className="flex flex-wrap mb-2 p-2 bg-gray-50 rounded-xl shadow-md">
                   {formData.fld_userid.map((providerId) => {
@@ -223,22 +224,22 @@ const AddNotificationForm = ({ onClose }) => {
                           animate={{ opacity: 1 }}
                           exit={{ opacity: 0, height: 0 }}
                           transition={{ duration: 0.3 }}
-                          className="flex items-center mr-2 mb-2 border border-gray-300 rounded-full bg-white p-2 shadow-sm hover:shadow-lg transition-shadow"
+                          className="flex items-center mr-2 mb-2 border border-gray-300 rounded-full bg-white px-1 py-1 shadow-sm hover:shadow-lg transition-shadow"
                         >
                           <img
                             src={provider.fld_profile_image && provider.fld_profile_image !== ""
-                              ? 'https://serviceprovidersback.onrender.com/uploads/profileimg/' + provider.fld_profile_image
+                              ? 'https://service-providers-panel.vercel.app/uploads/profileimg/' + provider.fld_profile_image
                               : "https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg"}
                             alt={provider.fld_username || 'No Name'}
-                            className="w-10 h-10 rounded-full border border-gray-200"
+                            className="w-8 h-8 rounded-full border border-gray-200 mr-2"
                           />
-                          <span className="mx-2 text-gray-800 font-semibold">{provider.fld_username || 'No Name'}</span>
+                          <span className="font-semibold">{provider.fld_username || 'No Name'}</span>
                           <button
                             type="button"
                             onClick={() => removeProvider(provider._id)}
-                            className="text-red-500 hover:text-red-700 transition-colors"
+                            className="text-red-500 hover:text-red-700 ml-2"
                           >
-                            <CircleX />
+                            <CircleX className='icx'/>
                           </button>
                         </motion.div>
                       ) : (
@@ -250,23 +251,24 @@ const AddNotificationForm = ({ onClose }) => {
               </div>
             )}
 
-            <div className="flex justify-end ">
-              <button
+            <div className="flex justify-end">
+              {/* <button
                 type="button"
                 onClick={onClose}
-                className="mr-2 bg-red-500 transition duration-300 
- hover:bg-red-600 hover:shadow-lg text-white py-1 px-2 rounded flex"
+                className="mr-2 ded bg-red-500 transition duration-300 
+ hover:bg-red-600 hover:shadow-lg text-white py-1 px-1 rounded flex items-center"
               >
                 <CircleX className='mr-1 ic'/>Cancel
-              </button>
+              </button> */}
               <div className='but'>
-                <button type="submit" className="bg-blue-600 text-white py-1 px-2 rounded flex">
+                <button type="submit" className="bg-blue-600 text-white py-1 px-1 rounded flex items-center">
                   <Save className='mr-1 ic' /> Save
                 </button></div>
             </div>
           </form>
         </div>
       </div>
+
       <ToastContainer />
     </motion.div>
   );

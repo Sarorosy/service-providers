@@ -9,12 +9,12 @@ const Sidebar = () => {
   const profileImage = sessionStorage.getItem('profileImage');
   const defaultProfileImage = "https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg";
   const displayProfileImage = profileImage && profileImage !== "null"
-    ? 'https://serviceprovidersback.onrender.com/uploads/profileimg/' + profileImage
+    ? 'https://service-providers-panel.vercel.app/uploads/profileimg/' + profileImage
     : defaultProfileImage;
 
   console.log("Full Profile Image URL:", displayProfileImage); // Log the full URL
   return (
-    <aside className="bg-white w-64 min-h-screen p-4 shadow-md fixed mt-20">
+    <aside className="bg-white w-64 min-h-screen p-4 shadow-md fixed sidealign">
       {/* Profile Section */}
       <div className="flex flex-col items-center mb-4">
         <img

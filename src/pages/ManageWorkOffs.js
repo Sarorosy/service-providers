@@ -38,7 +38,7 @@ const ManageWorkoffs = () => {
   // Function to fetch service providers
   const fetchServiceProviders = async () => {
     try {
-      const response = await fetch('https://serviceprovidersback.onrender.com/api/users/serviceproviders'); // API endpoint
+      const response = await fetch('https://service-providers-panel.vercel.app/api/users/serviceproviders'); // API endpoint
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
@@ -54,7 +54,7 @@ const ManageWorkoffs = () => {
   const fetchWorkoffs = async () => {
     setLoading(true);
     try {
-      const response = await fetch('https://serviceprovidersback.onrender.com/api/workoffs/');
+      const response = await fetch('https://service-providers-panel.vercel.app/api/workoffs/');
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
@@ -84,32 +84,32 @@ const ManageWorkoffs = () => {
       width: "90px",
       render: (data) => {
         const provider = serviceProviders.find(provider => provider._id == data); // Match by ID
-        return `<div style="width: 100%; font-size: 13px;">${provider ? provider.fld_name : 'Unknown Provider'}</div>`; // Display name or fallback to 'Unknown Provider'
+        return `<div style="width: 100%; font-size: 12px;">${provider ? provider.fld_name : 'Unknown Provider'}</div>`; // Display name or fallback to 'Unknown Provider'
       },
     },
     {
       title: 'Start Date',
       data: 'fld_start_date',
       width: "100px",
-      render: (data) => `<div style="width: 100%; font-size: 13px;">${new Date(data).toLocaleDateString()}</div>`, // Format date
+      render: (data) => `<div style="width: 100%; font-size: 12px;">${new Date(data).toLocaleDateString()}</div>`, // Format date
     },
     {
       title: 'End Date',
       data: 'fld_end_date',
       width: "100px",
-      render: (data) => `<div style="width: 100%; font-size: 13px;">${new Date(data).toLocaleDateString()}</div>`,
+      render: (data) => `<div style="width: 100%; font-size: 12px;">${new Date(data).toLocaleDateString()}</div>`,
     },
     {
       title: 'Duration',
       data: 'fld_duration',
       width: "80px",
-      render: (data) => `<div style="width: 100%; font-size: 13px;">${data}</div>`,
+      render: (data) => `<div style="width: 100%; font-size: 12px;">${data}</div>`,
     },
     {
       title: 'Reason',
       data: 'fld_reason',
       render: (data) => (
-        `<div style="width: 100%; font-size: 13px;">${data.length > 80 ? `${data.substring(0, 80)}...` : data}</div>` // Trim reason if too long
+        `<div style="width: 100%; font-size: 12px;">${data.length > 80 ? `${data.substring(0, 80)}...` : data}</div>` // Trim reason if too long
       ),
     },
     {
@@ -127,7 +127,7 @@ const ManageWorkoffs = () => {
       title: 'Actions',
       width: "100px",
       render: (data, type, row) => (
-        `<div style="width: 100%; font-size: 13px;">
+        `<div style="width: 100%; font-size: 12px;">
            <button class="view-btn" data-id="${row._id}">View</button>
          </div>`
       ),
@@ -154,9 +154,9 @@ const ManageWorkoffs = () => {
       <div className="flex justify-end">
         <button
           onClick={fetchWorkoffs}
-          className="text-white text-sm py-1 px-2 rounded transition duration-200 flex items-center mr-2"
+          className="text-white text-sm py-0 px-1 rounded transition duration-200 flex items-center mr-2"
         >
-          Refresh <RefreshCw className='ml-2' height="15" width="15"/>
+          Refresh <RefreshCw className='ml-2 ic'/>
         </button>
       </div>
       </div>

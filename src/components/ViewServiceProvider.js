@@ -27,7 +27,7 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
     useEffect(() => {
         const fetchServiceProvider = async () => {
             try {
-                const response = await fetch(`https://serviceprovidersback.onrender.com/api/users/find/${serviceProviderId}`);
+                const response = await fetch(`https://service-providers-panel.vercel.app/api/users/find/${serviceProviderId}`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch User');
                 }
@@ -45,7 +45,7 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
     }, [id, serviceProviderId]);
 
     useEffect(() => {
-        fetch(`https://serviceprovidersback.onrender.com/api/manageworkoffs/first/${serviceProviderId}`)
+        fetch(`https://service-providers-panel.vercel.app/api/manageworkoffs/first/${serviceProviderId}`)
             .then(response => response.json())
             .then(data => {
                 setWorkoffs(data);
@@ -60,7 +60,7 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
     useEffect(() => {
         const fetchServiceCharges = async () => {
             try {
-                const response = await fetch(`https://serviceprovidersback.onrender.com/api/servicecharge/user/${serviceProviderId}`);
+                const response = await fetch(`https://service-providers-panel.vercel.app/api/servicecharge/user/${serviceProviderId}`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch service charges');
                 }
@@ -83,7 +83,7 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ duration: 0.5, ease: 'easeInOut' }}
-            className="bg-blue-100 w-full h-full p-6 fixed top-0 right-0 z-50 overflow-y-auto shadow-lg"
+            className="bg-sky-50 w-full h-full p-6 fixed top-0 right-0 z-50 overflow-y-auto shadow-lg"
         >
             <RevolvingDot
                 visible={true}
@@ -101,7 +101,7 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
 
     const imageUrl = (type, fileName) => {
         return fileName && fileName !== ''
-            ? `https://serviceprovidersback.onrender.com/uploads/${type}/${fileName}`
+            ? `https://service-providers-panel.vercel.app/uploads/${type}/${fileName}`
             : null;
     };
     const handleEditClick = (id) => {
@@ -128,7 +128,7 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ duration: 0.5, ease: 'easeInOut' }}
-            className="bg-blue-100 w-full h-full p-6 fixed top-0 right-0 z-50 overflow-y-auto shadow-lg"
+            className="bg-sky-50 w-full h-full p-6 fixed top-0 right-0 z-50 overflow-y-auto shadow-lg"
         >
             <button
                 onClick={onClose}
@@ -247,7 +247,7 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
                             <img
                                 src={
                                     serviceProvider.fld_profile_image && serviceProvider.fld_profile_image.trim() !== ""
-                                        ? `https://serviceprovidersback.onrender.com/uploads/profileimg/${serviceProvider.fld_profile_image}`
+                                        ? `https://service-providers-panel.vercel.app/uploads/profileimg/${serviceProvider.fld_profile_image}`
                                         : "https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg"
                                 }
                                 alt="Profile"
@@ -324,7 +324,7 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
                             <div className="p-3 cent">
                                 <h3 className="text-lg font-semibold mb-2 text-gray-700">Aadhar Card</h3>
                                 <img
-                                    src={`https://serviceprovidersback.onrender.com/uploads/aadharcard/${serviceProvider.fld_aadharcard}`}
+                                    src={`https://service-providers-panel.vercel.app/uploads/aadharcard/${serviceProvider.fld_aadharcard}`}
                                     alt="Aadhar Card"
                                     className="w-full h-auto object-cover rounded-lg shadow-md"
                                 />
@@ -334,7 +334,7 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
                             <div className="p-3 cent">
                                 <h3 className="text-lg font-semibold mb-2 text-gray-700">PAN Card</h3>
                                 <img
-                                    src={`https://serviceprovidersback.onrender.com/uploads/pancard/${serviceProvider.fld_pancard}`}
+                                    src={`https://service-providers-panel.vercel.app/uploads/pancard/${serviceProvider.fld_pancard}`}
                                     alt="PAN Card"
                                     className="w-full h-auto object-cover rounded-lg shadow-md"
                                 />
@@ -344,7 +344,7 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
                             <div className="p-3 cent">
                                 <h3 className="text-lg font-semibold mb-2 text-gray-700">Cancelled Cheque</h3>
                                 <img
-                                    src={`https://serviceprovidersback.onrender.com/uploads/cancelledchequeimage/${serviceProvider.fld_cancelledchequeimage}`}
+                                    src={`https://service-providers-panel.vercel.app/uploads/cancelledchequeimage/${serviceProvider.fld_cancelledchequeimage}`}
                                     alt="Cancelled Cheque"
                                     className="w-full h-auto object-cover rounded-lg shadow-md"
                                 />

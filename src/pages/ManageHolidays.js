@@ -53,7 +53,7 @@ const ManageHolidays = () => {
     const fetchHolidays = async () => {
         setLoading(true);
         try {
-            const response = await fetch('https://serviceprovidersback.onrender.com/api/holidays/');
+            const response = await fetch('https://service-providers-panel.vercel.app/api/holidays/');
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
@@ -152,7 +152,7 @@ const ManageHolidays = () => {
     const handleDeleteConfirmation = async () => {
         if (selectedHolidayId) {
             try {
-                const response = await fetch(`https://serviceprovidersback.onrender.com/api/holidays/${selectedHolidayId}`, {
+                const response = await fetch(`https://service-providers-panel.vercel.app/api/holidays/${selectedHolidayId}`, {
                     method: 'DELETE',
                 });
                 if (response.ok) {
@@ -179,15 +179,15 @@ const ManageHolidays = () => {
                 <div className="flex justify-end">
                     <button
                         onClick={fetchHolidays}
-                        className="text-white text-sm py-1 px-2 rounded transition duration-200 flex items-center mr-2"
+                        className="text-white py-0 px-1 rounded transition duration-200 flex items-center mr-2"
                     >
-                        Refresh <RefreshCw className='ml-2' height="15" width="15" />
+                        Refresh <RefreshCw className='ml-2 ic' />
                     </button>
                     <button
                         onClick={handleAddHolidayClick}
-                        className="text-white text-sm py-1 px-2 rounded transition duration-200 flex items-center"
+                        className="text-white py-0 px-1 rounded transition duration-200 flex items-center"
                     >
-                        Add Holiday <CalendarPlus className='ml-2' height="15" width="15" />
+                        Add Holiday <CalendarPlus className='ml-2 ic' />
                     </button>
                 </div>
             </div>

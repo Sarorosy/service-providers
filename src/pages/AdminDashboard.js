@@ -25,9 +25,9 @@ const AdminDashboard = () => {
       try {
         // Fetch data from your endpoints
         const [serviceProvidersResponse, holidaysResponse, notificationsResponse] = await Promise.all([
-          axios.get('https://serviceprovidersback.onrender.com/api/users/serviceproviders'),
-          axios.get('https://serviceprovidersback.onrender.com/api/holidays'),
-          axios.get('https://serviceprovidersback.onrender.com/api/notifications'),
+          axios.get('https://service-providers-panel.vercel.app/api/users/serviceproviders'),
+          axios.get('https://service-providers-panel.vercel.app/api/holidays'),
+          axios.get('https://service-providers-panel.vercel.app/api/notifications'),
         ]);
 
         const serviceProviders = serviceProvidersResponse.data;
@@ -89,52 +89,50 @@ const AdminDashboard = () => {
     <div className="p-4">
       <div>
 
-        <div className='flex gap-5 col-md-12 mb-4'>
+        <div className='flex gap-3 col-md-12 mb-2'>
           <div className='flex flex-col col-md-4'>
-            <div className="bg-blue-100 shadow-md rounded px-3 py-4 flex items-center">
-              <UsersRound className="h-8 w-8 text-blue-600 mr-3" />
+            <div className="bg-blue-100 shadow-md rounded px-3 py-3 flex">
+              <UsersRound className="h-6 w-6 text-blue-600 mr-3" />
               <div>
-                <h2 className="text-md font-bold">Total Users</h2>
+                <h2 className="text-sm font-bold">Total Users</h2>
                 <p className="text-2xl">{data.totalUsers}</p>
               </div>
             </div>
-            <button className="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600" onClick={() => { navigate('/manage-service-provider') }}>
+            <button className="cent bg-blue-500 ded1 text-white font-bold py-2 px-4 hover:bg-blue-600" onClick={() => { navigate('/manage-service-provider') }}>
               Manage Service Providers
             </button>
           </div>
 
-          <div className="bg-green-100 shadow-md rounded p-3 flex col-md-3">
-            <UsersRound className="h-8 w-8 text-green-600 mr-3" />
+          <div className="bg-green-100 shadow-md rounded p-3 flex dbox">
+            <UsersRound className="h-6 w-6 text-green-600 mr-3" />
             <div>
-              <h2 className="text-md font-bold">Active Users</h2>
+              <h2 className="text-sm font-bold">Active Users</h2>
               <p className="text-2xl">{data.activeUsers}</p>
-              <button className="bg-green-500 text-white font-bold py-2 px-4 rounded hover:bg-green-600 mt-2 " onClick={() => { navigate('/manage-service-provider/active') }}>
+              <button className="bg-green-500 text-white font-bold py-1 px-2 rounded hover:bg-green-600 mt-1 ded" onClick={() => { navigate('/manage-service-provider/active') }}>
                 View
               </button>
             </div>
           </div>
 
-          <div className=' col-md-3'>
-            <div className="bg-red-100 shadow-md rounded p-3 flex">
-              <UsersRound className="h-8 w-8 text-red-600 mr-3" />
+            <div className="bg-red-100 shadow-md rounded p-3 flex dbox">
+              <UsersRound className="h-6 w-6 text-red-600 mr-3" />
               <div>
-                <h2 className="text-md font-bold">Inactive Users</h2>
+                <h2 className="text-sm font-bold">Inactive Users</h2>
                 <p className="text-2xl">{data.inactiveUsers}</p>
-                <button className="bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-600 mt-2 " onClick={() => { navigate('/manage-service-provider/inactive') }}>
+                <button className="bg-red-500 text-white font-bold py-1 px-2 rounded hover:bg-red-600 mt-1 ded" onClick={() => { navigate('/manage-service-provider/inactive') }}>
                   View
                 </button>
               </div>
             </div>
-          </div>
 
         </div>
 
         <div className='flex gap-3 col-md-12'>
-        <div className='flex flex-col col-md-5'>
-          <div className="bg-yellow-100 shadow-md rounded p-3 flex items-center">
-            <BellRing className="h-8 w-8 text-yellow-600 mr-3" />
+        <div className='flex flex-col col-md-4'>
+          <div className="bg-yellow-100 shadow-md rounded p-3 flex">
+            <BellRing className="h-6 w-6 text-yellow-600 mr-3" />
             <div>
-              <h2 className="text-md font-bold">Notifications</h2>
+              <h2 className="text-sm font-bold">Notifications</h2>
               <p className="text-2xl">{data.notifications.length}</p>
             </div>
 
@@ -142,37 +140,37 @@ const AdminDashboard = () => {
           </div>
           {data.notifications.slice(0, 3).map(notification => (
             <div key={notification._id} className="bg-purple-50 p-3 rounded mt-2 shadow-md">
-              <h3 className="text-md font-semibold">{notification.fld_title}</h3>
+              <h3 className="text-sm font-semibold">{notification.fld_title}</h3>
               <p className="text-gray-600">
                 {/* Format the date correctly */}
                 {new Date(notification.fld_addedon).toLocaleDateString()}
               </p>
             </div>
           ))}
-          <button className="bg-orange-500 text-white font-bold py-2 px-4 rounded hover:bg-orange-600" onClick={() => { navigate('/manage-notifications') }}>
+          <button className="cent ded1 bg-orange-500 text-white font-bold py-2 px-4 hover:bg-orange-600" onClick={() => { navigate('/manage-notifications') }}>
             Manage Notifications
           </button>
         </div>
 
-        <div className='flex flex-col col-md-6'>
-          <div className="bg-purple-100 shadow-md rounded p-3 flex items-center">
-            <Calendar1 className="h-8 w-8 text-purple-600 mr-3" />
+        <div className='flex flex-col col-md-7'>
+          <div className="bg-purple-100 shadow-md rounded p-3 flex">
+            <Calendar1 className="h-6 w-6 text-purple-600 mr-3" />
             <div>
-              <h2 className="text-md font-bold">Upcoming Holidays</h2>
+              <h2 className="text-sm font-bold">Upcoming Holidays</h2>
               <p className="text-2xl">{data.holidays.length}</p>
 
             </div>
           </div>
           {data.holidays.slice(0, 3).map(holiday => (
             <div key={holiday._id} className="bg-purple-50 p-3 rounded mt-2 shadow-md">
-              <h3 className="text-md font-semibold">{holiday.fld_title}</h3>
+              <h3 className="text-sm font-semibold">{holiday.fld_title}</h3>
               <p className="text-gray-600">
                 {/* Format the date correctly */}
                 {new Date(holiday.fld_holiday_date).toLocaleDateString()}
               </p>
             </div>
           ))}
-          <button className="bg-green-500 text-white font-bold py-2 px-4 rounded hover:bg-green-600" onClick={() => { navigate('/manage-holidays') }}>
+          <button className="bg-green-500 text-white font-bold py-2 px-4 hover:bg-green-600 ded1 cent" onClick={() => { navigate('/manage-holidays') }}>
             Manage Holidays
           </button>
         </div>

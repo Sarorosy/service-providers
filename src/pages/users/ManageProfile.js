@@ -36,7 +36,7 @@ const ManageProfile = () => {
 
     // Fetch service provider data for editing
     const fetchServiceProvider = async () => {
-        const response = await fetch(`https://serviceprovidersback.onrender.com/api/users/find/${userId}`);
+        const response = await fetch(`https://service-providers-panel.vercel.app/api/users/find/${userId}`);
         if (response.ok) {
             const data = await response.json();
             if (data.fld_start_date) {
@@ -95,7 +95,7 @@ const ManageProfile = () => {
             formDataToSend.append(key, formData[key]);
         }
 
-        const response = await fetch(`https://serviceprovidersback.onrender.com/api/users/${userId}`, {
+        const response = await fetch(`https://service-providers-panel.vercel.app/api/users/${userId}`, {
             method: 'PUT',
             body: formDataToSend,
         });
@@ -350,7 +350,7 @@ const ManageProfile = () => {
                             {formData.fld_profile_image ? (
                                 <div className="relative">
                                     <img
-                                        src={`https://serviceprovidersback.onrender.com/uploads/profileimg/${formData.fld_profile_image}`}
+                                        src={`https://service-providers-panel.vercel.app/uploads/profileimg/${formData.fld_profile_image}`}
                                         alt="Profile"
                                         className="border rounded p-2 w-2/3"
                                     />
@@ -378,7 +378,7 @@ const ManageProfile = () => {
                             {formData.fld_aadharcard ? (
                                 <div className="relative">
                                     <img
-                                        src={`https://serviceprovidersback.onrender.com/uploads/aadharcard/${formData.fld_aadharcard}`}
+                                        src={`https://service-providers-panel.vercel.app/uploads/aadharcard/${formData.fld_aadharcard}`}
                                         alt="Aadhar Card"
                                         className="border rounded p-2 w-2/3"
                                     />
@@ -406,7 +406,7 @@ const ManageProfile = () => {
                             {formData.fld_pancard ? (
                                 <div className="relative">
                                     <img
-                                        src={`https://serviceprovidersback.onrender.com/uploads/pancard/${formData.fld_pancard}`}
+                                        src={`https://service-providers-panel.vercel.app/uploads/pancard/${formData.fld_pancard}`}
                                         alt="PAN Card"
                                         className="border rounded p-2 w-2/3"
                                     />
@@ -434,7 +434,7 @@ const ManageProfile = () => {
                             {formData.fld_cancelledchequeimage ? (
                                 <div className="relative">
                                     <img
-                                        src={`https://serviceprovidersback.onrender.com/uploads/cancelledchequeimage/${formData.fld_cancelledchequeimage}`}
+                                        src={`https://service-providers-panel.vercel.app/uploads/cancelledchequeimage/${formData.fld_cancelledchequeimage}`}
                                         alt="Cancelled Cheque"
                                         className="border rounded p-2 w-2/3"
                                     />

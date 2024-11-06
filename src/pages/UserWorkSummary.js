@@ -4,7 +4,7 @@ import DataTable from 'datatables.net-react';
 import DT from 'datatables.net-dt'; // Import DataTables
 import $ from 'jquery'; // Import jQuery
 import { RevolvingDot } from 'react-loader-spinner';
-import { ArrowLeftCircle, RefreshCw,ArrowUpCircle  } from 'lucide-react';
+import { ArrowLeftCircle, RefreshCw, ArrowUpCircle } from 'lucide-react';
 
 
 const UserWorkSummary = () => {
@@ -18,7 +18,7 @@ const UserWorkSummary = () => {
     const [user, setUser] = useState(null); // Store user data
     const [showScrollTop, setShowScrollTop] = useState(false);
     const [projectsLoading, setProjectsLoading] = useState(true);
-    
+
     useEffect(() => {
         if (sessionStorage.getItem("adminType") != "SUPERADMIN") {
             navigate("/dashboard"); // Redirect to homepage if not SUPERADMIN
@@ -28,7 +28,7 @@ const UserWorkSummary = () => {
 
     const fetchProjects = async () => {
         try {
-            const response = await fetch('https://serviceprovidersback.onrender.com/api/projects');
+            const response = await fetch('https://service-providers-panel.vercel.app/api/projects');
             if (!response.ok) {
                 throw new Error('Failed to fetch projects');
             }
@@ -37,13 +37,13 @@ const UserWorkSummary = () => {
         } catch (error) {
             console.error('Error fetching projects:', error);
             setProjects([]);
-        }finally {
+        } finally {
             setProjectsLoading(false); // Stop loading projects
         }
     };
     // Fetch all projects
     useEffect(() => {
-        
+
 
         fetchProjects();
     }, []);
@@ -51,7 +51,7 @@ const UserWorkSummary = () => {
     // Fetch user by ID
     const fetchUser = async () => {
         try {
-            const response = await fetch(`https://serviceprovidersback.onrender.com/api/users/find/${id}`);
+            const response = await fetch(`https://service-providers-panel.vercel.app/api/users/find/${id}`);
             if (!response.ok) {
                 throw new Error('Failed to fetch user');
             }
@@ -70,7 +70,7 @@ const UserWorkSummary = () => {
     const fetchWorkSummaries = async () => {
         setLoading(true); // Start loading
         try {
-            const response = await fetch(`https://serviceprovidersback.onrender.com/api/worksummaries/user/${id}`);
+            const response = await fetch(`https://service-providers-panel.vercel.app/api/worksummaries/user/${id}`);
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
@@ -88,7 +88,7 @@ const UserWorkSummary = () => {
         fetchWorkSummaries();
     }, [id]);
 
-   
+
     const handleScroll = () => {
         const scrollPosition = window.scrollY; // Get current scroll position
         const windowHeight = window.innerHeight; // Get window height
@@ -116,8 +116,8 @@ const UserWorkSummary = () => {
             data: 'fld_projectid',
             render: (data) => {
                 const project = projects.find((proj) => proj._id == data);
-                const title = project ? project.fld_title : 'Unknown Project'; 
-                return title ? title : 'No Title'; 
+                const title = project ? project.fld_title : 'Unknown Project';
+                return title ? title : 'No Title';
             },
         },
         {
@@ -130,7 +130,7 @@ const UserWorkSummary = () => {
         {
             title: 'Status',
             data: 'status',
-            width:"100px",
+            width: "100px",
             render: (data) => {
                 return data ? data : 'No Status'; // Display 'No Status' if status is not present
             },
@@ -138,7 +138,7 @@ const UserWorkSummary = () => {
         {
             title: 'Date Added',
             data: 'fld_addedon',
-            width:"110px",
+            width: "110px",
             render: (data, type) => {
                 // Render the date for display and sorting
                 if (type === 'display') {
@@ -159,46 +159,50 @@ const UserWorkSummary = () => {
     };
 
     return (
-        <div className="p-6 bg-gray-100 rounded-lg shadow-md">
-            <div className="flex justify-between items-center mb-4">
-                <button
-                    onClick={() => navigate(-1)} // Go back to the previous page
-                    className="bg-red-500 text-white flex px-4 py-2 rounded-lg shadow-md hover:bg-red-600 transition duration-200"
-                >
-                    <ArrowLeftCircle className='mr-2' /> Back
-                </button>
-                <button
-                    onClick={handleRefresh}
-                    className="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-200 flex items-center mr-2"
-                >
-                    Refresh <RefreshCw className='ml-2' />
-                </button>
+        <div className="p-6 bg-white rounded-lg shadow-md">
+            <div className='flex justify-content-between mb-6'>
+                <h1 className="text-xl font-bold text-gray-800 flex items-center">
+                    {user ? (
+                        <>
+                            <img
+                                src={user.fld_profile_image && user.fld_profile_image !== ""
+                                    ? 'https://service-providers-panel.vercel.app/uploads/profileimg/' + user.fld_profile_image
+                                    : "https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg"}
+                                alt={user.fld_username || 'No Name'}
+                                className="w-10 h-10 rounded-full border border-gray-200 mr-2" // Added margin to separate image and text
+                            />
+                            {user.fld_name}
+                        </>
+                    ) : 'Loading...'}
+                </h1>
+                <div className="flex justify-end items-center">
+                    <button
+                        onClick={() => navigate(-1)} // Go back to the previous page
+                        className=" flex px-1 py-1 rounded backbut mr-4"
+                    >
+                        <ArrowLeftCircle className='mr-1 ic1' /> Back
+                    </button>
+                    <div className='but'>
+                        <button
+                            onClick={handleRefresh}
+                            className="text-white text-sm py-1 px-1 rounded transition duration-200 flex items-center"
+                        >
+                            Refresh <RefreshCw className='ml-2 ic' />
+                        </button></div>
+                </div>
             </div>
             {showScrollTop && (
                 <div className="fixed bottom-6 right-6 z-50">
                     <button
                         onClick={scrollToTop}
-                        className="bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition duration-200"
+                        className="arak text-white p-2 rounded-full shadow-lg transition duration-200"
                     >
                         <ArrowUpCircle className="w-6 h-6" />
                     </button>
                 </div>
             )}
 
-            <h1 className="text-3xl font-bold mb-6 text-gray-800 flex items-center">
-                {user ? (
-                    <>
-                        <img
-                            src={user.fld_profile_image && user.fld_profile_image !== ""
-                                ? 'https://serviceprovidersback.onrender.com/uploads/profileimg/' + user.fld_profile_image
-                                : "https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg"}
-                            alt={user.fld_username || 'No Name'}
-                            className="w-10 h-10 rounded-full border border-gray-200 mr-2" // Added margin to separate image and text
-                        />
-                        {user.fld_name}
-                    </>
-                ) : 'Loading...'}
-            </h1>
+
 
             {loading || projectsLoading ? (
                 <div className="flex justify-center mt-10">

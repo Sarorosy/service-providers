@@ -46,8 +46,8 @@ const ManageServiceCharge = () => {
     setLoading(true);
     try {
       const [serviceChargeResponse, serviceProviderResponse] = await Promise.all([
-        fetch('https://serviceprovidersback.onrender.com/api/servicecharge/'),
-        fetch('https://serviceprovidersback.onrender.com/api/users/serviceproviders/')
+        fetch('https://service-providers-panel.vercel.app/api/servicecharge/'),
+        fetch('https://service-providers-panel.vercel.app/api/users/serviceproviders/')
       ]);
 
       if (!serviceChargeResponse.ok || !serviceProviderResponse.ok) {
@@ -92,7 +92,7 @@ const ManageServiceCharge = () => {
   const handleDelete = async () => {
     if (selectedServiceCharge) {
       try {
-        const response = await fetch(`https://serviceprovidersback.onrender.com/api/servicecharge/${selectedServiceCharge._id}`, {
+        const response = await fetch(`https://service-providers-panel.vercel.app/api/servicecharge/${selectedServiceCharge._id}`, {
           method: 'DELETE',
         });
 
@@ -126,31 +126,31 @@ const ManageServiceCharge = () => {
       title: 'Service Provider',
       data: 'fld_service_provider_id',
       width: "150px",
-      render: (data) => `<div style="width: 100%; font-size: 13px;">${getServiceProviderName(data)}</div>`,
+      render: (data) => `<div style="width: 100%; font-size: 12px;">${getServiceProviderName(data)}</div>`,
     },
     {
       title: 'Service Charge',
       data: 'fld_service_charge',
       width: "100px",
-      render: (data) => `<div style="width: 100%; font-size: 13px;">${data}</div>`,
+      render: (data) => `<div style="width: 100%; font-size: 12px;">${data}</div>`,
     },
     {
       title: 'From Date',
       data: 'fld_from_date',
       width: "100px",
-      render: (data) => `<div style="width: 100%; font-size: 13px;">${new Date(data).toLocaleDateString()}</div>`,
+      render: (data) => `<div style="width: 100%; font-size: 12px;">${new Date(data).toLocaleDateString()}</div>`,
     },
     {
       title: 'To Date',
       data: 'fld_to_date',
       width: "100px",
-      render: (data) => `<div style="width: 100%; font-size: 13px;">${new Date(data).toLocaleDateString()}</div>`,
+      render: (data) => `<div style="width: 100%; font-size: 12px;">${new Date(data).toLocaleDateString()}</div>`,
     },
     {
       title: 'Actions',
       width: "100px",
       render: (data, type, row) => (
-        `<div style="width: 100%; font-size: 13px;">
+        `<div style="width: 100%; font-size: 12px;">
            <button class="edit-btn" data-id="${row._id}">Edit</button>
            <button class="delete-btn" data-id="${row._id}" style="margin-left: 10px;">Delete</button>
          </div>`
@@ -165,16 +165,16 @@ const ManageServiceCharge = () => {
         <div className='flex float-right'>
           <button
             onClick={fetchData}
-            className="text-white text-sm py-1 px-2 rounded flex items-center mr-2"
+            className="text-white text-sm py-1 px-1 rounded flex items-center mr-2"
           >
-            <RefreshCw className="mr-2" height="15" width="15" />
+            <RefreshCw className="mr-2 ic" />
             Refresh
           </button>
           <button
             onClick={handleAddButtonClick}
-            className="text-white text-sm py-1 px-2 rounded flex items-center"
+            className="text-white text-sm py-1 px-1 rounded flex items-center"
           >
-            <PlusCircle className="mr-2" height="15" width="15" />
+            <PlusCircle className="mr-2 ic"/>
             Add Service Charge
           </button>
         </div>

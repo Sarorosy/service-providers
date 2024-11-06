@@ -19,7 +19,7 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-white px-4 py-3 flex justify-between items-center w-full fixed top-0 left-0 z-50 border border-b border-blue-600">
+    <header className="bg-white px-4 py-2 flex justify-between items-center w-full fixed top-0 left-0 z-50 border border-b border-blue-600">
       <div className="flex items-center">
         <img
           src={logo}
@@ -33,10 +33,10 @@ const Header = () => {
       <div>
         <button
           onClick={handleLogout}
-          className="bg-red-500 text-white py-1 px-2 text-sm rounded shadow-md transition duration-300 
+          className="browny text-white py-1 px-2 text-sm rounded 
                      hover:bg-red-600 hover:shadow-lg focus:outline-none 
                      focus:ring-2 focus:ring-red-400 focus:ring-opacity-50 
-                     flex items-center space-x-2"
+                     flex items-center space-x-2 mt-1"
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-log-out">
             <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />

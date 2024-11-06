@@ -13,16 +13,16 @@ const ManageWorkDays = () => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-    useEffect(() => {
-        if (sessionStorage.getItem("adminType") != "SUPERADMIN") {
-            navigate("/dashboard"); // Redirect to homepage if not SUPERADMIN
-        }
-    }, [navigate]);
+  useEffect(() => {
+    if (sessionStorage.getItem("adminType") != "SUPERADMIN") {
+      navigate("/dashboard"); // Redirect to homepage if not SUPERADMIN
+    }
+  }, [navigate]);
 
   const fetchServiceProviders = async () => {
     try {
       setLoading(true);
-      const response = await fetch('https://serviceprovidersback.onrender.com/api/users/serviceproviders'); // API endpoint
+      const response = await fetch('https://service-providers-panel.vercel.app/api/users/serviceproviders'); // API endpoint
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
@@ -51,8 +51,8 @@ const ManageWorkDays = () => {
       data: 'fld_profile_image',
       width: "100px",
       render: (data) => `
-          <img src="${data && data.trim() !== "" ? `https://serviceprovidersback.onrender.com/uploads/profileimg/${data}` : 'https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg'}" 
-          alt="Profile" style="width: 50px; height: auto; object-fit: cover;border-radius:50%" />
+          <img src="${data && data.trim() !== "" ? `https://service-providers-panel.vercel.app/uploads/profileimg/${data}` : 'https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg'}" 
+          alt="Profile" style="width: 40px; height: auto; object-fit: cover;border-radius:50%" />
       `,
     },
     { title: 'Name', data: 'fld_name' },
@@ -73,17 +73,17 @@ const ManageWorkDays = () => {
   };
 
   return (
-    <div className="p-6 bg-white rounded-lg shadow-md">
-                  <div className="flex justify-content-between mb-4 but">
-      <h1 className="text-xl font-bold text-gray-800">Manage Work Days</h1>
-      <div className="flex justify-end">
-        <button
-          onClick={fetchServiceProviders}
-          className="text-white text-sm py-1 px-2 rounded transition duration-200 flex items-center mr-2"
-        >
-          Refresh <RefreshCw className='ml-2' height="15" width="15"/>
-        </button>
-      </div>
+    <div className="p-6 bg-white rounded-lg shadow-md smt">
+      <div className="flex justify-content-between mb-4 but">
+        <h1 className="text-xl font-bold text-gray-800">Manage Work Days</h1>
+        <div className="flex justify-end">
+          <button
+            onClick={fetchServiceProviders}
+            className="text-white text-sm py-0 px-1 rounded transition duration-200 flex items-center mr-2"
+          >
+            Refresh <RefreshCw className='ml-2 ic'/>
+          </button>
+        </div>
       </div>
 
       {loading ? (

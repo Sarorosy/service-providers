@@ -25,8 +25,8 @@ const ManageUserWorkoff = ({ onClose, serviceProviderId }) => {
         try {
 
             const [workoffResponse, serviceProviderResponse] = await Promise.all([
-                fetch(`https://serviceprovidersback.onrender.com/api/manageworkoffs/${serviceProviderId}`),
-                fetch('https://serviceprovidersback.onrender.com/api/users/serviceproviders/')
+                fetch(`https://service-providers-panel.vercel.app/api/manageworkoffs/${serviceProviderId}`),
+                fetch('https://service-providers-panel.vercel.app/api/users/serviceproviders/')
             ]);
 
             if (!workoffResponse.ok || !serviceProviderResponse.ok) {
@@ -79,7 +79,7 @@ const ManageUserWorkoff = ({ onClose, serviceProviderId }) => {
         if (!selectedWorkoffId) return;
 
         try {
-            const response = await fetch(`https://serviceprovidersback.onrender.com/api/manageworkoffs/${selectedWorkoffId}`, {
+            const response = await fetch(`https://service-providers-panel.vercel.app/api/manageworkoffs/${selectedWorkoffId}`, {
                 method: 'DELETE',
             });
 
@@ -99,43 +99,43 @@ const ManageUserWorkoff = ({ onClose, serviceProviderId }) => {
             title: 'Admin ID',
             data: 'fld_adminid',
             width: "100px",
-            render: (data) => `<div style="width: 100%; font-size: 13px;">${getServiceProviderName(data)}</div>`,
+            render: (data) => `<div style="width: 100%; font-size: 12px;">${getServiceProviderName(data)}</div>`,
         },
         {
             title: 'Workoff Start Date',
             data: 'fld_workoffs_startdate',
             width: "150px",
-            render: (data) => `<div style="width: 100%; font-size: 13px;">${new Date(data).toLocaleDateString()}</div>`,
+            render: (data) => `<div style="width: 100%; font-size: 12px;">${new Date(data).toLocaleDateString()}</div>`,
         },
         {
             title: 'Workoff End Date',
             data: 'fld_workoffs_enddate',
             width: "150px",
-            render: (data) => `<div style="width: 100%; font-size: 13px;">${new Date(data).toLocaleDateString()}</div>`,
+            render: (data) => `<div style="width: 100%; font-size: 12px;">${new Date(data).toLocaleDateString()}</div>`,
         },
         {
             title: 'Total Workoffs',
             data: 'fld_total_no_of_work_offs',
             width: "100px",
-            render: (data) => `<div style="width: 100%; font-size: 13px;">${data}</div>`,
+            render: (data) => `<div style="width: 100%; font-size: 12px;">${data}</div>`,
         },
         {
             title: 'Workoffs Availed',
             data: 'fld_work_offs_availed',
             width: "100px",
-            render: (data) => `<div style="width: 100%; font-size: 13px;">${data}</div>`,
+            render: (data) => `<div style="width: 100%; font-size: 12px;">${data}</div>`,
         },
         {
             title: 'Workoffs Balance',
             data: 'fld_work_offs_balance',
             width: "100px",
-            render: (data) => `<div style="width: 100%; font-size: 13px;">${data}</div>`,
+            render: (data) => `<div style="width: 100%; font-size: 12px;">${data}</div>`,
         },
         {
             title: 'Actions',
             width: "100px",
             render: (data, type, row) => (
-                `<div style="width: 100%; font-size: 13px;">
+                `<div style="width: 100%; font-size: 12px;">
                     <button class="delete-btn" data-id="${row._id}" style="margin-left: 10px;">Delete</button>
                 </div>`
             ),
@@ -161,14 +161,14 @@ const ManageUserWorkoff = ({ onClose, serviceProviderId }) => {
                     <div className='flex float-right'>
                         <button
                             onClick={fetchData}
-                            className="bg-blue-600 text-white px-2 py-1 rounded flex items-center mr-2 text-sm"
+                            className="bg-blue-600 text-white px-1 py-1 rounded flex items-center mr-2 text-sm"
                         >
                             <RefreshCw className="mr-2 ic" />
                             Refresh
                         </button>
                         <button
                             onClick={handleAddButtonClick}
-                            className="bg-blue-600 text-white px-2 py-1 rounded flex items-center text-sm"
+                            className="bg-blue-600 text-white px-1 py-1 rounded flex items-center text-sm"
                         >
                             <PlusCircle className="mr-2 ic" />
                             Add Workoff

@@ -53,7 +53,7 @@ const EditServiceCharge = ({ onClose, id }) => {
 
     const fetchServiceProviders = async () => {
         try {
-            const response = await fetch('https://serviceprovidersback.onrender.com/api/users/serviceproviders');
+            const response = await fetch('https://service-providers-panel.vercel.app/api/users/serviceproviders');
             const data = await response.json();
             setServiceProviders(data);
         } catch (error) {
@@ -64,7 +64,7 @@ const EditServiceCharge = ({ onClose, id }) => {
 
     const fetchServiceCharge = async () => {
         try {
-            const response = await fetch(`https://serviceprovidersback.onrender.com/api/servicecharge/${id}`);
+            const response = await fetch(`https://service-providers-panel.vercel.app/api/servicecharge/${id}`);
             if (!response.ok) {
                 throw new Error('Failed to fetch service charge');
             }
@@ -101,7 +101,7 @@ const EditServiceCharge = ({ onClose, id }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch(`https://serviceprovidersback.onrender.com/api/servicecharge/${id}`, {
+            const response = await fetch(`https://service-providers-panel.vercel.app/api/servicecharge/${id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -150,12 +150,12 @@ const EditServiceCharge = ({ onClose, id }) => {
             </button>
             <h2 className="text-2xl font-bold mb-3 text-center">Edit Service Charge</h2>
 
-            <div className='wen1 mx-auto bg-white p-6 rounded-lg shadow-md'>
+            <div className='wen3 mx-auto bg-white p-6 rounded-lg shadow-md esc'>
                 {selectedProvider && (
-                    <div className="mb-4 p-2 cent">
+                    <div className="mb-2 cent">
                         <div>
                             <img
-                                src={selectedProvider.fld_profile_image ? `https://serviceprovidersback.onrender.com/uploads/profileimg/${selectedProvider.fld_profile_image}` : 'https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg'}
+                                src={selectedProvider.fld_profile_image ? `https://service-providers-panel.vercel.app/uploads/profileimg/${selectedProvider.fld_profile_image}` : 'https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg'}
                                 alt={selectedProvider.text}
                                 className="rounded-full"
                             />
@@ -164,15 +164,15 @@ const EditServiceCharge = ({ onClose, id }) => {
                     </div>
                 )}
 
-                <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
-                    <div className="mb-4">
-                        <label htmlFor="serviceProvider" className="block text-gray-700">Service Provider</label>
+                <form onSubmit={handleSubmit} className='db'>
+                    <div className="mb-3">
+                        <label htmlFor="serviceProvider" className="block text-sm font-semibold">Service Provider</label>
                         <select id="serviceProvider" className="w-full p-2 border border-gray-300 rounded">
                             <option value="">Select a service provider</option>
                         </select>
                     </div>
-                    <div className="mb-4">
-                        <label htmlFor="fromDate" className="block text-gray-700">From Date</label>
+                    <div className="mb-3">
+                        <label htmlFor="fromDate" className="block text-sm font-semibold">From Date</label>
                         <input
                             type="date"
                             id="fromDate"
@@ -183,8 +183,8 @@ const EditServiceCharge = ({ onClose, id }) => {
                             required
                         />
                     </div>
-                    <div className="mb-4">
-                        <label htmlFor="toDate" className="block text-gray-700">To Date</label>
+                    <div className="mb-3">
+                        <label htmlFor="toDate" className="block text-sm font-semibold">To Date</label>
                         <input
                             type="date"
                             id="toDate"
@@ -196,7 +196,7 @@ const EditServiceCharge = ({ onClose, id }) => {
                         />
                     </div>
                     <div className="mb-4">
-                        <label htmlFor="serviceCharge" className="block text-gray-700">Service Charge</label>
+                        <label htmlFor="serviceCharge" className="block text-sm font-semibold">Service Charge</label>
                         <input
                             type="number"
                             id="serviceCharge"
