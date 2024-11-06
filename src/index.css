@@ -896,6 +896,7 @@ background-color: brown !important;
 
 .browny{
   background-color: brown;
+  height: 25px; 
 }
 
 .qledit {
@@ -975,4 +976,8 @@ div.dt-container .dt-paging .dt-paging-button{
 .dbox {
   height: 6.7rem;
   width: 18rem;
+}
+
+.browny span{
+  font-size: 12px;
 }
