@@ -46,8 +46,8 @@ const ManageUserServiceCharge = ({ serviceProviderId, onClose }) => {
     setLoading(true);
     try {
       const [serviceChargeResponse, serviceProviderResponse] = await Promise.all([
-        fetch(`https://service-providers-panel.vercel.app/api/servicecharge/user/${serviceProviderId}`),
-        fetch('https://service-providers-panel.vercel.app/api/users/serviceproviders/')
+        fetch(`https://serviceprovidersback.onrender.com/api/servicecharge/user/${serviceProviderId}`),
+        fetch('https://serviceprovidersback.onrender.com/api/users/serviceproviders/')
       ]);
 
       if (!serviceChargeResponse.ok || !serviceProviderResponse.ok) {
@@ -92,7 +92,7 @@ const ManageUserServiceCharge = ({ serviceProviderId, onClose }) => {
   const handleDelete = async () => {
     if (selectedServiceCharge) {
       try {
-        const response = await fetch(`https://service-providers-panel.vercel.app/api/servicecharge/${selectedServiceCharge._id}`, {
+        const response = await fetch(`https://serviceprovidersback.onrender.com/api/servicecharge/${selectedServiceCharge._id}`, {
           method: 'DELETE',
         });
 

@@ -47,7 +47,7 @@ const AddServiceCharge = ({ onClose }) => {
     const fetchServiceProviders = async () => {
         try {
             setLoading(true);
-            const response = await fetch('https://service-providers-panel.vercel.app/api/users/serviceproviders');
+            const response = await fetch('https://serviceprovidersback.onrender.com/api/users/serviceproviders');
             const data = await response.json();
             const options = data.map(provider => ({
                 _id: provider._id, // Ensure _id is used here
@@ -79,7 +79,7 @@ const AddServiceCharge = ({ onClose }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('https://service-providers-panel.vercel.app/api/servicecharge', {
+            const response = await fetch('https://serviceprovidersback.onrender.com/api/servicecharge', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -139,7 +139,7 @@ const AddServiceCharge = ({ onClose }) => {
                             <div className="mb-2">
                                 <div className="cent1 items-center">
                                     <img
-                                        src={selectedProvider.fld_profile_image ? `https://service-providers-panel.vercel.app/uploads/profileimg/${selectedProvider.fld_profile_image}` : 'https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg'}
+                                        src={selectedProvider.fld_profile_image ? `https://serviceprovidersback.onrender.com/uploads/profileimg/${selectedProvider.fld_profile_image}` : 'https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg'}
                                         alt={selectedProvider.text}
                                         className="w-16 h-16 rounded-full mr-2"
                                     />

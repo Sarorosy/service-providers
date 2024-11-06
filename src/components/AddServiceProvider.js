@@ -62,7 +62,7 @@ const AddServiceProvider = ({ onClose }) => {
             formDataToSend.append(key, formData[key]);
         }
 
-        const response = await fetch('https://service-providers-panel.vercel.app/api/users/', {
+        const response = await fetch('https://serviceprovidersback.onrender.com/api/users/', {
             method: 'POST',
             body: formDataToSend,
         });

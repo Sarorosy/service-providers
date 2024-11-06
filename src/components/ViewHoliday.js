@@ -12,7 +12,7 @@ const ViewHoliday = ({ onClose, holidayId }) => {
     useEffect(() => {
         const fetchHoliday = async () => {
             try {
-                const response = await fetch(`https://service-providers-panel.vercel.app/api/holidays/${holidayId}`);
+                const response = await fetch(`https://serviceprovidersback.onrender.com/api/holidays/${holidayId}`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch holiday');
                 }
@@ -31,7 +31,7 @@ const ViewHoliday = ({ onClose, holidayId }) => {
     useEffect(() => {
         const fetchServiceProviders = async () => {
             try {
-                const response = await fetch('https://service-providers-panel.vercel.app/api/users/serviceproviders');
+                const response = await fetch('https://serviceprovidersback.onrender.com/api/users/serviceproviders');
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -55,7 +55,7 @@ const ViewHoliday = ({ onClose, holidayId }) => {
     const getProfileImage = (userId) => {
         const user = serviceProviders.find((provider) => provider._id === userId);
         if (user && user.fld_profile_image) {
-            return `https://service-providers-panel.vercel.app/uploads/profileimg/${user.fld_profile_image}`;
+            return `https://serviceprovidersback.onrender.com/uploads/profileimg/${user.fld_profile_image}`;
         }
         return 'https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg';
     };

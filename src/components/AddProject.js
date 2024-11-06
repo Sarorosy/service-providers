@@ -24,7 +24,7 @@ const AddProject = ({ onClose }) => {
         };
 
         try {
-            const response = await fetch('https://service-providers-panel.vercel.app/api/projects', {
+            const response = await fetch('https://serviceprovidersback.onrender.com/api/projects', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -25,7 +25,7 @@ const ChangePassword = () => {
         setErrorMessage('');
 
         try {
-            const response = await fetch(`https://service-providers-panel.vercel.app/api/users/${userId}/password`, {
+            const response = await fetch(`https://serviceprovidersback.onrender.com/api/users/${userId}/password`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

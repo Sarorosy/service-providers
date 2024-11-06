@@ -53,7 +53,7 @@ const EditServiceCharge = ({ onClose, id }) => {
 
     const fetchServiceProviders = async () => {
         try {
-            const response = await fetch('https://service-providers-panel.vercel.app/api/users/serviceproviders');
+            const response = await fetch('https://serviceprovidersback.onrender.com/api/users/serviceproviders');
             const data = await response.json();
             setServiceProviders(data);
         } catch (error) {
@@ -64,7 +64,7 @@ const EditServiceCharge = ({ onClose, id }) => {
 
     const fetchServiceCharge = async () => {
         try {
-            const response = await fetch(`https://service-providers-panel.vercel.app/api/servicecharge/${id}`);
+            const response = await fetch(`https://serviceprovidersback.onrender.com/api/servicecharge/${id}`);
             if (!response.ok) {
                 throw new Error('Failed to fetch service charge');
             }
@@ -101,7 +101,7 @@ const EditServiceCharge = ({ onClose, id }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch(`https://service-providers-panel.vercel.app/api/servicecharge/${id}`, {
+            const response = await fetch(`https://serviceprovidersback.onrender.com/api/servicecharge/${id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -155,7 +155,7 @@ const EditServiceCharge = ({ onClose, id }) => {
                     <div className="mb-2 cent">
                         <div>
                             <img
-                                src={selectedProvider.fld_profile_image ? `https://service-providers-panel.vercel.app/uploads/profileimg/${selectedProvider.fld_profile_image}` : 'https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg'}
+                                src={selectedProvider.fld_profile_image ? `https://serviceprovidersback.onrender.com/uploads/profileimg/${selectedProvider.fld_profile_image}` : 'https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg'}
                                 alt={selectedProvider.text}
                                 className="rounded-full"
                             />

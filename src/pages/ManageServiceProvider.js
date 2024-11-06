@@ -42,11 +42,11 @@ const ManageServiceProvider = () => {
         let url; // Default URL
 
         if (status === 'active' || filterActive) {
-            url = 'https://service-providers-panel.vercel.app/api/users/activeserviceproviders';
+            url = 'https://serviceprovidersback.onrender.com/api/users/activeserviceproviders';
         } else if (status === 'inactive' || filterInactive) {
-            url = 'https://service-providers-panel.vercel.app/api/users/inactiveserviceproviders';
+            url = 'https://serviceprovidersback.onrender.com/api/users/inactiveserviceproviders';
         } else {
-            url = 'https://service-providers-panel.vercel.app/api/users/serviceproviders'; // Default URL for all service providers
+            url = 'https://serviceprovidersback.onrender.com/api/users/serviceproviders'; // Default URL for all service providers
         }
 
         try {
@@ -107,7 +107,7 @@ const ManageServiceProvider = () => {
             width: '50px',
             render: (data) => {
                 const imageUrl = (data && data.trim() !== "")
-                    ? `https://service-providers-panel.vercel.app/uploads/profileimg/${data}`
+                    ? `https://serviceprovidersback.onrender.com/uploads/profileimg/${data}`
                     : "https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg";
 
                 // Return an HTML string for the image
@@ -214,7 +214,7 @@ const ManageServiceProvider = () => {
     const handleDelete = async (id) => {
         if (window.confirm('Are you sure you want to delete this service provider?')) {
             try {
-                const response = await fetch(`https://service-providers-panel.vercel.app/api/users/${id}`, {
+                const response = await fetch(`https://serviceprovidersback.onrender.com/api/users/${id}`, {
                     method: 'DELETE',
                 });
                 if (!response.ok) {
@@ -254,7 +254,7 @@ const ManageServiceProvider = () => {
 
     const handleToggleStatus = async (id, currentStatus) => {
         try {
-            const response = await fetch(`https://service-providers-panel.vercel.app/api/users/${id}/status`, {
+            const response = await fetch(`https://serviceprovidersback.onrender.com/api/users/${id}/status`, {
                 method: 'PATCH',
             });
 
