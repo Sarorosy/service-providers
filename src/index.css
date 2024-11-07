@@ -1011,6 +1011,10 @@ div.dt-container .dt-paging .dt-paging-button {
   padding: 4px 10px !important;
 }
 
+.mr1 table.dataTable>tbody>tr>td span {
+  font-size: 12px !important;
+}
+
 /* .mr table.dataTable>tbody>tr>td:last-child {
   background-color: #212529;
   width: 10%;
@@ -1031,7 +1035,6 @@ div.dt-container .dt-paging .dt-paging-button {
 .mr table.dataTable thead th:nth-child(3) {
   width: 25%;
 }
-
 
 .dbox {
   height: 9.7rem;
