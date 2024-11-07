@@ -734,6 +734,7 @@ div.dt-container .dt-search input {
 select.dt-input {
   height: 25px;
   padding: 0 !important;
+  font-size: 12px;
 }
 
 .select2-container--default .select2-selection--multiple .select2-selection__clear {
