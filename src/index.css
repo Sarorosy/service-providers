@@ -1024,6 +1024,10 @@ div.dt-container .dt-paging .dt-paging-button {
   width: 10%;
 }
 
+.mrf table.dataTable thead th:first-child {
+  width: 10%;
+}
+
 .mr table.dataTable thead th:nth-child(3) {
   width: 25%;
 }
