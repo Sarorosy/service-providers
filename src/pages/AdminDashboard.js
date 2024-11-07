@@ -90,7 +90,7 @@ const AdminDashboard = () => {
       <div>
 
         <div className='flex gap-3 col-md-12 mb-2'>
-          <div className='flex flex-col col-md-4'>
+          <div className='flex flex-col col-md-4 bxs'>
             <div className="bg-blue-100 shadow-md rounded px-3 py-3 text-center frbox">
               <Users className="h-10 w-10 text-blue-600 mx-auto my-1" />
               <div>
@@ -118,26 +118,26 @@ const AdminDashboard = () => {
           </div>
 
           <div className='dbox'>
-          <div className="bg-red-100 shadow-md rounded p-3 text-center frbox">
-            <UserMinus className="h-10 w-10 text-red-600 mx-auto my-1" />
-            <div>
-              <p className="text-2xl">{data.inactiveUsers}</p>
-              <h2 className="text-sm font-bold">Inactive Users</h2>
+            <div className="bg-red-100 shadow-md rounded p-3 text-center frbox">
+              <UserMinus className="h-10 w-10 text-red-600 mx-auto my-1" />
+              <div>
+                <p className="text-2xl">{data.inactiveUsers}</p>
+                <h2 className="text-sm font-bold">Inactive Users</h2>
+              </div>
             </div>
-          </div>
-          <button className="border-0 col-md-12 bg-red-500 text-white font-bold py-1 px-2 hover:bg-red-600 ded" onClick={() => { navigate('/manage-service-provider/inactive') }}>
-                View
-              </button>
+            <button className="border-0 col-md-12 bg-red-500 text-white font-bold py-1 px-2 hover:bg-red-600 ded" onClick={() => { navigate('/manage-service-provider/inactive') }}>
+              View
+            </button>
           </div>
 
         </div>
 
         <div className='flex gap-3 col-md-12 mt-5'>
-          <div className='flex flex-col col-md-5 bgyy'>
+          <div className='flex flex-col col-md-5 bgyy bxs'>
             <div className="bg-yellow-100 shadow-md rounded px-3 py-2 flex">
               <BellRing className="h-6 w-6 text-yellow-600 mr-3" />
               <div className='flex sl'>
-              <h2 className="text-md font-semibold mr-1">{data.notifications.length}</h2>
+                <h2 className="text-md font-semibold mr-1">{data.notifications.length}</h2>
                 <h2 className="text-md font-semibold">Notifications</h2>
               </div>
 
@@ -160,27 +160,28 @@ const AdminDashboard = () => {
 
 
           <div className='flex flex-col col-md-6 bgpp'>
-            <div className="bg-purple-100 shadow-md px-3 py-2 flex ">
-              <Calendar1 className="h-6 w-6 text-purple-600 mr-3" />
-              <div className='flex sl'>
-              <h2 className="text-md font-semibold mr-1">{data.holidays.length}</h2>
-                <h2 className="text-sm font-bold">Upcoming Holidays</h2>
+            
+              <div className="bg-purple-100 shadow-md px-3 py-2 flex bxs">
+                <Calendar1 className="h-6 w-6 text-purple-600 mr-3" />
+                <div className='flex sl'>
+                  <h2 className="text-md font-semibold mr-1">{data.holidays.length}</h2>
+                  <h2 className="text-sm font-bold">Upcoming Holidays</h2>
 
+                </div>
               </div>
+              {data.holidays.slice(0, 3).map(holiday => (
+                <div key={holiday._id} className="bg-white p-3 bxs">
+                  <h3 className="text-sm font-semibold">{holiday.fld_title}</h3>
+                  <p className="text-gray-600">
+                    {/* Format the date correctly */}
+                    {new Date(holiday.fld_holiday_date).toLocaleDateString()}
+                  </p>
+                </div>
+              ))}
+              <button className="bg-purple-100 bxs font-bold py-2 px-4 ded1 cent" onClick={() => { navigate('/manage-holidays') }}>
+                Manage Holidays
+              </button>
             </div>
-            {data.holidays.slice(0, 3).map(holiday => (
-              <div key={holiday._id} className="bg-white p-3 ">
-                <h3 className="text-sm font-semibold">{holiday.fld_title}</h3>
-                <p className="text-gray-600">
-                  {/* Format the date correctly */}
-                  {new Date(holiday.fld_holiday_date).toLocaleDateString()}
-                </p>
-              </div>
-            ))}
-            <button className="bg-purple-100  font-bold py-2 px-4 ded1 cent" onClick={() => { navigate('/manage-holidays') }}>
-              Manage Holidays
-            </button>
-          </div>
         </div>
 
 
