@@ -152,7 +152,7 @@ const ManageServiceCharge = () => {
       render: (data, type, row) => (
         `<div style="width: 100%; font-size: 12px;">
            <button class="edit-btn" data-id="${row._id}">Edit</button>
-           <button class="delete-btn" data-id="${row._id}" style="margin-left: 10px;">Delete</button>
+           <button class="delete-btn" data-id="${row._id}">Delete</button>
          </div>`
       ),
     },
