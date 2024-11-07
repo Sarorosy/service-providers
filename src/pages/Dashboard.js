@@ -5,7 +5,7 @@ import { Outlet } from 'react-router-dom';
 
 const Dashboard = () => {
   return (
-    <div className="flex flex-col min-h-screen bg-sky-50 animate-fade-in">
+    <div className="flex flex-col min-h-screen bg-sky-50 animate-fade-in whitee">
       <Header />
       <div className="flex flex-1">
         <Sidebar />

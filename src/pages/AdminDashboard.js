@@ -17,7 +17,21 @@ const AdminDashboard = () => {
     notifications: [],
     holidays: [],
   });
-
+  useEffect(() => {
+    // Get the first element with class 'whitee' and set its background color
+    const whiteeElement = document.getElementsByClassName('whitee')[0];
+    if (whiteeElement) {
+      whiteeElement.style.backgroundColor = 'white';
+    }
+  
+    // Reset background color on cleanup
+    return () => {
+      if (whiteeElement) {
+        whiteeElement.style.backgroundColor = '';
+      }
+    };
+  }, []);
+  
 
 
   useEffect(() => {
@@ -86,7 +100,8 @@ const AdminDashboard = () => {
   // };
 
   return (
-    <div className="p-4">
+    <>
+    <div className="p-4 bg-white">
       <div>
 
         <div className='flex gap-3 col-md-12 mb-2'>
@@ -191,7 +206,7 @@ const AdminDashboard = () => {
         </div> */}
       </div>
 
-    </div>
+    </div></>
   );
 };
 
