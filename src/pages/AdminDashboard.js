@@ -136,9 +136,9 @@ const AdminDashboard = () => {
           <div className='flex flex-col col-md-5 bgyy'>
             <div className="bg-yellow-100 shadow-md rounded px-3 py-2 flex">
               <BellRing className="h-6 w-6 text-yellow-600 mr-3" />
-              <div>
-                <h2 className="text-sm font-bold">Notifications</h2>
-                <p className="text-2xl">{data.notifications.length}</p>
+              <div className='flex sl'>
+              <h2 className="text-md font-semibold mr-1">{data.notifications.length}</h2>
+                <h2 className="text-md font-semibold">Notifications</h2>
               </div>
 
 
@@ -162,9 +162,9 @@ const AdminDashboard = () => {
           <div className='flex flex-col col-md-6 bgpp'>
             <div className="bg-purple-100 shadow-md px-3 py-2 flex ">
               <Calendar1 className="h-6 w-6 text-purple-600 mr-3" />
-              <div>
+              <div className='flex sl'>
+              <h2 className="text-md font-semibold mr-1">{data.holidays.length}</h2>
                 <h2 className="text-sm font-bold">Upcoming Holidays</h2>
-                <p className="text-2xl">{data.holidays.length}</p>
 
               </div>
             </div>

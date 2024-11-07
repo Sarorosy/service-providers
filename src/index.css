@@ -1063,3 +1063,7 @@ table.dataTable thead>tr>th.dt-orderable-desc {
 .bgpp button:hover{
   background-color: #c4aedb !important;
 }
+
+.sl{
+  margin-top: 2px;
+}
