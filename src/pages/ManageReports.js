@@ -97,7 +97,7 @@ const ManageReports = () => {
   }
 
   return (
-    <div className="p-6 bg-white rounded-lg shadow-md smt">
+    <div className="p-6 bg-white rounded-lg shadow-md smt mr">
  
       <div className="flex justify-content-between mb-6 but">
         <h1 className="text-xl font-bold text-gray-800">Manage Reports</h1>
