@@ -85,19 +85,15 @@ export default function Login() {
   
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden bg-gradient-to-br from-[#eafdff] via-[#cef8ee] to-[#defbff]">
-      {/* Grid overlay */}
-      <div className="absolute inset-0 grid grid-cols-[repeat(20,1fr)] grid-rows-[repeat(20,1fr)]">
-        {Array.from({ length: 400 }).map((_, i) => (
-          <div key={i} className="border-[1px] border-black/5"></div>
-        ))}
-      </div>
+    <div className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden ">
+      
+      
 
       {/* Gradient blob */}
-      <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-gradient-to-br from-sky-300 to-green-300 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob"></div>
+      <div className=""></div>
 
       {/* Glassmorphism form card */}
-      <div className="relative z-10 bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg  p-8 w-full max-w-md mx-4 shadow-lg border border-white border-opacity-30">
+      <div className="relative z-10 bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg  p-8 w-full max-w-md mx-4 shadow-lg border rounded-md border-white border-opacity-30">
         <div className="text-center mb-8">
           <img
             src={logo} // Adjust the path as necessary
@@ -119,7 +115,7 @@ export default function Login() {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               required
-              className="w-full mt-1 bg-white bg-opacity-50 border-0 focus:ring-2 focus:ring-sky-300 p-2"
+              className="form-control"
             />
           </div>
           <div>
@@ -131,12 +127,13 @@ export default function Login() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="w-full mt-1 bg-white bg-opacity-50 border-0 focus:ring-2 focus:ring-sky-300 p-2"
+              className="form-control"
             />
           </div>
+          <div className="n-login-btn-set">
           <button
     type="submit"
-    className="w-full bg-gradient-to-r from-sky-500 to-green-500 hover:from-sky-400 hover:to-green-400 text-white font-semibold py-2 px-4 rounded-md transition duration-300 shadow-md flex items-center justify-center"
+    className=""
     disabled={loading}
 >
     {loading ? (
@@ -162,13 +159,15 @@ export default function Login() {
         </svg>
     ) : null}
     {loading ? "Signing In..." : "Sign In"}
+    <i class="fa fa-chevron-circle-right ml-2" aria-hidden="true"></i>
 </button>
+          </div>
 
         </form>
       </div>
 
       {/* Footer */}
-      <footer className="relative z-10 w-full text-center p-4 mt-8 text-gray-600">
+      <footer className="relative z-10 w-full text-center pt-4  text-gray-600">
         <p>&copy; {new Date().getFullYear()} Service Providers. All rights reserved.</p>
       </footer>
 

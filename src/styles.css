@@ -1,0 +1,23 @@
+@font-face {
+    font-family: normal normal normal 14px/1 FontAwesome;
+    src: url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css);
+ }
+.n-login-btn-set {
+    display: flex;
+    justify-content: center;
+}
+.n-login-btn-set button {
+    padding: 5px 20px;
+    background: rgba(0, 149, 218, 0.85);
+    color: #fff;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    /* border: 1px solid #000; */
+}
+.n-login-btn-set button:hover {
+    background: rgb(0 149 218 / 57%);
+    /* color: #000; */
+}
