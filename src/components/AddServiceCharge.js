@@ -79,6 +79,10 @@ const AddServiceCharge = ({ onClose }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            if (formData.fld_service_charge > 100000) {
+                toast.error("Value must be less than or equal to 100000");
+                return; 
+            }
             const response = await fetch('https://serviceprovidersback.onrender.com/api/servicecharge', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -198,6 +202,7 @@ const AddServiceCharge = ({ onClose }) => {
                             <button
                                 type="submit"
                                 className="text-white py-1 px-1 rounded col-span-2 flex items-center"
+                                onClick={handleSubmit}
                             >
                                 <Save className="mr-2 ic" />
                                 Add Service Charge
