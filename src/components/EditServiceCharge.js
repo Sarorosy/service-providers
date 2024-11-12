@@ -207,6 +207,7 @@ const EditServiceCharge = ({ onClose, id }) => {
                                 value={formData.fld_service_charge}
                                 onChange={handleInputChange}
                                 className="w-full p-2 border border-gray-300 rounded"
+                                max={100000}
                                 required
                             />
                         </div>
