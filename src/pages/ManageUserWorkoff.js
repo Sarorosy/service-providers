@@ -144,81 +144,87 @@ const ManageUserWorkoff = ({ onClose, serviceProviderId }) => {
 
     return (
         <motion.div
-            initial={{ x: '100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '100%' }}
-            transition={{ duration: 0.5, ease: 'easeInOut' }}
-            className="bg-sky-50 w-full h-full p-6 fixed top-0 right-0 z-50 overflow-y-auto shadow-lg"
+            // initial={{ x: '100%' }}
+            // animate={{ x: 0 }}
+            // exit={{ x: '100%' }}
+            // transition={{ duration: 0.5, ease: 'easeInOut' }}
+            className="w-full h-full p-6 fixed top-0 right-0 z-50 shadow-lg n-pop-up"
         >
-<button
+            <div className='went mx-auto bg-white p-6 rounded-lg shadow-md'>
+                <div className='n-pop-up-head d-flex justify-content-between align-items-center mb-4 border-bottom pb-3'>
+                <h1 className="text-xl font-bold text-gray-800">Manage Workoff Details</h1>
+                    <button
                         onClick={onClose}
-                        className="absolute top-4 right-4  text-white py-2 px-2 rounded-full"
-                    ><CircleX className='colorr'/></button>
-            <div className='went mt-5 mx-auto bg-white p-6 rounded-lg shadow-md'>
-                <div className='flex justify-content-between mb-6 but'>
-                    <h1 className="text-xl font-bold text-gray-800">Manage Workoff Details</h1>
-                    
-                    <div className='flex float-right'>
-                        <button
-                            onClick={fetchData}
-                            className="bg-blue-600 text-white px-1 py-1 rounded flex items-center mr-2 text-sm"
-                        >
-                            <RefreshCw className="mr-2 ic" />
-                            Refresh
-                        </button>
-                        <button
-                            onClick={handleAddButtonClick}
-                            className="bg-blue-600 text-white px-1 py-1 rounded flex items-center text-sm"
-                        >
-                            <PlusCircle className="mr-2 ic" />
-                            Add Workoff
-                        </button>
-                    </div>
+                        className="text-white mr-2"
+                    >
+                        <CircleX className='colorr'/>
+                    </button>
                 </div>
-
-                {loading ? (
-                    <div className='flex justify-center items-center h-64'>
-                        <RevolvingDot
-                            height="100"
-                            width="100"
-                            radius="6"
-                            color="blue"
-                            secondaryColor="gray"
-                            ariaLabel="revolving-dot-loading"
-                            visible={true}
-                        />
+                    
+                <div className=' n-popup-body'>
+                    <div className='flex justify-content-end mb-6 but'>
+                        <div className='flex float-right'>
+                            <button
+                                onClick={fetchData}
+                                className="bg-blue-600 text-white px-1 py-1 rounded flex items-center mr-2 text-sm"
+                            >
+                                <RefreshCw className="mr-2 ic" />
+                                Refresh
+                            </button>
+                            <button
+                                onClick={handleAddButtonClick}
+                                className="bg-blue-600 text-white px-1 py-1 rounded flex items-center text-sm"
+                            >
+                                <PlusCircle className="mr-2 ic" />
+                                Add Workoff
+                            </button>
+                        </div>
                     </div>
-                ) : (
-                    <DataTable
-                        data={workoffData}
-                        columns={columns}
-                        options={{
-                            paging: true,
-                            searching: true,
-                            ordering: true,
-                            createdRow: (row, data) => {
-                                $(row).on('click', (e) => {
-                                    const button = e.target;
 
-                                    handleDeleteButtonClick(e); // Check for delete button click
-                                });
-                            },
-                        }}
+                    {loading ? (
+                        <div className='flex justify-center items-center h-64'>
+                            <RevolvingDot
+                                height="100"
+                                width="100"
+                                radius="6"
+                                color="blue"
+                                secondaryColor="gray"
+                                ariaLabel="revolving-dot-loading"
+                                visible={true}
+                            />
+                        </div>
+                    ) : (
+                        <DataTable
+                            data={workoffData}
+                            columns={columns}
+                            options={{
+                                paging: true,
+                                searching: true,
+                                ordering: true,
+                                createdRow: (row, data) => {
+                                    $(row).on('click', (e) => {
+                                        const button = e.target;
 
-                    />
-                )}
-                <AnimatePresence>
-                    {isFormOpen && <AddWorkoff serviceProviderId={serviceProviderId} onClose={handleCloseForm} />}
-                    {isDeleteModalOpen && (
-                        <ConfirmationModal
-                            isOpen={isDeleteModalOpen}
-                            onConfirm={handleDelete}
-                            onClose={() => setIsDeleteModalOpen(false)}
-                            content="Are you sure you want to delete this workoff?"
-                            isReversible={true}
+                                        handleDeleteButtonClick(e); // Check for delete button click
+                                    });
+                                },
+                            }}
+
                         />
                     )}
-                </AnimatePresence>
+                    <AnimatePresence>
+                        {isFormOpen && <AddWorkoff serviceProviderId={serviceProviderId} onClose={handleCloseForm} />}
+                        {isDeleteModalOpen && (
+                            <ConfirmationModal
+                                isOpen={isDeleteModalOpen}
+                                onConfirm={handleDelete}
+                                onClose={() => setIsDeleteModalOpen(false)}
+                                content="Are you sure you want to delete this workoff?"
+                                isReversible={true}
+                            />
+                        )}
+                    </AnimatePresence>
+                </div>
             </div>
 
         </motion.div>

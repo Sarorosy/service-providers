@@ -143,32 +143,36 @@ const EditHolidayForm = ({ holidayId, onClose }) => {
 
     return (
         <motion.div
-            initial={{ x: '100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '100%' }}
-            transition={{ duration: 0.5, ease: 'easeInOut' }}
-            className="bg-sky-50 w-full h-full p-6 fixed top-0 right-0 z-50 overflow-y-auto shadow-lg"
+            // initial={{ x: '100%' }}
+            // animate={{ x: 0 }}
+            // exit={{ x: '100%' }}
+            // transition={{ duration: 0.5, ease: 'easeInOut' }}
+            className="w-full h-full p-6 fixed top-0 right-0 z-50 shadow-lg n-pop-up"
         >
-            <button
-                onClick={onClose}
-                className="absolute top-4 right-4  text-white py-2 px-2 rounded-full"
-            >
-                <CircleX className='colorr'/>
-            </button>
-            {(loading) ? (
-                <div className="flex justify-center mt-10">
-                    <RevolvingDot
-                        visible={true}
-                        height="50"
-                        width="50"
-                        color="#3b82f6" // Tailwind blue-600
-                        ariaLabel="revolving-dot-loading"
-                    />
+            <div className="wen mx-auto bg-white p-6 rounded-lg shadow-md">
+                <div className='n-pop-up-head d-flex justify-content-between align-items-center mb-4 border-bottom pb-3'>
+                    <h2 className="text-2xl font-bold text-center">Edit Holiday</h2>   
+                    <button
+                        onClick={onClose}
+                        className="text-white py-2 px-2 rounded-full"
+                    >
+                        <CircleX className='colorr'/>
+                    </button>
                 </div>
-            ) : (
+                {(loading) ? (
+                    <div className="flex justify-center mt-10">
+                        <RevolvingDot
+                            visible={true}
+                            height="50"
+                            width="50"
+                            color="#3b82f6" // Tailwind blue-600
+                            ariaLabel="revolving-dot-loading"
+                        />
+                    </div>
+                ) : (
                 <div className='db'>
-                    <h2 className="text-2xl font-bold mb-3 text-center">Edit Holiday</h2>
-                    <div className='wen mx-auto bg-white p-6 rounded-lg shadow-md'>
+                    
+                    <div className='n-popup-body'>
                         <form onSubmit={handleSubmit} className='mx-auto mt-2'>
                             <div className='flex w-full justify-center'>
                                 <div className="mb-4 w-1/2 mx-1">
@@ -279,7 +283,9 @@ const EditHolidayForm = ({ holidayId, onClose }) => {
                         </form>
                     </div>
                 </div>
+                
             )}
+            </div>
             <ToastContainer />
         </motion.div>
     );

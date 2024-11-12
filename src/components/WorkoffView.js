@@ -54,7 +54,7 @@ const WorkoffView = ({ isOpen, workoffData, serviceProviders, onClose }) => {
 
         <div className="p-3 border border-gray-300 rounded shadow-md mt-3 text-sm">
               <span className="font-semibold text-gray-800" style={{color: "#2d6a9d" }}>Reason: &nbsp;</span>
-              <span className="text-gray-600">{workoffData.fld_reason}</span>
+              <span className="text-gray-600 elips-text">{workoffData.fld_reason}</span>
             </div>
 
 

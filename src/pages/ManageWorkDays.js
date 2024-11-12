@@ -73,7 +73,7 @@ const ManageWorkDays = () => {
   };
 
   return (
-    <div className="p-6 bg-white rounded-lg shadow-md smt mr1">
+    <div className="p-6 bg-white rounded-lg shadow-md mt-20 smt mr1">
       <div className="flex justify-content-between mb-4 but">
         <h1 className="text-xl font-bold text-gray-800">Manage Work Days</h1>
         <div className="flex justify-end">

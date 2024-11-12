@@ -148,7 +148,7 @@ const ManageWorkoffs = () => {
   };
 
   return (
-    <div className="p-6 bg-white rounded-lg shadow-md">
+    <div className="p-6 bg-white rounded-lg shadow-md mt-20">
             <div className="flex justify-content-between but">
       <h1 className="text-xl font-bold text-gray-800">Manage Workoffs</h1>
       <div className="flex justify-end">

@@ -45,6 +45,7 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
     }, [id, serviceProviderId]);
 
     useEffect(() => {
+        setLoading(true);
         fetch(`https://serviceprovidersback.onrender.com/api/manageworkoffs/first/${serviceProviderId}`)
             .then(response => response.json())
             .then(data => {
@@ -60,6 +61,7 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
     useEffect(() => {
         const fetchServiceCharges = async () => {
             try {
+                setLoading(true);
                 const response = await fetch(`https://serviceprovidersback.onrender.com/api/servicecharge/user/${serviceProviderId}`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch service charges');
@@ -69,6 +71,8 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
             } catch (error) {
                 setError(error.message); // Handle error
                 console.error(error);
+            }finally{
+                setLoading(false);
             }
         };
 
@@ -124,25 +128,13 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
 
     return (
         <motion.div
-            initial={{ x: '100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '100%' }}
-            transition={{ duration: 0.5, ease: 'easeInOut' }}
-            className="bg-sky-50 w-full h-full p-6 fixed top-0 right-0 z-50 overflow-y-auto shadow-lg"
+            // initial={{ x: '100%' }}
+            // animate={{ x: 0 }}
+            // exit={{ x: '100%' }}
+            // transition={{ duration: 0.5, ease: 'easeInOut' }}
+            className="w-full h-full p-6 fixed top-0 right-0 z-50 shadow-lg n-pop-up"
         >
-            <button
-                onClick={onClose}
-                className="absolute top-4 right-4 text-white py-2 px-2 rounded-full"
-            >
-                <CircleX className='colorr' />
-            </button>
-            <button
-                onClick={() => handleEditClick(serviceProviderId)} // Pass the service provider ID
-                data-id={serviceProviderId}
-                className="absolute top-4 right-24 bg-blue-500 text-white py-2 px-2 rounded-full edit-button"
-            >
-                <Pen />
-            </button>
+            
             <AnimatePresence>
                 {isEditOpen && (
                     <EditServiceProvider
@@ -167,15 +159,32 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
             </AnimatePresence>
 
             <div className='db'>
-                <h2 className="text-2xl font-bold mb-3 text-center">Service Provider Details</h2>
                 <div className="wenn mx-auto bg-white p-6 rounded-lg shadow-md">
+                    <div className='n-pop-up-head d-flex justify-content-between align-items-center mb-4 border-bottom pb-3'>
+                        <h2 className="f-20">Service Provider Details</h2>
+                        <div>
+                        <button
+                            onClick={() => handleEditClick(serviceProviderId)} // Pass the service provider ID
+                            data-id={serviceProviderId}
+                            className="bg-blue-500 text-white edit-button mr-2 px-2 py-1 CircleX-edit rounded"
+                        >
+                            <Pen />
+                        </button>
+                        <button
+                            onClick={onClose}
+                            className="text-white mr-2 "
+                        >
+                            <CircleX className='colorr' />
+                        </button>
+                        </div>
+                    </div>
                     {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-4"> */}
-                    <div>
+                    <div className='n-popup-body'>
 
-                        <div className='flex'>
-                            <div className='col-md-7'>
+                        <div className='row'>
+                            <div className='col-md-9'>
                                 {/* Personal Information Section */}
-                                <div className="p-3 viewinfo ">
+                                <div className="pb-3 viewinfo ">
                                     <h3 className="text-lg font-semibold text-gray-700 mb-3 flex items-center">
                                         <User className="w-5 h-5 mr-2 text-blue-500" /> {/* Icon for Personal Info */}
                                         Personal Information
@@ -185,7 +194,7 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
                                             <p className="ww">
                                                 <strong>Username</strong>
                                             </p>
-                                            <p>                                   : {serviceProvider.fld_username}
+                                            <p>: {serviceProvider.fld_username}
                                             </p>
                                         </div>
                                         <div className='flex'>
@@ -224,11 +233,12 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
                             </div>
 
                             {/* Profile Image Section */}
-                            <div className="p-3 viewinfo viewinfimg">
+                            <div className="col-md-3 border-bottom">
                                 {/* <h3 className="text-lg font-semibold text-gray-700 mb-3 flex items-center">
                                     <Image className="w-5 h-5 mr-2 text-blue-500" />
                                     Profile Image
                                 </h3> */}
+                                <div className='pt-4'>
                                 <img
                                     src={
                                         serviceProvider.fld_profile_image && serviceProvider.fld_profile_image.trim() !== ""
@@ -238,6 +248,7 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
                                     alt="Profile"
                                     className=" h-auto object-cover rounded-lg shadow-md"
                                 />
+                                </div>
 
                             </div>
                         </div>

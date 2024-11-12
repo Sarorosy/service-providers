@@ -14,25 +14,27 @@ const Sidebar = () => {
 
   console.log("Full Profile Image URL:", displayProfileImage); // Log the full URL
   return (
-    <aside className="bg-white w-64 min-h-screen p-4 shadow-md fixed sidealign">
+    <aside className="bg-white w-64 min-h-screen p-2 shadow-md fixed sidealign">
       {/* Profile Section */}
-      <div className="flex flex-col items-center mb-4">
-        <img
-          src={displayProfileImage}
-          alt="Profile"
-          className="w-20 h-20 rounded-full mr-2"
-        />
-        <span className="text-md font-semibold">{username}</span>
+      <div className="d-flex align-items-center mb-2 bg-light p-2">
+        <div>
+          <img
+            src={displayProfileImage}
+            alt="Profile"
+            className="w-10 h-10 rounded-full mr-2"
+          />
+        </div>
+        <div className="text-sm font-semibold">{username}</div>
       </div>
 
-      <nav className="mt-4">
+      <nav className="n-nav-list-set">
         <ul className='overflow-y-scroll ul'>
           {sessionStorage.getItem("adminType") === "SUPERADMIN" ? (
             <>
               <li>
                 <NavLink
                   to="/admindashboard"
-                  className="flex items-center rounded transition duration-100 border-bottom border-gray-400"
+                  className="flex items-center  transition duration-100 "
                 >
                   <LayoutDashboard className="mr-2" height="17" width="17"/>
                   Dashboard
@@ -41,7 +43,7 @@ const Sidebar = () => {
               <li>
                 <NavLink
                   to="/manage-notifications"
-                  className="flex items-center rounded transition duration-100 border-bottom border-gray-400"
+                  className="flex items-center  transition duration-100 "
                 >
                   <Bell className="mr-2" height="17" width="17"/>
                   Notifications
@@ -50,7 +52,7 @@ const Sidebar = () => {
               <li>
                 <NavLink
                   to="/manage-holidays"
-                  className="flex items-center rounded transition duration-100 border-bottom border-gray-400"
+                  className="flex items-center  transition duration-100 "
                 >
                   <Calendar className="mr-2" height="17" width="17"/>
                   Holidays
@@ -59,7 +61,7 @@ const Sidebar = () => {
               <li>
                 <NavLink
                   to="/manage-reports"
-                  className="flex items-center rounded transition duration-100 border-bottom border-gray-400"
+                  className="flex items-center  transition duration-100 "
                 >
                   <BarChart className="mr-2" height="17" width="17"/>
                   Reports
@@ -68,7 +70,7 @@ const Sidebar = () => {
               <li>
                 <NavLink
                   to="/manage-service-provider"
-                  className="flex items-center rounded transition duration-100 border-bottom border-gray-400"
+                  className="flex items-center  transition duration-100 "
                 >
                   <Users className="mr-2" height="17" width="17"/>
                   Service Provider
@@ -77,7 +79,7 @@ const Sidebar = () => {
               <li>
                 <NavLink
                   to="/work-offs"
-                  className="flex items-center rounded transition duration-100 border-bottom border-gray-400 "
+                  className="flex items-center  transition duration-100  "
                 >
                   <LogOut className="mr-2" height="17" width="17"/>
                   Work Offs
@@ -86,7 +88,7 @@ const Sidebar = () => {
               <li>
                 <NavLink
                   to="/manage-work-days"
-                  className="flex items-center rounded transition duration-100  border-bottom border-gray-400"
+                  className="flex items-center  transition duration-100  "
                 >
                   <FileText className="mr-2" height="17" width="17"/>
                   Work Days
@@ -95,7 +97,7 @@ const Sidebar = () => {
               <li>
                 <NavLink
                   to="/manage-service-charge"
-                  className="flex items-center rounded transition duration-100 border-gray-400 "
+                  className="flex items-center  transition duration-100 border-gray-400 "
                 >
                   <Settings className="mr-2" height="17" width="17"/>
                   Service Charge
@@ -107,7 +109,7 @@ const Sidebar = () => {
               <li>
                 <NavLink
                   to="/dashboard"
-                  className="flex items-center rounded transition duration-100 my-1 border-bottom border-gray-400"
+                  className="flex items-center  transition duration-100 my-1 "
                 >
                   <LayoutDashboard className="mr-2"  height="17" width="17"/>
                   Dashboard
@@ -116,7 +118,7 @@ const Sidebar = () => {
               <li>
                 <NavLink
                   to="/work-summary"
-                  className="flex items-center rounded transition duration-100 my-1 border-bottom border-gray-400"
+                  className="flex items-center  transition duration-100 my-1 "
                 >
                   <BarChart className="mr-2" height="17" width="17"/>
                   Work Summary
@@ -125,7 +127,7 @@ const Sidebar = () => {
               <li>
                 <NavLink
                   to="/manage-projects"
-                  className="flex items-center rounded transition duration-100 my-1 border-bottom border-gray-400 "
+                  className="flex items-center  transition duration-100 my-1  "
                 >
                   <FolderClosed className="mr-2" height="17" width="17"/>
                   Manage Projects
@@ -134,7 +136,7 @@ const Sidebar = () => {
               <li>
                 <NavLink
                   to="/manage-profile"
-                  className="flex items-center rounded transition duration-100 my-1 border-bottom border-gray-400 "
+                  className="flex items-center  transition duration-100 my-1  "
                 >
                   <UserCircle2 className="mr-2" height="17" width="17"/>
                   Manage Profile
@@ -152,7 +154,7 @@ const Sidebar = () => {
               <li>
                 <NavLink
                   to="/manage-work-offs"
-                  className="flex items-center p-2 hover:bg-sky-200 rounded transition duration-100 my-1 border-bottom border-gray-400 "
+                  className="flex items-center p-2 hover:bg-sky-200  transition duration-100 my-1  "
                 >
                   <Plane className="mr-2" height="17" width="17"/>
                   Manage Work-Off
@@ -161,7 +163,7 @@ const Sidebar = () => {
               <li>
                 <NavLink
                   to="/work-days"
-                  className="flex items-center p-2 hover:bg-sky-200 rounded transition duration-100 my-1 border-bottom border-gray-400 "
+                  className="flex items-center p-2 hover:bg-sky-200  transition duration-100 my-1  "
                 >
                   <CalendarDays className="mr-2" height="17" width="17"/>
                   Manage Work Days

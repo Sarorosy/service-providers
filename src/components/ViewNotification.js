@@ -69,18 +69,22 @@ const ViewNotification = ({ onClose, notificationId }) => {
 
     return (
         <motion.div
-            initial={{ x: '100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '100%' }}
-            transition={{ duration: 0.5, ease: 'easeInOut' }}
-            className="bg-sky-50 w-full h-full p-6 fixed top-0 right-0 z-50 overflow-y-auto shadow-lg"
+            // initial={{ x: '100%' }}
+            // animate={{ x: 0 }}
+            // exit={{ x: '100%' }}
+            // transition={{ duration: 0.5, ease: 'easeInOut' }}
+            className="w-full h-full p-6 fixed top-0 right-0 z-50 shadow-lg n-pop-up"
         >
-            <button
-                onClick={onClose}
-                className="absolute top-4 right-4 text-white py-2 px-2 rounded-full"
-            >
-                <CircleX className='colorr'/>
-            </button>
+            <div className="wen mx-auto bg-white p-6 rounded-lg shadow-md">
+            <div className='n-pop-up-head d-flex justify-content-between align-items-center mb-4 border-bottom pb-3'>
+                <h2 className="text-xl font-bold">View Notification</h2>
+                <button
+                    onClick={onClose}
+                    className="text-white"
+                >
+                    <CircleX className='colorr'/>
+                </button>
+            </div>
             {!notification ? (
                 <div className="flex justify-center mt-10">
                     <RevolvingDot
@@ -94,8 +98,8 @@ const ViewNotification = ({ onClose, notificationId }) => {
             ) : (
                 <>
                     <div className='db'>
-                        <h2 className="text-2xl font-bold mb-3 text-center">View Notification</h2>
-                        <div className="wen mx-auto bg-white p-6 rounded-lg shadow-md">
+                    <div className=' n-popup-body'>
+                        <div className="">
                             <h2 className="font-bold mb-3">Notification Details</h2>
 
                             <div className="flex flex-wrap -mx-4">
@@ -142,8 +146,10 @@ const ViewNotification = ({ onClose, notificationId }) => {
                             </div>
                         </div>
                     </div>
+                    </div>
                 </>
             )}
+            </div>
 
 
             <ToastContainer />

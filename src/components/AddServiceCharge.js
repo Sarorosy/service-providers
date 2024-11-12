@@ -115,92 +115,93 @@ const AddServiceCharge = ({ onClose }) => {
 
     return (
         <motion.div
-            initial={{ x: '100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '100%' }}
-            transition={{ duration: 0.5, ease: 'easeInOut' }}
-            className="bg-sky-50 w-full h-full p-6 fixed top-0 right-0 z-50 overflow-y-auto shadow-lg"
+            // initial={{ x: '100%' }}
+            // animate={{ x: 0 }}
+            // exit={{ x: '100%' }}
+            // transition={{ duration: 0.5, ease: 'easeInOut' }}
+            className="w-full h-full p-6 fixed top-0 right-0 z-50 shadow-lg n-pop-up"
         >
-            <button
-                onClick={onClose}
-                className="absolute top-4 right-4 text-white py-2 px-2 rounded-full"
-            >
-                <CircleX className='colorr' />
-            </button>
+            <div className="wen2 mt-5 mx-auto bg-white p-6 rounded-lg shadow-md">
+                <div className='n-pop-up-head d-flex justify-content-between align-items-center mb-4 border-bottom pb-3'>
+                    <h2 className="text-2xl font-bold text-center">Add Service Charge</h2>
+                    <button
+                        onClick={onClose}
+                        className="text-white py-2 px-2 rounded-full"
+                    >
+                        <CircleX className='colorr' />
+                    </button>
+                </div>
 
-            <div className='db'>
-                <h2 className="text-2xl font-bold mb-3 text-center">Add Service Charge</h2>
+                <div className='db'>
+                    <div className=''>
+                        <form onSubmit={handleSubmit} className="grid">
+                            {selectedProvider && (
+                                <div className="mb-2">
+                                    <div className="cent1 items-center">
+                                        <img
+                                            src={selectedProvider.fld_profile_image ? `https://serviceprovidersback.onrender.com/uploads/profileimg/${selectedProvider.fld_profile_image}` : 'https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg'}
+                                            alt={selectedProvider.text}
+                                            className="w-16 h-16 rounded-full mr-2"
+                                        />
 
-
-
-                <div className='wen2 mx-auto bg-white p-6 rounded-lg shadow-md'>
-                    <form onSubmit={handleSubmit} className="grid">
-                        {selectedProvider && (
-                            <div className="mb-2">
-                                <div className="cent1 items-center">
-                                    <img
-                                        src={selectedProvider.fld_profile_image ? `https://serviceprovidersback.onrender.com/uploads/profileimg/${selectedProvider.fld_profile_image}` : 'https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg'}
-                                        alt={selectedProvider.text}
-                                        className="w-16 h-16 rounded-full mr-2"
-                                    />
-
-                                    <span className="text-lg font-semibold">{selectedProvider.fld_name}</span>
+                                        <span className="text-lg font-semibold">{selectedProvider.fld_name}</span>
+                                    </div>
                                 </div>
+                            )}
+                            {loading ? <RevolvingDot height="20" width="20" color="blue" ariaLabel="loading" /> : (<div className="mb-3">
+                                <label htmlFor="serviceProvider" className="block text-gray-700">Service Provider</label>
+                                <select id="serviceProvider" className="w-full p-2 border border-gray-300 rounded">
+                                    <option value="">Select a service provider</option>
+                                </select>
+                            </div>)}
+
+
+                            <div className="mb-3">
+                                <label htmlFor="fromDate" className="block text-gray-700">From Date</label>
+                                <input
+                                    type="date"
+                                    id="fromDate"
+                                    name="fld_from_date"
+                                    value={formData.fld_from_date}
+                                    onChange={handleInputChange}
+                                    className="w-full p-2 border border-gray-300 rounded"
+                                    required
+                                />
                             </div>
-                        )}
-                        {loading ? <RevolvingDot height="20" width="20" color="blue" ariaLabel="loading" /> : (<div className="mb-3">
-                            <label htmlFor="serviceProvider" className="block text-gray-700">Service Provider</label>
-                            <select id="serviceProvider" className="w-full p-2 border border-gray-300 rounded">
-                                <option value="">Select a service provider</option>
-                            </select>
-                        </div>)}
-
-
-                        <div className="mb-3">
-                            <label htmlFor="fromDate" className="block text-gray-700">From Date</label>
-                            <input
-                                type="date"
-                                id="fromDate"
-                                name="fld_from_date"
-                                value={formData.fld_from_date}
-                                onChange={handleInputChange}
-                                className="w-full p-2 border border-gray-300 rounded"
-                                required
-                            />
+                            <div className="mb-3">
+                                <label htmlFor="toDate" className="block text-gray-700">To Date</label>
+                                <input
+                                    type="date"
+                                    id="toDate"
+                                    name="fld_to_date"
+                                    value={formData.fld_to_date}
+                                    onChange={handleInputChange}
+                                    className="w-full p-2 border border-gray-300 rounded"
+                                    required
+                                />
+                            </div>
+                            <div className="mb-3">
+                                <label htmlFor="serviceCharge" className="block text-gray-700">Service Charge</label>
+                                <input
+                                    type="number"
+                                    id="serviceCharge"
+                                    name="fld_service_charge"
+                                    value={formData.fld_service_charge}
+                                    onChange={handleInputChange}
+                                    className="w-full p-2 border border-gray-300 rounded"
+                                    required
+                                />
+                            </div>
+                        </form>
+                        <div className='flex justify-end but mt-3'>
+                            <button
+                                type="submit"
+                                className="text-white py-1 px-1 rounded col-span-2 flex items-center"
+                            >
+                                <Save className="mr-2 ic" />
+                                Add Service Charge
+                            </button>
                         </div>
-                        <div className="mb-3">
-                            <label htmlFor="toDate" className="block text-gray-700">To Date</label>
-                            <input
-                                type="date"
-                                id="toDate"
-                                name="fld_to_date"
-                                value={formData.fld_to_date}
-                                onChange={handleInputChange}
-                                className="w-full p-2 border border-gray-300 rounded"
-                                required
-                            />
-                        </div>
-                        <div className="mb-3">
-                            <label htmlFor="serviceCharge" className="block text-gray-700">Service Charge</label>
-                            <input
-                                type="number"
-                                id="serviceCharge"
-                                name="fld_service_charge"
-                                value={formData.fld_service_charge}
-                                onChange={handleInputChange}
-                                className="w-full p-2 border border-gray-300 rounded"
-                                required
-                            />
-                        </div>
-                    </form>
-                    <div className='flex justify-end but mt-3'>
-                        <button
-                            type="submit"
-                            className="text-white py-1 px-1 rounded col-span-2 flex items-center"
-                        >
-                            <Save className="mr-2 ic" />
-                            Add Service Charge
-                        </button>
                     </div>
                 </div>
             </div>

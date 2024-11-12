@@ -159,7 +159,7 @@ const ManageServiceCharge = () => {
   ];
 
   return (
-    <div className="p-6 bg-white rounded-lg shadow-md">
+    <div className="p-6 bg-white rounded-lg shadow-md mt-20">
       <div className="flex justify-content-between but">
         <h2 className="text-xl font-bold text-gray-800">Manage Service Charges</h2>
         <div className='flex float-right'>

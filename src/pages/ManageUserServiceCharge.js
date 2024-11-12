@@ -160,22 +160,25 @@ const ManageUserServiceCharge = ({ serviceProviderId, onClose }) => {
 
   return (
     <motion.div
-      initial={{ x: '100%' }}
-      animate={{ x: 0 }}
-      exit={{ x: '100%' }}
-      transition={{ duration: 0.5, ease: 'easeInOut' }}
-      className="bg-blue-100 w-full h-full p-6 fixed top-0 right-0 z-50 overflow-y-auto shadow-lg"
+      // initial={{ x: '100%' }}
+      // animate={{ x: 0 }}
+      // exit={{ x: '100%' }}
+      // transition={{ duration: 0.5, ease: 'easeInOut' }}
+      className="w-full h-full p-6 fixed top-0 right-0 z-50 shadow-lg n-pop-up"
     >
-    <button
-            onClick={onClose}
-            className="absolute top-4 right-4 text-white py-2 px-2 rounded-full"
-          >
-            <CircleX className='colorr'/>
-          </button>
 
       <div className="went mt-5 mx-auto bg-white p-6 rounded-lg shadow-md">
-        <div className="flex justify-content-between but">
-          <h1 className="text-xl font-bold text-gray-800">Manage Service Charges</h1>
+        <div className='n-pop-up-head d-flex justify-content-between align-items-center mb-4 border-bottom pb-3'>
+            <h1 className="text-xl font-bold text-gray-800">Manage Service Charges</h1>
+            <button
+              onClick={onClose}
+              className="text-white mr-2"
+            >
+              <CircleX className='colorr'/>
+            </button>
+        </div>
+        <div className=' n-popup-body'>
+        <div className="flex justify-content-end but">
       
           <div className='flex float-right'>
             <button
@@ -233,6 +236,7 @@ const ManageUserServiceCharge = ({ serviceProviderId, onClose }) => {
             />
           )}
         </AnimatePresence>
+      </div>
       </div>
 
     </motion.div>

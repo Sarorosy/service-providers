@@ -159,7 +159,7 @@ const UserWorkSummary = () => {
     };
 
     return (
-        <div className="p-6 bg-white rounded-lg shadow-md mrf">
+        <div className="p-6 bg-white rounded-lg shadow-md mt-20 mrf">
             <div className='flex justify-content-between mb-6'>
                 <h1 className="text-xl font-bold text-gray-800 flex items-center">
                     {user ? (

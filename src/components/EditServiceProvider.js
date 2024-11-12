@@ -119,20 +119,24 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
 
     return (
         <motion.div
-            initial={{ x: '100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '100%' }}
-            transition={{ duration: 0.5, ease: 'easeInOut' }}
-            className="bg-sky-50 w-full h-full p-6 fixed top-0 right-0 z-50 overflow-y-auto shadow-lg"
+            // initial={{ x: '100%' }}
+            // animate={{ x: 0 }}
+            // exit={{ x: '100%' }}
+            // transition={{ duration: 0.5, ease: 'easeInOut' }}
+            className="w-full h-full p-6 fixed top-0 right-0 z-50 shadow-lg n-pop-up"
         >
+            <div className='went mx-auto bg-white p-6 rounded-lg shadow-md'>
+            <div className='n-pop-up-head d-flex justify-content-between align-items-center mb-4 border-bottom pb-3'>
+            <h2 className="text-xl font-bold text-gray-800">Edit Service Provider</h2>
             {loading && <LoadingModal />} 
             <button
                 onClick={onClose}
-                className="absolute top-4 right-4 bg-red-500 text-white py-2 px-2 rounded-full"
+                className="bg-red-500 text-white py-2 px-2 rounded-full"
             >
                 <CircleX />
             </button>
-            <h2 className="text-2xl font-bold mb-4">Edit Service Provider</h2>
+            </div>
+            <div className=' n-popup-body'>
             <form onSubmit={handleSubmit} className="max-w-5xl mx-auto mt-2">
                 <input
                     type="hidden"
@@ -501,6 +505,9 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
                     
                     </form>
 
+            
+            </div>
+            </div>
                     <ToastContainer />
                 </motion.div>
                 );
