@@ -77,7 +77,7 @@ const AddUserServiceCharge = ({ onClose, serviceProviderId }) => {
             // transition={{ duration: 0.5, ease: 'easeInOut' }}
             className="w-full h-full p-6 fixed top-0 right-0 z-50 shadow-lg n-pop-up"
         >
-        <div className="wen2 mx-auto bg-white p-6 rounded-lg shadow-md">
+        <div className="wen3 mx-auto bg-white p-6 rounded-lg shadow-md">
             <div className='n-pop-up-head d-flex justify-content-between align-items-center mb-4 border-bottom pb-3'>
                 <h2 className="text-2xl font-bold">Add Service Charge</h2>
                 <button
