@@ -14,7 +14,7 @@ const ViewNotification = ({ onClose, notificationId }) => {
     useEffect(() => {
         const fetchNotification = async () => {
             try {
-                const response = await fetch(`https://serviceprovidersback.onrender.com/api/notifications/${notificationId}`);
+                const response = await fetch(`https://serviceprovidersback.onrender.comapi/notifications/${notificationId}`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch notification');
                 }
@@ -34,7 +34,7 @@ const ViewNotification = ({ onClose, notificationId }) => {
         const fetchServiceProviders = async () => {
             try {
                 setLoading(true)
-                const response = await fetch('https://serviceprovidersback.onrender.com/api/users/serviceproviders');
+                const response = await fetch('https://serviceprovidersback.onrender.comapi/users/serviceproviders');
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -60,7 +60,7 @@ const ViewNotification = ({ onClose, notificationId }) => {
     const getProfileImage = (userId) => {
         const user = serviceProviders.find((provider) => provider._id === userId._id);
         if (user && user.fld_profile_image && user.fld_profile_image !== '') {
-            return `https://serviceprovidersback.onrender.com/uploads/profileimg/${user.fld_profile_image}`;
+            return `https://serviceprovidersback.onrender.comuploads/profileimg/${user.fld_profile_image}`;
         }
         return 'https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg';
     };
@@ -131,7 +131,7 @@ const ViewNotification = ({ onClose, notificationId }) => {
 
                             <div className="mb-4 fthirteen">
                                 <h3 className="text-sm font-semibold mb-4">Assigned Users: {notification.fld_userid.length}</h3>
-                                <ul className="list-disc pl-5 flex flex-wrap">
+                                <ul className="list-disc flex flex-wrap">
                                     {notification.fld_userid.map((user) => ( // Map over the user objects
                                         <li key={user._id} className="flex items-center mb-2 mr-4 border border-gray-300 rounded-full px-1 py-1 bg-white shadow-sm hover:shadow-lg transition-shadow duration-200">
                                             <img

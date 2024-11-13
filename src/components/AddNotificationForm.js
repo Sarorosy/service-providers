@@ -24,7 +24,7 @@ const AddNotificationForm = ({ onClose }) => {
   useEffect(() => {
     const fetchServiceProviders = async () => {
       try {
-        const response = await fetch('https://serviceprovidersback.onrender.com/api/users/activeserviceproviders');
+        const response = await fetch('https://serviceprovidersback.onrender.comapi/users/activeserviceproviders');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -68,7 +68,7 @@ const AddNotificationForm = ({ onClose }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch('https://serviceprovidersback.onrender.com/api/notifications', {
+    const response = await fetch('https://serviceprovidersback.onrender.comapi/notifications', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -139,7 +139,7 @@ const AddNotificationForm = ({ onClose }) => {
           </button>
         </div>
         <div className='db'>
-          <div className=''>
+          <div className='n-popup-body ad-notf-h'>
           <div className=''>
             <form onSubmit={handleSubmit} className='mx-auto mt-2'>
               <div className='flex w-full justify-center'>
@@ -152,7 +152,7 @@ const AddNotificationForm = ({ onClose }) => {
                     name="fld_title"
                     value={formData.fld_title} // Updated
                     onChange={handleChange}
-                    className="border border-gray-300 rounded p-2 w-full"
+                    className="border border-gray-300 rounded p-2 w-full form-control-sm"
                     required
                   />
                 </div>
@@ -165,7 +165,7 @@ const AddNotificationForm = ({ onClose }) => {
                     value={formData.fld_due_date} // Updated
                     min={new Date().toISOString().split("T")[0]}
                     onChange={handleChange}
-                    className="border border-gray-300 rounded p-2 w-full"
+                    className="border border-gray-300 rounded p-2 w-full form-control-sm"
                     required
                   />
                 </div>
@@ -201,7 +201,7 @@ const AddNotificationForm = ({ onClose }) => {
                   name="fld_userid" // Updated
                   multiple
                   ref={selectRef}
-                  className="border border-gray-300 rounded p-2 w-full"
+                  className="border border-gray-300 rounded p-2 w-full form-control-sm"
                   required
                 >
                   {serviceProviders.map((provider) => (
@@ -231,7 +231,7 @@ const AddNotificationForm = ({ onClose }) => {
                           >
                             <img
                               src={provider.fld_profile_image && provider.fld_profile_image !== ""
-                                ? 'https://serviceprovidersback.onrender.com/uploads/profileimg/' + provider.fld_profile_image
+                                ? 'https://serviceprovidersback.onrender.comuploads/profileimg/' + provider.fld_profile_image
                                 : "https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg"}
                               alt={provider.fld_username || 'No Name'}
                               className="w-8 h-8 rounded-full border border-gray-200 mr-2"

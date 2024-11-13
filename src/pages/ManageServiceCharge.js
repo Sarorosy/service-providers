@@ -46,8 +46,8 @@ const ManageServiceCharge = () => {
     setLoading(true);
     try {
       const [serviceChargeResponse, serviceProviderResponse] = await Promise.all([
-        fetch('https://serviceprovidersback.onrender.com/api/servicecharge/'),
-        fetch('https://serviceprovidersback.onrender.com/api/users/serviceproviders/')
+        fetch('https://serviceprovidersback.onrender.comapi/servicecharge/'),
+        fetch('https://serviceprovidersback.onrender.comapi/users/serviceproviders/')
       ]);
 
       if (!serviceChargeResponse.ok || !serviceProviderResponse.ok) {
@@ -92,7 +92,7 @@ const ManageServiceCharge = () => {
   const handleDelete = async () => {
     if (selectedServiceCharge) {
       try {
-        const response = await fetch(`https://serviceprovidersback.onrender.com/api/servicecharge/${selectedServiceCharge._id}`, {
+        const response = await fetch(`https://serviceprovidersback.onrender.comapi/servicecharge/${selectedServiceCharge._id}`, {
           method: 'DELETE',
         });
 

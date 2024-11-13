@@ -28,7 +28,7 @@ const AddWorkoff = ({ serviceProviderId, onClose }) => {
         e.preventDefault();
         setIsSubmitting(true);
         try {
-            const response = await fetch('https://serviceprovidersback.onrender.com/api/manageworkoffs', {
+            const response = await fetch('https://serviceprovidersback.onrender.comapi/manageworkoffs', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -57,7 +57,7 @@ const AddWorkoff = ({ serviceProviderId, onClose }) => {
             // transition={{ duration: 0.5, ease: 'easeInOut' }}
             className="w-full h-full p-6 fixed top-0 right-0 z-50 shadow-lg n-pop-up"
         >
-            <div className="went mt-5 mx-auto bg-white p-6 rounded-lg shadow-md">
+            <div className="wen mt-5 mx-auto bg-white p-6 rounded-lg shadow-md">
                 <div className='n-pop-up-head d-flex justify-content-between align-items-center mb-4 border-bottom pb-3'>
                     <h2 className="text-xl font-bold text-gray-800">Add Workoff</h2>
                     <button
@@ -65,9 +65,9 @@ const AddWorkoff = ({ serviceProviderId, onClose }) => {
                         className=""
                     ><CircleX /></button>
                 </div>
-                <div className=' n-popup-body'>
+                <div className=' n-popup-body ad-work-h'>
                     <div className='row justify-content-center'>
-                        <div className='col-md-8'>
+                        <div className='col-md-12'>
                             <form onSubmit={handleSubmit}>
                                 <div className="mb-4">
                                     <label htmlFor="fld_workoffs_start_date" className="block mb-2">Workoff Start Date:</label>
@@ -78,7 +78,7 @@ const AddWorkoff = ({ serviceProviderId, onClose }) => {
                                         value={workoff.fld_workoffs_start_date}
                                         onChange={handleChange}
                                         required
-                                        className="border rounded p-2 w-full"
+                                        className="border rounded w-full form-control-sm"
                                     />
                                 </div>
                                 <div className="mb-4">
@@ -90,7 +90,7 @@ const AddWorkoff = ({ serviceProviderId, onClose }) => {
                                         value={workoff.fld_workoffs_end_date}
                                         onChange={handleChange}
                                         required
-                                        className="border rounded p-2 w-full"
+                                        className="border rounded w-full form-control-sm"
                                     />
                                 </div>
                                 <div className="mb-4">
@@ -102,7 +102,7 @@ const AddWorkoff = ({ serviceProviderId, onClose }) => {
                                         value={workoff.fld_total_no_of_work_offs}
                                         onChange={handleChange}
                                         required
-                                        className="border rounded p-2 w-full"
+                                        className="border rounded w-full form-control-sm"
                                     />
                                 </div>
                                 <input
@@ -110,13 +110,15 @@ const AddWorkoff = ({ serviceProviderId, onClose }) => {
                                     name="fld_addedon"
                                     value={workoff.fld_addedon}
                                 />
-                                <button
-                                    type="submit"
-                                    className={`bg-blue-600 text-white px-4 py-2 rounded-lg ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
-                                    disabled={isSubmitting}
-                                >
-                                    {isSubmitting ? <RevolvingDot height="20" width="20" color="white" ariaLabel="loading" /> : 'Add Workoff'}
-                                </button>
+                                <div className='d-flex justify-content-end but '>
+                                    <button
+                                        type="submit"
+                                        className={`bg-blue-600 text-sm text-white px-2 py-1 rounded-lg ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                        disabled={isSubmitting}
+                                    >
+                                        {isSubmitting ? <RevolvingDot height="20" width="20" color="white" ariaLabel="loading" /> : 'Add Workoff'}
+                                    </button>
+                                </div>   
                             </form>
                         </div>
                     </div>

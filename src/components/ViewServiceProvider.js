@@ -27,7 +27,7 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
     useEffect(() => {
         const fetchServiceProvider = async () => {
             try {
-                const response = await fetch(`https://serviceprovidersback.onrender.com/api/users/find/${serviceProviderId}`);
+                const response = await fetch(`https://serviceprovidersback.onrender.comapi/users/find/${serviceProviderId}`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch User');
                 }
@@ -46,7 +46,7 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
 
     useEffect(() => {
         setLoading(true);
-        fetch(`https://serviceprovidersback.onrender.com/api/manageworkoffs/first/${serviceProviderId}`)
+        fetch(`https://serviceprovidersback.onrender.comapi/manageworkoffs/first/${serviceProviderId}`)
             .then(response => response.json())
             .then(data => {
                 setWorkoffs(data);
@@ -62,7 +62,7 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
         const fetchServiceCharges = async () => {
             try {
                 setLoading(true);
-                const response = await fetch(`https://serviceprovidersback.onrender.com/api/servicecharge/user/${serviceProviderId}`);
+                const response = await fetch(`https://serviceprovidersback.onrender.comapi/servicecharge/user/${serviceProviderId}`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch service charges');
                 }
@@ -105,7 +105,7 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
 
     const imageUrl = (type, fileName) => {
         return fileName && fileName !== ''
-            ? `https://serviceprovidersback.onrender.com/uploads/${type}/${fileName}`
+            ? `https://serviceprovidersback.onrender.comuploads/${type}/${fileName}`
             : null;
     };
     const handleEditClick = (id) => {
@@ -159,16 +159,16 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
             </AnimatePresence>
 
             <div className='db'>
-                <div className="wenn mx-auto bg-white p-6 rounded-lg shadow-md">
+                <div className="n-wenn mx-auto bg-white p-6 rounded-lg shadow-md">
                     <div className='n-pop-up-head d-flex justify-content-between align-items-center mb-4 border-bottom pb-3'>
                         <h2 className="f-20">Service Provider Details</h2>
                         <div>
                         <button
                             onClick={() => handleEditClick(serviceProviderId)} // Pass the service provider ID
                             data-id={serviceProviderId}
-                            className="bg-blue-500 text-white edit-button mr-2 px-2 py-1 CircleX-edit rounded"
+                            className="mr-2 px-2 py-1 CircleX-edit rounded"
                         >
-                            <Pen />
+                            <Pen className='edit-hover'/>
                         </button>
                         <button
                             onClick={onClose}
@@ -243,7 +243,7 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
                                 <img
                                     src={
                                         serviceProvider.fld_profile_image && serviceProvider.fld_profile_image.trim() !== ""
-                                            ? `https://serviceprovidersback.onrender.com/uploads/profileimg/${serviceProvider.fld_profile_image}`
+                                            ? `https://serviceprovidersback.onrender.comuploads/profileimg/${serviceProvider.fld_profile_image}`
                                             : "https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg"
                                     }
                                     alt="Profile"
@@ -355,7 +355,7 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
                                 <div className="p-3">
                                     <h3 className="text-md font-semibold mb-2 text-gray-700">Aadhar Card</h3>
                                     <img
-                                        src={`https://serviceprovidersback.onrender.com/uploads/aadharcard/${serviceProvider.fld_aadharcard}`}
+                                        src={`https://serviceprovidersback.onrender.comuploads/aadharcard/${serviceProvider.fld_aadharcard}`}
                                         alt="Aadhar Card"
                                         className="object-cover rounded-lg shadow-md"
                                     />
@@ -365,7 +365,7 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
                                 <div className="p-3">
                                     <h3 className="text-md font-semibold mb-2 text-gray-700">PAN Card</h3>
                                     <img
-                                        src={`https://serviceprovidersback.onrender.com/uploads/pancard/${serviceProvider.fld_pancard}`}
+                                        src={`https://serviceprovidersback.onrender.comuploads/pancard/${serviceProvider.fld_pancard}`}
                                         alt="PAN Card"
                                         className="object-cover rounded-lg shadow-md"
                                     />
@@ -375,7 +375,7 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
                                 <div className="p-3">
                                     <h3 className="text-md font-semibold mb-2 text-gray-700">Cancelled Cheque</h3>
                                     <img
-                                        src={`https://serviceprovidersback.onrender.com/uploads/cancelledchequeimage/${serviceProvider.fld_cancelledchequeimage}`}
+                                        src={`https://serviceprovidersback.onrender.comuploads/cancelledchequeimage/${serviceProvider.fld_cancelledchequeimage}`}
                                         alt="Cancelled Cheque"
                                         className="object-cover rounded-lg shadow-md"
                                     />

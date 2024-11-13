@@ -40,7 +40,7 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
 
         // Fetch service provider data for editing
         const fetchServiceProvider = async () => {
-            const response = await fetch(`https://serviceprovidersback.onrender.com/api/users/find/${serviceProviderId}`);
+            const response = await fetch(`https://serviceprovidersback.onrender.comapi/users/find/${serviceProviderId}`);
             if (response.ok) {
                 const data = await response.json();
                 if (data.fld_start_date) {
@@ -86,7 +86,7 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
             formDataToSend.append(key, formData[key]);
         }
 
-        const response = await fetch(`https://serviceprovidersback.onrender.com/api/users/${serviceProviderId}`, {
+        const response = await fetch(`https://serviceprovidersback.onrender.comapi/users/${serviceProviderId}`, {
             method: 'PUT',
             body: formDataToSend,
         });
@@ -131,7 +131,7 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
             {loading && <LoadingModal />} 
             <button
                 onClick={onClose}
-                className="bg-red-500 text-white py-2 px-2 rounded-full"
+                className=""
             >
                 <CircleX />
             </button>
@@ -384,7 +384,7 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
                             {formData.fld_profile_image ? (
                                 <div className="relative">
                                     <img
-                                        src={`https://serviceprovidersback.onrender.com/uploads/profileimg/${formData.fld_profile_image}`}
+                                        src={`https://serviceprovidersback.onrender.comuploads/profileimg/${formData.fld_profile_image}`}
                                         alt="Profile"
                                         className="border rounded p-2 w-2/3"
                                     />
@@ -401,7 +401,7 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
                                     id="profile_image"
                                     name="fld_profile_image"
                                     onChange={handleFileChange}
-                                    className="border border-gray-300 rounded p-2 w-full"
+                                    className="border border-gray-300 rounded p-2 w-full form-control-sm"
                                 />
                             )}
                         </div>
@@ -412,7 +412,7 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
                             {formData.fld_aadharcard ? (
                                 <div className="relative">
                                     <img
-                                        src={`https://serviceprovidersback.onrender.com/uploads/aadharcard/${formData.fld_aadharcard}`}
+                                        src={`https://serviceprovidersback.onrender.comuploads/aadharcard/${formData.fld_aadharcard}`}
                                         alt="Aadhar Card"
                                         className="border rounded p-2 w-2/3"
                                     />
@@ -429,7 +429,7 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
                                     id="aadharcard"
                                     name="fld_aadharcard"
                                     onChange={handleFileChange}
-                                    className="border border-gray-300 rounded p-2 w-full"
+                                    className="border border-gray-300 rounded p-2 w-full form-control-sm"
                                 />
                             )}
                         </div>
@@ -440,7 +440,7 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
                             {formData.fld_pancard ? (
                                 <div className="relative">
                                     <img
-                                        src={`https://serviceprovidersback.onrender.com/uploads/pancard/${formData.fld_pancard}`}
+                                        src={`https://serviceprovidersback.onrender.comuploads/pancard/${formData.fld_pancard}`}
                                         alt="PAN Card"
                                         className="border rounded p-2 w-2/3"
                                     />
@@ -457,7 +457,7 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
                                     id="pancard"
                                     name="fld_pancard"
                                     onChange={handleFileChange}
-                                    className="border border-gray-300 rounded p-2 w-full"
+                                    className="border border-gray-300 rounded p-2 w-full form-control-sm"
                                 />
                             )}
                         </div>
@@ -468,7 +468,7 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
                             {formData.fld_cancelledchequeimage ? (
                                 <div className="relative">
                                     <img
-                                        src={`https://serviceprovidersback.onrender.com/uploads/cancelledchequeimage/${formData.fld_cancelledchequeimage}`}
+                                        src={`https://serviceprovidersback.onrender.comuploads/cancelledchequeimage/${formData.fld_cancelledchequeimage}`}
                                         alt="Cancelled Cheque"
                                         className="border rounded p-2 w-2/3"
                                     />
@@ -485,7 +485,7 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
                                     id="cancelledchequeimage"
                                     name="fld_cancelledchequeimage"
                                     onChange={handleFileChange}
-                                    className="border border-gray-300 rounded p-2 w-full"
+                                    className="border border-gray-300 rounded p-2 w-full form-control-sm"
                                 />
                             )}
                         </div>
@@ -494,10 +494,10 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
                     </div>
 
                         {/* Submit Button */}
-                        <div className="mt-6">
+                        <div className='flex justify-end but mt-3'>
                             <button
                                 type="submit"
-                                className="bg-blue-500 text-white font-semibold py-2 px-4 rounded"
+                                className="text-white py-1 px-1 rounded col-span-2 flex items-center"
                             >
                                 Update Service Provider
                             </button>

@@ -9,7 +9,7 @@ const Sidebar = () => {
   const profileImage = sessionStorage.getItem('profileImage');
   const defaultProfileImage = "https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg";
   const displayProfileImage = profileImage && profileImage !== "null"
-    ? 'https://serviceprovidersback.onrender.com/uploads/profileimg/' + profileImage
+    ? 'https://serviceprovidersback.onrender.comuploads/profileimg/' + profileImage
     : defaultProfileImage;
 
   console.log("Full Profile Image URL:", displayProfileImage); // Log the full URL

@@ -53,7 +53,7 @@ const ManageHolidays = () => {
     const fetchHolidays = async () => {
         setLoading(true);
         try {
-            const response = await fetch('https://serviceprovidersback.onrender.com/api/holidays/');
+            const response = await fetch('https://serviceprovidersback.onrender.comapi/holidays/');
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
@@ -152,7 +152,7 @@ const ManageHolidays = () => {
     const handleDeleteConfirmation = async () => {
         if (selectedHolidayId) {
             try {
-                const response = await fetch(`https://serviceprovidersback.onrender.com/api/holidays/${selectedHolidayId}`, {
+                const response = await fetch(`https://serviceprovidersback.onrender.comapi/holidays/${selectedHolidayId}`, {
                     method: 'DELETE',
                 });
                 if (response.ok) {

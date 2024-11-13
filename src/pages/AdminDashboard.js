@@ -39,9 +39,9 @@ const AdminDashboard = () => {
       try {
         // Fetch data from your endpoints
         const [serviceProvidersResponse, holidaysResponse, notificationsResponse] = await Promise.all([
-          axios.get('https://serviceprovidersback.onrender.com/api/users/serviceproviders'),
-          axios.get('https://serviceprovidersback.onrender.com/api/holidays'),
-          axios.get('https://serviceprovidersback.onrender.com/api/notifications'),
+          axios.get('https://serviceprovidersback.onrender.comapi/users/serviceproviders'),
+          axios.get('https://serviceprovidersback.onrender.comapi/holidays'),
+          axios.get('https://serviceprovidersback.onrender.comapi/notifications'),
         ]);
 
         const serviceProviders = serviceProvidersResponse.data;

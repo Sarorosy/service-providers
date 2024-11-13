@@ -20,7 +20,7 @@ export default function Login() {
   
     try {
       setLoading(true);
-      const response = await fetch('https://serviceprovidersback.onrender.com/api/users/login', {
+      const response = await fetch('https://serviceprovidersback.onrender.comapi/users/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -94,20 +94,20 @@ export default function Login() {
 
       {/* Glassmorphism form card */}
       <div className="relative z-10 bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg  p-8 w-full max-w-md mx-4 shadow-lg border rounded-md border-white border-opacity-30">
-        <div className="text-center mb-8">
+        <div className="text-center mb-4">
           <img
             src={logo} // Adjust the path as necessary
             alt="Service Providers Logo"
-            className="mx-auto  bg-white p-2 mb-4"
+            className="mx-auto  bg-white p-2 mb-2"
             style={{  height: '60px' }}
           />
-          <h2 className="text-3xl font-bold text-gray-800">Service Providers</h2>
-          <p className="text-gray-600 mt-2">Sign in to your account</p>
+          <h2 className="text-3xl font-bold text-gray-800 f-20">Service Providers</h2>
+          <p className="text-gray-600 mt-1 f-14">Sign in to your account</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="">
           <div>
-            <label htmlFor="username" className="text-gray-700">Username</label>
+            <label htmlFor="username" className="text-gray-700 f-13 f-w-600">Username</label>
             <input
               id="username"
               type="text"
@@ -115,11 +115,11 @@ export default function Login() {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               required
-              className="form-control"
+              className="form-control form-control-sm"
             />
           </div>
-          <div>
-            <label htmlFor="password" className="text-gray-700">Password</label>
+          <div class="mt-3">
+            <label htmlFor="password" className="text-gray-700 f-13 f-w-600">Password</label>
             <input
               id="password"
               type="password"
@@ -127,13 +127,13 @@ export default function Login() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="form-control"
+              className="form-control form-control-sm"
             />
           </div>
           <div className="n-login-btn-set">
           <button
     type="submit"
-    className=""
+    className="mt-4"
     disabled={loading}
 >
     {loading ? (

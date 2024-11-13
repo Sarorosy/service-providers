@@ -8,6 +8,9 @@
 .f-15 {
     font-size: 15px;
 }
+.f-14 {
+    font-size: 14px;
+}
 .f-13 {
     font-size: 13px;
 }
@@ -207,7 +210,22 @@
 
 
 
-
+.n-wenn {
+    width: 46rem;
+}
 .elips-text {
     overflow-wrap: break-word;
+}
+.edit-hover:hover {
+    color: #009fff;
+}
+
+.n-popup-body.ad-work-h {
+    height: 43vh;
+}
+.n-popup-body.ad-holdy-h {
+    height: 50vh;
+}
+.n-popup-body.ad-notf-h {
+    height: 55vh;
 }
