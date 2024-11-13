@@ -19,7 +19,7 @@ const AddUserServiceCharge = ({ onClose, serviceProviderId }) => {
     const fetchServiceProviders = async () => {
         try {
             setLoading(true);
-            const response = await fetch('https://serviceprovidersback.onrender.com/api/users/serviceproviders');
+            const response = await fetch('http://localhost:5000/api/users/serviceproviders');
             const data = await response.json();
             setServiceProviders(data);
             const matchedProvider = data.find(provider => provider._id === serviceProviderId);
@@ -43,7 +43,7 @@ const AddUserServiceCharge = ({ onClose, serviceProviderId }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('https://serviceprovidersback.onrender.com/api/servicecharge', {
+            const response = await fetch('http://localhost:5000/api/servicecharge', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),
@@ -98,7 +98,7 @@ const AddUserServiceCharge = ({ onClose, serviceProviderId }) => {
                             <img
                                 src={
                                     selectedProvider.fld_profile_image && selectedProvider.fld_profile_image.trim() !== ""
-                                        ? `https://serviceprovidersback.onrender.com/uploads/profileimg/${selectedProvider.fld_profile_image}`
+                                        ? `http://localhost:5000/uploads/profileimg/${selectedProvider.fld_profile_image}`
                                         : "https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg"
                                 }
                                 alt="Profile"

@@ -15,7 +15,7 @@ const EditWorkSummary = ({ workSummaryId, onClose }) => {
     useEffect(() => {
         const fetchProjects = async () => {
             try {
-                const response = await fetch(`https://serviceprovidersback.onrender.com/api/projects/user/${userId}`);
+                const response = await fetch(`http://localhost:5000/api/projects/user/${userId}`);
                 const data = await response.json();
                 setProjects(data); // Assuming the API returns a list of projects
             } catch (error) {
@@ -44,7 +44,7 @@ const EditWorkSummary = ({ workSummaryId, onClose }) => {
     useEffect(() => {
         const fetchWorkSummary = async () => {
             try {
-                const response = await fetch(`https://serviceprovidersback.onrender.com/api/worksummaries/${workSummaryId}`);
+                const response = await fetch(`http://localhost:5000/api/worksummaries/${workSummaryId}`);
                 const data = await response.json();
 
                 if (data) {
@@ -72,7 +72,7 @@ const EditWorkSummary = ({ workSummaryId, onClose }) => {
         };
 
         try {
-            const response = await fetch(`https://serviceprovidersback.onrender.com/api/worksummaries/${workSummaryId}`, {
+            const response = await fetch(`http://localhost:5000/api/worksummaries/${workSummaryId}`, {
                 method: 'PUT', // Use PUT for updating
                 headers: {
                     'Content-Type': 'application/json',

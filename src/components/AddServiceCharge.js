@@ -47,7 +47,7 @@ const AddServiceCharge = ({ onClose }) => {
     const fetchServiceProviders = async () => {
         try {
             setLoading(true);
-            const response = await fetch('https://serviceprovidersback.onrender.com/api/users/serviceproviders');
+            const response = await fetch('http://localhost:5000/api/users/serviceproviders');
             const data = await response.json();
             const options = data.map(provider => ({
                 _id: provider._id, // Ensure _id is used here
@@ -83,7 +83,7 @@ const AddServiceCharge = ({ onClose }) => {
                 toast.error("Value must be less than or equal to 100000");
                 return; 
             }
-            const response = await fetch('https://serviceprovidersback.onrender.com/api/servicecharge', {
+            const response = await fetch('http://localhost:5000/api/servicecharge', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -143,7 +143,7 @@ const AddServiceCharge = ({ onClose }) => {
                                 <div className="mb-2">
                                     <div className="cent1 items-center">
                                         <img
-                                            src={selectedProvider.fld_profile_image ? `https://serviceprovidersback.onrender.com/uploads/profileimg/${selectedProvider.fld_profile_image}` : 'https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg'}
+                                            src={selectedProvider.fld_profile_image ? `http://localhost:5000/uploads/profileimg/${selectedProvider.fld_profile_image}` : 'https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg'}
                                             alt={selectedProvider.text}
                                             className="w-16 h-16 rounded-full mr-2"
                                         />
@@ -154,7 +154,7 @@ const AddServiceCharge = ({ onClose }) => {
                             )}
                             {loading ? <RevolvingDot height="20" width="20" color="blue" ariaLabel="loading" /> : (<div className="mb-3">
                                 <label htmlFor="serviceProvider" className="block text-gray-700">Service Provider</label>
-                                <select id="serviceProvider" className="w-full p-2 border border-gray-300 rounded">
+                                <select id="serviceProvider" className="w-full border border-gray-300 rounded form-control-sm">
                                     <option value="">Select a service provider</option>
                                 </select>
                             </div>)}
@@ -168,7 +168,7 @@ const AddServiceCharge = ({ onClose }) => {
                                     name="fld_from_date"
                                     value={formData.fld_from_date}
                                     onChange={handleInputChange}
-                                    className="w-full p-2 border border-gray-300 rounded"
+                                    className="w-full border border-gray-300 rounded form-control-sm"
                                     required
                                 />
                             </div>
@@ -180,7 +180,7 @@ const AddServiceCharge = ({ onClose }) => {
                                     name="fld_to_date"
                                     value={formData.fld_to_date}
                                     onChange={handleInputChange}
-                                    className="w-full p-2 border border-gray-300 rounded"
+                                    className="w-full border border-gray-300 rounded form-control-sm"
                                     required
                                 />
                             </div>
@@ -192,7 +192,7 @@ const AddServiceCharge = ({ onClose }) => {
                                     name="fld_service_charge"
                                     value={formData.fld_service_charge}
                                     onChange={handleInputChange}
-                                    className="w-full p-2 border border-gray-300 rounded"
+                                    className="w-full border border-gray-300 rounded form-control-sm"
                                     max={100000}
                                     required
                                 />

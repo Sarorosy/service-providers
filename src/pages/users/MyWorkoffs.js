@@ -8,7 +8,7 @@ const MyWorkoffs = () => {
 
     useEffect(() => {
         const userId = sessionStorage.getItem('userId');
-        fetch(`https://serviceprovidersback.onrender.com/api/workoffs/user/${userId}`)
+        fetch(`http://localhost:5000/api/workoffs/user/${userId}`)
             .then(response => response.json())
             .then(data => {
                 setWorkoffs(data);
