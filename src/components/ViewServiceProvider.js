@@ -81,23 +81,7 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
         }
     }, [serviceProviderId]);
 
-    if (loading) {
-        return <motion.div
-            // initial={{ x: '100%' }}
-            // animate={{ x: 0 }}
-            // exit={{ x: '100%' }}
-            // transition={{ duration: 0.5, ease: 'easeInOut' }}
-            className=""
-        >
-            <RevolvingDot
-                visible={true}
-                height="50"
-                width="50"
-                color="#3b82f6" // Tailwind blue-600
-                ariaLabel="revolving-dot-loading"
-            />
-        </motion.div>;
-    }
+    
 
     if (error) {
         return <div>{error}</div>;
@@ -135,6 +119,7 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
             className="w-full h-full p-6 fixed top-0 right-0 z-50 shadow-lg n-pop-up"
         >
             
+            
             <AnimatePresence>
                 {isEditOpen && (
                     <EditServiceProvider
@@ -160,6 +145,14 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
 
             <div className='db'>
                 <div className="n-wenn mx-auto bg-white p-6 rounded-lg shadow-md">
+                {loading ? (  <div className='d-flex justify-content-center '><RevolvingDot
+                visible={true}
+                height="50"
+                width="50"
+                color="#3b82f6" // Tailwind blue-600
+                ariaLabel="revolving-dot-loading"
+            /></div> ) : (
+                <>
                     <div className='n-pop-up-head d-flex justify-content-between align-items-center mb-4 border-bottom pb-3'>
                         <h2 className="f-20">Service Provider Details</h2>
                         <div>
@@ -384,9 +377,15 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
                         </div>
 
                     </div> ) : "" }
+
+                    </>
+                     )}
                 </div>
             </div>
+            
+           
             <ToastContainer />
+        
         </motion.div>
     );
 };
