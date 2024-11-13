@@ -153,7 +153,7 @@ const AddServiceCharge = ({ onClose }) => {
                                 </div>
                             )}
                             {loading ? <RevolvingDot height="20" width="20" color="blue" ariaLabel="loading" /> : (<div className="mb-3">
-                                <label htmlFor="serviceProvider" className="block text-gray-700">Service Provider</label>
+                                <label htmlFor="serviceProvider" className="block text-sm font-semibold">Service Provider</label>
                                 <select id="serviceProvider" className="w-full border border-gray-300 rounded form-control-sm">
                                     <option value="">Select a service provider</option>
                                 </select>
@@ -161,7 +161,7 @@ const AddServiceCharge = ({ onClose }) => {
 
 
                             <div className="mb-3">
-                                <label htmlFor="fromDate" className="block text-gray-700">From Date</label>
+                                <label htmlFor="fromDate" className="block text-sm font-semibold">From Date</label>
                                 <input
                                     type="date"
                                     id="fromDate"
@@ -173,7 +173,7 @@ const AddServiceCharge = ({ onClose }) => {
                                 />
                             </div>
                             <div className="mb-3">
-                                <label htmlFor="toDate" className="block text-gray-700">To Date</label>
+                                <label htmlFor="toDate" className="block text-sm font-semibold">To Date</label>
                                 <input
                                     type="date"
                                     id="toDate"
@@ -185,7 +185,7 @@ const AddServiceCharge = ({ onClose }) => {
                                 />
                             </div>
                             <div className="mb-3">
-                                <label htmlFor="serviceCharge" className="block text-gray-700">Service Charge</label>
+                                <label htmlFor="serviceCharge" className="block text-sm font-semibold">Service Charge</label>
                                 <input
                                     type="number"
                                     id="serviceCharge"
