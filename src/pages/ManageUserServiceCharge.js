@@ -46,8 +46,8 @@ const ManageUserServiceCharge = ({ serviceProviderId, onClose }) => {
     setLoading(true);
     try {
       const [serviceChargeResponse, serviceProviderResponse] = await Promise.all([
-        fetch(`https://serviceprovidersback.onrender.com/api/servicecharge/user/${serviceProviderId}`),
-        fetch('https://serviceprovidersback.onrender.com/api/users/serviceproviders/')
+        fetch(`https://serviceprovidersback.onrender.com//api/servicecharge/user/${serviceProviderId}`),
+        fetch('https://serviceprovidersback.onrender.com//api/users/serviceproviders/')
       ]);
 
       if (!serviceChargeResponse.ok || !serviceProviderResponse.ok) {
@@ -92,7 +92,7 @@ const ManageUserServiceCharge = ({ serviceProviderId, onClose }) => {
   const handleDelete = async () => {
     if (selectedServiceCharge) {
       try {
-        const response = await fetch(`https://serviceprovidersback.onrender.com/api/servicecharge/${selectedServiceCharge._id}`, {
+        const response = await fetch(`https://serviceprovidersback.onrender.com//api/servicecharge/${selectedServiceCharge._id}`, {
           method: 'DELETE',
         });
 
@@ -152,7 +152,7 @@ const ManageUserServiceCharge = ({ serviceProviderId, onClose }) => {
       render: (data, type, row) => (
         `<div style="width: 100%; font-size: 12px;">
            <button class="edit-btn" data-id="${row._id}">Edit</button>
-           <button class="delete-btn" data-id="${row._id}" style="margin-left: 10px;">Delete</button>
+           <button class="delete-btn" data-id="${row._id}">Delete</button>
          </div>`
       ),
     },
@@ -167,7 +167,7 @@ const ManageUserServiceCharge = ({ serviceProviderId, onClose }) => {
       className="w-full h-full p-6 fixed top-0 right-0 z-50 shadow-lg n-pop-up"
     >
 
-      <div className="went mt-5 mx-auto bg-white p-6 rounded-lg shadow-md">
+      <div className="went mx-auto bg-white p-6 rounded-lg shadow-md">
         <div className='n-pop-up-head d-flex justify-content-between align-items-center mb-4 border-bottom pb-3'>
             <h1 className="text-xl font-bold text-gray-800">Manage Service Charges</h1>
             <button

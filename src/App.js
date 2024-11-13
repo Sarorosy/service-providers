@@ -66,7 +66,7 @@ function App() {
   );
 }
 
-// Create a private route component to handle authentication https://serviceprovidersback.onrender.com/
+// Create a private route component to handle authentication https://serviceprovidersback.onrender.com//
 const PrivateRoute = () => {
   const navigate = useNavigate();
   useEffect(() => {

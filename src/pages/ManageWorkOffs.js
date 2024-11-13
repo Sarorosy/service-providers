@@ -38,7 +38,7 @@ const ManageWorkoffs = () => {
   // Function to fetch service providers
   const fetchServiceProviders = async () => {
     try {
-      const response = await fetch('https://serviceprovidersback.onrender.com/api/users/serviceproviders'); // API endpoint
+      const response = await fetch('https://serviceprovidersback.onrender.com//api/users/serviceproviders'); // API endpoint
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
@@ -54,7 +54,7 @@ const ManageWorkoffs = () => {
   const fetchWorkoffs = async () => {
     setLoading(true);
     try {
-      const response = await fetch('https://serviceprovidersback.onrender.com/api/workoffs/');
+      const response = await fetch('https://serviceprovidersback.onrender.com//api/workoffs/');
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }

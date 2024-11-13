@@ -27,7 +27,7 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
     useEffect(() => {
         const fetchServiceProvider = async () => {
             try {
-                const response = await fetch(`https://serviceprovidersback.onrender.com/api/users/find/${serviceProviderId}`);
+                const response = await fetch(`https://serviceprovidersback.onrender.com//api/users/find/${serviceProviderId}`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch User');
                 }
@@ -46,7 +46,7 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
 
     useEffect(() => {
         setLoading(true);
-        fetch(`https://serviceprovidersback.onrender.com/api/manageworkoffs/first/${serviceProviderId}`)
+        fetch(`https://serviceprovidersback.onrender.com//api/manageworkoffs/first/${serviceProviderId}`)
             .then(response => response.json())
             .then(data => {
                 setWorkoffs(data);
@@ -62,7 +62,7 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
         const fetchServiceCharges = async () => {
             try {
                 setLoading(true);
-                const response = await fetch(`https://serviceprovidersback.onrender.com/api/servicecharge/user/${serviceProviderId}`);
+                const response = await fetch(`https://serviceprovidersback.onrender.com//api/servicecharge/user/${serviceProviderId}`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch service charges');
                 }
@@ -83,11 +83,11 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
 
     if (loading) {
         return <motion.div
-            initial={{ x: '100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '100%' }}
-            transition={{ duration: 0.5, ease: 'easeInOut' }}
-            className="bg-sky-50 w-full h-full p-6 fixed top-0 right-0 z-50 overflow-y-auto shadow-lg"
+            // initial={{ x: '100%' }}
+            // animate={{ x: 0 }}
+            // exit={{ x: '100%' }}
+            // transition={{ duration: 0.5, ease: 'easeInOut' }}
+            className=""
         >
             <RevolvingDot
                 visible={true}
@@ -105,7 +105,7 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
 
     const imageUrl = (type, fileName) => {
         return fileName && fileName !== ''
-            ? `https://serviceprovidersback.onrender.com/uploads/${type}/${fileName}`
+            ? `https://serviceprovidersback.onrender.com//uploads/${type}/${fileName}`
             : null;
     };
     const handleEditClick = (id) => {
@@ -185,7 +185,7 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
                         <div className='row'>
                             <div className='col-md-9'>
                                 {/* Personal Information Section */}
-                                <div className="pb-3 viewinfo ">
+                                <div className="pb-3 pl-3 viewinfo ">
                                     <h3 className="text-lg font-semibold text-gray-700 mb-3 flex items-center">
                                         <User className="w-5 h-5 mr-2 text-blue-500" /> {/* Icon for Personal Info */}
                                         Personal Information
@@ -243,7 +243,7 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
                                 <img
                                     src={
                                         serviceProvider.fld_profile_image && serviceProvider.fld_profile_image.trim() !== ""
-                                            ? `https://serviceprovidersback.onrender.com/uploads/profileimg/${serviceProvider.fld_profile_image}`
+                                            ? `https://serviceprovidersback.onrender.com//uploads/profileimg/${serviceProvider.fld_profile_image}`
                                             : "https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg"
                                     }
                                     alt="Profile"
@@ -256,7 +256,7 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
 
                         <div className='grid grid-cols-1 md:grid-cols-2 gap-0'>
                             {/* Work Profile Section */}
-                            <div className="px-3 py-4 viewinfo ">
+                            <div className="p-3 viewinfo ">
                                 <h3 className="text-lg font-semibold text-gray-700 mb-3 flex items-center">
                                     <Briefcase className="w-5 h-5 mr-2 text-blue-500" /> {/* Icon for Work Profile */}
                                     Work Profile
@@ -271,23 +271,23 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
                             </div>
 
                             {/* Bank Details Section */}
-                            <div className="px-3 py-4 viewinfo blviewinfo">
+                            <div className="p-3 viewinfo blviewinfo">
                                 <h3 className="text-lg font-semibold text-gray-700 mb-3 flex items-center">
                                     <Landmark className="w-5 h-5 mr-2 text-blue-500" /> {/* Icon for Bank Details */}
                                     Bank Details
                                 </h3>
                                 <div className="flex flex-col space-y-2">
                                     <div className='flex'>
-                                        <p className="ww"><strong>Bank Name</strong></p><p>: {serviceProvider.fld_bankname}</p></div>
-                                    <div className='flex'><p className="ww"><strong>Account No</strong></p><p>: {serviceProvider.fld_accountno}</p></div>
-                                    <div className='flex'><p className="ww"><strong>Branch</strong></p><p>: {serviceProvider.fld_branch}</p></div>
-                                    <div className='flex'><p className="ww"><strong>IFSC Code</strong></p><p>: {serviceProvider.fld_ifsc}</p></div>
+                                        <p className="ww"><strong>Bank Name</strong></p><p className='n-ww'>: {serviceProvider.fld_bankname}</p></div>
+                                    <div className='flex'><p className="ww"><strong>Account No</strong></p><p className='n-ww'>: {serviceProvider.fld_accountno}</p></div>
+                                    <div className='flex'><p className="ww"><strong>Branch</strong></p><p className='n-ww'>: {serviceProvider.fld_branch}</p></div>
+                                    <div className='flex'><p className="ww"><strong>IFSC Code</strong></p><p className='n-ww'>: {serviceProvider.fld_ifsc}</p></div>
                                 </div>
                             </div>
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-                            <div className="bg-white bxs rounded-lg p-4">
+                            <div className="bg-white bxs rounded-lg p-3">
                                 <h2 className="text-lg font-semibold mb-1">Manage Workoffs</h2>
                                 {workoffs.length > 0 ? ( // Check if workoffs array is not empty
                                     <ul className="space-y-4">
@@ -311,7 +311,7 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
                                         ))}
                                     </ul>
                                 ) : (
-                                    <p className="text-left text-gray-500 mb-2">No workoffs found.</p> // Message when no workoffs
+                                    <p className="text-left text-gray-500 mb-2 f-13">No workoffs found.</p> // Message when no workoffs
                                 )}
                                 <div className='but'>
                                     <button
@@ -323,22 +323,22 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
                                     </button>
                                 </div>
                             </div>
-                            <div className="bg-white bxs rounded-lg p-4">
+                            <div className="bg-white bxs rounded-lg p-3">
                                 <h2 className="text-lg font-semibold mb-1">Service Charge Details</h2>
                                 {serviceCharges.length > 0 ? (
-                                    <ul className="space-y-4">
+                                    <ul className="mb-0">
                                         {serviceCharges.map((charge) => (
-                                            <li key={charge._id} className="border-b pb-4">
-                                                <p className="text-gray-700"><strong>Service Charge:</strong> INR {charge.fld_service_charge}</p>
-                                                <p className="text-gray-700"><strong>From Date:</strong> {new Date(charge.fld_from_date).toLocaleDateString()}</p>
-                                                <p className="text-gray-700"><strong>To Date:</strong> {new Date(charge.fld_to_date).toLocaleDateString()}</p>
-                                                <p className="text-gray-700"><strong>Added On:</strong> {new Date(charge.fld_added_on).toLocaleDateString()}</p>
+                                            <li key={charge._id} className="pb-4">
+                                                <div className="text-gray-700 f-13 d-flex"><strong className='ww'>Service Charge:</strong><p> INR {charge.fld_service_charge}</p></div>
+                                                <div className="text-gray-700 f-13 d-flex"><strong className='ww'>From Date:</strong><p> {new Date(charge.fld_from_date).toLocaleDateString()}</p></div>
+                                                <div className="text-gray-700 f-13 d-flex"><strong className='ww'>To Date:</strong><p> {new Date(charge.fld_to_date).toLocaleDateString()}</p></div>
+                                                <div className="text-gray-700 f-13 d-flex"><strong className='ww'>Added On:</strong><p> {new Date(charge.fld_added_on).toLocaleDateString()}</p></div>
 
                                             </li>
                                         ))}
                                     </ul>
                                 ) : (
-                                    <p className="text-left text-gray-500 mb-2">No service charges found.</p>
+                                    <p className="text-left text-gray-500 mb-2 f-13">No service charges found.</p>
                                 )}
                                 <div className='but'>
                                     <button
@@ -355,7 +355,7 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
                                 <div className="p-3">
                                     <h3 className="text-md font-semibold mb-2 text-gray-700">Aadhar Card</h3>
                                     <img
-                                        src={`https://serviceprovidersback.onrender.com/uploads/aadharcard/${serviceProvider.fld_aadharcard}`}
+                                        src={`https://serviceprovidersback.onrender.com//uploads/aadharcard/${serviceProvider.fld_aadharcard}`}
                                         alt="Aadhar Card"
                                         className="object-cover rounded-lg shadow-md"
                                     />
@@ -365,7 +365,7 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
                                 <div className="p-3">
                                     <h3 className="text-md font-semibold mb-2 text-gray-700">PAN Card</h3>
                                     <img
-                                        src={`https://serviceprovidersback.onrender.com/uploads/pancard/${serviceProvider.fld_pancard}`}
+                                        src={`https://serviceprovidersback.onrender.com//uploads/pancard/${serviceProvider.fld_pancard}`}
                                         alt="PAN Card"
                                         className="object-cover rounded-lg shadow-md"
                                     />
@@ -375,7 +375,7 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
                                 <div className="p-3">
                                     <h3 className="text-md font-semibold mb-2 text-gray-700">Cancelled Cheque</h3>
                                     <img
-                                        src={`https://serviceprovidersback.onrender.com/uploads/cancelledchequeimage/${serviceProvider.fld_cancelledchequeimage}`}
+                                        src={`https://serviceprovidersback.onrender.com//uploads/cancelledchequeimage/${serviceProvider.fld_cancelledchequeimage}`}
                                         alt="Cancelled Cheque"
                                         className="object-cover rounded-lg shadow-md"
                                     />

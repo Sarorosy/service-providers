@@ -25,8 +25,8 @@ const ManageUserWorkoff = ({ onClose, serviceProviderId }) => {
         try {
 
             const [workoffResponse, serviceProviderResponse] = await Promise.all([
-                fetch(`https://serviceprovidersback.onrender.com/api/manageworkoffs/${serviceProviderId}`),
-                fetch('https://serviceprovidersback.onrender.com/api/users/serviceproviders/')
+                fetch(`https://serviceprovidersback.onrender.com//api/manageworkoffs/${serviceProviderId}`),
+                fetch('https://serviceprovidersback.onrender.com//api/users/serviceproviders/')
             ]);
 
             if (!workoffResponse.ok || !serviceProviderResponse.ok) {
@@ -79,7 +79,7 @@ const ManageUserWorkoff = ({ onClose, serviceProviderId }) => {
         if (!selectedWorkoffId) return;
 
         try {
-            const response = await fetch(`https://serviceprovidersback.onrender.com/api/manageworkoffs/${selectedWorkoffId}`, {
+            const response = await fetch(`https://serviceprovidersback.onrender.com//api/manageworkoffs/${selectedWorkoffId}`, {
                 method: 'DELETE',
             });
 

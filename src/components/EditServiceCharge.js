@@ -53,7 +53,7 @@ const EditServiceCharge = ({ onClose, id }) => {
 
     const fetchServiceProviders = async () => {
         try {
-            const response = await fetch('https://serviceprovidersback.onrender.com/api/users/serviceproviders');
+            const response = await fetch('https://serviceprovidersback.onrender.com//api/users/serviceproviders');
             const data = await response.json();
             setServiceProviders(data);
         } catch (error) {
@@ -64,7 +64,7 @@ const EditServiceCharge = ({ onClose, id }) => {
 
     const fetchServiceCharge = async () => {
         try {
-            const response = await fetch(`https://serviceprovidersback.onrender.com/api/servicecharge/${id}`);
+            const response = await fetch(`https://serviceprovidersback.onrender.com//api/servicecharge/${id}`);
             if (!response.ok) {
                 throw new Error('Failed to fetch service charge');
             }
@@ -105,7 +105,7 @@ const EditServiceCharge = ({ onClose, id }) => {
                 toast.error("Value must be less than or equal to 100000");
                 return; 
             }
-            const response = await fetch(`https://serviceprovidersback.onrender.com/api/servicecharge/${id}`, {
+            const response = await fetch(`https://serviceprovidersback.onrender.com//api/servicecharge/${id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -146,7 +146,7 @@ const EditServiceCharge = ({ onClose, id }) => {
             // transition={{ duration: 0.5, ease: 'easeInOut' }}
             className="w-full h-full p-6 fixed top-0 right-0 z-50 shadow-lg n-pop-up"
         >
-            <div className="wen3 mt-5 mx-auto bg-white p-6 rounded-lg shadow-md">
+            <div className="wen3 mx-auto bg-white p-6 rounded-lg shadow-md">
                 <div className='n-pop-up-head d-flex justify-content-between align-items-center mb-4 border-bottom pb-3'>
                     <h2 className="text-2xl font-bold text-center">Edit Service Charge</h2>
                     <button
@@ -162,7 +162,7 @@ const EditServiceCharge = ({ onClose, id }) => {
                         <div className="mb-2 cent">
                             <div>
                                 <img
-                                    src={selectedProvider.fld_profile_image ? `https://serviceprovidersback.onrender.com/uploads/profileimg/${selectedProvider.fld_profile_image}` : 'https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg'}
+                                    src={selectedProvider.fld_profile_image ? `https://serviceprovidersback.onrender.com//uploads/profileimg/${selectedProvider.fld_profile_image}` : 'https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg'}
                                     alt={selectedProvider.text}
                                     className="rounded-full"
                                 />
@@ -174,7 +174,7 @@ const EditServiceCharge = ({ onClose, id }) => {
                     <form onSubmit={handleSubmit} className='db'>
                         <div className="mb-3">
                             <label htmlFor="serviceProvider" className="block text-sm font-semibold">Service Provider</label>
-                            <select id="serviceProvider" className="w-full p-2 border border-gray-300 rounded">
+                            <select id="serviceProvider" className="w-full p-2 border border-gray-300 rounded form-control-sm">
                                 <option value="">Select a service provider</option>
                             </select>
                         </div>
@@ -186,7 +186,7 @@ const EditServiceCharge = ({ onClose, id }) => {
                                 name="fld_from_date"
                                 value={formData.fld_from_date}
                                 onChange={handleInputChange}
-                                className="w-full p-2 border border-gray-300 rounded"
+                                className="w-full p-2 border border-gray-300 rounded form-control-sm"
                                 required
                             />
                         </div>
@@ -198,7 +198,7 @@ const EditServiceCharge = ({ onClose, id }) => {
                                 name="fld_to_date"
                                 value={formData.fld_to_date}
                                 onChange={handleInputChange}
-                                className="w-full p-2 border border-gray-300 rounded"
+                                className="w-full p-2 border border-gray-300 rounded form-control-sm"
                                 required
                             />
                         </div>
@@ -210,7 +210,7 @@ const EditServiceCharge = ({ onClose, id }) => {
                                 name="fld_service_charge"
                                 value={formData.fld_service_charge}
                                 onChange={handleInputChange}
-                                className="w-full p-2 border border-gray-300 rounded"
+                                className="w-full p-2 border border-gray-300 rounded form-control-sm"
                                 max={100000}
                                 required
                             />

@@ -40,7 +40,7 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
 
         // Fetch service provider data for editing
         const fetchServiceProvider = async () => {
-            const response = await fetch(`https://serviceprovidersback.onrender.com/api/users/find/${serviceProviderId}`);
+            const response = await fetch(`https://serviceprovidersback.onrender.com//api/users/find/${serviceProviderId}`);
             if (response.ok) {
                 const data = await response.json();
                 if (data.fld_start_date) {
@@ -86,7 +86,7 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
             formDataToSend.append(key, formData[key]);
         }
 
-        const response = await fetch(`https://serviceprovidersback.onrender.com/api/users/${serviceProviderId}`, {
+        const response = await fetch(`https://serviceprovidersback.onrender.com//api/users/${serviceProviderId}`, {
             method: 'PUT',
             body: formDataToSend,
         });
@@ -144,7 +144,7 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
                     name="fld_adminid"
                     value={adminId}
                     onChange={handleChange}
-                    className="border border-gray-300 rounded p-2 w-full text-sm"
+                    className="border border-gray-300 rounded w-full text-sm form-control-sm"
                     required
                 />
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-2">
@@ -157,7 +157,7 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
                             name="fld_username"
                             value={formData.fld_username}
                             onChange={handleChange}
-                            className="border border-gray-300 rounded p-2 w-full text-sm"
+                            className="border border-gray-300 rounded w-full text-sm form-control-sm"
                             required
                         />
                     </div>
@@ -171,7 +171,7 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
                             name="fld_name"
                             value={formData.fld_name}
                             onChange={handleChange}
-                            className="border border-gray-300 rounded p-2 w-full text-sm"
+                            className="border border-gray-300 rounded w-full text-sm form-control-sm"
                             required
                         />
                     </div>
@@ -185,7 +185,7 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
                             name="fld_email"
                             value={formData.fld_email}
                             onChange={handleChange}
-                            className="border border-gray-300 rounded p-2 w-full text-sm"
+                            className="border border-gray-300 rounded w-full text-sm form-control-sm"
                             required
                         />
                     </div>
@@ -199,7 +199,7 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
                             name="fld_phone"
                             value={formData.fld_phone}
                             onChange={handleChange}
-                            className="border border-gray-300 rounded p-2 w-full text-sm"
+                            className="border border-gray-300 rounded w-full text-sm form-control-sm"
                             required
                         />
                     </div>
@@ -213,7 +213,7 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
                             name="fld_decrypt_password"
                             value={formData.fld_decrypt_password}
                             onChange={handleChange}
-                            className="border border-gray-300 rounded p-2 w-full text-sm"
+                            className="border border-gray-300 rounded w-full text-sm form-control-sm"
                             required
                         />
                     </div>
@@ -227,7 +227,7 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
                             name="fld_decrypt_password"
                             value={formData.fld_decrypt_password}
                             onChange={handleChange}
-                            className="border border-gray-300 rounded p-2 w-full text-sm"
+                            className="border border-gray-300 rounded w-full text-sm form-control-sm"
                             required
                         />
                     </div>
@@ -241,7 +241,7 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
                             name="fld_address"
                             value={formData.fld_address}
                             onChange={handleChange}
-                            className="border border-gray-300 rounded p-2 w-full text-sm"
+                            className="border border-gray-300 rounded w-full text-sm form-control-sm"
                             required
                         />
                     </div>
@@ -254,7 +254,7 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
                             name="fld_gender"
                             value={formData.fld_gender}
                             onChange={handleChange}
-                            className="border border-gray-300 rounded p-2 w-full text-sm"
+                            className="border border-gray-300 rounded w-full text-sm form-control-sm"
                             required
                         >
                             <option value="">Select Gender</option>
@@ -273,7 +273,7 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
                             name="fld_designation"
                             value={formData.fld_designation}
                             onChange={handleChange}
-                            className="border border-gray-300 rounded p-2 w-full text-sm"
+                            className="border border-gray-300 rounded w-full text-sm form-control-sm"
                             required
                         />
                     </div>
@@ -287,7 +287,7 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
                             name="fld_aadhar"
                             value={formData.fld_aadhar}
                             onChange={handleChange}
-                            className="border border-gray-300 rounded p-2 w-full text-sm"
+                            className="border border-gray-300 rounded w-full text-sm form-control-sm"
                             required
                         />
                     </div>
@@ -301,7 +301,7 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
                             name="fld_start_date"
                             value={formData.fld_start_date}
                             onChange={handleChange}
-                            className="border border-gray-300 rounded p-2 w-full text-sm"
+                            className="border border-gray-300 rounded w-full text-sm form-control-sm"
                             required
                         />
                     </div>
@@ -315,7 +315,7 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
                             name="fld_end_date"
                             value={formData.fld_end_date}
                             onChange={handleChange}
-                            className="border border-gray-300 rounded p-2 w-full text-sm"
+                            className="border border-gray-300 rounded w-full text-sm form-control-sm"
                         />
                     </div>
 
@@ -328,7 +328,7 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
                             name="fld_bankname"
                             value={formData.fld_bankname}
                             onChange={handleChange}
-                            className="border border-gray-300 rounded p-2 w-full text-sm"
+                            className="border border-gray-300 rounded w-full text-sm form-control-sm"
                             required
                         />
                     </div>
@@ -342,7 +342,7 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
                             name="fld_accountno"
                             value={formData.fld_accountno}
                             onChange={handleChange}
-                            className="border border-gray-300 rounded p-2 w-full text-sm"
+                            className="border border-gray-300 rounded w-full text-sm form-control-sm"
                             required
                         />
                     </div>
@@ -356,7 +356,7 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
                             name="fld_branch"
                             value={formData.fld_branch}
                             onChange={handleChange}
-                            className="border border-gray-300 rounded p-2 w-full text-sm"
+                            className="border border-gray-300 rounded w-full text-sm form-control-sm"
                             required
                         />
                     </div>
@@ -370,7 +370,7 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
                             name="fld_ifsc"
                             value={formData.fld_ifsc}
                             onChange={handleChange}
-                            className="border border-gray-300 rounded p-2 w-full text-sm"
+                            className="border border-gray-300 rounded w-full text-sm form-control-sm"
                             required
                         />
                     </div>
@@ -384,7 +384,7 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
                             {formData.fld_profile_image ? (
                                 <div className="relative">
                                     <img
-                                        src={`https://serviceprovidersback.onrender.com/uploads/profileimg/${formData.fld_profile_image}`}
+                                        src={`https://serviceprovidersback.onrender.com//uploads/profileimg/${formData.fld_profile_image}`}
                                         alt="Profile"
                                         className="border rounded p-2 w-2/3"
                                     />
@@ -401,7 +401,7 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
                                     id="profile_image"
                                     name="fld_profile_image"
                                     onChange={handleFileChange}
-                                    className="border border-gray-300 rounded p-2 w-full form-control-sm"
+                                    className="border border-gray-300 rounded w-full"
                                 />
                             )}
                         </div>
@@ -412,7 +412,7 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
                             {formData.fld_aadharcard ? (
                                 <div className="relative">
                                     <img
-                                        src={`https://serviceprovidersback.onrender.com/uploads/aadharcard/${formData.fld_aadharcard}`}
+                                        src={`https://serviceprovidersback.onrender.com//uploads/aadharcard/${formData.fld_aadharcard}`}
                                         alt="Aadhar Card"
                                         className="border rounded p-2 w-2/3"
                                     />
@@ -429,7 +429,7 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
                                     id="aadharcard"
                                     name="fld_aadharcard"
                                     onChange={handleFileChange}
-                                    className="border border-gray-300 rounded p-2 w-full form-control-sm"
+                                    className="border border-gray-300 rounded w-full"
                                 />
                             )}
                         </div>
@@ -440,7 +440,7 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
                             {formData.fld_pancard ? (
                                 <div className="relative">
                                     <img
-                                        src={`https://serviceprovidersback.onrender.com/uploads/pancard/${formData.fld_pancard}`}
+                                        src={`https://serviceprovidersback.onrender.com//uploads/pancard/${formData.fld_pancard}`}
                                         alt="PAN Card"
                                         className="border rounded p-2 w-2/3"
                                     />
@@ -457,7 +457,7 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
                                     id="pancard"
                                     name="fld_pancard"
                                     onChange={handleFileChange}
-                                    className="border border-gray-300 rounded p-2 w-full form-control-sm"
+                                    className="border border-gray-300 rounded w-full"
                                 />
                             )}
                         </div>
@@ -468,7 +468,7 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
                             {formData.fld_cancelledchequeimage ? (
                                 <div className="relative">
                                     <img
-                                        src={`https://serviceprovidersback.onrender.com/uploads/cancelledchequeimage/${formData.fld_cancelledchequeimage}`}
+                                        src={`https://serviceprovidersback.onrender.com//uploads/cancelledchequeimage/${formData.fld_cancelledchequeimage}`}
                                         alt="Cancelled Cheque"
                                         className="border rounded p-2 w-2/3"
                                     />
@@ -485,7 +485,7 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
                                     id="cancelledchequeimage"
                                     name="fld_cancelledchequeimage"
                                     onChange={handleFileChange}
-                                    className="border border-gray-300 rounded p-2 w-full form-control-sm"
+                                    className="border border-gray-300 rounded  w-full"
                                 />
                             )}
                         </div>

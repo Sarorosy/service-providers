@@ -846,7 +846,9 @@ select.dt-input {
 .ww {
   width: 7.6rem;
 }
-
+.n-ww {
+  width: 70%;
+}
 .blviewinfo{
   border-left: 1px solid #d7d7d7;
 }
