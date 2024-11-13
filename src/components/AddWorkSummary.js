@@ -16,7 +16,7 @@ const AddWorkSummary = ({ onClose }) => {
     useEffect(() => {
         const fetchProjects = async () => {
             try {
-                const response = await fetch(`https://serviceprovidersback.onrender.com//api/projects/user/${userId}`);
+                const response = await fetch(`https://serviceprovidersback.onrender.com/api/projects/user/${userId}`);
                 const data = await response.json();
                 setProjects(data); // Assuming the API returns a list of projects
             } catch (error) {
@@ -55,7 +55,7 @@ const AddWorkSummary = ({ onClose }) => {
         };
 
         try {
-            const response = await fetch('https://serviceprovidersback.onrender.com//api/worksummaries/', {
+            const response = await fetch('https://serviceprovidersback.onrender.com/api/worksummaries/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

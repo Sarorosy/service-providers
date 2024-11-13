@@ -23,7 +23,7 @@ const ManageProjects = () => {
     const userId = sessionStorage.getItem('userId'); // Get userId from session storage
     setLoading(true);
     try {
-      const response = await fetch(`https://serviceprovidersback.onrender.com//api/projects/user/${userId}`);
+      const response = await fetch(`https://serviceprovidersback.onrender.com/api/projects/user/${userId}`);
       if (!response.ok) {
         throw new Error('Error fetching projects');
       }
@@ -67,7 +67,7 @@ const ManageProjects = () => {
   const handleDelete = async () => {
     if (selectedProject) {
       try {
-        const response = await fetch(`https://serviceprovidersback.onrender.com//api/projects/${selectedProject._id}`, {
+        const response = await fetch(`https://serviceprovidersback.onrender.com/api/projects/${selectedProject._id}`, {
           method: 'DELETE',
         });
 
@@ -87,7 +87,7 @@ const ManageProjects = () => {
 
   const toggleStatus = async (id, currentStatus) => {
     try {
-      const response = await fetch(`https://serviceprovidersback.onrender.com//api/projects/${id}/status`, {
+      const response = await fetch(`https://serviceprovidersback.onrender.com/api/projects/${id}/status`, {
         method: 'PATCH',
       });
 

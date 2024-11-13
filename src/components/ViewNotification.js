@@ -14,7 +14,7 @@ const ViewNotification = ({ onClose, notificationId }) => {
     useEffect(() => {
         const fetchNotification = async () => {
             try {
-                const response = await fetch(`https://serviceprovidersback.onrender.com//api/notifications/${notificationId}`);
+                const response = await fetch(`https://serviceprovidersback.onrender.com/api/notifications/${notificationId}`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch notification');
                 }
@@ -34,7 +34,7 @@ const ViewNotification = ({ onClose, notificationId }) => {
         const fetchServiceProviders = async () => {
             try {
                 setLoading(true)
-                const response = await fetch('https://serviceprovidersback.onrender.com//api/users/serviceproviders');
+                const response = await fetch('https://serviceprovidersback.onrender.com/api/users/serviceproviders');
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -60,7 +60,7 @@ const ViewNotification = ({ onClose, notificationId }) => {
     const getProfileImage = (userId) => {
         const user = serviceProviders.find((provider) => provider._id === userId._id);
         if (user && user.fld_profile_image && user.fld_profile_image !== '') {
-            return `https://serviceprovidersback.onrender.com//uploads/profileimg/${user.fld_profile_image}`;
+            return `https://serviceprovidersback.onrender.com/uploads/profileimg/${user.fld_profile_image}`;
         }
         return 'https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg';
     };

@@ -17,7 +17,7 @@ const ManageUserWorkOffs = () => {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`https://serviceprovidersback.onrender.com//api/workoffs/user/${userId}`);
+      const response = await fetch(`https://serviceprovidersback.onrender.com/api/workoffs/user/${userId}`);
       if (!response.ok) {
         throw new Error('Error fetching data');
       }
