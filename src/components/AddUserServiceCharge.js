@@ -119,7 +119,7 @@ const AddUserServiceCharge = ({ onClose, serviceProviderId }) => {
                         name="fld_from_date"
                         value={formData.fld_from_date}
                         onChange={handleInputChange}
-                        className="w-full p-2 border border-gray-300 rounded"
+                        className="w-full border border-gray-300 rounded form-control-sm"
                         required
                     />
                 </div>
@@ -131,7 +131,7 @@ const AddUserServiceCharge = ({ onClose, serviceProviderId }) => {
                         name="fld_to_date"
                         value={formData.fld_to_date}
                         onChange={handleInputChange}
-                        className="w-full p-2 border border-gray-300 rounded"
+                        className="w-full border border-gray-300 rounded form-control-sm"
                         required
                     />
                 </div>
@@ -144,7 +144,7 @@ const AddUserServiceCharge = ({ onClose, serviceProviderId }) => {
                         name="fld_service_charge"
                         value={formData.fld_service_charge}
                         onChange={handleInputChange}
-                        className="w-full p-2 border border-gray-300 rounded"
+                        className="w-full border border-gray-300 rounded form-control-sm"
                         required
                     />
                 </div>
