@@ -111,7 +111,7 @@ const ManageServiceProvider = () => {
                     : "https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg";
 
                 // Return an HTML string for the image
-                return `<img src="${imageUrl}" alt="Profile" className="w-10 h-10 rounded-full border border-gray-200" />`;
+                return `<img src="${imageUrl}" alt="Profile" class="w-10 h-10 rounded-full border border-gray-200" />`;
             },
         },
 
@@ -189,10 +189,10 @@ const ManageServiceProvider = () => {
             render: (data) => {
                 return `
                     <div class="flex flex-col">
-                        <button class="view-button " data-id="${data._id}">View</button>
-                        <button class="workoff-button  " data-id="${data._id}">Workoff</button>
-                        <button class="toggle-status-button " data-id="${data._id}">Status</button>
-                        <button class="delete-button " data-id="${data._id}">Delete</button>
+                        <button class="view-button text-green-500 " data-id="${data._id}">View</button>
+                        <button class="workoff-button text-blue-500 " data-id="${data._id}">Workoff</button>
+                         <button class="toggle-status-button text-purple-500 " data-id="${data._id}">Status</button>
+                        <button class="delete-button text-red-500 " data-id="${data._id}">Delete</button>
                     </div>
                 `;
             },
@@ -275,32 +275,9 @@ const ManageServiceProvider = () => {
         }
     }
     return (
-        <div className="p-2">
-            <div className="page-header py-3 mb-1 d-flex justify-content-between align-items-center">   
-            
-                <h4 className="page-title f-20 f-w-600 mb-0">Manage Service Providers</h4>
-                <div className="btn-group btn-group-page-header ml-auto n-drop">
-                    <button type="button" className="btn btn-primary btn-round btn-page-header-dropdown dropdown-toggle p-2 py-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i className="fa fa-ellipsis-h" aria-hidden="true"></i>
-                    </button>
-                    <div className="dropdown-menu drop-style" x-placement="bottom-start" >
-                        <a className="dropdown-item d-flex f-13" href="#" onClick={fetchServiceProviders}>
-                            Refresh <RefreshCw className='ml-2 ic' />
-                        </a>
-                        <a href="#" onClick={handleAddServiceProviderClick} className="dropdown-item d-flex f-13">
-                            Add Service Provider <UserPlus2 className="ml-2 ic" />
-                        </a>
-                        <a className="dropdown-item" href="#">
-                            <label htmlFor="active" className='act w-100 mb-0  f-13 f1-b-color'> Active <i className="fa fa-check ml-1 f-w-n" aria-hidden="true"></i></label>
-                        </a>
-                        <a className="dropdown-item" href="#">
-                            <label htmlFor="inactive"  className='inact w-100 mb-0  f-13 f1-b-color'>Inactive <i className="fa fa-minus ml-1 f-w-n" aria-hidden="true"></i></label>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            {/* <div className="flex justify-content-end mb-3 but">
-                
+        <div className="p-6 bg-white rounded-lg shadow-md mt-20">
+            <div className="flex justify-content-between mb-3 but">
+                <h1 className="text-xl font-bold text-gray-800">Manage Service Providers</h1>
                 <div className="flex justify-end">
                     <button
                         onClick={fetchServiceProviders}
@@ -312,27 +289,27 @@ const ManageServiceProvider = () => {
                         Add Service Provider <UserPlus2 className="ml-2 ic" />
                     </button>
                 </div>
-            </div> */}
-            <div id="checklist" className='d-none'>
-                        <input
-                            checked={filterActive}
-                            value="active"
-                            name="active"
-                            type="checkbox"
-                            id="active"
-                            onChange={handleCheckboxChange}
-                        />
-                        <label htmlFor="active" className='act'>Active</label>
-                        <input
-                            checked={filterInactive}
-                            value="inactive"
-                            name="inactive"
-                            type="checkbox"
-                            id="inactive"
-                            onChange={handleCheckboxChange}
-                        />
-                        <label htmlFor="inactive"  className='inact'>Inactive</label>
-                    </div>
+            </div>
+            <div id="checklist">
+                <input
+                    checked={filterActive}
+                    value="active"
+                    name="active"
+                    type="checkbox"
+                    id="active"
+                    onChange={handleCheckboxChange}
+                />
+                <label htmlFor="active" className='act'>Active</label>
+                <input
+                    checked={filterInactive}
+                    value="inactive"
+                    name="inactive"
+                    type="checkbox"
+                    id="inactive"
+                    onChange={handleCheckboxChange}
+                />
+                <label htmlFor="inactive"  className='inact'>Inactive</label>
+            </div>
 
             <AnimatePresence>
                 {isFormOpen && <AddServiceProvider onClose={handleCloseForm} />}
@@ -351,50 +328,45 @@ const ManageServiceProvider = () => {
                     />
                 </div>
             ) : (
-                <div className='card mt-4'>
-                <div className='card-body pt-0'>
-                    
-                    <div className="table-container mt-1">
-                        <DataTable
-                            data={serviceProviders}
-                            columns={columns}
-                            options={{
-                                searching: true,
-                                paging: true,
-                                ordering: true,
-                                order: [[5, 'desc']], // Sort by the "Added On" column in descending order
-                                responsive: true,
-                                className: 'display bg-white rounded-lg shadow-sm',
-                                createdRow: (row, data) => {
-                                    $(row).on('click', (e) => {
-                                        const button = e.target;
-                                        if (button.classList.contains('view-button')) {
-                                            const id = button.getAttribute('data-id');
-                                            handleView(id);
-                                        }
+                <div className="table-container mt-1">
+                    <DataTable
+                        data={serviceProviders}
+                        columns={columns}
+                        options={{
+                            searching: true,
+                            paging: true,
+                            ordering: true,
+                            order: [[5, 'desc']], // Sort by the "Added On" column in descending order
+                            responsive: true,
+                            className: 'display bg-white rounded-lg shadow-sm',
+                            createdRow: (row, data) => {
+                                $(row).on('click', (e) => {
+                                    const button = e.target;
+                                    if (button.classList.contains('view-button')) {
+                                        const id = button.getAttribute('data-id');
+                                        handleView(id);
+                                    }
 
-                                        if (button.classList.contains('workoff-button')) {
-                                            const id = button.getAttribute('data-id');
-                                            handleWorkoff(id);
-                                        }
-                                        if (button.classList.contains('toggle-status-button')) {
-                                            const id = button.getAttribute('data-id');
-                                            handleToggleStatus(id, data.status);
+                                    if (button.classList.contains('workoff-button')) {
+                                        const id = button.getAttribute('data-id');
+                                        handleWorkoff(id);
+                                    }
+                                    if (button.classList.contains('toggle-status-button')) {
+                                        const id = button.getAttribute('data-id');
+                                        handleToggleStatus(id, data.status);
 
-                                        }
-                                        if (button.classList.contains('delete-button')) {
-                                            const id = button.getAttribute('data-id');
-                                            handleDelete(id);
-                                        }
+                                    }
+                                    if (button.classList.contains('delete-button')) {
+                                        const id = button.getAttribute('data-id');
+                                        handleDelete(id);
+                                    }
 
 
-                                    });
-                                },
-                            }}
-                            className="display text-xsm datatables rounded"
-                        />
-                    </div>
-                    </div>
+                                });
+                            },
+                        }}
+                        className="display text-xsm datatables rounded"
+                    />
                 </div>
             )}
         </div>

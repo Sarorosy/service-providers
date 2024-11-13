@@ -181,7 +181,7 @@ const ManageServiceCharge = () => {
       </div>
       {loading ? (
         <div className="flex justify-center">
-          <RevolvingDot height="30" width="30" color="blue" ariaLabel="loading" />
+          <RevolvingDot height="10" width="10" color="#3b82f6" ariaLabel="loading" />
         </div>
       ) : (
         <DataTable
