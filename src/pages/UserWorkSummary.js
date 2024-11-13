@@ -28,7 +28,7 @@ const UserWorkSummary = () => {
 
     const fetchProjects = async () => {
         try {
-            const response = await fetch('https://serviceprovidersback.onrender.comapi/projects');
+            const response = await fetch('https://serviceprovidersback.onrender.com/api/projects');
             if (!response.ok) {
                 throw new Error('Failed to fetch projects');
             }
@@ -51,7 +51,7 @@ const UserWorkSummary = () => {
     // Fetch user by ID
     const fetchUser = async () => {
         try {
-            const response = await fetch(`https://serviceprovidersback.onrender.comapi/users/find/${id}`);
+            const response = await fetch(`https://serviceprovidersback.onrender.com/api/users/find/${id}`);
             if (!response.ok) {
                 throw new Error('Failed to fetch user');
             }
@@ -70,7 +70,7 @@ const UserWorkSummary = () => {
     const fetchWorkSummaries = async () => {
         setLoading(true); // Start loading
         try {
-            const response = await fetch(`https://serviceprovidersback.onrender.comapi/worksummaries/user/${id}`);
+            const response = await fetch(`https://serviceprovidersback.onrender.com/api/worksummaries/user/${id}`);
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
@@ -166,7 +166,7 @@ const UserWorkSummary = () => {
                         <>
                             <img
                                 src={user.fld_profile_image && user.fld_profile_image !== ""
-                                    ? 'https://serviceprovidersback.onrender.comuploads/profileimg/' + user.fld_profile_image
+                                    ? 'https://serviceprovidersback.onrender.com/uploads/profileimg/' + user.fld_profile_image
                                     : "https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg"}
                                 alt={user.fld_username || 'No Name'}
                                 className="w-10 h-10 rounded-full border border-gray-200 mr-2" // Added margin to separate image and text

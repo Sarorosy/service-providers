@@ -24,7 +24,7 @@ const EditNotificationForm = ({ notificationId, onClose }) => {
     useEffect(() => {
         const fetchServiceProviders = async () => {
             try {
-                const response = await fetch('https://serviceprovidersback.onrender.comapi/users/activeserviceproviders');
+                const response = await fetch('https://serviceprovidersback.onrender.com/api/users/activeserviceproviders');
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -42,7 +42,7 @@ const EditNotificationForm = ({ notificationId, onClose }) => {
     useEffect(() => {
         const fetchNotification = async () => {
             try {
-                const response = await fetch(`https://serviceprovidersback.onrender.comapi/notifications/${notificationId}`);
+                const response = await fetch(`https://serviceprovidersback.onrender.com/api/notifications/${notificationId}`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -128,7 +128,7 @@ const EditNotificationForm = ({ notificationId, onClose }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = await fetch(`https://serviceprovidersback.onrender.comapi/notifications/${notificationId}`, {
+        const response = await fetch(`https://serviceprovidersback.onrender.com/api/notifications/${notificationId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -260,7 +260,7 @@ const EditNotificationForm = ({ notificationId, onClose }) => {
                                                     >
                                                         <img
                                                             src={provider.fld_profile_image && provider.fld_profile_image !== ""
-                                                                ? 'https://serviceprovidersback.onrender.comuploads/profileimg/' + provider.fld_profile_image
+                                                                ? 'https://serviceprovidersback.onrender.com/uploads/profileimg/' + provider.fld_profile_image
                                                                 : "https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg"}
                                                             alt={provider.fld_username || 'No Name'}
                                                             className="w-8 h-8 rounded-full border border-gray-200 mr-2"

@@ -28,7 +28,7 @@ const AddWorkoff = ({ serviceProviderId, onClose }) => {
         e.preventDefault();
         setIsSubmitting(true);
         try {
-            const response = await fetch('https://serviceprovidersback.onrender.comapi/manageworkoffs', {
+            const response = await fetch('https://serviceprovidersback.onrender.com/api/manageworkoffs', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

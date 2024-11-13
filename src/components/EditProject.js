@@ -11,7 +11,7 @@ const EditProject = ({ projectId, onClose }) => {
     useEffect(() => {
         const fetchProjectDetails = async () => {
             try {
-                const response = await fetch(`https://serviceprovidersback.onrender.comapi/projects/${projectId}`);
+                const response = await fetch(`https://serviceprovidersback.onrender.com/api/projects/${projectId}`);
                 const data = await response.json();
                 setTitle(data.fld_title); // Assuming the API returns a project with fld_title
             } catch (error) {
@@ -34,7 +34,7 @@ const EditProject = ({ projectId, onClose }) => {
         };
 
         try {
-            const response = await fetch(`https://serviceprovidersback.onrender.comapi/projects/${projectId}`, {
+            const response = await fetch(`https://serviceprovidersback.onrender.com/api/projects/${projectId}`, {
                 method: 'PUT', // Use PUT for updating the project
                 headers: {
                     'Content-Type': 'application/json',
