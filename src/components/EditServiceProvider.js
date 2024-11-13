@@ -376,7 +376,7 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
                     </div>
                 </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-4 gap-1 mb-6">
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-1 mb-6 edit-i-s">
 
                         {/* Profile Image */}
                         <div className="mb-4">
