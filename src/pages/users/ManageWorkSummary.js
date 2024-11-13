@@ -22,7 +22,7 @@ const ManageWorkSummary = () => {
 
   const fetchProjects = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/projects');
+      const response = await fetch('https://serviceprovidersback.onrender.com/api/projects');
       if (!response.ok) {
         throw new Error('Failed to fetch projects');
       }
@@ -55,7 +55,7 @@ const ManageWorkSummary = () => {
     setLoading(true);
     const userId = sessionStorage.getItem('userId');
     try {
-      const response = await fetch(`http://localhost:5000/api/worksummaries/user/${userId}`);
+      const response = await fetch(`https://serviceprovidersback.onrender.com/api/worksummaries/user/${userId}`);
       if (!response.ok) {
         throw new Error('Error fetching data');
       }
@@ -86,7 +86,7 @@ const ManageWorkSummary = () => {
   const handleDelete = async () => {
     if (selectedWorkSummary) {
       try {
-        const response = await fetch(`http://localhost:5000/api/worksummaries/${selectedWorkSummary._id}`, {
+        const response = await fetch(`https://serviceprovidersback.onrender.com/api/worksummaries/${selectedWorkSummary._id}`, {
           method: 'DELETE',
         });
         if (!response.ok) {
@@ -114,7 +114,7 @@ const ManageWorkSummary = () => {
 
   const toggleStatus = async (id, currentStatus) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/worksummaries/${id}/status`, {
+      const response = await fetch(`https://serviceprovidersback.onrender.com/api/worksummaries/${id}/status`, {
         method: 'PATCH',
       });
   
