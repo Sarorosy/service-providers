@@ -85,7 +85,7 @@ const Sidebar = () => {
                   Work Offs
                 </NavLink>
               </li>
-              <li>
+              {/* <li>
                 <NavLink
                   to="/manage-work-days"
                   className="flex items-center  transition duration-100  "
@@ -102,7 +102,7 @@ const Sidebar = () => {
                   <Settings className="mr-2" height="17" width="17"/>
                   Service Charge
                 </NavLink>
-              </li>
+              </li> */}
             </>
           ) : (
             <>

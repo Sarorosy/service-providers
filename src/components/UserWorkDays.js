@@ -4,9 +4,11 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import { useNavigate, useParams } from 'react-router-dom';
 import { RevolvingDot } from 'react-loader-spinner'; // Import the loading spinner
-import { ArrowLeftCircle, Calendar1, Clock4, LogIn, LogOut, RefreshCw } from 'lucide-react';
+import { ArrowLeftCircle, Calendar1, Clock4, LogIn, LogOut, RefreshCw,CircleX } from 'lucide-react';
+import { motion } from 'framer-motion';
 
-const UserWorkDays = () => {
+
+const UserWorkDays = ({ serviceProviderId, onClose }) => {
   const { id } = useParams(); // Get the service provider ID from the URL
   const navigate = useNavigate();
   const [events, setEvents] = useState([]);
@@ -27,7 +29,7 @@ const UserWorkDays = () => {
   const fetchLoginHistories = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`https://serviceprovidersback.onrender.com/api/login-history/${id}`); // Fetch login histories for the user
+      const response = await fetch(`https://serviceprovidersback.onrender.com/api/login-history/${serviceProviderId}`); // Fetch login histories for the user
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
@@ -72,7 +74,7 @@ const UserWorkDays = () => {
 
       const userHolidays = holidays.filter(holiday => {
         // Check if fld_userid is defined and is an array
-        return Array.isArray(holiday.fld_userid) && holiday.fld_userid.includes(id);
+        return Array.isArray(holiday.fld_userid) && holiday.fld_userid.includes(serviceProviderId);
       });
 
       // Map the holidays to a format suitable for FullCalendar
@@ -106,7 +108,7 @@ const UserWorkDays = () => {
   // Fetch user by ID
   const fetchUser = async () => {
     try {
-      const response = await fetch(`https://serviceprovidersback.onrender.com/api/users/find/${id}`);
+      const response = await fetch(`https://serviceprovidersback.onrender.com/api/users/find/${serviceProviderId}`);
       if (!response.ok) {
         throw new Error('Failed to fetch user');
       }
@@ -126,7 +128,7 @@ const UserWorkDays = () => {
       await fetchUser();
     };
     fetchData();
-  }, [id]);
+  }, [serviceProviderId]);
 
   const handleDateClick = (arg) => {
     const clickedDate = arg.dateStr;
@@ -167,6 +169,13 @@ const UserWorkDays = () => {
 
 
   return (
+    <motion.div
+            // initial={{ x: '100%' }}
+            // animate={{ x: 0 }}
+            // exit={{ x: '100%' }}
+            // transition={{ duration: 0.5, ease: 'easeInOut' }}
+            className="w-[90vh] h-[90vh] p-6 fixed top-0 right-0 z-50 shadow-lg n-pop-up"
+        >
     <div className=" p-6 bg-white rounded-lg shadow-md mt-20 h-auto">
       <div className='flex justify-content-between mb-6'>
         <h1 className="text-xl font-bold mb-2 text-gray-800 flex items-center">
@@ -184,12 +193,12 @@ const UserWorkDays = () => {
           ) : 'Loading...'}
         </h1>
         <div className="flex justify-end items-center mb-3">
-          <button
-            onClick={() => navigate(-1)} // Go back to the previous page
-            className=" flex px-1 py-1 rounded backbut mr-4"
-          >
-            <ArrowLeftCircle className='mr-2 ic' /> Back
-          </button>
+        <button
+                            onClick={onClose}
+                            className="text-white mr-2 "
+                        >
+                            <CircleX className='colorr' />
+                        </button>
 
         </div>
       </div>
@@ -321,6 +330,7 @@ const UserWorkDays = () => {
         </div>
       </div>
     </div>
+    </motion.div>
   );
 };
 

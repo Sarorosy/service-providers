@@ -5,7 +5,8 @@ import DT from 'datatables.net-dt'; // Import DataTables
 import $ from 'jquery'; // Import jQuery
 import { RevolvingDot } from 'react-loader-spinner';
 import { ArrowLeftCircle, RefreshCw, ArrowUpCircle } from 'lucide-react';
-
+import 'select2/dist/css/select2.css';  // Import select2 CSS
+import 'select2';
 
 const UserWorkSummary = () => {
     DataTable.use(DT); // Initialize DataTables
@@ -18,13 +19,48 @@ const UserWorkSummary = () => {
     const [user, setUser] = useState(null); // Store user data
     const [showScrollTop, setShowScrollTop] = useState(false);
     const [projectsLoading, setProjectsLoading] = useState(true);
+    const [users, setUsers] = useState([]);
 
     useEffect(() => {
         if (sessionStorage.getItem("adminType") != "SUPERADMIN") {
             navigate("/dashboard"); // Redirect to homepage if not SUPERADMIN
         }
     }, [navigate]);
+    useEffect(() => {
+        // Initialize select2 on the dropdown after the users have loaded
+        $('#user-select').select2({
+            placeholder: 'Select a user', // Optional placeholder
+            width: '100%', // Ensures it takes full width
+        });
 
+        // Listen for the change event triggered by select2
+        $('#user-select').on('change', function () {
+            // Trigger your handleUserChange function manually
+            handleUserChange({ target: { value: $(this).val() } });
+        });
+
+        // Clean up select2 on component unmount
+        return () => {
+            $('#user-select').select2('destroy');
+        };
+    }, [users]);
+
+    useEffect(() => {
+        const fetchUsers = async () => {
+            try {
+                const response = await fetch('https://serviceprovidersback.onrender.com/api/users/serviceproviders');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                setUsers(Array.isArray(data) ? data : []);
+            } catch (error) {
+                console.error('Error fetching users:', error);
+                setUsers([]);
+            }
+        };
+        fetchUsers();
+    }, []);
 
     const fetchProjects = async () => {
         try {
@@ -65,6 +101,13 @@ const UserWorkSummary = () => {
     useEffect(() => {
         fetchUser();
     }, [id]);
+
+    const handleUserChange = (event) => {
+        const selectedUserId = event.target.value;
+        if (selectedUserId) {
+            navigate(`/report/${selectedUserId}`);
+        }
+    };
 
     // Fetch the work summaries by user ID
     const fetchWorkSummaries = async () => {
@@ -140,13 +183,19 @@ const UserWorkSummary = () => {
             data: 'fld_addedon',
             width: "110px",
             render: (data, type) => {
-                // Render the date for display and sorting
-                if (type === 'display') {
-                    return data ? new Date(data).toLocaleDateString('en-US') : 'No Date'; // Format date for display or show 'No Date'
-                }
-                return data ? new Date(data).getTime() : 0; // Use timestamp for sorting or return 0 if no date
+              if (type === 'display') {
+                return data
+                  ? new Date(data).toLocaleDateString('en-GB', {
+                      day: '2-digit',
+                      month: 'short',
+                      year: 'numeric'
+                    })
+                  : 'No Date'; // Format date for display or show 'No Date'
+              }
+              return data ? new Date(data).getTime() : 0; // Use timestamp for sorting or return 0 if no date
             },
-        },
+          }
+          
     ];
 
 
@@ -161,21 +210,40 @@ const UserWorkSummary = () => {
     return (
         <div className="p-6 bg-white rounded-lg shadow-md mt-20 mrf">
             <div className='flex justify-content-between mb-6'>
-                <h1 className="text-xl font-bold text-gray-800 flex items-center">
-                    {user ? (
-                        <>
-                            <img
-                                src={user.fld_profile_image && user.fld_profile_image !== ""
-                                    ? 'https://serviceprovidersback.onrender.com/uploads/profileimg/' + user.fld_profile_image
-                                    : "https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg"}
-                                alt={user.fld_username || 'No Name'}
-                                className="w-10 h-10 rounded-full border border-gray-200 mr-2" // Added margin to separate image and text
-                            />
-                            {user.fld_name}
-                        </>
-                    ) : 'Loading...'}
-                </h1>
-                <div className="flex justify-end items-center">
+                <div className="flex items-center justify-around space-x-4 max-w-5xl">
+                    <h1 className="text-xl font-bold text-gray-800 flex items-center space-x-2">
+                        {user ? (
+                            <>
+                                <img
+                                    src={user.fld_profile_image && user.fld_profile_image !== ""
+                                        ? 'https://serviceprovidersback.onrender.com/uploads/profileimg/' + user.fld_profile_image
+                                        : "https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg"}
+                                    alt={user.fld_username || 'No Name'}
+                                    className="w-10 h-10 rounded-full border border-gray-200"
+                                />
+                                <span>{user.fld_name}</span>
+                            </>
+                        ) : (
+                            'Loading...'
+                        )}
+                    </h1>
+
+                    
+                </div>
+
+                <div className="flex justify-end items-center" style={{width:"400px"}}>
+                <select
+                        onChange={handleUserChange}
+                        className="border border-gray-300 rounded p-2 ml-20"
+                        id="user-select"
+                    >
+                        <option value="">Select a user</option>
+                        {users.map((provider) => (
+                            <option key={provider._id} value={provider._id}>
+                                {provider.fld_name}
+                            </option>
+                        ))}
+                    </select>
                     <button
                         onClick={() => navigate(-1)} // Go back to the previous page
                         className=" flex px-1 py-1 rounded backbut mr-4"

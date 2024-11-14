@@ -20,6 +20,7 @@ const AddNotificationForm = ({ onClose }) => {
   const [serviceProviders, setServiceProviders] = useState([]);
   const selectRef = useRef(null); // Reference for the select element
   const [selectAll, setSelectAll] = useState(false);
+  const [isSelectAll, setIsSelectAll] = useState(false);
 
   useEffect(() => {
     const fetchServiceProviders = async () => {
@@ -119,6 +120,24 @@ const AddNotificationForm = ({ onClose }) => {
     }
     setSelectAll(!selectAll);
   };
+  const handleRadioChange = (e) => {
+    setIsSelectAll(e.target.value === "selectAll");
+    if (e.target.value === "selectAll") {
+      // If 'Select All' is chosen, select all providers
+      setFormData((prevData) => ({
+        ...prevData,
+        fld_userid: serviceProviders.map(provider => provider._id.toString()),
+      }));
+      $(selectRef.current).val(serviceProviders.map(provider => provider._id.toString())).trigger('change');
+    } else {
+      // If 'Select Specific' is chosen, reset the field
+      setFormData((prevData) => ({
+        ...prevData,
+        fld_userid: [],
+      }));
+      $(selectRef.current).val([]).trigger('change');
+    }
+  };
 
   return (
     <motion.div
@@ -180,19 +199,34 @@ const AddNotificationForm = ({ onClose }) => {
                   required
                 />
               </div>
-              <div className="mb-1">
-                <label className="inline-flex items-center">
-                  <input
-                    type="checkbox"
-                    checked={selectAll}
-                    onChange={handleSelectAll}
-                    className="form-checkbox"
-                  />
-                  <span className="ml-2 font-semibold text-sm">Select All Service Providers</span>
-                </label>
-              </div>
-              {/* Dropdown for Service Providers */}
-              <div className="mb-3">
+              <div className="mb-3 flex items-center justify-around">
+            <label className="inline-flex items-center mr-6">
+              <input
+                type="radio"
+                name="selectProvider"
+                value="selectAll"
+                checked={isSelectAll}
+                onChange={handleRadioChange}
+                className="form-radio"
+              />
+              <span className="ml-2 font-semibold text-sm">Select All Service Providers</span>
+            </label>
+            <label className="inline-flex items-center ml-6">
+              <input
+                type="radio"
+                name="selectProvider"
+                value="selectSpecific"
+                checked={!isSelectAll}
+                onChange={handleRadioChange}
+                className="form-radio"
+              />
+              <span className="ml-2 font-semibold text-sm">Select Specific</span>
+            </label>
+            
+          </div>
+          
+              
+              <div className="mb-3" style={{ display: isSelectAll ? 'none' : 'block' }}>
                 <label className="block text-sm font-semibold mb-1" htmlFor="serviceProvider">
                   Select Service Provider
                 </label>
@@ -211,7 +245,7 @@ const AddNotificationForm = ({ onClose }) => {
                   ))}
                 </select>
               </div>
-
+           
               {/* Display selected service providers */}
               {formData.fld_userid.length > 0 && (
                 <div className="mb-3 max-w-5xl mx-auto fthirteen">

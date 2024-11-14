@@ -86,13 +86,21 @@ const ManageNotifications = () => {
     {
       title: 'Added On',
       data: 'fld_addedon',
-      render: (data) => new Date(data).toLocaleDateString(), // Format date
-    },
-    {
-      title: 'Due Date',
-      data: 'fld_due_date',
-      render: (data) => new Date(data).toLocaleDateString(), // Format date
-    },
+      type: 'date',
+      render: (data) => {
+          const options = { day: '2-digit', month: 'short', year: 'numeric' };
+          return new Date(data).toLocaleDateString('en-GB', options).replace(',', ''); // Customize locale and remove comma
+      }
+  },
+  {
+    title: 'Due Date',
+    data: 'fld_due_date',
+    type: 'date',
+    render: (data) => {
+        const options = { day: '2-digit', month: 'short', year: 'numeric' };
+        return new Date(data).toLocaleDateString('en-GB', options).replace(',', ''); // Customize locale and remove comma
+    }
+},
     {
       title: 'Actions',
       render: (data, type, row) => (
@@ -192,7 +200,7 @@ const ManageNotifications = () => {
             isOpen={isDeleteModalOpen} // Pass isOpen prop
             onConfirm={handleDeleteConfirmation}
             onClose={() => setIsDeleteModalOpen(false)}
-            content="want to delete this notification?"
+            content="Are you sure you want to delete this notification?"
             isReversible={true}
           />
         )}

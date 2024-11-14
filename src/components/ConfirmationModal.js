@@ -23,8 +23,7 @@ const ConfirmationModal = ({ isOpen, onClose, onConfirm, content, isReversible =
                         <div className='text-center smallct'>
                             <h2 className="text-lg mb-3 font-semibold">
                                 <span className="text-2xl font-bold">
-                                    {/* <CircleX className="inline text-red-600 mr-2" /> */}
-                                    Are you sure?
+                                {content}
                                 </span>
                             </h2>
                         {isReversible && (
@@ -33,7 +32,7 @@ const ConfirmationModal = ({ isOpen, onClose, onConfirm, content, isReversible =
                                 This is an irreversible process
                             </p>
                         )}
-                            <span className="block text-gray-700">{content}</span>
+                            {/* <span className="block text-gray-700">{content}</span> */}
                             </div>
 
                         <div className="flex justify-center mt-3 smallcta">
@@ -41,7 +40,7 @@ const ConfirmationModal = ({ isOpen, onClose, onConfirm, content, isReversible =
                                 onClick={onClose}
                                 className="bg-gray-300 text-gray-800 py-1 px-2 rounded mr-2 transition duration-200 hover:bg-gray-400"
                             >
-                                Cancel
+                                No
                             </button>
                             <button
                                 onClick={onConfirm}

@@ -49,7 +49,7 @@ const Header = () => {
         isOpen={isLogoutModalOpen}
         onClose={() => setIsLogoutModalOpen(false)} // Close modal on cancel
         onConfirm={handleConfirmLogout} // Call handleConfirmLogout on confirmation
-        content="want to logout?"
+        content="Are you sure you want to logout?"
         isReversible={false}
       />
     </header>

@@ -57,6 +57,14 @@ const ManageUserWorkoff = ({ onClose, serviceProviderId }) => {
         const provider = serviceProviders.find((sp) => sp._id === providerId);
         return provider ? provider.fld_name : 'Unknown';
     };
+    const getServiceProviderProfile = (providerId) => {
+        const provider = serviceProviders.find((sp) => sp._id === providerId);
+        return provider ? provider.fld_profile_image : 'Unknown';
+      };
+      const getServiceProviderStatus = (providerId) => {
+        const provider = serviceProviders.find((sp) => sp._id === providerId);
+        return provider ? provider.status : 'unknown';
+      };
 
     const handleAddButtonClick = () => {
         setIsFormOpen(true);
@@ -95,12 +103,6 @@ const ManageUserWorkoff = ({ onClose, serviceProviderId }) => {
     };
 
     const columns = [
-        {
-            title: 'Admin ID',
-            data: 'fld_adminid',
-            width: "100px",
-            render: (data) => `<div style="width: 100%; font-size: 12px;">${getServiceProviderName(data)}</div>`,
-        },
         {
             title: 'Workoff Start Date',
             data: 'fld_workoffs_startdate',
@@ -152,7 +154,15 @@ const ManageUserWorkoff = ({ onClose, serviceProviderId }) => {
         >
             <div className='went mx-auto bg-white p-6 rounded-lg shadow-md'>
                 <div className='n-pop-up-head d-flex justify-content-between align-items-center mb-4 border-bottom pb-3'>
-                <h1 className="text-xl font-bold text-gray-800">Manage Workoff Details</h1>
+                <h1 className="text-xl font-bold text-gray-800 flex items-center">Manage <img
+            src={
+              getServiceProviderProfile(serviceProviderId)
+                ? `https://serviceprovidersback.onrender.com/uploads/profileimg/${getServiceProviderProfile(serviceProviderId)}`
+                : "https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg"
+            }
+            alt="Service Provider Profile"
+            class=" mx-2 w-10 h-10 rounded-full border border-gray-200"
+          /> <h2 style={{ color: "#2d6a9d", marginRight: "5px" }} >{getServiceProviderName(serviceProviderId)}</h2> Workoff Details</h1>
                     <button
                         onClick={onClose}
                         className="text-white mr-2"
@@ -171,6 +181,7 @@ const ManageUserWorkoff = ({ onClose, serviceProviderId }) => {
                                 <RefreshCw className="mr-2 ic" />
                                 Refresh
                             </button>
+                            {getServiceProviderStatus(serviceProviderId) === "Active" && (
                             <button
                                 onClick={handleAddButtonClick}
                                 className="bg-blue-600 text-white px-1 py-1 rounded flex items-center text-sm"
@@ -178,6 +189,7 @@ const ManageUserWorkoff = ({ onClose, serviceProviderId }) => {
                                 <PlusCircle className="mr-2 ic" />
                                 Add Workoff
                             </button>
+                            )}
                         </div>
                     </div>
 

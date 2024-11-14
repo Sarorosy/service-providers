@@ -78,6 +78,14 @@ const ManageUserServiceCharge = ({ serviceProviderId, onClose }) => {
     const provider = serviceProviders.find((sp) => sp._id === providerId);
     return provider ? provider.fld_name : 'Unknown';
   };
+  const getServiceProviderProfile = (providerId) => {
+    const provider = serviceProviders.find((sp) => sp._id === providerId);
+    return provider ? provider.fld_profile_image : 'Unknown';
+  };
+  const getServiceProviderStatus = (providerId) => {
+    const provider = serviceProviders.find((sp) => sp._id === providerId);
+    return provider ? provider.status : 'unknown';
+  };
 
   const handleEditButtonClick = (serviceCharge) => {
     setSelectedServiceCharge(serviceCharge); // Set the selected service charge for editing
@@ -123,12 +131,6 @@ const ManageUserServiceCharge = ({ serviceProviderId, onClose }) => {
 
   const columns = [
     {
-      title: 'Service Provider',
-      data: 'fld_service_provider_id',
-      width: "150px",
-      render: (data) => `<div style="width: 100%; font-size: 12px;">${getServiceProviderName(data)}</div>`,
-    },
-    {
       title: 'Service Charge',
       data: 'fld_service_charge',
       width: "100px",
@@ -169,74 +171,84 @@ const ManageUserServiceCharge = ({ serviceProviderId, onClose }) => {
 
       <div className="went mx-auto bg-white p-6 rounded-lg shadow-md">
         <div className='n-pop-up-head d-flex justify-content-between align-items-center mb-4 border-bottom pb-3'>
-            <h1 className="text-xl font-bold text-gray-800">Manage Service Charges</h1>
-            <button
-              onClick={onClose}
-              className="text-white mr-2"
-            >
-              <CircleX className='colorr'/>
-            </button>
+          <h1 className="text-xl font-bold text-gray-800 flex items-center">Manage <img
+            src={
+              getServiceProviderProfile(serviceProviderId)
+                ? `https://serviceprovidersback.onrender.com/uploads/profileimg/${getServiceProviderProfile(serviceProviderId)}`
+                : "https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg"
+            }
+            alt="Service Provider Profile"
+            class=" mx-2 w-10 h-10 rounded-full border border-gray-200"
+          /> <h2 style={{ color: "#2d6a9d", marginRight: "5px" }} >{getServiceProviderName(serviceProviderId)}</h2> Service Charges</h1>
+          <button
+            onClick={onClose}
+            className="text-white mr-2"
+          >
+            <CircleX className='colorr' />
+          </button>
         </div>
         <div className=' n-popup-body'>
-        <div className="flex justify-content-end but">
-      
-          <div className='flex float-right'>
-            <button
-              onClick={fetchData}
-              className="bg-blue-600 text-white px-2 py-1 rounded flex items-center mr-2"
-            >
-              <RefreshCw className="mr-2 ic" />
-              Refresh
-            </button>
-            <button
-              onClick={handleAddButtonClick}
-              className="bg-blue-600 text-white px-2 py-1 rounded flex items-center"
-            >
-              <PlusCircle className="mr-2 ic" />
-              Add Service Charge
-            </button>
+          <div className="flex justify-content-end but">
+
+            <div className='flex float-right'>
+              <button
+                onClick={fetchData}
+                className="bg-blue-600 text-white px-2 py-1 rounded flex items-center mr-2"
+              >
+                <RefreshCw className="mr-2 ic" />
+                Refresh
+              </button>
+              {getServiceProviderStatus(serviceProviderId) === "Active" && (
+                <button
+                  onClick={handleAddButtonClick}
+                  className="bg-blue-600 text-white px-2 py-1 rounded flex items-center"
+                >
+                  <PlusCircle className="mr-2 ic" />
+                  Add Service Charge
+                </button>
+              )}
+            </div>
           </div>
+          {loading ? (
+            <div className="flex justify-center">
+              <RevolvingDot height="30" width="30" color="blue" ariaLabel="loading" />
+            </div>
+          ) : (
+            <DataTable
+              data={serviceCharges}
+              columns={columns}
+              options={{
+                searching: false,
+                paging: true,
+                ordering: true,
+                order: [[0, 'asc']],
+                createdRow: (row, data) => {
+                  $(row).on('click', '.edit-btn', () => handleEditButtonClick(data));
+                  $(row).on('click', '.delete-btn', () => handleDeleteButtonClick(data));
+                },
+              }}
+            />
+          )}
+          <AnimatePresence>
+            {isFormOpen && <AddServiceCharge onClose={handleCloseForm} serviceProviderId={serviceProviderId} />}
+            {isEditFormOpen && (
+              <EditServiceCharge
+                id={selectedServiceCharge._id}
+                onClose={handleEditFormClose}
+                onUpdate={handleUpdateServiceCharge}
+              />
+            )}
+            {isDeleteModalOpen && (
+              <ConfirmationModal
+                isOpen={isDeleteModalOpen}
+                onConfirm={handleDelete}
+                onClose={() => setIsDeleteModalOpen(false)}
+                content="Are you sure you want to delete this service charge?"
+                isReversible={true}
+              />
+            )}
+          </AnimatePresence>
         </div>
-        {loading ? (
-          <div className="flex justify-center">
-            <RevolvingDot height="30" width="30" color="blue" ariaLabel="loading" />
-          </div>
-        ) : (
-          <DataTable
-            data={serviceCharges}
-            columns={columns}
-            options={{
-              searching: false,
-              paging: true,
-              ordering: true,
-              order: [[0, 'asc']],
-              createdRow: (row, data) => {
-                $(row).on('click', '.edit-btn', () => handleEditButtonClick(data));
-                $(row).on('click', '.delete-btn', () => handleDeleteButtonClick(data));
-              },
-            }}
-          />
-        )}
-        <AnimatePresence>
-          {isFormOpen && <AddServiceCharge onClose={handleCloseForm} serviceProviderId={serviceProviderId} />}
-          {isEditFormOpen && (
-            <EditServiceCharge
-              id={selectedServiceCharge._id}
-              onClose={handleEditFormClose}
-              onUpdate={handleUpdateServiceCharge}
-            />
-          )}
-          {isDeleteModalOpen && (
-            <ConfirmationModal
-              isOpen={isDeleteModalOpen}
-              onConfirm={handleDelete}
-              onClose={() => setIsDeleteModalOpen(false)}
-              content="Are you sure you want to delete this service charge?"
-              isReversible={true}
-            />
-          )}
-        </AnimatePresence>
-      </div>
       </div>
 
     </motion.div>

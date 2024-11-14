@@ -6,7 +6,7 @@ import { RevolvingDot } from 'react-loader-spinner';
 import AddServiceProvider from '../components/AddServiceProvider';
 import ViewServiceProvider from '../components/ViewServiceProvider';
 import EditServiceProvider from '../components/EditServiceProvider';
-
+import UserWorkDays from '../components/UserWorkDays';
 import { AnimatePresence } from 'framer-motion';
 import { RefreshCw, UserPlus2 } from 'lucide-react';
 import ManageUserWorkoff from './ManageUserWorkoff';
@@ -20,11 +20,13 @@ const ManageServiceProvider = () => {
     const [isFormOpen, setIsFormOpen] = useState(false);
     const [isViewOpen, setIsViewOpen] = useState(false);
     const [isEditOpen, setIsEditOpen] = useState(false);
+    const [isworkdaysopen, setIsworkdaysopen] = useState(false);
     const [isWorkoffOpen, setIsWorkoffOpen] = useState(false);
     const [selectedServiceProvider, setSelectedServiceProvider] = useState(null);
     const [filterActive, setFilterActive] = useState(false); // State for active filter
     const [filterInactive, setFilterInactive] = useState(false);
     const location = useLocation(); // Get the location object
+    
 
     // Extract the last part of the path
     const status = location.pathname.split('/').pop();
@@ -70,6 +72,17 @@ const ManageServiceProvider = () => {
 
     }, [status, filterActive, filterInactive]);
 
+    useEffect(() => {
+        // Bind the toggle status button click event after the DataTable renders
+        $(document).on('click', '.toggle-status-button', function() {
+            const button = $(this);
+            const id = button.data('id');
+            const currentStatus = button.data('current-status');
+            
+            handleToggleStatus(id, currentStatus); // Call the toggle status handler
+        });
+    }, [serviceProviders])
+
     const handleCheckboxChange = (e) => {
         const { value, checked } = e.target;
 
@@ -113,6 +126,7 @@ const ManageServiceProvider = () => {
                 // Return an HTML string for the image
                 return `<img src="${imageUrl}" alt="Profile" class="w-10 h-10 rounded-full border border-gray-200" />`;
             },
+            orderable: false
         },
 
         {
@@ -124,6 +138,7 @@ const ManageServiceProvider = () => {
                     <span>${data}</span>
                 </div>`
             ),
+            orderable: false
         },
         {
             title: 'Username / Email',
@@ -136,6 +151,7 @@ const ManageServiceProvider = () => {
                     <span style="font-size: 14px;">${data.fld_email}</span>
                 </div>`
             ),
+            orderable: false
         },
         {
             title: 'Password',
@@ -146,6 +162,7 @@ const ManageServiceProvider = () => {
                     <span>${data}</span>
                 </div>`
             ),
+            orderable: false
         },
         {
             title: 'Phone',
@@ -156,32 +173,38 @@ const ManageServiceProvider = () => {
                     <span>${data}</span>
                 </div>`
             ),
+            orderable: false
         },
         {
             title: 'Added On',
-            data: 'fld_addedon', // Field for the added date
-            render: (data) => (
-                `<div style="display: flex; flex-direction: column; font-size: 13px; overflow-wrap: break-word;">
-                    <span>${new Date(data).toLocaleDateString('en-US')}</span>
-                </div>`
-            ),
+            data: 'fld_addedon',
             width: '80px',
-
+            type: 'date',
+            render: (data) => {
+                const options = { day: '2-digit', month: 'short', year: 'numeric' };
+                return new Date(data).toLocaleDateString('en-GB', options).replace(',', ''); // Customize locale and remove comma
+            }
         },
         {
             title: 'Status',
             data: 'status',
             width: "80px",
-            render: (data) => {
-                if (data == "Active") {
-                    // For Active
-                    return `<span style="background-color: lightgreen; color: green; padding: 5px; border-radius: 5px;">Active</span>`;
-                } else {
-                    // For Inactive
-                    return `<span style="background-color: lightcoral; color: red; padding: 5px; border-radius: 5px;">Inactive</span>`;
-                }
+            render: (data, type, row) => {
+                const statusBadge = data === "Active"
+                    ? `<p style="background-color: #c7f5c7; color: green; padding: 5px; border-radius: 5px;">Active</p>`
+                    : `<p style="background-color: #ffbcbc; color: red; padding: 5px; border-radius: 5px;">Inactive</p>`;
+        
+                return `
+                    <div class="flex flex-col items-center">
+                        <button class="toggle-status-button text-purple-500 mt-1" data-id="${row._id}" data-current-status="${data}">
+                            ${statusBadge}
+                        </button>
+                    </div>
+                `;
             },
+            orderable: false
         },
+        
         {
             title: 'Action',
             data: null,
@@ -191,11 +214,12 @@ const ManageServiceProvider = () => {
                     <div class="flex flex-col">
                         <button class="view-button text-green-500 " data-id="${data._id}">View</button>
                         <button class="workoff-button text-blue-500 " data-id="${data._id}">Workoff</button>
-                         <button class="toggle-status-button text-purple-500 " data-id="${data._id}">Status</button>
-                        <button class="delete-button text-red-500 " data-id="${data._id}">Delete</button>
+                         <button class="workdays-button text-purple-500 " data-id="${data._id}">WorkDays</button>
+                         <button class="delete-button text-red-500 " data-id="${data._id}">Delete</button>
                     </div>
                 `;
             },
+            orderable: false
         },
     ];
 
@@ -205,6 +229,7 @@ const ManageServiceProvider = () => {
         setSelectedServiceProvider(selected); // Set selected service provider
         setIsEditOpen(true); // Open the edit modal
     };
+
     const handleWorkoff = (id) => {
         const selected = serviceProviders.find((sp) => sp._id === id); // Find the selected service provider by ID
         setSelectedServiceProvider(selected); // Set selected service provider
@@ -242,8 +267,17 @@ const ManageServiceProvider = () => {
         setIsViewOpen(true); // Open the view modal
     };
 
+    const handleworkdays = (id) => {
+        const selected = serviceProviders.find((sp) => sp._id === id); // Find the selected service provider by ID
+        setSelectedServiceProvider(selected); // Set selected service provider
+        setIsworkdaysopen(true); // Open the view modal
+    };
+
     const handleCloseView = () => {
         setIsViewOpen(false); // Close the view modal
+    };
+    const handleCloseWorkDays = () => {
+        setIsworkdaysopen(false); // Close the view modal
     };
     const handleCloseEdit = () => {
         setIsEditOpen(false); // Close the edit modal
@@ -254,6 +288,7 @@ const ManageServiceProvider = () => {
 
     const handleToggleStatus = async (id, currentStatus) => {
         try {
+            
             const response = await fetch(`https://serviceprovidersback.onrender.com/api/users/${id}/status`, {
                 method: 'PATCH',
             });
@@ -314,6 +349,7 @@ const ManageServiceProvider = () => {
             <AnimatePresence>
                 {isFormOpen && <AddServiceProvider onClose={handleCloseForm} />}
                 {isViewOpen && <ViewServiceProvider serviceProviderId={selectedServiceProvider._id} onClose={handleCloseView} />}
+                {isworkdaysopen && <UserWorkDays serviceProviderId={selectedServiceProvider._id} onClose={handleCloseWorkDays} />}
                 {isEditOpen && <EditServiceProvider serviceProviderId={selectedServiceProvider._id} onClose={handleCloseEdit} />}
                 {isWorkoffOpen && <ManageUserWorkoff serviceProviderId={selectedServiceProvider._id} onClose={handleCloseWorkoff} />}
             </AnimatePresence>
@@ -335,7 +371,7 @@ const ManageServiceProvider = () => {
                         options={{
                             searching: true,
                             paging: true,
-                            ordering: true,
+                            //ordering: true,
                             order: [[5, 'desc']], // Sort by the "Added On" column in descending order
                             responsive: true,
                             className: 'display bg-white rounded-lg shadow-sm',
@@ -350,6 +386,11 @@ const ManageServiceProvider = () => {
                                     if (button.classList.contains('workoff-button')) {
                                         const id = button.getAttribute('data-id');
                                         handleWorkoff(id);
+                                    }
+                                    if (button.classList.contains('workdays-button')) {
+                                        const id = button.getAttribute('data-id');
+                                        handleworkdays(id, data.status);
+
                                     }
                                     if (button.classList.contains('toggle-status-button')) {
                                         const id = button.getAttribute('data-id');

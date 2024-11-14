@@ -19,6 +19,7 @@ const EditHolidayForm = ({ holidayId, onClose }) => {
     const selectRef = useRef(null);
     const [selectAll, setSelectAll] = useState(false);
     const [loading, setLoading] = useState(true);
+    const [isSelectAll, setIsSelectAll] = useState(false);
 
     useEffect(() => {
         const fetchServiceProviders = async () => {
@@ -141,6 +142,25 @@ const EditHolidayForm = ({ holidayId, onClose }) => {
         });
     };
 
+    const handleRadioChange = (e) => {
+        setIsSelectAll(e.target.value === "selectAll");
+        if (e.target.value === "selectAll") {
+          // If 'Select All' is chosen, select all providers
+          setFormData((prevData) => ({
+            ...prevData,
+            fld_userid: serviceProviders.map(provider => provider._id.toString()),
+          }));
+          $(selectRef.current).val(serviceProviders.map(provider => provider._id.toString())).trigger('change');
+        } else {
+          // If 'Select Specific' is chosen, reset the field
+          setFormData((prevData) => ({
+            ...prevData,
+            fld_userid: [],
+          }));
+          $(selectRef.current).val([]).trigger('change');
+        }
+      };
+
     return (
         <motion.div
             // initial={{ x: '100%' }}
@@ -202,17 +222,32 @@ const EditHolidayForm = ({ holidayId, onClose }) => {
                                 </div>
                             </div>
 
-                            <div className="flex items-center mb-3">
-                                <input
-                                    type="checkbox"
-                                    id="selectAll"
-                                    checked={selectAll}
-                                    onChange={handleSelectAll}
-                                    className="mr-2"
-                                />
-                                <label htmlFor="selectAll" className="text-sm font-semibold">Select All Service Providers</label>
-                            </div>
-                            <div className="mb-4">
+                            <div className="mb-3 flex items-center justify-around">
+            <label className="inline-flex items-center mr-6">
+              <input
+                type="radio"
+                name="selectProvider"
+                value="selectAll"
+                checked={isSelectAll}
+                onChange={handleRadioChange}
+                className="form-radio"
+              />
+              <span className="ml-2 font-semibold text-sm">Select All Service Providers</span>
+            </label>
+            <label className="inline-flex items-center ml-6">
+              <input
+                type="radio"
+                name="selectProvider"
+                value="selectSpecific"
+                checked={!isSelectAll}
+                onChange={handleRadioChange}
+                className="form-radio"
+              />
+              <span className="ml-2 font-semibold text-sm">Select Specific</span>
+            </label>
+            
+          </div>
+                            <div className="mb-4" style={{ display: isSelectAll ? 'none' : 'block' }}>
                                 <label className="block text-sm font-semibold mb-1" htmlFor="serviceProvider">
                                     Select Service Provider
                                 </label>

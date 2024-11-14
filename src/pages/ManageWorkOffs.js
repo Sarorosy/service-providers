@@ -91,13 +91,15 @@ const ManageWorkoffs = () => {
       title: 'Start Date',
       data: 'fld_start_date',
       width: "100px",
-      render: (data) => `<div style="width: 100%; font-size: 12px;">${new Date(data).toLocaleDateString()}</div>`, // Format date
+      render: (data) => 
+        `<div style="width: 100%; font-size: 12px;">${data ? new Date(data).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }) : 'No Date'}</div>`, // Format date
     },
     {
       title: 'End Date',
       data: 'fld_end_date',
       width: "100px",
-      render: (data) => `<div style="width: 100%; font-size: 12px;">${new Date(data).toLocaleDateString()}</div>`,
+      render: (data) => 
+        `<div style="width: 100%; font-size: 12px;">${data ? new Date(data).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }) : 'No Date'}</div>`, // Format date
     },
     {
       title: 'Duration',
@@ -118,10 +120,12 @@ const ManageWorkoffs = () => {
       width: "100px",
       render: (data, type) => {
         if (type === 'display') {
-          return data ? new Date(data).toLocaleDateString('en-US') : 'No Date'; 
+          return data 
+            ? new Date(data).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }) 
+            : 'No Date'; // Format date for display or show 'No Date'
         }
-        return data ? new Date(data).getTime() : 0; 
-      },
+        return data ? new Date(data).getTime() : 0; // Use timestamp for sorting or return 0 if no date
+      }
     },
     {
       title: 'Actions',

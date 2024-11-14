@@ -206,7 +206,7 @@ const ManageHolidays = () => {
                         isOpen={isDeleteModalOpen}
                         onConfirm={handleDeleteConfirmation}
                         onClose={() => setIsDeleteModalOpen(false)}
-                        content="Want to delete this holiday?"
+                        content="Are you sure you want to delete this holiday?"
                         isReversible={true}
                     />
                 )}

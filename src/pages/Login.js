@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import logo from '../assets/logo-elk.png';
+import { Eye, EyeOff } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -9,6 +10,7 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
   const [loading,  setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -118,17 +120,27 @@ export default function Login() {
               className="form-control form-control-sm"
             />
           </div>
-          <div class="mt-3">
-            <label htmlFor="password" className="text-gray-700 f-13 f-w-600">Password</label>
-            <input
-              id="password"
-              type="password"
-              placeholder="Enter your password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              className="form-control form-control-sm"
-            />
+          <div className="mt-3 relative">
+            <label htmlFor="password" className="text-gray-700">Password</label>
+            <div className="relative">
+              <input
+                id="password"
+                type={showPassword ? "text" : "password"}
+                placeholder="Enter your password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                className="form-control form-control-sm pr-10" // Padding right for icon space
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 focus:outline-none"
+                style={{ cursor: 'pointer' }}
+              >
+                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+              </button>
+            </div>
           </div>
           <div className="n-login-btn-set">
           <button

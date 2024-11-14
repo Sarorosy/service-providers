@@ -152,12 +152,18 @@ code {
   border-radius: 3px;
 }
 
-/* .dataTable .toggle-status-btn {
+ .dataTable .workdays-button {
   color: #6200bd;
   background-color: #dcb7ff;
   margin: 3px 0;
   border-radius: 3px;
-} */
+}
+.dataTable .workdays-button:hover {
+  color: white;
+  background-color: #6200bd;
+  margin: 3px 0;
+  border-radius: 3px;
+}
 
 .dataTable .toggle-status-button {
   /* color: #30aa00; */
