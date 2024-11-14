@@ -11,6 +11,7 @@ import { AnimatePresence } from 'framer-motion';
 import { RefreshCw, UserPlus2 } from 'lucide-react';
 import ManageUserWorkoff from './ManageUserWorkoff';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import ConfirmationModal from '../components/ConfirmationModal';
 
 const ManageServiceProvider = () => {
     DataTable.use(DT); // Initialize DataTables
@@ -26,7 +27,8 @@ const ManageServiceProvider = () => {
     const [filterActive, setFilterActive] = useState(false); // State for active filter
     const [filterInactive, setFilterInactive] = useState(false);
     const location = useLocation(); // Get the location object
-    
+    const [showModal, setShowModal] = useState(false);
+    const [pendingAction, setPendingAction] = useState(null);
 
     // Extract the last part of the path
     const status = location.pathname.split('/').pop();
@@ -286,9 +288,15 @@ const ManageServiceProvider = () => {
         setIsWorkoffOpen(false); // Close the edit modal
     };
 
-    const handleToggleStatus = async (id, currentStatus) => {
+    const handleToggleStatus = (id, currentStatus) => {
+        // Show confirmation modal
+        setShowModal(true);
+        setPendingAction({ id, currentStatus });
+    };
+
+    const confirmAction = async () => {
+        const { id, currentStatus } = pendingAction;
         try {
-            
             const response = await fetch(`https://serviceprovidersback.onrender.com/api/users/${id}/status`, {
                 method: 'PATCH',
             });
@@ -308,7 +316,13 @@ const ManageServiceProvider = () => {
         } catch (error) {
             console.error('Error toggling status:', error);
         }
-    }
+        setShowModal(false); // Close the modal
+    };
+
+    const cancelAction = () => {
+        setShowModal(false); // Just close the modal
+    };
+
     return (
         <div className="p-6 bg-white rounded-lg shadow-md mt-20">
             <div className="flex justify-content-between mb-3 but">
@@ -408,6 +422,14 @@ const ManageServiceProvider = () => {
                         }}
                         className="display text-xsm datatables rounded"
                     />
+                    {showModal && (
+                <ConfirmationModal
+                isOpen={showModal}
+                content="Are you sure you want to toggle the status?"
+                    onConfirm={confirmAction}
+                    onClose={cancelAction}
+                />
+            )}
                 </div>
             )}
         </div>

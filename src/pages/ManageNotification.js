@@ -77,10 +77,12 @@ const ManageNotifications = () => {
     {
       title: 'Title',
       data: 'fld_title',
+      orderable: false
     },
     {
       title: 'Description',
       data: 'fld_description',
+      orderable: false,
       render: (data) => (data.length > 80 ? `${data.substring(0, 80)}...` : data), // Trim description
     },
     {
@@ -90,7 +92,8 @@ const ManageNotifications = () => {
       render: (data) => {
           const options = { day: '2-digit', month: 'short', year: 'numeric' };
           return new Date(data).toLocaleDateString('en-GB', options).replace(',', ''); // Customize locale and remove comma
-      }
+      },
+      
   },
   {
     title: 'Due Date',
@@ -99,7 +102,8 @@ const ManageNotifications = () => {
     render: (data) => {
         const options = { day: '2-digit', month: 'short', year: 'numeric' };
         return new Date(data).toLocaleDateString('en-GB', options).replace(',', ''); // Customize locale and remove comma
-    }
+    },
+    orderable: false
 },
     {
       title: 'Actions',
@@ -108,6 +112,7 @@ const ManageNotifications = () => {
         <button class="edit-btn" data-id="${row._id}">Edit</button>
          <button class="delete-btn" data-id="${row._id}">Delete</button>`
       ),
+      orderable: false
     },
   ];
 

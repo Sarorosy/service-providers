@@ -29,7 +29,7 @@ const UserWorkSummary = () => {
     useEffect(() => {
         // Initialize select2 on the dropdown after the users have loaded
         $('#user-select').select2({
-            placeholder: 'Select a user', // Optional placeholder
+            placeholder: 'Select service provider', // Optional placeholder
             width: '100%', // Ensures it takes full width
         });
 
@@ -231,26 +231,22 @@ const UserWorkSummary = () => {
                     
                 </div>
 
-                <div className="flex justify-end items-center" style={{width:"400px"}}>
+                <div className="flex justify-end items-center" style={{width:"400px", }}>
                 <select
                         onChange={handleUserChange}
-                        className="border border-gray-300 rounded p-2 ml-20"
+                        className="border border-gray-300 rounded p-2 ml-20 "
                         id="user-select"
+                        style={{marginRight:"8px"}}
                     >
-                        <option value="">Select a user</option>
+                        <option value="">Select service provider</option>
                         {users.map((provider) => (
                             <option key={provider._id} value={provider._id}>
                                 {provider.fld_name}
                             </option>
                         ))}
                     </select>
-                    <button
-                        onClick={() => navigate(-1)} // Go back to the previous page
-                        className=" flex px-1 py-1 rounded backbut mr-4"
-                    >
-                        <ArrowLeftCircle className='mr-1 ic1' /> Back
-                    </button>
-                    <div className='but'>
+                    
+                    <div className='but ml-3'>
                         <button
                             onClick={handleRefresh}
                             className="text-white text-sm py-1 px-1 rounded transition duration-200 flex items-center"

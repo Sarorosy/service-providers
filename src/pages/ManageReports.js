@@ -58,7 +58,7 @@ const ManageReports = () => {
   };
 
   const columns = [
-    { title: 'Id', data: 'id', width: "60px" },
+    { title: 'Id', data: 'id', width: "60px",orderable: false },
     {
       title: 'Profile',
       data: 'fld_profile_image',
@@ -67,8 +67,9 @@ const ManageReports = () => {
           <img src="${data && data.trim() !== "" ? `https://serviceprovidersback.onrender.com/uploads/profileimg/${data}` : 'https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg'}" 
           alt="Profile" style="width: 40px; height: auto; object-fit: cover;border-radius:50%" />
       `,
+      orderable: false
     },
-    { title: 'Name', data: 'fld_name' },
+    { title: 'Name', data: 'fld_name',orderable: false },
     {
       title: 'Last Report',
       data: 'lastReportDesc',
@@ -76,12 +77,14 @@ const ManageReports = () => {
         // Trim to 20 characters and append ellipsis if necessary
         return data && data.length > 50 ? `${data.substring(0, 50)}...` : data;
       },
+      orderable: false
     },
     {
       title: 'Actions',
       render: (data, type, row) => `
         <button class="view-btn" data-id="${row._id}">View All</button>
       `,
+      orderable: false
     },
   ];
 

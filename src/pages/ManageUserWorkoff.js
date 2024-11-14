@@ -107,35 +107,41 @@ const ManageUserWorkoff = ({ onClose, serviceProviderId }) => {
             title: 'Workoff Start Date',
             data: 'fld_workoffs_startdate',
             width: "150px",
+            orderable: false,
             render: (data) => `<div style="width: 100%; font-size: 12px;">${new Date(data).toLocaleDateString()}</div>`,
         },
         {
             title: 'Workoff End Date',
             data: 'fld_workoffs_enddate',
             width: "150px",
+            orderable: false,
             render: (data) => `<div style="width: 100%; font-size: 12px;">${new Date(data).toLocaleDateString()}</div>`,
         },
         {
             title: 'Total Workoffs',
             data: 'fld_total_no_of_work_offs',
             width: "100px",
+            orderable: false,
             render: (data) => `<div style="width: 100%; font-size: 12px;">${data}</div>`,
         },
         {
             title: 'Workoffs Availed',
             data: 'fld_work_offs_availed',
             width: "100px",
+            orderable: false,
             render: (data) => `<div style="width: 100%; font-size: 12px;">${data}</div>`,
         },
         {
             title: 'Workoffs Balance',
             data: 'fld_work_offs_balance',
             width: "100px",
+            orderable: false,
             render: (data) => `<div style="width: 100%; font-size: 12px;">${data}</div>`,
         },
         {
             title: 'Actions',
             width: "100px",
+            orderable: false,
             render: (data, type, row) => (
                 `<div style="width: 100%; font-size: 12px;">
                     <button class="delete-btn" data-id="${row._id}" style="">Delete</button>

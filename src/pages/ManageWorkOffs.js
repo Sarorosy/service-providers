@@ -86,11 +86,13 @@ const ManageWorkoffs = () => {
         const provider = serviceProviders.find(provider => provider._id == data); // Match by ID
         return `<div style="width: 100%; font-size: 12px;">${provider ? provider.fld_name : 'Unknown Provider'}</div>`; // Display name or fallback to 'Unknown Provider'
       },
+      orderable: false
     },
     {
       title: 'Start Date',
       data: 'fld_start_date',
       width: "100px",
+      orderable: false,
       render: (data) => 
         `<div style="width: 100%; font-size: 12px;">${data ? new Date(data).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }) : 'No Date'}</div>`, // Format date
     },
@@ -98,6 +100,7 @@ const ManageWorkoffs = () => {
       title: 'End Date',
       data: 'fld_end_date',
       width: "100px",
+      orderable: false,
       render: (data) => 
         `<div style="width: 100%; font-size: 12px;">${data ? new Date(data).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }) : 'No Date'}</div>`, // Format date
     },
@@ -105,11 +108,13 @@ const ManageWorkoffs = () => {
       title: 'Duration',
       data: 'fld_duration',
       width: "80px",
+      orderable: false,
       render: (data) => `<div style="width: 100%; font-size: 12px;">${data}</div>`,
     },
     {
       title: 'Reason',
       data: 'fld_reason',
+      orderable: false,
       render: (data) => (
         `<div style="width: 100%; font-size: 12px;">${data.length > 80 ? `${data.substring(0, 80)}...` : data}</div>` // Trim reason if too long
       ),
@@ -135,6 +140,7 @@ const ManageWorkoffs = () => {
            <button class="view-btn" data-id="${row._id}">View</button>
          </div>`
       ),
+      orderable: false
     },
   ];
 

@@ -76,6 +76,7 @@ const ManageHolidays = () => {
         {
             title: 'Title',
             data: 'fld_title',
+            orderable: false
         },
         {
             title: 'Holiday Date',
@@ -84,7 +85,8 @@ const ManageHolidays = () => {
             render: (data) => {
                 const options = { day: '2-digit', month: 'short', year: 'numeric' };
                 return new Date(data).toLocaleDateString('en-GB', options).replace(',', ''); // Customize locale and remove comma
-            }
+            },
+            orderable: false
         },
         {
             title: 'Added On',
@@ -106,6 +108,7 @@ const ManageHolidays = () => {
                 </span>
               `;
             },
+            orderable: false
         },
         {
             title: 'Actions',
@@ -114,6 +117,7 @@ const ManageHolidays = () => {
         <button class="edit-btn" data-id="${row._id}">Edit</button>
         <button class="delete-btn" data-id="${row._id}">Delete</button>`
             ),
+            orderable: false
         },
     ];
 

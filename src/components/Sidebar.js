@@ -73,7 +73,7 @@ const Sidebar = () => {
                   className="flex items-center  transition duration-100 "
                 >
                   <Users className="mr-2" height="17" width="17"/>
-                  Service Provider
+                  Service Providers
                 </NavLink>
               </li>
               <li>

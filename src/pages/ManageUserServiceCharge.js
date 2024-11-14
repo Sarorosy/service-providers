@@ -134,23 +134,27 @@ const ManageUserServiceCharge = ({ serviceProviderId, onClose }) => {
       title: 'Service Charge',
       data: 'fld_service_charge',
       width: "100px",
+      orderable: false,
       render: (data) => `<div style="width: 100%; font-size: 12px;">${data}</div>`,
     },
     {
       title: 'From Date',
       data: 'fld_from_date',
       width: "100px",
+      orderable: false,
       render: (data) => `<div style="width: 100%; font-size: 12px;">${new Date(data).toLocaleDateString()}</div>`,
     },
     {
       title: 'To Date',
       data: 'fld_to_date',
       width: "100px",
+      orderable: false,
       render: (data) => `<div style="width: 100%; font-size: 12px;">${new Date(data).toLocaleDateString()}</div>`,
     },
     {
       title: 'Actions',
       width: "100px",
+      orderable: false,
       render: (data, type, row) => (
         `<div style="width: 100%; font-size: 12px;">
            <button class="edit-btn" data-id="${row._id}">Edit</button>
