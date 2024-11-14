@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import logo from '../assets/logo-login.png';
+import logo from '../assets/logo-elk.png';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -98,8 +98,8 @@ export default function Login() {
           <img
             src={logo} // Adjust the path as necessary
             alt="Service Providers Logo"
-            className="mx-auto  bg-white p-2 mb-2"
-            style={{  height: '60px' }}
+            className="mx-auto  bg-white mb-2"
+            style={{  width: '150px' }}
           />
           <h2 className="text-3xl font-bold text-gray-800 f-20">Service Providers</h2>
           <p className="text-gray-600 mt-1 f-14">Sign in to your account</p>
