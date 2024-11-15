@@ -106,14 +106,14 @@ const ManageUserWorkoff = ({ onClose, serviceProviderId }) => {
         {
             title: 'Workoff Start Date',
             data: 'fld_workoffs_startdate',
-            width: "150px",
+            width: "125px",
             orderable: false,
             render: (data) => `<div style="width: 100%; font-size: 12px;">${new Date(data).toLocaleDateString()}</div>`,
         },
         {
             title: 'Workoff End Date',
             data: 'fld_workoffs_enddate',
-            width: "150px",
+            width: "125px",
             orderable: false,
             render: (data) => `<div style="width: 100%; font-size: 12px;">${new Date(data).toLocaleDateString()}</div>`,
         },
@@ -134,7 +134,7 @@ const ManageUserWorkoff = ({ onClose, serviceProviderId }) => {
         {
             title: 'Workoffs Balance',
             data: 'fld_work_offs_balance',
-            width: "100px",
+            width: "110px",
             orderable: false,
             render: (data) => `<div style="width: 100%; font-size: 12px;">${data}</div>`,
         },

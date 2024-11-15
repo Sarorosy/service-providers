@@ -122,7 +122,11 @@ const AddUserServiceCharge = ({ onClose, serviceProviderId }) => {
                         id="fromDate"
                         name="fld_from_date"
                         value={formData.fld_from_date}
-                        onChange={handleInputChange}
+                        onChange={(e) => {
+                            handleInputChange(e);
+                            document.getElementById('toDate').min = e.target.value; // Dynamically set min for toDate
+                        }}
+                        min={new Date().toISOString().split('T')[0]}
                         className="w-full border border-gray-300 rounded form-control-sm"
                         required
                     />
@@ -137,6 +141,7 @@ const AddUserServiceCharge = ({ onClose, serviceProviderId }) => {
                         onChange={handleInputChange}
                         className="w-full border border-gray-300 rounded form-control-sm"
                         required
+                        min={formData.fld_from_date || new Date().toISOString().split('T')[0]} 
                     />
                 </div>
                 
@@ -150,6 +155,7 @@ const AddUserServiceCharge = ({ onClose, serviceProviderId }) => {
                         onChange={handleInputChange}
                         className="w-full border border-gray-300 rounded form-control-sm"
                         required
+                        min={100}
                     />
                 </div>
                 <div className='flex justify-end but mt-3'>

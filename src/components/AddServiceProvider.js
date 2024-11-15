@@ -62,15 +62,17 @@ const AddServiceProvider = ({ onClose }) => {
             formDataToSend.append(key, formData[key]);
         }
 
-        const response = await fetch('https://serviceprovidersback.onrender.com/api/users/', {
+        const response = await fetch('https://serviceprovidersback.onrender.com/api/users/new/', {
             method: 'POST',
             body: formDataToSend,
         });
 
         if (response.ok) {
+            console.log(response)
             toast.success("Service Provider added successfully!");
             onClose();
         } else {
+            console.log(response)
             toast.error("Error adding Service Provider!");
         }
         setLoading(false);
@@ -97,7 +99,7 @@ const AddServiceProvider = ({ onClose }) => {
                         </button>
                     </div>
                     <div className='px-3 n-popup-body'>
-                        <form onSubmit={handleSubmit} className=' mx-auto mt-2'>
+                        <form onSubmit={handleSubmit} className=' mx-auto mt-2' >
                                 <input
                                     type="hidden"
                                     id="adminid"

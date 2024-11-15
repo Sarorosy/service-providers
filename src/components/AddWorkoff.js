@@ -76,8 +76,12 @@ const AddWorkoff = ({ serviceProviderId, onClose }) => {
                                         id="fld_workoffs_start_date"
                                         name="fld_workoffs_startdate"
                                         value={workoff.fld_workoffs_start_date}
-                                        onChange={handleChange}
+                                        onChange={(e) => {
+                                            handleChange(e); 
+                                            document.getElementById('fld_workoffs_end_date').min = e.target.value; // Update end date min
+                                        }}
                                         required
+                                        min={new Date().toISOString().split('T')[0]} 
                                         className="border rounded w-full form-control-sm"
                                     />
                                 </div>
@@ -102,6 +106,7 @@ const AddWorkoff = ({ serviceProviderId, onClose }) => {
                                         value={workoff.fld_total_no_of_work_offs}
                                         onChange={handleChange}
                                         required
+                                        min={1}
                                         className="border rounded w-full form-control-sm"
                                     />
                                 </div>
