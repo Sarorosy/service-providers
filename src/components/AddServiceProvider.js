@@ -72,7 +72,6 @@ const AddServiceProvider = ({ onClose }) => {
             toast.success("Service Provider added successfully!");
             onClose();
         } else {
-            console.log(response)
             toast.error("Error adding Service Provider!");
         }
         setLoading(false);
