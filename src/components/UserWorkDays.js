@@ -203,7 +203,7 @@ const UserWorkDays = ({ serviceProviderId, onClose }) => {
         </div>
       </div>
 
-      <div className='flex'>
+      <div className='flex n-popup-body wor-dy-pop-h'>
         <div className="flex-1">
 
           {loading ? (

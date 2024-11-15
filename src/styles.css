@@ -229,7 +229,15 @@
 .n-popup-body.ad-notf-h {
     height: 55vh;
 }
-
+.n-popup-body.serv-pop-h {
+    height: 60vh !important;
+}
+.n-popup-body.wrkof-pop-h {
+    height: 60vh !important;
+}
+.n-popup-body.wor-dy-pop-h {
+    height: 80vh !important;
+}
 
 
 
@@ -240,7 +248,7 @@
 
 
 .sure-popup-set{
-    width: 25%;
+    width: 20%;
 }
 
 

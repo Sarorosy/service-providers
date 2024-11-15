@@ -173,7 +173,7 @@ const ManageUserServiceCharge = ({ serviceProviderId, onClose }) => {
       className="w-full h-full p-6 fixed top-0 right-0 z-50 shadow-lg n-pop-up"
     >
 
-      <div className="went mx-auto bg-white p-6 rounded-lg shadow-md">
+      <div className="n-wenn mx-auto bg-white p-6 rounded-lg shadow-md">
         <div className='n-pop-up-head d-flex justify-content-between align-items-center mb-4 border-bottom pb-3'>
           <h1 className="text-xl font-bold text-gray-800 flex items-center">Manage <img
             src={
@@ -191,7 +191,7 @@ const ManageUserServiceCharge = ({ serviceProviderId, onClose }) => {
             <CircleX className='colorr' />
           </button>
         </div>
-        <div className=' n-popup-body'>
+        <div className=' n-popup-body serv-pop-h'>
           <div className="flex justify-content-end but">
 
             <div className='flex float-right'>
