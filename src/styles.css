@@ -236,3 +236,16 @@
 .edit-i-s img {
     height: 110px;
 }
+
+
+
+.sure-popup-set{
+    width: 25%;
+}
+
+
+.log-eye {
+    position: absolute;
+    right: 10px;
+    top: 8px;
+}

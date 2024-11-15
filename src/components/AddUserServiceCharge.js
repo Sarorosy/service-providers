@@ -43,6 +43,10 @@ const AddUserServiceCharge = ({ onClose, serviceProviderId }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            if (formData.fld_service_charge > 100000) {
+                toast.error("Value must be less than or equal to 100000");
+                return; 
+            }
             const response = await fetch('https://serviceprovidersback.onrender.com/api/servicecharge', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },

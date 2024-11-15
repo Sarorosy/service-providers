@@ -102,6 +102,7 @@ const EditServiceCharge = ({ onClose, id }) => {
         e.preventDefault();
         try {
             if (formData.fld_service_charge > 100000) {
+                console.log("money 1000000")
                 toast.error("Value must be less than or equal to 100000");
                 return; 
             }
@@ -119,6 +120,9 @@ const EditServiceCharge = ({ onClose, id }) => {
             if (response.ok) {
                 toast.success('Service charge updated successfully!');
                 resetForm();
+                setTimeout(() => {
+                    onClose(); // Call onClose after 2 seconds
+                }, 1000);
             } else {
                 toast.error('Error updating service charge!');
             }
@@ -221,6 +225,7 @@ const EditServiceCharge = ({ onClose, id }) => {
                     <div className='flex justify-end but mt-2'>
                         <button
                             type="submit"
+                            onClick={handleSubmit}
                             className="bg-blue-700 text-white py-1 px-2 rounded flex float-right"
                         >
                             <Save className="mr-2 ic" />

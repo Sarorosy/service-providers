@@ -100,10 +100,10 @@ export default function Login() {
           <img
             src={logo} // Adjust the path as necessary
             alt="Service Providers Logo"
-            className="mx-auto  bg-white mb-2"
-            style={{  width: '150px' }}
+            className="mx-auto  bg-white mb-3"
+            style={{  width: '120px' }}
           />
-          <h2 className="text-3xl font-bold text-gray-800 f-20">Service Providers</h2>
+          <h2 className="font-bold text-gray-800 f-20">Service Providers</h2>
           <p className="text-gray-600 mt-1 f-14">Sign in to your account</p>
         </div>
 
@@ -121,7 +121,7 @@ export default function Login() {
             />
           </div>
           <div className="mt-3 relative">
-            <label htmlFor="password" className="text-gray-700">Password</label>
+            <label htmlFor="password" className="text-gray-700 f-13 f-w-600">Password</label>
             <div className="relative">
               <input
                 id="password"
@@ -135,7 +135,7 @@ export default function Login() {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 focus:outline-none"
+                className="log-eye text-gray-500 focus:outline-none"
                 style={{ cursor: 'pointer' }}
               >
                 {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}

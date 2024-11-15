@@ -158,8 +158,8 @@ const AddHolidayForm = ({ onClose }) => {
       <div className='db'>
         
         <div className='n-popup-body ad-holdy-h'>
-          <form onSubmit={handleSubmit} className='mx-auto mt-2'>
-            <div className="mb-3">
+          <form onSubmit={handleSubmit} className='mx-auto mt-2 row'>
+            <div className="mb-3 col-md-6">
               <label className="block text-sm font-semibold mb-1" htmlFor="holidayName">Holiday Name</label>
               <input
                 type="text"
@@ -171,7 +171,7 @@ const AddHolidayForm = ({ onClose }) => {
                 required
               />
             </div>
-            <div className="mb-3">
+            <div className="mb-3 col-md-6">
               <label className="block text-sm font-semibold mb-1" htmlFor="holidayDate">Holiday Date</label>
               <input
                 type="date"
@@ -184,33 +184,33 @@ const AddHolidayForm = ({ onClose }) => {
                 required
               />
             </div>
-            <div className="mb-3 flex items-center justify-around">
-            <label className="inline-flex items-center mr-6">
-              <input
-                type="radio"
-                name="selectProvider"
-                value="selectAll"
-                checked={isSelectAll}
-                onChange={handleRadioChange}
-                className="form-radio"
-              />
-              <span className="ml-2 font-semibold text-sm">Select All Service Providers</span>
-            </label>
-            <label className="inline-flex items-center ml-6">
-              <input
-                type="radio"
-                name="selectProvider"
-                value="selectSpecific"
-                checked={!isSelectAll}
-                onChange={handleRadioChange}
-                className="form-radio"
-              />
-              <span className="ml-2 font-semibold text-sm">Select Specific</span>
-            </label>
+            <div className="mb-3 flex items-center justify-around col-md-12">
+              <label className="inline-flex items-center mr-6">
+                <input
+                  type="radio"
+                  name="selectProvider"
+                  value="selectAll"
+                  checked={isSelectAll}
+                  onChange={handleRadioChange}
+                  className="form-radio"
+                />
+                <span className="ml-2 font-semibold text-sm">Select All Service Providers</span>
+              </label>
+              <label className="inline-flex items-center ml-6">
+                <input
+                  type="radio"
+                  name="selectProvider"
+                  value="selectSpecific"
+                  checked={!isSelectAll}
+                  onChange={handleRadioChange}
+                  className="form-radio"
+                />
+                <span className="ml-2 font-semibold text-sm">Select Specific</span>
+              </label>
             
-          </div>
+            </div>
 
-            <div className="mb-3" style={{ display: isSelectAll ? 'none' : 'block' }}>
+            <div className="mb-3 col-md-12" style={{ display: isSelectAll ? 'none' : 'block' }}>
               <label className="block text-sm font-semibold mb-1" htmlFor="serviceProvider">
                 Select Users
               </label>
@@ -219,7 +219,7 @@ const AddHolidayForm = ({ onClose }) => {
                 name="selectedUsers"
                 multiple
                 ref={selectRef}
-                className="border border-gray-300 rounded p-2 w-full form-control-sm"
+                className="border border-gray-300 rounded p-2 w-full form-control-sm w-100"
                 required
               >
                 {users.map((user) => (
@@ -232,7 +232,7 @@ const AddHolidayForm = ({ onClose }) => {
 
             {formData.selectedUsers.length > 0 && (
               <div className="mb-3 max-w-5xl mx-auto fthirteen">
-                <label className="text-sm font-semibold my-3">Selected Users</label>
+                <label className="text-sm font-semibold mb-3">Selected Users</label>
                 <div className="flex flex-wrap mb-2 p-2 bg-gray-50 rounded-xl shadow-md">
                   {formData.selectedUsers.map((userId) => {
                     const user = users.find(u => u._id === userId);

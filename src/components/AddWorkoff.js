@@ -65,12 +65,12 @@ const AddWorkoff = ({ serviceProviderId, onClose }) => {
                         className=""
                     ><CircleX /></button>
                 </div>
-                <div className=' n-popup-body ad-work-h'>
+                <div className='ad-work-h'>
                     <div className='row justify-content-center'>
                         <div className='col-md-12'>
-                            <form onSubmit={handleSubmit}>
-                                <div className="mb-4">
-                                    <label htmlFor="fld_workoffs_start_date" className="block mb-2">Workoff Start Date:</label>
+                            <form onSubmit={handleSubmit} className='row'>
+                                <div className="mb-4 col-md-6">
+                                    <label htmlFor="fld_workoffs_start_date" className="block mb-2">Start Date:</label>
                                     <input
                                         type="date"
                                         id="fld_workoffs_start_date"
@@ -81,8 +81,8 @@ const AddWorkoff = ({ serviceProviderId, onClose }) => {
                                         className="border rounded w-full form-control-sm"
                                     />
                                 </div>
-                                <div className="mb-4">
-                                    <label htmlFor="fld_workoffs_end_date" className="block mb-2">Workoff End Date:</label>
+                                <div className="mb-4 col-md-6">
+                                    <label htmlFor="fld_workoffs_end_date" className="block mb-2">End Date:</label>
                                     <input
                                         type="date"
                                         id="fld_workoffs_end_date"
@@ -93,7 +93,7 @@ const AddWorkoff = ({ serviceProviderId, onClose }) => {
                                         className="border rounded w-full form-control-sm"
                                     />
                                 </div>
-                                <div className="mb-4">
+                                <div className="mb-4 col-md-12">
                                     <label htmlFor="fld_total_no_of_work_offs" className="block mb-2">Total Workoffs:</label>
                                     <input
                                         type="number"

@@ -12,6 +12,9 @@ import { RefreshCw, UserPlus2 } from 'lucide-react';
 import ManageUserWorkoff from './ManageUserWorkoff';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import ConfirmationModal from '../components/ConfirmationModal';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const ManageServiceProvider = () => {
     DataTable.use(DT); // Initialize DataTables
@@ -29,6 +32,8 @@ const ManageServiceProvider = () => {
     const location = useLocation(); // Get the location object
     const [showModal, setShowModal] = useState(false);
     const [pendingAction, setPendingAction] = useState(null);
+    const [selectedUser, setSelectedUser] = useState(null);
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
     // Extract the last part of the path
     const status = location.pathname.split('/').pop();
@@ -136,8 +141,8 @@ const ManageServiceProvider = () => {
             data: 'fld_name', // Field for the name
             width: '100px',
             render: (data) => (
-                `<div style="display: flex; flex-direction: column; font-size: 13px; overflow-wrap: break-word;">
-                    <span>${data}</span>
+                `<div style="display: flex; flex-direction: column; font-size: 12px; overflow-wrap: break-word;">
+                    <span style="font-size: 12px;">${data}</span>
                 </div>`
             ),
             orderable: false
@@ -145,12 +150,12 @@ const ManageServiceProvider = () => {
         {
             title: 'Username / Email',
             data: null, // No direct data mapping
-            width: '150px',
+            width: '170px',
 
             render: (data) => (
                 `<div style="display: flex; flex-direction: column; font-size: 13px; overflow-wrap: break-word;">
                     <span style="font-weight:600;">${data.fld_username}</span>
-                    <span style="font-size: 14px;">${data.fld_email}</span>
+                    <span style="font-size: 12px;">${data.fld_email}</span>
                 </div>`
             ),
             orderable: false
@@ -161,7 +166,7 @@ const ManageServiceProvider = () => {
             width: '120px',
             render: (data) => (
                 `<div style="display: flex; flex-direction: column; font-size: 13px; overflow-wrap: break-word;">
-                    <span>${data}</span>
+                    <span style="font-size: 12px;">${data}</span>
                 </div>`
             ),
             orderable: false
@@ -172,7 +177,7 @@ const ManageServiceProvider = () => {
             width: '100px',
             render: (data) => (
                 `<div style="display: flex; flex-direction: column; font-size: 13px; overflow-wrap: break-word;">
-                    <span>${data}</span>
+                    <span style="font-size: 12px;">${data}</span>
                 </div>`
             ),
             orderable: false
@@ -190,7 +195,7 @@ const ManageServiceProvider = () => {
         {
             title: 'Status',
             data: 'status',
-            width: "80px",
+            width: "60px",
             render: (data, type, row) => {
                 const statusBadge = data === "Active"
                     ? `<p style="background-color: #c7f5c7; color: green; padding: 5px; border-radius: 5px;">Active</p>`
@@ -210,7 +215,7 @@ const ManageServiceProvider = () => {
         {
             title: 'Action',
             data: null,
-            width: '90px',
+            width: '80px',
             render: (data) => {
                 return `
                     <div class="flex flex-col">
@@ -238,23 +243,37 @@ const ManageServiceProvider = () => {
         setIsWorkoffOpen(true); // Open the edit modal
     };
 
-    const handleDelete = async (id) => {
-        if (window.confirm('Are you sure you want to delete this service provider?')) {
-            try {
-                const response = await fetch(`https://serviceprovidersback.onrender.com/api/users/${id}`, {
-                    method: 'DELETE',
-                });
-                if (!response.ok) {
-                    throw new Error('Failed to delete service provider');
-                }
-                fetchServiceProviders();
-                alert('Service Provider deleted successfully.');
-            } catch (error) {
-                console.error('Error deleting service provider:', error);
-                alert('Failed to delete service provider.');
+    const handleDeleteButtonClick = (user) => {
+        setSelectedUser(user); // Set the selected user to delete
+        setIsDeleteModalOpen(true); // Open the delete confirmation modal
+      };
+    
+      const handleDelete = async () => {
+        if (selectedUser) {
+          try {
+            const response = await fetch(`https://serviceprovidersback.onrender.com/api/users/${selectedUser}`, {
+              method: 'DELETE',
+            });
+    
+            if (!response.ok) {
+              throw new Error('Failed to delete service provider');
             }
+    
+            // Update the state to remove the deleted user
+            
+            toast.success('Service Provider deleted successfully.');
+            setTimeout(()=>{
+                fetchServiceProviders();
+            }, 1000);
+          } catch (error) {
+            console.error('Error deleting service provider:', error);
+            toast.error('Failed to delete service provider.');
+          } finally {
+            setIsDeleteModalOpen(false); // Close the modal
+            setSelectedUser(null); // Reset selected user
+          }
         }
-    };
+      };
     const handleAddServiceProviderClick = () => {
         setIsFormOpen(true); // Open the Add Service Provider form
     };
@@ -413,7 +432,7 @@ const ManageServiceProvider = () => {
                                     }
                                     if (button.classList.contains('delete-button')) {
                                         const id = button.getAttribute('data-id');
-                                        handleDelete(id);
+                                        handleDeleteButtonClick(id);
                                     }
 
 
@@ -430,6 +449,17 @@ const ManageServiceProvider = () => {
                     onClose={cancelAction}
                 />
             )}
+
+{isDeleteModalOpen && (
+        <ConfirmationModal
+          isOpen={isDeleteModalOpen}
+          onConfirm={handleDelete}
+          onClose={() => setIsDeleteModalOpen(false)}
+          content="Are you sure you want to delete this service provider?"
+          isReversible={true}
+        />
+      )}
+       <ToastContainer />
                 </div>
             )}
         </div>
