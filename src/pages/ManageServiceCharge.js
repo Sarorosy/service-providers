@@ -23,9 +23,9 @@ const ManageServiceCharge = () => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); // State for delete modal
   const navigate = useNavigate();
   useEffect(() => {
-      if (sessionStorage.getItem("adminType") != "SUPERADMIN") {
-          navigate("/dashboard"); // Redirect to homepage if not SUPERADMIN
-      }
+    if (sessionStorage.getItem("adminType") != "SUPERADMIN") {
+      navigate("/dashboard"); // Redirect to homepage if not SUPERADMIN
+    }
   }, [navigate]);
 
 
@@ -126,60 +126,62 @@ const ManageServiceCharge = () => {
       title: 'Service Provider',
       data: 'fld_service_provider_id',
       width: "150px",
-      render: (data) => `<div style="width: 100%; font-size: 13px;">${getServiceProviderName(data)}</div>`,
+      render: (data) => `<div style="width: 100%; font-size: 12px;">${getServiceProviderName(data)}</div>`,
     },
     {
       title: 'Service Charge',
       data: 'fld_service_charge',
       width: "100px",
-      render: (data) => `<div style="width: 100%; font-size: 13px;">${data}</div>`,
+      render: (data) => `<div style="width: 100%; font-size: 12px;">${data}</div>`,
     },
     {
       title: 'From Date',
       data: 'fld_from_date',
       width: "100px",
-      render: (data) => `<div style="width: 100%; font-size: 13px;">${new Date(data).toLocaleDateString()}</div>`,
+      render: (data) => `<div style="width: 100%; font-size: 12px;">${new Date(data).toLocaleDateString()}</div>`,
     },
     {
       title: 'To Date',
       data: 'fld_to_date',
       width: "100px",
-      render: (data) => `<div style="width: 100%; font-size: 13px;">${new Date(data).toLocaleDateString()}</div>`,
+      render: (data) => `<div style="width: 100%; font-size: 12px;">${new Date(data).toLocaleDateString()}</div>`,
     },
     {
       title: 'Actions',
       width: "100px",
       render: (data, type, row) => (
-        `<div style="width: 100%; font-size: 13px;">
+        `<div style="width: 100%; font-size: 12px;">
            <button class="edit-btn" data-id="${row._id}">Edit</button>
-           <button class="delete-btn" data-id="${row._id}" style="margin-left: 10px;">Delete</button>
+           <button class="delete-btn" data-id="${row._id}">Delete</button>
          </div>`
       ),
     },
   ];
 
   return (
-    <div className="p-6 bg-gray-100 rounded-lg shadow-md">
-      <h2 className="text-2xl mb-4">Manage Service Charges</h2>
-      <div className='flex float-right'>
-        <button
-          onClick={fetchData}
-          className="bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center mb-4 mr-2"
-        >
-          <RefreshCw className="mr-2" />
-          Refresh
-        </button>
-        <button
-          onClick={handleAddButtonClick}
-          className="bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center mb-4"
-        >
-          <PlusCircle className="mr-2" />
-          Add Service Charge
-        </button>
+    <div className="p-6 bg-white rounded-lg shadow-md mt-20">
+      <div className="flex justify-content-between but">
+        <h2 className="text-xl font-bold text-gray-800">Manage Service Charges</h2>
+        <div className='flex float-right'>
+          <button
+            onClick={fetchData}
+            className="text-white text-sm py-1 px-1 rounded flex items-center mr-2"
+          >
+            <RefreshCw className="mr-2 ic" />
+            Refresh
+          </button>
+          <button
+            onClick={handleAddButtonClick}
+            className="text-white text-sm py-1 px-1 rounded flex items-center"
+          >
+            <PlusCircle className="mr-2 ic"/>
+            Add Service Charge
+          </button>
+        </div>
       </div>
       {loading ? (
         <div className="flex justify-center">
-          <RevolvingDot height="30" width="30" color="blue" ariaLabel="loading" />
+          <RevolvingDot height="10" width="10" color="#3b82f6" ariaLabel="loading" />
         </div>
       ) : (
         <DataTable

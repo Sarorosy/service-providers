@@ -16,6 +16,7 @@ const AddHolidayForm = ({ onClose }) => {
   const [users, setUsers] = useState([]);
   const [selectAll, setSelectAll] = useState(false);
   const selectRef = useRef(null); // Reference for the select element
+  const [isSelectAll, setIsSelectAll] = useState(false);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -78,6 +79,24 @@ const AddHolidayForm = ({ onClose }) => {
       $(selectRef.current).val([]).trigger('change');
     }
   };
+  const handleRadioChange = (e) => {
+    setIsSelectAll(e.target.value === "selectAll");
+    if (e.target.value === "selectAll") {
+      // If 'Select All' is chosen, select all providers
+      setFormData((prevData) => ({
+        ...prevData,
+        selectedUsers: users.map(provider => provider._id.toString()),
+      }));
+      $(selectRef.current).val(users.map(provider => provider._id.toString())).trigger('change');
+    } else {
+      // If 'Select Specific' is chosen, reset the field
+      setFormData((prevData) => ({
+        ...prevData,
+        selectedUsers: [],
+      }));
+      $(selectRef.current).val([]).trigger('change');
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -120,131 +139,153 @@ const AddHolidayForm = ({ onClose }) => {
 
   return (
     <motion.div
-      initial={{ x: '100%' }}
-      animate={{ x: 0 }}
-      exit={{ x: '100%' }}
-      transition={{ duration: 0.5, ease: 'easeInOut' }}
-      className="bg-sky-50 w-full h-full p-6 fixed top-0 right-0 z-50 overflow-y-auto shadow-lg"
+      // initial={{ x: '100%' }}
+      // animate={{ x: 0 }}
+      // exit={{ x: '100%' }}
+      // transition={{ duration: 0.5, ease: 'easeInOut' }}
+      className="w-full h-full p-6 fixed top-0 right-0 z-50 shadow-lg n-pop-up"
     >
-      <button
-        onClick={onClose}
-        className="absolute top-4 right-4 bg-red-500 text-white py-2 px-2 rounded-full"
-      >
-        <CircleX />
-      </button>
-      <h2 className="text-2xl font-bold mb-4">Add Holiday</h2>
-      <form onSubmit={handleSubmit} className='max-w-5xl mx-auto mt-2'>
-        <div className="mb-4">
-          <label className="block text-sm font-medium mb-1" htmlFor="holidayName">Holiday Name</label>
-          <input
-            type="text"
-            id="holidayName"
-            name="fld_title"
-            value={formData.fld_title}
-            onChange={handleChange}
-            className="border border-gray-300 rounded p-2 w-full"
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-sm font-medium mb-1" htmlFor="holidayDate">Holiday Date</label>
-          <input
-            type="date"
-            id="holidayDate"
-            name="fld_holiday_date"
-            value={formData.fld_holiday_date}
-            min={new Date().toISOString().split("T")[0]} 
-            onChange={handleChange}
-            className="border border-gray-300 rounded p-2 w-full"
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-sm font-medium mb-1" htmlFor="serviceProvider">
-            Select Users
-          </label>
-          <div className="flex items-center mb-2">
-            <input
-              type="checkbox"
-              id="selectAll"
-              checked={selectAll}
-              onChange={handleSelectAll}
-              className="mr-2"
-            />
-            <label htmlFor="selectAll" className="text-sm">Select All Service Providers</label>
-          </div>
-        </div>
-        
-        <div className="mb-4">
-          <label className="block text-sm font-medium mb-1" htmlFor="serviceProvider">
-            Select Users
-          </label>
-          <select
-            id="serviceProvider"
-            name="selectedUsers"
-            multiple
-            ref={selectRef}
-            className="border border-gray-300 rounded p-2 w-full"
-            required
-          >
-            {users.map((user) => (
-              <option key={user._id} value={user._id}>
-                {user.fld_name}
-              </option>
-            ))}
-          </select>
-        </div>
-        
-        {formData.selectedUsers.length > 0 && (
-          <div className="mb-4 max-w-5xl mx-auto">
-            <label className="text-sm font-medium my-3">Selected Users</label>
-            <div className="flex flex-wrap mb-2 p-2 bg-gray-50 rounded-xl shadow-md">
-              {formData.selectedUsers.map((userId) => {
-                const user = users.find(u => u._id === userId);
-                return (
-                  user ? (
-                    <div
-                      key={user._id}
-                      className="flex items-center mr-2 mb-2 border border-gray-300 rounded-full bg-white p-2 shadow-sm hover:shadow-lg transition-shadow"
-                    >
-                      <img 
-                          src={user.fld_profile_image && user.fld_profile_image !== "" 
-                            ? 'https://serviceprovidersback.onrender.com/uploads/profileimg/' + user.fld_profile_image 
-                            : "https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg"} 
-                          alt={user.fld_username || 'No Name'}
-                          className="w-10 h-10 rounded-full border border-gray-200"
-                        />
-                      <span className="mx-2 text-gray-800 font-semibold">{user.fld_name}</span>
-                      <button
-                        type="button"
-                        onClick={() => removeUser(user._id)}
-                        className="text-red-500 hover:text-red-700 transition-colors"
-                      >
-                        <CircleX />
-                      </button>
-                    </div>
-                  ) : (
-                    <span key={userId} className="mr-2 text-red-500">User with ID {userId} not found.</span>
-                  )
-                );
-              })}
-            </div>
-          </div>
-        )}
-
-        <div className="flex justify-end">
+      <div className="wen mx-auto bg-white p-6 rounded-lg shadow-md">
+        <div className='n-pop-up-head d-flex justify-content-between align-items-center mb-4 border-bottom pb-3'>
+          <h2 className="text-2xl font-bold text-center">Add Holiday</h2>
           <button
-            type="button"
             onClick={onClose}
-            className="mr-2 bg-black text-white py-2 px-4 rounded flex"
+            className="text-white py-2 px-2 rounded-full "
           >
-            <CircleX className='mr-2' /> Cancel
-          </button>
-          <button type="submit" className="bg-blue-600 text-white py-2 px-4 rounded flex">
-            <Save className='mr-2' /> Save
+            <CircleX className='colorr'/>
           </button>
         </div>
-      </form>
+      <div className='db'>
+        
+        <div className='n-popup-body ad-holdy-h'>
+          <form onSubmit={handleSubmit} className='mx-auto mt-2 row'>
+            <div className="mb-3 col-md-6">
+              <label className="block text-sm font-semibold mb-1" htmlFor="holidayName">Holiday Name</label>
+              <input
+                type="text"
+                id="holidayName"
+                name="fld_title"
+                value={formData.fld_title}
+                onChange={handleChange}
+                className="border border-gray-300 rounded p-2 w-full form-control-sm"
+                required
+              />
+            </div>
+            <div className="mb-3 col-md-6">
+              <label className="block text-sm font-semibold mb-1" htmlFor="holidayDate">Holiday Date</label>
+              <input
+                type="date"
+                id="holidayDate"
+                name="fld_holiday_date"
+                value={formData.fld_holiday_date}
+                min={new Date().toISOString().split("T")[0]}
+                onChange={handleChange}
+                className="border border-gray-300 rounded p-2 w-full form-control-sm"
+                required
+              />
+            </div>
+            <div className="mb-3 flex items-center justify-around col-md-12">
+              <label className="inline-flex items-center mr-6">
+                <input
+                  type="radio"
+                  name="selectProvider"
+                  value="selectAll"
+                  checked={isSelectAll}
+                  onChange={handleRadioChange}
+                  className="form-radio"
+                />
+                <span className="ml-2 font-semibold text-sm">Select All Service Providers</span>
+              </label>
+              <label className="inline-flex items-center ml-6">
+                <input
+                  type="radio"
+                  name="selectProvider"
+                  value="selectSpecific"
+                  checked={!isSelectAll}
+                  onChange={handleRadioChange}
+                  className="form-radio"
+                />
+                <span className="ml-2 font-semibold text-sm">Select Specific</span>
+              </label>
+            
+            </div>
+
+            <div className="mb-3 col-md-12" style={{ display: isSelectAll ? 'none' : 'block' }}>
+              <label className="block text-sm font-semibold mb-1" htmlFor="serviceProvider">
+                Select Users
+              </label>
+              <select
+                id="serviceProvider"
+                name="selectedUsers"
+                multiple
+                ref={selectRef}
+                className="border border-gray-300 rounded p-2 w-full form-control-sm w-100"
+                required
+              >
+                {users.map((user) => (
+                  <option key={user._id} value={user._id}>
+                    {user.fld_name}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {formData.selectedUsers.length > 0 && (
+              <div className="mb-3 max-w-5xl mx-auto fthirteen">
+                <label className="text-sm font-semibold mb-3">Selected Users</label>
+                <div className="flex flex-wrap mb-2 p-2 bg-gray-50 rounded-xl shadow-md">
+                  {formData.selectedUsers.map((userId) => {
+                    const user = users.find(u => u._id === userId);
+                    return (
+                      user ? (
+                        <div
+                          key={user._id}
+                          className="flex items-center mr-2 mb-2 border border-gray-300 rounded-full bg-white px-1 py-1 shadow-sm hover:shadow-lg transition-shadow"
+                        >
+                          <img
+                            src={user.fld_profile_image && user.fld_profile_image !== ""
+                              ? 'https://serviceprovidersback.onrender.com/uploads/profileimg/' + user.fld_profile_image
+                              : "https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg"}
+                            alt={user.fld_username || 'No Name'}
+                            className="w-8 h-8 rounded-full border border-gray-200"
+                          />
+                          <span className="mx-2 text-gray-800 font-semibold">{user.fld_name}</span>
+                          <button
+                            type="button"
+                            onClick={() => removeUser(user._id)}
+                            className="text-red-500 hover:text-red-700 transition-colors"
+                          >
+                            <CircleX size={15}/>
+                          </button>
+                        </div>
+                      ) : (
+                        <span key={userId} className="mr-2 text-red-500">User with ID {userId} not found.</span>
+                      )
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
+            <div className="flex justify-end">
+              {/* <button
+                type="button"
+                onClick={onClose}
+                className="mr-2 bg-red-500 transition duration-300 ded
+ hover:bg-red-600 hover:shadow-lg text-white py-1 px-1 rounded flex items-center"
+              >
+                <CircleX className='mr-1 ic' /> Cancel
+              </button> */}
+              <div className='but'>
+                <button type="submit" className="bg-blue-600 text-white py-1 px-1 rounded flex items-center">
+                  <Save className='mr-1 ic' /> Save
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      </div>
       <ToastContainer />
     </motion.div>
   );

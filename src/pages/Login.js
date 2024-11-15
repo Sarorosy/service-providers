@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import logo from '../assets/logo-login.png';
+import logo from '../assets/logo-elk.png';
+import { Eye, EyeOff } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -9,6 +10,7 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
   const [loading,  setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -85,33 +87,29 @@ export default function Login() {
   
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden bg-gradient-to-br from-[#eafdff] via-[#cef8ee] to-[#defbff]">
-      {/* Grid overlay */}
-      <div className="absolute inset-0 grid grid-cols-[repeat(20,1fr)] grid-rows-[repeat(20,1fr)]">
-        {Array.from({ length: 400 }).map((_, i) => (
-          <div key={i} className="border-[1px] border-black/5"></div>
-        ))}
-      </div>
+    <div className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden ">
+      
+      
 
       {/* Gradient blob */}
-      <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-gradient-to-br from-sky-300 to-green-300 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob"></div>
+      <div className=""></div>
 
       {/* Glassmorphism form card */}
-      <div className="relative z-10 bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg  p-8 w-full max-w-md mx-4 shadow-lg border border-white border-opacity-30">
-        <div className="text-center mb-8">
+      <div className="relative z-10 bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg  p-8 w-full max-w-md mx-4 shadow-lg border rounded-md border-white border-opacity-30">
+        <div className="text-center mb-4">
           <img
             src={logo} // Adjust the path as necessary
             alt="Service Providers Logo"
-            className="mx-auto  bg-white p-2 mb-4"
-            style={{  height: '60px' }}
+            className="mx-auto  bg-white mb-3"
+            style={{  width: '120px' }}
           />
-          <h2 className="text-3xl font-bold text-gray-800">Service Providers</h2>
-          <p className="text-gray-600 mt-2">Sign in to your account</p>
+          <h2 className="font-bold text-gray-800 f-20">Service Providers</h2>
+          <p className="text-gray-600 mt-1 f-14">Sign in to your account</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="">
           <div>
-            <label htmlFor="username" className="text-gray-700">Username</label>
+            <label htmlFor="username" className="text-gray-700 f-13 f-w-600">Username</label>
             <input
               id="username"
               type="text"
@@ -119,24 +117,35 @@ export default function Login() {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               required
-              className="w-full mt-1 bg-white bg-opacity-50 border-0 focus:ring-2 focus:ring-sky-300 p-2"
+              className="form-control form-control-sm"
             />
           </div>
-          <div>
-            <label htmlFor="password" className="text-gray-700">Password</label>
-            <input
-              id="password"
-              type="password"
-              placeholder="Enter your password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              className="w-full mt-1 bg-white bg-opacity-50 border-0 focus:ring-2 focus:ring-sky-300 p-2"
-            />
+          <div className="mt-3 relative">
+            <label htmlFor="password" className="text-gray-700 f-13 f-w-600">Password</label>
+            <div className="relative">
+              <input
+                id="password"
+                type={showPassword ? "text" : "password"}
+                placeholder="Enter your password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                className="form-control form-control-sm pr-10" // Padding right for icon space
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="log-eye text-gray-500 focus:outline-none"
+                style={{ cursor: 'pointer' }}
+              >
+                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+              </button>
+            </div>
           </div>
+          <div className="n-login-btn-set">
           <button
     type="submit"
-    className="w-full bg-gradient-to-r from-sky-500 to-green-500 hover:from-sky-400 hover:to-green-400 text-white font-semibold py-2 px-4 rounded-md transition duration-300 shadow-md flex items-center justify-center"
+    className="mt-4"
     disabled={loading}
 >
     {loading ? (
@@ -162,13 +171,15 @@ export default function Login() {
         </svg>
     ) : null}
     {loading ? "Signing In..." : "Sign In"}
+    <i class="fa fa-chevron-circle-right ml-2" aria-hidden="true"></i>
 </button>
+          </div>
 
         </form>
       </div>
 
       {/* Footer */}
-      <footer className="relative z-10 w-full text-center p-4 mt-8 text-gray-600">
+      <footer className="relative z-10 w-full text-center pt-4  text-gray-600">
         <p>&copy; {new Date().getFullYear()} Service Providers. All rights reserved.</p>
       </footer>
 

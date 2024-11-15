@@ -20,6 +20,7 @@ const EditNotificationForm = ({ notificationId, onClose }) => {
     const [serviceProviders, setServiceProviders] = useState([]);
     const selectRef = useRef(null);
     const [selectAll, setSelectAll] = useState(false);
+    const [isSelectAll, setIsSelectAll] = useState(false);
 
     useEffect(() => {
         const fetchServiceProviders = async () => {
@@ -125,6 +126,24 @@ const EditNotificationForm = ({ notificationId, onClose }) => {
         }
         setSelectAll(!selectAll);
     };
+    const handleRadioChange = (e) => {
+        setIsSelectAll(e.target.value === "selectAll");
+        if (e.target.value === "selectAll") {
+          // If 'Select All' is chosen, select all providers
+          setFormData((prevData) => ({
+            ...prevData,
+            fld_userid: serviceProviders.map(provider => provider._id.toString()),
+          }));
+          $(selectRef.current).val(serviceProviders.map(provider => provider._id.toString())).trigger('change');
+        } else {
+          // If 'Select Specific' is chosen, reset the field
+          setFormData((prevData) => ({
+            ...prevData,
+            fld_userid: [],
+          }));
+          $(selectRef.current).val([]).trigger('change');
+        }
+      };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -157,134 +176,159 @@ const EditNotificationForm = ({ notificationId, onClose }) => {
 
     return (
         <motion.div
-            initial={{ x: '100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '100%' }}
-            transition={{ duration: 0.5, ease: 'easeInOut' }}
-            className="bg-sky-50 w-full h-full p-6 fixed top-0 right-0 z-50 overflow-y-auto shadow-lg"
+            // initial={{ x: '100%' }}
+            // animate={{ x: 0 }}
+            // exit={{ x: '100%' }}
+            // transition={{ duration: 0.5, ease: 'easeInOut' }}
+            className="w-full h-full p-6 fixed top-0 right-0 z-50 shadow-lg n-pop-up"
         >
-            <button
-                onClick={onClose}
-                className="absolute top-4 right-4 bg-red-500 text-white py-2 px-2 rounded-full"
-            >
-                <CircleX />
-            </button>
-            <h2 className="text-2xl font-bold mb-4">Edit Notification</h2>
-            <form onSubmit={handleSubmit} className='max-w-5xl mx-auto mt-2'>
-                <div className='flex w-full justify-center'>
-                    <div className="mb-4 w-1/2 mx-1">
-                        <label className="block text-sm font-semibold mb-1" htmlFor="title">Title</label>
-                        <input
-                            type="text"
-                            id="title"
-                            name="fld_title"
-                            value={formData.fld_title}
-                            onChange={handleChange}
-                            className="border border-gray-300 rounded p-2 w-full"
-                            required
-                        />
-                    </div>
-                    <div className="mb-4 w-1/2 mx-1">
-                        <label className="block text-sm font-semibold mb-1" htmlFor="dueDate">Due Date</label>
-                        <input
-                            type="date"
-                            id="dueDate"
-                            name="fld_due_date"
-                            value={formData.fld_due_date}
-                            min={new Date().toISOString().split("T")[0]} 
-                            onChange={handleChange}
-                            className="border border-gray-300 rounded p-2 w-full"
-                            required
-                        />
-                    </div>
-                </div>
-                <div className="mb-4">
-                    <label className="block text-sm font-semibold mb-1" htmlFor="description">Description</label>
-                    <ReactQuill
-                        value={formData.fld_description}
-                        onChange={handleQuillChange}
-                        theme="snow"
-                        className="border border-gray-300 rounded p-2 w-full"
-                        required
-                    />
-                </div>
-                <div className="flex items-center mb-2">
-                    <input
-                        type="checkbox"
-                        id="selectAll"
-                        checked={selectAll}
-                        onChange={handleSelectAll}
-                        className="mr-2"
-                    />
-                    <label htmlFor="selectAll" className="text-sm font-semibold">Select All Service Providers</label>
-                </div>
-                <div className="mb-4">
-                    <label className="block text-sm font-semibold mb-1" htmlFor="serviceProvider">Select Service Provider</label>
-                    <select
-                        id="serviceProvider"
-                        name="fld_userid"
-                        multiple
-                        ref={selectRef}
-                        className="border border-gray-300 rounded p-2 w-full"
-                        required
-                    >
-                        {serviceProviders.map((provider) => (
-                            <option key={provider._id} value={provider._id}> {/* Use _id instead of id */}
-                                {provider.fld_username}
-                            </option>
-                        ))}
-                    </select>
-                </div>
-
-                {formData.fld_userid.length > 0 && (
-                    <div className="mb-4 max-w-5xl mx-auto">
-                        <label className="text-sm font-medium my-3">Selected Service Providers</label>
-                        <div className="flex flex-wrap mb-2 p-2 bg-gray-50 rounded-xl shadow-md">
-                            {formData.fld_userid.map((providerId) => {
-                                const provider = serviceProviders.find(p => p._id === providerId); // Use _id for matching
-                                return (
-                                    provider ? (
-                                        <motion.div
-                                            key={provider._id}
-                                            initial={{ opacity: 1 }}
-                                            animate={{ opacity: 1 }}
-                                            exit={{ opacity: 0, height: 0 }}
-                                            transition={{ duration: 0.3 }}
-                                            className="flex items-center bg-blue-100 rounded-full py-1 px-2 mx-1"
-                                        >
-                                            <img 
-                          src={provider.fld_profile_image && provider.fld_profile_image !== "" 
-                            ? 'https://serviceprovidersback.onrender.com/uploads/profileimg/' + provider.fld_profile_image 
-                            : "https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg"} 
-                          alt={provider.fld_username || 'No Name'}
-                          className="w-10 h-10 rounded-full border border-gray-200"
-                        />
-                                            <span className="text-sm font-semibold">{provider.fld_username}</span>
-                                            <button
-                                                type="button"
-                                                onClick={() => removeProvider(provider._id)} // Use _id for removal
-                                                className="ml-2 text-red-500 hover:text-red-700"
-                                            >
-                                                <CircleX />
-                                            </button>
-                                        </motion.div>
-                                    ) : null
-                                );
-                            })}
-                        </div>
-                    </div>
-                )}
-
-                <div className="flex justify-end">
+            <div className="wen mx-auto bg-white p-6 rounded-lg shadow-md">
+                <div className='n-pop-up-head d-flex justify-content-between align-items-center mb-4 border-bottom pb-3'>
+                    <h2 className="text-2xl font-bold mb-3 text-center">Edit Notification</h2>
                     <button
-                        type="submit"
-                        className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-500 flex items-center"
+                        onClick={onClose}
+                        className="text-white py-2 px-2 rounded-full"
                     >
-                        <Save className="mr-2" />
-                        Update Notification
+                        <CircleX className='colorr'/>
                     </button>
                 </div>
-            </form>
+                <div className='db'>
+                <div className=' n-popup-body'>
+                    <form onSubmit={handleSubmit} className=''>
+                        <div className='mx-auto bg-white p-6 rounded-lg '>
+                            <div className='flex w-full justify-center'>
+                                <div className="mb-4 w-1/2 mx-1">
+                                    <label className="block text-sm font-semibold mb-1" htmlFor="title">Title</label>
+                                    <input
+                                        type="text"
+                                        id="title"
+                                        name="fld_title"
+                                        value={formData.fld_title}
+                                        onChange={handleChange}
+                                        className="border border-gray-300 rounded p-2 w-full form-control-sm"
+                                        required
+                                    />
+                                </div>
+                                <div className="mb-4 w-1/2 mx-1">
+                                    <label className="block text-sm font-semibold mb-1" htmlFor="dueDate">Due Date</label>
+                                    <input
+                                        type="date"
+                                        id="dueDate"
+                                        name="fld_due_date"
+                                        value={formData.fld_due_date}
+                                        min={new Date().toISOString().split("T")[0]}
+                                        onChange={handleChange}
+                                        className="border border-gray-300 rounded p-2 w-full form-control-sm"
+                                        required
+                                    />
+                                </div>
+                            </div>
+                            <div className="mb-4 fs">
+                                <label className="block text-sm font-semibold mb-1" htmlFor="description">Description</label>
+                                <ReactQuill
+                                    value={formData.fld_description}
+                                    onChange={handleQuillChange}
+                                    theme="snow"
+                                    className="w-full"
+                                    required
+                                />
+                            </div>
+                            <div className="mb-3 flex items-center justify-around">
+            <label className="inline-flex items-center mr-6">
+              <input
+                type="radio"
+                name="selectProvider"
+                value="selectAll"
+                checked={isSelectAll}
+                onChange={handleRadioChange}
+                className="form-radio"
+              />
+              <span className="ml-2 font-semibold text-sm">Select All Service Providers</span>
+            </label>
+            <label className="inline-flex items-center ml-6">
+              <input
+                type="radio"
+                name="selectProvider"
+                value="selectSpecific"
+                checked={!isSelectAll}
+                onChange={handleRadioChange}
+                className="form-radio"
+              />
+              <span className="ml-2 font-semibold text-sm">Select Specific</span>
+            </label>
+            
+          </div>
+                            <div className="mb-4 mt-3" style={{ display: isSelectAll ? 'none' : 'block' }}>
+                                <label className="block text-sm font-semibold mb-1" htmlFor="serviceProvider">Select Service Provider</label>
+                                <select
+                                    id="serviceProvider"
+                                    name="fld_userid"
+                                    multiple
+                                    ref={selectRef}
+                                    className="border border-gray-300 rounded p-2 w-full form-control-sm"
+                                    required
+                                >
+                                    {serviceProviders.map((provider) => (
+                                        <option key={provider._id} value={provider._id}> {/* Use _id instead of id */}
+                                            {provider.fld_username}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+
+                            {formData.fld_userid.length > 0 && (
+                                <div className="mb-4 max-w-5xl mx-auto fthirteen">
+                                    <label className="text-sm font-medium my-2 font-semibold">Selected Service Providers</label>
+                                    <div className="flex flex-wrap mb-2 p-2 bg-gray-50 rounded-xl shadow-md">
+                                        {formData.fld_userid.map((providerId) => {
+                                            const provider = serviceProviders.find(p => p._id === providerId); // Use _id for matching
+                                            return (
+                                                provider ? (
+                                                    <motion.div
+                                                        key={provider._id}
+                                                        initial={{ opacity: 1 }}
+                                                        animate={{ opacity: 1 }}
+                                                        exit={{ opacity: 0, height: 0 }}
+                                                        transition={{ duration: 0.3 }}
+                                                        className="flex items-center bg-white border border-gray-300 mb-2 mb-2 rounded-full py-1 px-1 mx-1 shadow-sm"
+                                                    >
+                                                        <img
+                                                            src={provider.fld_profile_image && provider.fld_profile_image !== ""
+                                                                ? 'https://serviceprovidersback.onrender.com/uploads/profileimg/' + provider.fld_profile_image
+                                                                : "https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg"}
+                                                            alt={provider.fld_username || 'No Name'}
+                                                            className="w-8 h-8 rounded-full border border-gray-200 mr-2"
+                                                        />
+                                                        <span className="font-semibold">{provider.fld_username}</span>
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => removeProvider(provider._id)} // Use _id for removal
+                                                            className="ml-2 text-red-500 hover:text-red-700"
+                                                        >
+                                                            <CircleX width="15" height="15"/>
+                                                        </button>
+                                                    </motion.div>
+                                                ) : null
+                                            );
+                                        })}
+                                    </div>
+                                </div>
+                            )}
+
+                            <div className="flex justify-end but">
+                                <button
+                                    type="submit"
+                                    className="text-white py-1 px-1 rounded hover:bg-blue-500 flex items-center text-sm"
+                                >
+                                    <Save className="mr-1 ic" />
+                                    Update Notification
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                </div>
+            </div>
             <ToastContainer />
         </motion.div>
     );

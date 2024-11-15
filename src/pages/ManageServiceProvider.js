@@ -6,11 +6,15 @@ import { RevolvingDot } from 'react-loader-spinner';
 import AddServiceProvider from '../components/AddServiceProvider';
 import ViewServiceProvider from '../components/ViewServiceProvider';
 import EditServiceProvider from '../components/EditServiceProvider';
-
+import UserWorkDays from '../components/UserWorkDays';
 import { AnimatePresence } from 'framer-motion';
 import { RefreshCw, UserPlus2 } from 'lucide-react';
 import ManageUserWorkoff from './ManageUserWorkoff';
-import { useLocation, useNavigate, useParams  } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import ConfirmationModal from '../components/ConfirmationModal';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const ManageServiceProvider = () => {
     DataTable.use(DT); // Initialize DataTables
@@ -20,11 +24,16 @@ const ManageServiceProvider = () => {
     const [isFormOpen, setIsFormOpen] = useState(false);
     const [isViewOpen, setIsViewOpen] = useState(false);
     const [isEditOpen, setIsEditOpen] = useState(false);
+    const [isworkdaysopen, setIsworkdaysopen] = useState(false);
     const [isWorkoffOpen, setIsWorkoffOpen] = useState(false);
     const [selectedServiceProvider, setSelectedServiceProvider] = useState(null);
     const [filterActive, setFilterActive] = useState(false); // State for active filter
     const [filterInactive, setFilterInactive] = useState(false);
     const location = useLocation(); // Get the location object
+    const [showModal, setShowModal] = useState(false);
+    const [pendingAction, setPendingAction] = useState(null);
+    const [selectedUser, setSelectedUser] = useState(null);
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
     // Extract the last part of the path
     const status = location.pathname.split('/').pop();
@@ -70,13 +79,24 @@ const ManageServiceProvider = () => {
 
     }, [status, filterActive, filterInactive]);
 
+    useEffect(() => {
+        // Bind the toggle status button click event after the DataTable renders
+        $(document).on('click', '.toggle-status-button', function() {
+            const button = $(this);
+            const id = button.data('id');
+            const currentStatus = button.data('current-status');
+            
+            handleToggleStatus(id, currentStatus); // Call the toggle status handler
+        });
+    }, [serviceProviders])
+
     const handleCheckboxChange = (e) => {
         const { value, checked } = e.target;
-    
+
         // Determine the new filter state
         let newFilterActive = filterActive;
         let newFilterInactive = filterInactive;
-    
+
         if (value === 'active') {
             newFilterActive = checked;
             newFilterInactive = false; // Uncheck inactive if active is checked
@@ -84,11 +104,11 @@ const ManageServiceProvider = () => {
             newFilterInactive = checked;
             newFilterActive = false; // Uncheck active if inactive is checked
         }
-    
+
         // Set the new filter states
         setFilterActive(newFilterActive);
         setFilterInactive(newFilterInactive);
-    
+
         // Navigate based on the new filter states
         if (newFilterActive) {
             navigate('/manage-service-provider/active');
@@ -113,6 +133,7 @@ const ManageServiceProvider = () => {
                 // Return an HTML string for the image
                 return `<img src="${imageUrl}" alt="Profile" class="w-10 h-10 rounded-full border border-gray-200" />`;
             },
+            orderable: false
         },
 
         {
@@ -120,22 +141,24 @@ const ManageServiceProvider = () => {
             data: 'fld_name', // Field for the name
             width: '100px',
             render: (data) => (
-                `<div style="display: flex; flex-direction: column; font-size: 15px; overflow-wrap: break-word;">
-                    <span>${data}</span>
+                `<div style="display: flex; flex-direction: column; font-size: 12px; overflow-wrap: break-word;">
+                    <span style="font-size: 12px;">${data}</span>
                 </div>`
             ),
+            orderable: false
         },
         {
             title: 'Username / Email',
             data: null, // No direct data mapping
-            width: '150px',
+            width: '170px',
 
             render: (data) => (
                 `<div style="display: flex; flex-direction: column; font-size: 13px; overflow-wrap: break-word;">
-                    <span>${data.fld_username}</span>
-                    <span style="font-size: 14px;">${data.fld_email}</span>
+                    <span style="font-weight:600;">${data.fld_username}</span>
+                    <span style="font-size: 12px;">${data.fld_email}</span>
                 </div>`
             ),
+            orderable: false
         },
         {
             title: 'Password',
@@ -143,9 +166,10 @@ const ManageServiceProvider = () => {
             width: '120px',
             render: (data) => (
                 `<div style="display: flex; flex-direction: column; font-size: 13px; overflow-wrap: break-word;">
-                    <span>${data}</span>
+                    <span style="font-size: 12px;">${data}</span>
                 </div>`
             ),
+            orderable: false
         },
         {
             title: 'Phone',
@@ -153,49 +177,56 @@ const ManageServiceProvider = () => {
             width: '100px',
             render: (data) => (
                 `<div style="display: flex; flex-direction: column; font-size: 13px; overflow-wrap: break-word;">
-                    <span>${data}</span>
+                    <span style="font-size: 12px;">${data}</span>
                 </div>`
             ),
+            orderable: false
         },
         {
             title: 'Added On',
-            data: 'fld_addedon', // Field for the added date
-            render: (data) => (
-                `<div style="display: flex; flex-direction: column; font-size: 13px; overflow-wrap: break-word;">
-                    <span>${new Date(data).toLocaleDateString('en-US')}</span>
-                </div>`
-            ),
+            data: 'fld_addedon',
             width: '80px',
-
+            type: 'date',
+            render: (data) => {
+                const options = { day: '2-digit', month: 'short', year: 'numeric' };
+                return new Date(data).toLocaleDateString('en-GB', options).replace(',', ''); // Customize locale and remove comma
+            }
         },
         {
             title: 'Status',
             data: 'status',
-            width: "80px",
-            render: (data) => {
-                if (data== "Active") {
-                  // For Active
-                  return `<span style="background-color: lightgreen; color: green; padding: 5px; border-radius: 5px;">Active</span>`;
-                } else {
-                  // For Inactive
-                  return `<span style="background-color: lightcoral; color: red; padding: 5px; border-radius: 5px;">Inactive</span>`;
-                }
-              },
+            width: "60px",
+            render: (data, type, row) => {
+                const statusBadge = data === "Active"
+                    ? `<p style="background-color: #c7f5c7; color: green; padding: 5px; border-radius: 5px;">Active</p>`
+                    : `<p style="background-color: #ffbcbc; color: red; padding: 5px; border-radius: 5px;">Inactive</p>`;
+        
+                return `
+                    <div class="flex flex-col items-center">
+                        <button class="toggle-status-button text-purple-500 mt-1" data-id="${row._id}" data-current-status="${data}">
+                            ${statusBadge}
+                        </button>
+                    </div>
+                `;
+            },
+            orderable: false
         },
+        
         {
             title: 'Action',
             data: null,
-            width: '90px',
+            width: '80px',
             render: (data) => {
                 return `
                     <div class="flex flex-col">
                         <button class="view-button text-green-500 " data-id="${data._id}">View</button>
                         <button class="workoff-button text-blue-500 " data-id="${data._id}">Workoff</button>
-                         <button class="toggle-status-button text-purple-500 " data-id="${data._id}">Status</button>
-                        <button class="delete-button text-red-500 " data-id="${data._id}">Delete</button>
+                         <button class="workdays-button text-purple-500 " data-id="${data._id}">WorkDays</button>
+                         <button class="delete-button text-red-500 " data-id="${data._id}">Delete</button>
                     </div>
                 `;
             },
+            orderable: false
         },
     ];
 
@@ -205,29 +236,44 @@ const ManageServiceProvider = () => {
         setSelectedServiceProvider(selected); // Set selected service provider
         setIsEditOpen(true); // Open the edit modal
     };
+
     const handleWorkoff = (id) => {
         const selected = serviceProviders.find((sp) => sp._id === id); // Find the selected service provider by ID
         setSelectedServiceProvider(selected); // Set selected service provider
         setIsWorkoffOpen(true); // Open the edit modal
     };
 
-    const handleDelete = async (id) => {
-        if (window.confirm('Are you sure you want to delete this service provider?')) {
-            try {
-                const response = await fetch(`https://serviceprovidersback.onrender.com/api/users/${id}`, {
-                    method: 'DELETE',
-                });
-                if (!response.ok) {
-                    throw new Error('Failed to delete service provider');
-                }
-                fetchServiceProviders();
-                alert('Service Provider deleted successfully.');
-            } catch (error) {
-                console.error('Error deleting service provider:', error);
-                alert('Failed to delete service provider.');
+    const handleDeleteButtonClick = (user) => {
+        setSelectedUser(user); // Set the selected user to delete
+        setIsDeleteModalOpen(true); // Open the delete confirmation modal
+      };
+    
+      const handleDelete = async () => {
+        if (selectedUser) {
+          try {
+            const response = await fetch(`https://serviceprovidersback.onrender.com/api/users/${selectedUser}`, {
+              method: 'DELETE',
+            });
+    
+            if (!response.ok) {
+              throw new Error('Failed to delete service provider');
             }
+    
+            // Update the state to remove the deleted user
+            
+            toast.success('Service Provider deleted successfully.');
+            setTimeout(()=>{
+                fetchServiceProviders();
+            }, 1000);
+          } catch (error) {
+            console.error('Error deleting service provider:', error);
+            toast.error('Failed to delete service provider.');
+          } finally {
+            setIsDeleteModalOpen(false); // Close the modal
+            setSelectedUser(null); // Reset selected user
+          }
         }
-    };
+      };
     const handleAddServiceProviderClick = () => {
         setIsFormOpen(true); // Open the Add Service Provider form
     };
@@ -242,8 +288,17 @@ const ManageServiceProvider = () => {
         setIsViewOpen(true); // Open the view modal
     };
 
+    const handleworkdays = (id) => {
+        const selected = serviceProviders.find((sp) => sp._id === id); // Find the selected service provider by ID
+        setSelectedServiceProvider(selected); // Set selected service provider
+        setIsworkdaysopen(true); // Open the view modal
+    };
+
     const handleCloseView = () => {
         setIsViewOpen(false); // Close the view modal
+    };
+    const handleCloseWorkDays = () => {
+        setIsworkdaysopen(false); // Close the view modal
     };
     const handleCloseEdit = () => {
         setIsEditOpen(false); // Close the edit modal
@@ -252,7 +307,14 @@ const ManageServiceProvider = () => {
         setIsWorkoffOpen(false); // Close the edit modal
     };
 
-    const handleToggleStatus = async (id, currentStatus) => {
+    const handleToggleStatus = (id, currentStatus) => {
+        // Show confirmation modal
+        setShowModal(true);
+        setPendingAction({ id, currentStatus });
+    };
+
+    const confirmAction = async () => {
+        const { id, currentStatus } = pendingAction;
         try {
             const response = await fetch(`https://serviceprovidersback.onrender.com/api/users/${id}/status`, {
                 method: 'PATCH',
@@ -273,44 +335,54 @@ const ManageServiceProvider = () => {
         } catch (error) {
             console.error('Error toggling status:', error);
         }
-    }
+        setShowModal(false); // Close the modal
+    };
+
+    const cancelAction = () => {
+        setShowModal(false); // Just close the modal
+    };
+
     return (
-        <div className="p-6 bg-gray-100 rounded-lg shadow-md">
-            <h1 className="text-3xl font-bold mb-6 text-gray-800">Manage Service Providers</h1>
-            <div id="checklist" className="mb-4">
-                <input 
-                    checked={filterActive} 
-                    value="active" 
-                    name="active" 
-                    type="checkbox" 
-                    id="active" 
-                    onChange={handleCheckboxChange} 
-                />
-                <label htmlFor="active">Active</label>
-                <input 
-                    checked={filterInactive} 
-                    value="inactive" 
-                    name="inactive" 
-                    type="checkbox" 
-                    id="inactive" 
-                    onChange={handleCheckboxChange} 
-                />
-                <label htmlFor="inactive">Inactive</label>
+        <div className="p-6 bg-white rounded-lg shadow-md mt-20">
+            <div className="flex justify-content-between mb-3 but">
+                <h1 className="text-xl font-bold text-gray-800">Manage Service Providers</h1>
+                <div className="flex justify-end">
+                    <button
+                        onClick={fetchServiceProviders}
+                        className="text-white text-sm py-0 px-1 rounded transition duration-200 flex items-center mr-2"
+                    >
+                        Refresh <RefreshCw className='ml-2 ic' />
+                    </button>
+                    <button onClick={handleAddServiceProviderClick} className="flex items-center text-white text-sm py-0 px-1 rounded transition duration-200">
+                        Add Service Provider <UserPlus2 className="ml-2 ic" />
+                    </button>
+                </div>
             </div>
-            <div className="flex justify-end mb-4">
-                <button
-                    onClick={fetchServiceProviders}
-                    className="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-200 flex items-center mr-2"
-                >
-                    Refresh <RefreshCw className='ml-2' />
-                </button>
-                <button onClick={handleAddServiceProviderClick} className="flex bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-200">
-                    Add Service Provider <UserPlus2 className="ml-2" />
-                </button>
+            <div id="checklist">
+                <input
+                    checked={filterActive}
+                    value="active"
+                    name="active"
+                    type="checkbox"
+                    id="active"
+                    onChange={handleCheckboxChange}
+                />
+                <label htmlFor="active" className='act'>Active</label>
+                <input
+                    checked={filterInactive}
+                    value="inactive"
+                    name="inactive"
+                    type="checkbox"
+                    id="inactive"
+                    onChange={handleCheckboxChange}
+                />
+                <label htmlFor="inactive"  className='inact'>Inactive</label>
             </div>
+
             <AnimatePresence>
                 {isFormOpen && <AddServiceProvider onClose={handleCloseForm} />}
                 {isViewOpen && <ViewServiceProvider serviceProviderId={selectedServiceProvider._id} onClose={handleCloseView} />}
+                {isworkdaysopen && <UserWorkDays serviceProviderId={selectedServiceProvider._id} onClose={handleCloseWorkDays} />}
                 {isEditOpen && <EditServiceProvider serviceProviderId={selectedServiceProvider._id} onClose={handleCloseEdit} />}
                 {isWorkoffOpen && <ManageUserWorkoff serviceProviderId={selectedServiceProvider._id} onClose={handleCloseWorkoff} />}
             </AnimatePresence>
@@ -325,14 +397,14 @@ const ManageServiceProvider = () => {
                     />
                 </div>
             ) : (
-                <div className="table-container">
+                <div className="table-container mt-1">
                     <DataTable
                         data={serviceProviders}
                         columns={columns}
                         options={{
                             searching: true,
                             paging: true,
-                            ordering: true,
+                            //ordering: true,
                             order: [[5, 'desc']], // Sort by the "Added On" column in descending order
                             responsive: true,
                             className: 'display bg-white rounded-lg shadow-sm',
@@ -343,10 +415,15 @@ const ManageServiceProvider = () => {
                                         const id = button.getAttribute('data-id');
                                         handleView(id);
                                     }
-                                    
+
                                     if (button.classList.contains('workoff-button')) {
                                         const id = button.getAttribute('data-id');
                                         handleWorkoff(id);
+                                    }
+                                    if (button.classList.contains('workdays-button')) {
+                                        const id = button.getAttribute('data-id');
+                                        handleworkdays(id, data.status);
+
                                     }
                                     if (button.classList.contains('toggle-status-button')) {
                                         const id = button.getAttribute('data-id');
@@ -355,15 +432,34 @@ const ManageServiceProvider = () => {
                                     }
                                     if (button.classList.contains('delete-button')) {
                                         const id = button.getAttribute('data-id');
-                                        handleDelete(id);
+                                        handleDeleteButtonClick(id);
                                     }
 
 
                                 });
                             },
                         }}
-                        className="display text-xsm datatables rounded-lg shadow-sm"
+                        className="display text-xsm datatables rounded"
                     />
+                    {showModal && (
+                <ConfirmationModal
+                isOpen={showModal}
+                content="Are you sure you want to toggle the status?"
+                    onConfirm={confirmAction}
+                    onClose={cancelAction}
+                />
+            )}
+
+{isDeleteModalOpen && (
+        <ConfirmationModal
+          isOpen={isDeleteModalOpen}
+          onConfirm={handleDelete}
+          onClose={() => setIsDeleteModalOpen(false)}
+          content="Are you sure you want to delete this service provider?"
+          isReversible={true}
+        />
+      )}
+       <ToastContainer />
                 </div>
             )}
         </div>

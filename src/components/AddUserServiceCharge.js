@@ -43,6 +43,10 @@ const AddUserServiceCharge = ({ onClose, serviceProviderId }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            if (formData.fld_service_charge > 100000) {
+                toast.error("Value must be less than or equal to 100000");
+                return; 
+            }
             const response = await fetch('https://serviceprovidersback.onrender.com/api/servicecharge', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -71,21 +75,24 @@ const AddUserServiceCharge = ({ onClose, serviceProviderId }) => {
 
     return (
         <motion.div
-            initial={{ x: '100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '100%' }}
-            transition={{ duration: 0.5, ease: 'easeInOut' }}
-            className="bg-sky-50 w-full h-full p-6 fixed top-0 right-0 z-50 overflow-y-auto shadow-lg"
+            // initial={{ x: '100%' }}
+            // animate={{ x: 0 }}
+            // exit={{ x: '100%' }}
+            // transition={{ duration: 0.5, ease: 'easeInOut' }}
+            className="w-full h-full p-6 fixed top-0 right-0 z-50 shadow-lg n-pop-up"
         >
-            <button
-                onClick={onClose}
-                className="absolute top-4 right-4 bg-red-500 text-white py-2 px-2 rounded-full"
-            >
-                <CircleX />
-            </button>
-            <h2 className="text-2xl font-bold mb-4">Add Service Charge</h2>
+        <div className="wen3 mx-auto bg-white p-6 rounded-lg shadow-md">
+            <div className='n-pop-up-head d-flex justify-content-between align-items-center mb-4 border-bottom pb-3'>
+                <h2 className="text-2xl font-bold">Add Service Charge</h2>
+                <button
+                    onClick={onClose}
+                    className=" "
+                >
+                    <CircleX />
+                </button>
+            </div>
 
-            <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
+            <form onSubmit={handleSubmit} className="">
                 {loading ? (
                     <RevolvingDot height="20" width="20" color="blue" ariaLabel="loading" />
                 ) : selectedProvider ? (
@@ -116,7 +123,7 @@ const AddUserServiceCharge = ({ onClose, serviceProviderId }) => {
                         name="fld_from_date"
                         value={formData.fld_from_date}
                         onChange={handleInputChange}
-                        className="w-full p-2 border border-gray-300 rounded"
+                        className="w-full border border-gray-300 rounded form-control-sm"
                         required
                     />
                 </div>
@@ -128,7 +135,7 @@ const AddUserServiceCharge = ({ onClose, serviceProviderId }) => {
                         name="fld_to_date"
                         value={formData.fld_to_date}
                         onChange={handleInputChange}
-                        className="w-full p-2 border border-gray-300 rounded"
+                        className="w-full border border-gray-300 rounded form-control-sm"
                         required
                     />
                 </div>
@@ -141,19 +148,21 @@ const AddUserServiceCharge = ({ onClose, serviceProviderId }) => {
                         name="fld_service_charge"
                         value={formData.fld_service_charge}
                         onChange={handleInputChange}
-                        className="w-full p-2 border border-gray-300 rounded"
+                        className="w-full border border-gray-300 rounded form-control-sm"
                         required
                     />
                 </div>
-
-                <button
-                    type="submit"
-                    className="bg-blue-500 text-white py-2 px-4 rounded col-span-2"
-                >
-                    <Save className="mr-2" />
-                    Add Service Charge
-                </button>
+                <div className='flex justify-end but mt-3'>
+                    <button
+                        type="submit"
+                        className="text-white py-1 px-1 rounded col-span-2 flex items-center"
+                    >
+                        <Save className="mr-2 ic"/>
+                        Add Service Charge
+                    </button>
+                </div>    
             </form>
+        </div>
             <ToastContainer />
         </motion.div>
     );

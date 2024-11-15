@@ -43,7 +43,7 @@ const ViewNotification = ({ onClose, notificationId }) => {
             } catch (error) {
                 console.error('Error fetching service providers:', error);
                 setServiceProviders([]);
-            }finally{
+            } finally {
                 setLoading(false)
             }
         };
@@ -65,84 +65,92 @@ const ViewNotification = ({ onClose, notificationId }) => {
         return 'https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg';
     };
 
-    
+
 
     return (
         <motion.div
-            initial={{ x: '100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '100%' }}
-            transition={{ duration: 0.5, ease: 'easeInOut' }}
-            className="bg-blue-100 w-full h-full p-6 fixed top-0 right-0 z-50 overflow-y-auto shadow-lg"
+            // initial={{ x: '100%' }}
+            // animate={{ x: 0 }}
+            // exit={{ x: '100%' }}
+            // transition={{ duration: 0.5, ease: 'easeInOut' }}
+            className="w-full h-full p-6 fixed top-0 right-0 z-50 shadow-lg n-pop-up"
         >
-            <button
-                onClick={onClose}
-                className="absolute top-4 right-4 bg-red-500 text-white py-2 px-2 rounded-full"
-            >
-                <CircleX />
-            </button>
+            <div className="wen mx-auto bg-white p-6 rounded-lg shadow-md">
+            <div className='n-pop-up-head d-flex justify-content-between align-items-center mb-4 border-bottom pb-3'>
+                <h2 className="text-xl font-bold">View Notification</h2>
+                <button
+                    onClick={onClose}
+                    className="text-white"
+                >
+                    <CircleX className='colorr'/>
+                </button>
+            </div>
             {!notification ? (
                 <div className="flex justify-center mt-10">
-                <RevolvingDot
-                  visible={true}
-                  height="50"
-                  width="50"
-                  color="#3b82f6" // Tailwind blue-600
-                  ariaLabel="revolving-dot-loading"
-                />
-              </div>
-            ) : (
-<>
-<h2 className="text-2xl font-bold mb-4">View Notification</h2>
-<div className="max-w-5xl mx-auto bg-white p-6 rounded-lg shadow-md">
-    <h2 className="text-2xl font-bold mb-6 text-gray-800 text-center">Notification Details</h2>
-
-    <div className="flex flex-wrap -mx-4 mb-6">
-        <div className="mb-4 px-4 flex items-center">
-            <h3 className="text-lg font-semibold text-gray-700">Title:</h3>
-            <p className="text-gray-800 ml-2">{notification.fld_title}</p>
-        </div>
-        <div className="mb-4 px-4 flex items-center">
-            <h3 className="text-lg font-semibold text-gray-700">Due Date:</h3>
-            <p className="text-gray-800 ml-2">
-                {new Date(notification.fld_due_date).toLocaleDateString('en-GB', {
-                    day: 'numeric',
-                    month: 'short',
-                    year: 'numeric',
-                })}
-            </p>
-        </div>
-    </div>
-
-    <div className="mb-4">
-        <h3 className="text-lg font-semibold mb-2 text-gray-700">Description:</h3>
-        <div className="border border-gray-300 rounded p-4 bg-gray-50">
-            <div
-                dangerouslySetInnerHTML={{ __html: notification.fld_description }}
-                className="text-gray-800"
-            />
-        </div>
-    </div>
-
-    <div className="mb-4">
-        <h3 className="text-lg font-semibold mb-2 text-gray-700">Assigned Users: {notification.fld_userid.length}</h3>
-        <ul className="list-disc pl-6 flex flex-wrap">
-            {notification.fld_userid.map((user) => ( // Map over the user objects
-                <li key={user._id} className="flex items-center mb-2 mr-4 border border-gray-300 rounded-full p-2 bg-white shadow-sm hover:shadow-lg transition-shadow duration-200">
-                    <img
-                        src={getProfileImage(user)}
-                        alt={getUsernameById(user)}
-                        className="w-10 h-10 rounded-full border border-gray-200 mr-2"
+                    <RevolvingDot
+                        visible={true}
+                        height="50"
+                        width="50"
+                        color="#3b82f6" // Tailwind blue-600
+                        ariaLabel="revolving-dot-loading"
                     />
-                    <span className="text-gray-800 font-medium">{getUsernameById(user)}</span>
-                </li>
-            ))}
-        </ul>
-    </div>
-</div>
-</>
+                </div>
+            ) : (
+                <>
+                    <div className='db'>
+                    <div className=' n-popup-body'>
+                        <div className="">
+                            <h2 className="font-bold mb-3">Notification Details</h2>
+
+                            <div className="flex flex-wrap -mx-4">
+                                <div className="mb-4 px-3 flex items-center">
+                                    <h4 className="text-sm font-semibold">Title:</h4>
+                                    <p className="text-gray-800 text-sm ml-2">{notification.fld_title}</p>
+                                </div>
+                                <div className="mb-4 px-3 flex items-center">
+                                    <h4 className="text-sm font-semibold">Due Date:</h4>
+                                    <p className="text-gray-800 text-sm ml-2">
+                                        {new Date(notification.fld_due_date).toLocaleDateString('en-GB', {
+                                            day: 'numeric',
+                                            month: 'short',
+                                            year: 'numeric',
+                                        })}
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div className="mb-4">
+                                <h3 className="text-sm font-semibold mb-2">Description:</h3>
+                                <div className="border border-gray-300 rounded qledit">
+                                    <div
+                                        dangerouslySetInnerHTML={{ __html: notification.fld_description }}
+                                        className="text-gray-800 fs"
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="mb-4 fthirteen">
+                                <h3 className="text-sm font-semibold mb-4">Assigned Users: {notification.fld_userid.length}</h3>
+                                <ul className="list-disc flex flex-wrap">
+                                    {notification.fld_userid.map((user) => ( // Map over the user objects
+                                        <li key={user._id} className="flex items-center mb-2 mr-4 border border-gray-300 rounded-full px-1 py-1 bg-white shadow-sm hover:shadow-lg transition-shadow duration-200">
+                                            <img
+                                                src={getProfileImage(user)}
+                                                alt={getUsernameById(user)}
+                                                className="w-8 h-8 rounded-full border border-gray-200 mr-2"
+                                            />
+                                            <span className="text-gray-800 font-semibold">{getUsernameById(user)}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </>
             )}
-            
+            </div>
+
 
             <ToastContainer />
         </motion.div>

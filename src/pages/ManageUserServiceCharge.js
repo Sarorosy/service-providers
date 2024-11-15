@@ -11,7 +11,7 @@ import ConfirmationModal from '../components/ConfirmationModal'; // Import your 
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
-const ManageUserServiceCharge = ({serviceProviderId, onClose}) => {
+const ManageUserServiceCharge = ({ serviceProviderId, onClose }) => {
   DataTable.use(DT);
 
   const [serviceCharges, setServiceCharges] = useState([]);
@@ -23,9 +23,9 @@ const ManageUserServiceCharge = ({serviceProviderId, onClose}) => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); // State for delete modal
   const navigate = useNavigate();
   useEffect(() => {
-      if (sessionStorage.getItem("adminType") != "SUPERADMIN") {
-          navigate("/dashboard"); // Redirect to homepage if not SUPERADMIN
-      }
+    if (sessionStorage.getItem("adminType") != "SUPERADMIN") {
+      navigate("/dashboard"); // Redirect to homepage if not SUPERADMIN
+    }
   }, [navigate]);
 
 
@@ -78,6 +78,14 @@ const ManageUserServiceCharge = ({serviceProviderId, onClose}) => {
     const provider = serviceProviders.find((sp) => sp._id === providerId);
     return provider ? provider.fld_name : 'Unknown';
   };
+  const getServiceProviderProfile = (providerId) => {
+    const provider = serviceProviders.find((sp) => sp._id === providerId);
+    return provider ? provider.fld_profile_image : 'Unknown';
+  };
+  const getServiceProviderStatus = (providerId) => {
+    const provider = serviceProviders.find((sp) => sp._id === providerId);
+    return provider ? provider.status : 'unknown';
+  };
 
   const handleEditButtonClick = (serviceCharge) => {
     setSelectedServiceCharge(serviceCharge); // Set the selected service charge for editing
@@ -123,36 +131,34 @@ const ManageUserServiceCharge = ({serviceProviderId, onClose}) => {
 
   const columns = [
     {
-      title: 'Service Provider',
-      data: 'fld_service_provider_id',
-      width: "150px",
-      render: (data) => `<div style="width: 100%; font-size: 13px;">${getServiceProviderName(data)}</div>`,
-    },
-    {
       title: 'Service Charge',
       data: 'fld_service_charge',
       width: "100px",
-      render: (data) => `<div style="width: 100%; font-size: 13px;">${data}</div>`,
+      orderable: false,
+      render: (data) => `<div style="width: 100%; font-size: 12px;">${data}</div>`,
     },
     {
       title: 'From Date',
       data: 'fld_from_date',
       width: "100px",
-      render: (data) => `<div style="width: 100%; font-size: 13px;">${new Date(data).toLocaleDateString()}</div>`,
+      orderable: false,
+      render: (data) => `<div style="width: 100%; font-size: 12px;">${new Date(data).toLocaleDateString()}</div>`,
     },
     {
       title: 'To Date',
       data: 'fld_to_date',
       width: "100px",
-      render: (data) => `<div style="width: 100%; font-size: 13px;">${new Date(data).toLocaleDateString()}</div>`,
+      orderable: false,
+      render: (data) => `<div style="width: 100%; font-size: 12px;">${new Date(data).toLocaleDateString()}</div>`,
     },
     {
       title: 'Actions',
       width: "100px",
+      orderable: false,
       render: (data, type, row) => (
-        `<div style="width: 100%; font-size: 13px;">
+        `<div style="width: 100%; font-size: 12px;">
            <button class="edit-btn" data-id="${row._id}">Edit</button>
-           <button class="delete-btn" data-id="${row._id}" style="margin-left: 10px;">Delete</button>
+           <button class="delete-btn" data-id="${row._id}">Delete</button>
          </div>`
       ),
     },
@@ -160,74 +166,95 @@ const ManageUserServiceCharge = ({serviceProviderId, onClose}) => {
 
   return (
     <motion.div
-            initial={{ x: '100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '100%' }}
-            transition={{ duration: 0.5, ease: 'easeInOut' }}
-            className="bg-blue-100 w-full h-full p-6 fixed top-0 right-0 z-50 overflow-y-auto shadow-lg"
-        >
-      <h2 className="text-2xl mb-4">Manage Service Charges</h2>
-      <button
-                onClick={onClose}
-                className="absolute top-4 right-4 bg-red-500 text-white py-2 px-2 rounded-full"
-            >
-                <CircleX />
-            </button>
-      <div className='flex float-right'>
-        <button
-          onClick={fetchData}
-          className="bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center mb-4 mr-2"
-        >
-          <RefreshCw className="mr-2" />
-          Refresh
-        </button>
-        <button
-          onClick={handleAddButtonClick}
-          className="bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center mb-4"
-        >
-          <PlusCircle className="mr-2" />
-          Add Service Charge
-        </button>
-      </div>
-      {loading ? (
-        <div className="flex justify-center">
-          <RevolvingDot height="30" width="30" color="blue" ariaLabel="loading" />
+      // initial={{ x: '100%' }}
+      // animate={{ x: 0 }}
+      // exit={{ x: '100%' }}
+      // transition={{ duration: 0.5, ease: 'easeInOut' }}
+      className="w-full h-full p-6 fixed top-0 right-0 z-50 shadow-lg n-pop-up"
+    >
+
+      <div className="went mx-auto bg-white p-6 rounded-lg shadow-md">
+        <div className='n-pop-up-head d-flex justify-content-between align-items-center mb-4 border-bottom pb-3'>
+          <h1 className="text-xl font-bold text-gray-800 flex items-center">Manage <img
+            src={
+              getServiceProviderProfile(serviceProviderId)
+                ? `https://serviceprovidersback.onrender.com/uploads/profileimg/${getServiceProviderProfile(serviceProviderId)}`
+                : "https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg"
+            }
+            alt="Service Provider Profile"
+            class=" mx-2 w-10 h-10 rounded-full border border-gray-200"
+          /> <h2 style={{ color: "#2d6a9d", marginRight: "5px" }} >{getServiceProviderName(serviceProviderId)}</h2> Service Charges</h1>
+          <button
+            onClick={onClose}
+            className="text-white mr-2"
+          >
+            <CircleX className='colorr' />
+          </button>
         </div>
-      ) : (
-        <DataTable
-          data={serviceCharges}
-          columns={columns}
-          options={{
-            searching: false,
-            paging: true,
-            ordering: true,
-            order: [[0, 'asc']],
-            createdRow: (row, data) => {
-              $(row).on('click', '.edit-btn', () => handleEditButtonClick(data));
-              $(row).on('click', '.delete-btn', () => handleDeleteButtonClick(data));
-            },
-          }}
-        />
-      )}
-      <AnimatePresence>
-        {isFormOpen && <AddServiceCharge onClose={handleCloseForm} serviceProviderId={serviceProviderId}/>}
-        {isEditFormOpen && (
-          <EditServiceCharge
-            id={selectedServiceCharge._id}
-            onClose={handleEditFormClose}
-            onUpdate={handleUpdateServiceCharge}
-          />
-        )}
-        {isDeleteModalOpen && (
-          <ConfirmationModal
-            isOpen={isDeleteModalOpen}
-            onConfirm={handleDelete}
-            onClose={() => setIsDeleteModalOpen(false)}
-            content="Are you sure you want to delete this service charge?"
-            isReversible={true}
-          />
-        )}
-      </AnimatePresence>
+        <div className=' n-popup-body'>
+          <div className="flex justify-content-end but">
+
+            <div className='flex float-right'>
+              <button
+                onClick={fetchData}
+                className="bg-blue-600 text-white px-2 py-1 rounded flex items-center mr-2"
+              >
+                <RefreshCw className="mr-2 ic" />
+                Refresh
+              </button>
+              {getServiceProviderStatus(serviceProviderId) === "Active" && (
+                <button
+                  onClick={handleAddButtonClick}
+                  className="bg-blue-600 text-white px-2 py-1 rounded flex items-center"
+                >
+                  <PlusCircle className="mr-2 ic" />
+                  Add Service Charge
+                </button>
+              )}
+            </div>
+          </div>
+          {loading ? (
+            <div className="flex justify-center">
+              <RevolvingDot height="30" width="30" color="blue" ariaLabel="loading" />
+            </div>
+          ) : (
+            <DataTable
+              data={serviceCharges}
+              columns={columns}
+              options={{
+                searching: false,
+                paging: true,
+                ordering: true,
+                order: [[0, 'asc']],
+                createdRow: (row, data) => {
+                  $(row).on('click', '.edit-btn', () => handleEditButtonClick(data));
+                  $(row).on('click', '.delete-btn', () => handleDeleteButtonClick(data));
+                },
+              }}
+            />
+          )}
+          <AnimatePresence>
+            {isFormOpen && <AddServiceCharge onClose={handleCloseForm} serviceProviderId={serviceProviderId} />}
+            {isEditFormOpen && (
+              <EditServiceCharge
+                id={selectedServiceCharge._id}
+                onClose={handleEditFormClose}
+                onUpdate={handleUpdateServiceCharge}
+              />
+            )}
+            {isDeleteModalOpen && (
+              <ConfirmationModal
+                isOpen={isDeleteModalOpen}
+                onConfirm={handleDelete}
+                onClose={() => setIsDeleteModalOpen(false)}
+                content="Are you sure you want to delete this service charge?"
+                isReversible={true}
+              />
+            )}
+          </AnimatePresence>
+        </div>
+      </div>
+
     </motion.div>
   );
 };

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Bar } from 'react-chartjs-2';
 import axios from 'axios';
 import { BarElement, Title, Tooltip, Legend, Chart as ChartJS, CategoryScale, LinearScale } from 'chart.js';
-import { UsersRound, BellRing, Calendar1 } from 'lucide-react'; // Importing Lucide icons
+import { UsersRound, BellRing, Calendar1, Users, UserCheck, UserMinus } from 'lucide-react'; // Importing Lucide icons
 import { useNavigate } from 'react-router-dom';
 
 // Register the required components
@@ -17,7 +17,21 @@ const AdminDashboard = () => {
     notifications: [],
     holidays: [],
   });
-
+  useEffect(() => {
+    // Get the first element with class 'whitee' and set its background color
+    const whiteeElement = document.getElementsByClassName('whitee')[0];
+    if (whiteeElement) {
+      whiteeElement.style.backgroundColor = 'white';
+    }
+  
+    // Reset background color on cleanup
+    return () => {
+      if (whiteeElement) {
+        whiteeElement.style.backgroundColor = '';
+      }
+    };
+  }, []);
+  
 
 
   useEffect(() => {
@@ -86,90 +100,139 @@ const AdminDashboard = () => {
   // };
 
   return (
-    <div className="p-4 bg-gray-100">
-      <div className="grid grid-cols-2 gap-4">
-        <div className='flex flex-col'>
-          <div className="bg-blue-100 shadow-md rounded p-4 flex items-center">
-            <UsersRound className="h-8 w-8 text-blue-600 mr-3" />
-            <div>
-              <h2 className="text-xl font-bold">Total Users</h2>
-              <p className="text-3xl">{data.totalUsers}</p>
-
-            </div>
-
-          </div>
-          <button className="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600" onClick={() => { navigate('/manage-service-provider') }}>
-            Manage Service Providers
-          </button>
+    <>
+    <div className="p-2">
+      <div>
+        <div className="page-header py-3 mb-1">
+						<h4 className="page-title h5">Dashboard</h4>
         </div>
-        <div className='flex'>
-          <div className="bg-green-100 shadow-md rounded p-4 flex items-center">
-            <UsersRound className="h-8 w-8 text-green-600 mr-3" />
-            <div>
-              <h2 className="text-xl font-bold">Active Users</h2>
-              <p className="text-3xl">{data.activeUsers}</p>
-              <button className="bg-green-500 text-white font-bold py-2 px-4 rounded hover:bg-green-600 mt-2 " onClick={() => { navigate('/manage-service-provider/active') }}>
-            View
-          </button>
+        <div className='row mb-5'>
+          <div className='col-md-12'>
+          <div className='row'>
+          <div className='col-md-4 d-flex'>
+            <div className="bg-info text-white rounded w-100">
+              <div className='d-flex align-items-center'>
+                <div className='p-3'>
+                <Users className="h-10 w-10" />
+                </div>
+                <div className='p-3'>
+                  <h2 className="h6 ">Total Users</h2>
+                  <p className="h4 mt-2 mb-2">{data.totalUsers}</p>
+                  {/* <div className="chart-wrapper mt-3 mx-3" style="height: 70px;"><canvas data-testid="canvas" height="70" role="img" width="298" style="height: 70px; display: block; box-sizing: border-box; width: 298px;"></canvas><div className="chartjs-tooltip" style="opacity: 0; left: 213px; top: 133.712px;"><table style="margin: 0px;"><thead className="chartjs-tooltip-header"><tr className="chartjs-tooltip-header-item" style="border-width: 0px;"><th style="border-width: 0px;">May</th></tr></thead><tbody className="chartjs-tooltip-body"><tr className="chartjs-tooltip-body-item"><td style="border-width: 0px;"><span style="background: rgb(88, 86, 214); border-color: rgba(255, 255, 255, 0.55); border-width: 2px; margin-right: 10px; height: 10px; width: 10px; display: inline-block;"></span>My First dataset: 51</td></tr></tbody></table></div></div> */}
+                  <button className="btn btn-light btn-sm n-btn-set" onClick={() => { navigate('/manage-service-provider') }}>View <i className="fa fa-long-arrow-right ml-1" aria-hidden="true"></i></button>
+                </div>
+              </div>
             </div>
           </div>
-          <div className="bg-red-100 shadow-md rounded p-4 flex items-center">
-            <UsersRound className="h-8 w-8 text-red-600 mr-3" />
-            <div>
-              <h2 className="text-xl font-bold">Inactive Users</h2>
-              <p className="text-3xl">{data.inactiveUsers}</p>
-              <button className="bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-600 mt-2 " onClick={() => { navigate('/manage-service-provider/inactive') }}>
-            View
-          </button>
+          <div className='col-md-4 d-flex'>
+            <div className="n-bg-success text-white rounded w-100">
+              <div className='d-flex align-items-center'>
+                <div className='p-3'>
+                <UserCheck className="h-10 w-10" />
+                </div>
+                <div className='p-3'>
+                  <h2 className="h6 ">Active Users</h2>
+                  <p className="h4 mt-2 mb-2">{data.activeUsers}</p>
+                  {/* <div className="chart-wrapper mt-3 mx-3" style="height: 70px;"><canvas data-testid="canvas" height="70" role="img" width="298" style="height: 70px; display: block; box-sizing: border-box; width: 298px;"></canvas><div className="chartjs-tooltip" style="opacity: 0; left: 213px; top: 133.712px;"><table style="margin: 0px;"><thead className="chartjs-tooltip-header"><tr className="chartjs-tooltip-header-item" style="border-width: 0px;"><th style="border-width: 0px;">May</th></tr></thead><tbody className="chartjs-tooltip-body"><tr className="chartjs-tooltip-body-item"><td style="border-width: 0px;"><span style="background: rgb(88, 86, 214); border-color: rgba(255, 255, 255, 0.55); border-width: 2px; margin-right: 10px; height: 10px; width: 10px; display: inline-block;"></span>My First dataset: 51</td></tr></tbody></table></div></div> */}
+                  <button className="btn btn-light btn-sm n-btn-set"  onClick={() => { navigate('/manage-service-provider/active') }}>View <i className="fa fa-long-arrow-right ml-1" aria-hidden="true"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className='col-md-4 d-flex'>
+            <div className="n-bg-danger text-white rounded w-100">
+              <div className='d-flex align-items-center'>
+                <div className='p-3'>
+                <UserMinus className="h-10 w-10" />
+                </div>
+                <div className='p-3'>
+                  <h2 className="h6 ">Inactive Users</h2>
+                  <p className="h4 mt-2 mb-2">{data.inactiveUsers}</p>
+                  {/* <div className="chart-wrapper mt-3 mx-3" style="height: 70px;"><canvas data-testid="canvas" height="70" role="img" width="298" style="height: 70px; display: block; box-sizing: border-box; width: 298px;"></canvas><div className="chartjs-tooltip" style="opacity: 0; left: 213px; top: 133.712px;"><table style="margin: 0px;"><thead className="chartjs-tooltip-header"><tr className="chartjs-tooltip-header-item" style="border-width: 0px;"><th style="border-width: 0px;">May</th></tr></thead><tbody className="chartjs-tooltip-body"><tr className="chartjs-tooltip-body-item"><td style="border-width: 0px;"><span style="background: rgb(88, 86, 214); border-color: rgba(255, 255, 255, 0.55); border-width: 2px; margin-right: 10px; height: 10px; width: 10px; display: inline-block;"></span>My First dataset: 51</td></tr></tbody></table></div></div> */}
+                  <button className="btn btn-light btn-sm n-btn-set"  onClick={() => { navigate('/manage-service-provider/inactive') }}>View <i className="fa fa-long-arrow-right ml-1" aria-hidden="true"></i></button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <div className='flex flex-col'>
-          <div className="bg-yellow-100 shadow-md rounded p-4 flex items-center">
-            <BellRing className="h-8 w-8 text-yellow-600 mr-3" />
-            <div>
-              <h2 className="text-xl font-bold">Notifications</h2>
-              <p className="text-3xl">{data.notifications.length}</p>
-            </div>
-
-
           </div>
-          {data.notifications.slice(0, 3).map(notification => (
-            <div key={notification._id} className="bg-purple-50 p-3 rounded mt-2 shadow-md">
-              <h3 className="text-lg font-semibold">{notification.fld_title}</h3>
-              <p className="text-gray-600">
-                {/* Format the date correctly */}
-                {new Date(notification.fld_addedon).toLocaleDateString()}
-              </p>
-            </div>
-          ))}
-          <button className="bg-orange-500 text-white font-bold py-2 px-4 rounded hover:bg-orange-600" onClick={() => { navigate('/manage-notifications') }}>
-            Manage Notifications
-          </button>
         </div>
-
-        <div className='flex flex-col'>
-          <div className="bg-purple-100 shadow-md rounded p-4 flex items-center">
-            <Calendar1 className="h-8 w-8 text-purple-600 mr-3" />
-            <div>
-              <h2 className="text-xl font-bold">Upcoming Holidays</h2>
-              <p className="text-3xl">{data.holidays.length}</p>
-
+        <div className='row'>
+          <div className='col-md-4 d-flex'>
+            <div className="card n-card round w-100">
+              <div className="card-header">
+                <div className='d-flex align-items-center justify-content-between'>
+                  <h4 className="card-title d-flex mb-0 align-items-center f-15">
+                    <BellRing className="h-6 w-6 text-yellow-600 mr-3" />
+                    Notifications
+                  </h4>
+                  <h2 className=""><span className="badge badge-warning f-11">{data.notifications.length}</span></h2>
+                </div>
+              </div>
+              <div className="card-body">
+                
+                    {data.notifications.slice(0, 3).map(notification => (
+                <div className="card-list">
+                  <div className="item-list">
+                    <div className="info-user">
+                      <div key={notification._id} className="d-flex align-items-center justify-content-between">
+                        <h3 className="f-12">{notification.fld_title}</h3>
+                        <p className="text-gray-600 f-10">
+                          {/* Format the date correctly */}
+                          {new Date(notification.fld_addedon).toLocaleDateString()}
+                        </p>
+                      </div>
+                    </div>
+                    
+                  </div>
+                  
+                </div>
+                    ))}
+              </div>
+              <div className="card-footer d-flex justify-content-end">
+                <button className="btn btn-warning btn-sm n-btn-set"  onClick={() => { navigate('/manage-notifications') }}>View Notifications <i className="fa fa-long-arrow-right ml-1" aria-hidden="true"></i></button>
+              </div>
             </div>
           </div>
-          {data.holidays.slice(0, 3).map(holiday => (
-            <div key={holiday._id} className="bg-purple-50 p-3 rounded mt-2 shadow-md">
-              <h3 className="text-lg font-semibold">{holiday.fld_title}</h3>
-              <p className="text-gray-600">
-                {/* Format the date correctly */}
-                {new Date(holiday.fld_holiday_date).toLocaleDateString()}
-              </p>
+          <div className='col-md-4 d-flex'>
+            <div className="card n-card round w-100">
+              <div className="card-header">
+                <div className='d-flex align-items-center justify-content-between'>
+                  <h4 className="card-title d-flex mb-0 align-items-center f-15">
+                    <Calendar1 className="h-6 w-6 text-info mr-3" />
+                    Upcoming Holidays
+                  </h4>
+                  <h2 className=""><span className="badge badge-info f-11">{data.holidays.length}</span></h2>
+                </div>
+              </div>
+              <div className="card-body">
+                
+              {data.holidays.slice(0, 3).map(holiday => (
+                <div className="card-list">
+                  <div className="item-list">
+                    <div className="info-user">
+                      <div key={holiday._id} className="d-flex align-items-center justify-content-between">
+                        <h3 className="f-12">{holiday.fld_title}</h3>
+                        <p className="text-gray-600 f-10">
+                          {/* Format the date correctly */}
+                          {new Date(holiday.fld_holiday_date).toLocaleDateString()} 
+                        </p>
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+                    ))}
+              </div>
+              <div className="card-footer d-flex justify-content-end">
+                <button className="btn btn-info btn-sm n-btn-set"  onClick={() => { navigate('/manage-holidays') }}>View Upcoming Holidays <i className="fa fa-long-arrow-right ml-1" aria-hidden="true"></i></button>
+              </div>
             </div>
-          ))}
-          <button className="bg-green-500 text-white font-bold py-2 px-4 rounded hover:bg-green-600" onClick={() => { navigate('/manage-holidays') }}>
-            Manage Holidays
-          </button>
+          </div>
         </div>
+            
+        
+
 
         {/* <div className="col-span-2 bg-white shadow-md rounded p-4">
           <h2 className="text-xl font-bold">Dashboard Chart</h2>
@@ -177,7 +240,7 @@ const AdminDashboard = () => {
         </div> */}
       </div>
 
-    </div>
+    </div></>
   );
 };
 

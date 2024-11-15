@@ -13,11 +13,11 @@ const ManageWorkDays = () => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-    useEffect(() => {
-        if (sessionStorage.getItem("adminType") != "SUPERADMIN") {
-            navigate("/dashboard"); // Redirect to homepage if not SUPERADMIN
-        }
-    }, [navigate]);
+  useEffect(() => {
+    if (sessionStorage.getItem("adminType") != "SUPERADMIN") {
+      navigate("/dashboard"); // Redirect to homepage if not SUPERADMIN
+    }
+  }, [navigate]);
 
   const fetchServiceProviders = async () => {
     try {
@@ -52,7 +52,7 @@ const ManageWorkDays = () => {
       width: "100px",
       render: (data) => `
           <img src="${data && data.trim() !== "" ? `https://serviceprovidersback.onrender.com/uploads/profileimg/${data}` : 'https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg'}" 
-          alt="Profile" style="width: 50px; height: auto; object-fit: cover;border-radius:50%" />
+          alt="Profile" style="width: 40px; height: auto; object-fit: cover;border-radius:50%" />
       `,
     },
     { title: 'Name', data: 'fld_name' },
@@ -73,15 +73,17 @@ const ManageWorkDays = () => {
   };
 
   return (
-    <div className="p-6 bg-gray-100 rounded-lg shadow-md">
-      <h1 className="text-3xl font-bold mb-6 text-gray-800">Manage Work Days</h1>
-      <div className="flex justify-end mb-4">
-        <button
-          onClick={fetchServiceProviders}
-          className="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-200 flex items-center mr-2"
-        >
-          Refresh <RefreshCw className='ml-2' />
-        </button>
+    <div className="p-6 bg-white rounded-lg shadow-md mt-20 smt mr1">
+      <div className="flex justify-content-between mb-4 but">
+        <h1 className="text-xl font-bold text-gray-800">Manage Work Days</h1>
+        <div className="flex justify-end">
+          <button
+            onClick={fetchServiceProviders}
+            className="text-white text-sm py-0 px-1 rounded transition duration-200 flex items-center mr-2"
+          >
+            Refresh <RefreshCw className='ml-2 ic'/>
+          </button>
+        </div>
       </div>
 
       {loading ? (
@@ -107,7 +109,7 @@ const ManageWorkDays = () => {
               $(row).on('click', handleRowClick); // Handle row clicks
             },
           }}
-          className="display bg-white rounded-lg shadow-sm z-1"
+          className="display bg-white rounded"
         />
       )}
     </div>

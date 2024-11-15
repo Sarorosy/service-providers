@@ -76,6 +76,7 @@ const ManageHolidays = () => {
         {
             title: 'Title',
             data: 'fld_title',
+            orderable: false
         },
         {
             title: 'Holiday Date',
@@ -84,7 +85,8 @@ const ManageHolidays = () => {
             render: (data) => {
                 const options = { day: '2-digit', month: 'short', year: 'numeric' };
                 return new Date(data).toLocaleDateString('en-GB', options).replace(',', ''); // Customize locale and remove comma
-              }
+            },
+            orderable: false
         },
         {
             title: 'Added On',
@@ -93,20 +95,21 @@ const ManageHolidays = () => {
             render: (data) => {
                 const options = { day: '2-digit', month: 'short', year: 'numeric' };
                 return new Date(data).toLocaleDateString('en-GB', options).replace(',', ''); // Customize locale and remove comma
-              }
+            }
         },
         {
             title: 'Status',
             data: 'status',
             render: (data) => {
-              const isActive = data === 'Active'; // Check if status is Active
-              return `
+                const isActive = data === 'Active'; // Check if status is Active
+                return `
                 <span class="${isActive ? 'activeclass' : 'inactiveclass'}">
                   ${data}
                 </span>
               `;
             },
-          },
+            orderable: false
+        },
         {
             title: 'Actions',
             render: (data, type, row) => (
@@ -114,6 +117,7 @@ const ManageHolidays = () => {
         <button class="edit-btn" data-id="${row._id}">Edit</button>
         <button class="delete-btn" data-id="${row._id}">Delete</button>`
             ),
+            orderable: false
         },
     ];
 
@@ -171,22 +175,25 @@ const ManageHolidays = () => {
     };
 
     return (
-        <div className="p-6 bg-gray-100 rounded-lg shadow-md">
-            <h1 className="text-3xl font-bold mb-6 text-gray-800">Manage Holidays</h1>
+        <div className="p-6 bg-white rounded-lg shadow-md mt-20 ">
 
-            <div className="flex justify-end mb-4">
-                <button
-                    onClick={fetchHolidays}
-                    className="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-200 flex items-center mr-2"
-                >
-                    Refresh <RefreshCw className='ml-2' />
-                </button>
-                <button
-                    onClick={handleAddHolidayClick}
-                    className="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-200 flex items-center"
-                >
-                    Add Holiday <CalendarPlus className='ml-2' />
-                </button>
+            <div className="flex justify-content-between mb-6 but">
+                <h1 className="text-xl font-bold text-gray-800">Manage Holidays</h1>
+
+                <div className="flex justify-end">
+                    <button
+                        onClick={fetchHolidays}
+                        className="text-white py-0 px-1 rounded transition duration-200 flex items-center mr-2"
+                    >
+                        Refresh <RefreshCw className='ml-2 ic' />
+                    </button>
+                    <button
+                        onClick={handleAddHolidayClick}
+                        className="text-white py-0 px-1 rounded transition duration-200 flex items-center"
+                    >
+                        Add Holiday <CalendarPlus className='ml-2 ic' />
+                    </button>
+                </div>
             </div>
 
             <AnimatePresence>
@@ -203,7 +210,7 @@ const ManageHolidays = () => {
                         isOpen={isDeleteModalOpen}
                         onConfirm={handleDeleteConfirmation}
                         onClose={() => setIsDeleteModalOpen(false)}
-                        content="Want to delete this holiday?"
+                        content="Are you sure you want to delete this holiday?"
                         isReversible={true}
                     />
                 )}
@@ -238,7 +245,7 @@ const ManageHolidays = () => {
                                 });
                                 $(row).on('click', '.edit-btn', (e) => {
                                     e.stopPropagation(); // Prevent row click event
-                                    handleEditButtonClick(e, data._id); 
+                                    handleEditButtonClick(e, data._id);
                                 });
                                 $(row).on('click', '.delete-btn', (e) => {
                                     e.stopPropagation(); // Prevent row click event
@@ -247,7 +254,7 @@ const ManageHolidays = () => {
                                 });
                             },
                         }}
-                        className="display bg-white rounded-lg shadow-sm z-1"
+                        className="display bg-white rounded"
                     />
                 )}
             </div>

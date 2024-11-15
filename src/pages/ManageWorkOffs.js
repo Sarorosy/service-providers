@@ -84,32 +84,39 @@ const ManageWorkoffs = () => {
       width: "90px",
       render: (data) => {
         const provider = serviceProviders.find(provider => provider._id == data); // Match by ID
-        return `<div style="width: 100%; font-size: 13px;">${provider ? provider.fld_name : 'Unknown Provider'}</div>`; // Display name or fallback to 'Unknown Provider'
+        return `<div style="width: 100%; font-size: 12px;">${provider ? provider.fld_name : 'Unknown Provider'}</div>`; // Display name or fallback to 'Unknown Provider'
       },
+      orderable: false
     },
     {
       title: 'Start Date',
       data: 'fld_start_date',
       width: "100px",
-      render: (data) => `<div style="width: 100%; font-size: 13px;">${new Date(data).toLocaleDateString()}</div>`, // Format date
+      orderable: false,
+      render: (data) => 
+        `<div style="width: 100%; font-size: 12px;">${data ? new Date(data).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }) : 'No Date'}</div>`, // Format date
     },
     {
       title: 'End Date',
       data: 'fld_end_date',
       width: "100px",
-      render: (data) => `<div style="width: 100%; font-size: 13px;">${new Date(data).toLocaleDateString()}</div>`,
+      orderable: false,
+      render: (data) => 
+        `<div style="width: 100%; font-size: 12px;">${data ? new Date(data).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }) : 'No Date'}</div>`, // Format date
     },
     {
       title: 'Duration',
       data: 'fld_duration',
       width: "80px",
-      render: (data) => `<div style="width: 100%; font-size: 13px;">${data}</div>`,
+      orderable: false,
+      render: (data) => `<div style="width: 100%; font-size: 12px;">${data}</div>`,
     },
     {
       title: 'Reason',
       data: 'fld_reason',
+      orderable: false,
       render: (data) => (
-        `<div style="width: 100%; font-size: 13px;">${data.length > 80 ? `${data.substring(0, 80)}...` : data}</div>` // Trim reason if too long
+        `<div style="width: 100%; font-size: 12px;">${data.length > 80 ? `${data.substring(0, 80)}...` : data}</div>` // Trim reason if too long
       ),
     },
     {
@@ -118,19 +125,22 @@ const ManageWorkoffs = () => {
       width: "100px",
       render: (data, type) => {
         if (type === 'display') {
-          return data ? new Date(data).toLocaleDateString('en-US') : 'No Date'; 
+          return data 
+            ? new Date(data).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }) 
+            : 'No Date'; // Format date for display or show 'No Date'
         }
-        return data ? new Date(data).getTime() : 0; 
-      },
+        return data ? new Date(data).getTime() : 0; // Use timestamp for sorting or return 0 if no date
+      }
     },
     {
       title: 'Actions',
       width: "100px",
       render: (data, type, row) => (
-        `<div style="width: 100%; font-size: 13px;">
+        `<div style="width: 100%; font-size: 12px;">
            <button class="view-btn" data-id="${row._id}">View</button>
          </div>`
       ),
+      orderable: false
     },
   ];
 
@@ -148,16 +158,17 @@ const ManageWorkoffs = () => {
   };
 
   return (
-    <div className="p-6 bg-gray-100 rounded-lg shadow-md">
-      <h1 className="text-3xl font-bold mb-6 text-gray-800">Manage Workoffs</h1>
-
-      <div className="flex justify-end mb-4">
+    <div className="p-6 bg-white rounded-lg shadow-md mt-20">
+            <div className="flex justify-content-between but">
+      <h1 className="text-xl font-bold text-gray-800">Manage Workoffs</h1>
+      <div className="flex justify-end">
         <button
           onClick={fetchWorkoffs}
-          className="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-200 flex items-center mr-2"
+          className="text-white text-sm py-0 px-1 rounded transition duration-200 flex items-center mr-2"
         >
-          Refresh <RefreshCw className='ml-2' />
+          Refresh <RefreshCw className='ml-2 ic'/>
         </button>
+      </div>
       </div>
 
       <AnimatePresence>
@@ -200,7 +211,7 @@ const ManageWorkoffs = () => {
                 });
               },
             }}
-            className="display bg-white rounded-lg shadow-sm z-1"
+            className="display bg-white rounded"
           />
         )}
       </div>

@@ -161,7 +161,7 @@ const ManageProfile = () => {
                     name="fld_adminid"
                     value={1}
                     onChange={handleChange}
-                    className="border border-gray-300 rounded p-2 w-full text-sm"
+                    className="border border-gray-300 rounded w-full text-sm form-control-sm"
                     required
                 />
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-2">
@@ -174,7 +174,7 @@ const ManageProfile = () => {
                             name="fld_username"
                             value={formData.fld_username}
                             onChange={handleChange}
-                            className="border border-gray-300 rounded p-2 w-full text-sm"
+                            className="border border-gray-300 rounded w-full text-sm form-control-sm"
                             required
                         />
                     </div>
@@ -188,7 +188,7 @@ const ManageProfile = () => {
                             name="fld_name"
                             value={formData.fld_name}
                             onChange={handleChange}
-                            className="border border-gray-300 rounded p-2 w-full text-sm"
+                            className="border border-gray-300 rounded w-full text-sm form-control-sm"
                             required
                         />
                     </div>
@@ -202,7 +202,7 @@ const ManageProfile = () => {
                             name="fld_email"
                             value={formData.fld_email}
                             onChange={handleChange}
-                            className="border border-gray-300 rounded p-2 w-full text-sm"
+                            className="border border-gray-300 rounded w-full text-sm form-control-sm"
                             required
                         />
                     </div>
@@ -216,7 +216,7 @@ const ManageProfile = () => {
                             name="fld_phone"
                             value={formData.fld_phone}
                             onChange={handleChange}
-                            className="border border-gray-300 rounded p-2 w-full text-sm"
+                            className="border border-gray-300 rounded w-full text-sm form-control-sm"
                             required
                         />
                     </div>
@@ -232,7 +232,7 @@ const ManageProfile = () => {
                             name="fld_address"
                             value={formData.fld_address}
                             onChange={handleChange}
-                            className="border border-gray-300 rounded p-2 w-full text-sm"
+                            className="border border-gray-300 rounded w-full text-sm form-control-sm"
                             required
                         />
                     </div>
@@ -245,7 +245,7 @@ const ManageProfile = () => {
                             name="fld_gender"
                             value={formData.fld_gender}
                             onChange={handleChange}
-                            className="border border-gray-300 rounded p-2 w-full text-sm"
+                            className="border border-gray-300 rounded w-full text-sm form-control-sm"
                             required
                         >
                             <option value="">Select Gender</option>
@@ -264,7 +264,7 @@ const ManageProfile = () => {
                             name="fld_designation"
                             value={formData.fld_designation}
                             onChange={handleChange}
-                            className="border border-gray-300 rounded p-2 w-full text-sm"
+                            className="border border-gray-300 rounded w-full text-sm form-control-sm"
                             required
                         />
                     </div>
@@ -278,7 +278,7 @@ const ManageProfile = () => {
                             name="fld_aadhar"
                             value={formData.fld_aadhar}
                             onChange={handleChange}
-                            className="border border-gray-300 rounded p-2 w-full text-sm"
+                            className="border border-gray-300 rounded w-full text-sm form-control-sm"
                             required
                         />
                     </div>
@@ -294,7 +294,7 @@ const ManageProfile = () => {
                             name="fld_bankname"
                             value={formData.fld_bankname}
                             onChange={handleChange}
-                            className="border border-gray-300 rounded p-2 w-full text-sm"
+                            className="border border-gray-300 rounded w-full text-sm form-control-sm"
                             required
                         />
                     </div>
@@ -308,7 +308,7 @@ const ManageProfile = () => {
                             name="fld_accountno"
                             value={formData.fld_accountno}
                             onChange={handleChange}
-                            className="border border-gray-300 rounded p-2 w-full text-sm"
+                            className="border border-gray-300 rounded w-full text-sm form-control-sm"
                             required
                         />
                     </div>
@@ -322,7 +322,7 @@ const ManageProfile = () => {
                             name="fld_branch"
                             value={formData.fld_branch}
                             onChange={handleChange}
-                            className="border border-gray-300 rounded p-2 w-full text-sm"
+                            className="border border-gray-300 rounded w-full text-sm form-control-sm"
                             required
                         />
                     </div>
@@ -336,7 +336,7 @@ const ManageProfile = () => {
                             name="fld_ifsc"
                             value={formData.fld_ifsc}
                             onChange={handleChange}
-                            className="border border-gray-300 rounded p-2 w-full text-sm"
+                            className="border border-gray-300 rounded w-full text-sm form-control-sm"
                             required
                         />
                     </div>
@@ -367,7 +367,7 @@ const ManageProfile = () => {
                                     id="profile_image"
                                     name="fld_profile_image"
                                     onChange={handleFileChange}
-                                    className="border border-gray-300 rounded p-2 w-full"
+                                    className="border border-gray-300 rounded p-2 w-full form-control-sm"
                                 />
                             )}
                         </div>
@@ -395,7 +395,7 @@ const ManageProfile = () => {
                                     id="aadharcard"
                                     name="fld_aadharcard"
                                     onChange={handleFileChange}
-                                    className="border border-gray-300 rounded p-2 w-full"
+                                    className="border border-gray-300 rounded p-2 w-full form-control-sm"
                                 />
                             )}
                         </div>
@@ -423,7 +423,7 @@ const ManageProfile = () => {
                                     id="pancard"
                                     name="fld_pancard"
                                     onChange={handleFileChange}
-                                    className="border border-gray-300 rounded p-2 w-full"
+                                    className="border border-gray-300 rounded p-2 w-full form-control-sm"
                                 />
                             )}
                         </div>
@@ -451,7 +451,7 @@ const ManageProfile = () => {
                                     id="cancelledchequeimage"
                                     name="fld_cancelledchequeimage"
                                     onChange={handleFileChange}
-                                    className="border border-gray-300 rounded p-2 w-full"
+                                    className="border border-gray-300 rounded p-2 w-full form-control-sm"
                                 />
                             )}
                         </div>
