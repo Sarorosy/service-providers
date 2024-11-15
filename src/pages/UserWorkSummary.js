@@ -160,7 +160,7 @@ const UserWorkSummary = () => {
             render: (data) => {
                 const project = projects.find((proj) => proj._id == data);
                 const title = project ? project.fld_title : 'Unknown Project';
-                return title ? title : 'No Title';
+                return title ? `<span class="text-break f-12"> ${title}</span>` : 'No Title';
             },
         },
         {
