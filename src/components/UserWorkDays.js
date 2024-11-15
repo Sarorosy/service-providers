@@ -174,9 +174,9 @@ const UserWorkDays = ({ serviceProviderId, onClose }) => {
             // animate={{ x: 0 }}
             // exit={{ x: '100%' }}
             // transition={{ duration: 0.5, ease: 'easeInOut' }}
-            className="w-[90vh] h-[90vh] p-6 fixed top-0 right-0 z-50 shadow-lg n-pop-up"
+            className="w-full h-full p-6 fixed top-0 right-0 z-50 shadow-lg n-pop-up"
         >
-    <div className=" p-6 bg-white rounded-lg shadow-md mt-20 h-auto">
+    <div className="p-6 bg-white rounded-lg shadow-md h-auto wrk-of-wdt">
       <div className='flex justify-content-between mb-6'>
         <h1 className="text-xl font-bold mb-2 text-gray-800 flex items-center">
           {user ? (

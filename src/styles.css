@@ -224,7 +224,7 @@
     height: 43vh;
 }
 .n-popup-body.ad-holdy-h {
-    height: 50vh;
+    height: 31vh;
 }
 .n-popup-body.ad-notf-h {
     height: 55vh;
@@ -248,4 +248,35 @@
     position: absolute;
     right: 10px;
     top: 8px;
+}
+
+.select2-container--default .select2-selection--single{
+    height: 28px !important;
+}
+
+.wrk-of-wdt {
+    width: 80%;
+}
+
+p.n-sp-active:hover {
+    background: #008000;
+    color: #fff;
+}
+p.n-sp-active {
+    color: #008000;
+    background: #c7f5c7;
+    padding: 0px 5px;
+    font-size: 13px;
+    border-radius: 3px;
+}
+p.n-sp-inactive:hover {
+    background: #ff0000;
+    color: #fff;
+}
+p.n-sp-inactive {
+    color: #ff0000;
+    background: #ffbcbc;
+    padding: 0px 5px;
+    font-size: 13px;
+    border-radius: 3px;
 }

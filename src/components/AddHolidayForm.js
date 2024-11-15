@@ -171,7 +171,7 @@ const AddHolidayForm = ({ onClose }) => {
                 required
               />
             </div>
-            <div className="mb-3 col-md-6">
+            <div className="mb-4 col-md-6">
               <label className="block text-sm font-semibold mb-1" htmlFor="holidayDate">Holiday Date</label>
               <input
                 type="date"
@@ -267,7 +267,7 @@ const AddHolidayForm = ({ onClose }) => {
               </div>
             )}
 
-            <div className="flex justify-end">
+            <div className="flex justify-end mt-2">
               {/* <button
                 type="button"
                 onClick={onClose}

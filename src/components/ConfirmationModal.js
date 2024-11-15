@@ -22,7 +22,7 @@ const ConfirmationModal = ({ isOpen, onClose, onConfirm, content, isReversible =
                     >
                         <div className='text-center smallct'>
                             <h2 className="text-lg mb-3 font-semibold">
-                                <span className="font-bold f-20">
+                                <span className=" f-20">
                                 {content}
                                 </span>
                             </h2>
@@ -35,16 +35,16 @@ const ConfirmationModal = ({ isOpen, onClose, onConfirm, content, isReversible =
                             {/* <span className="block text-gray-700">{content}</span> */}
                             </div>
 
-                        <div className="flex justify-center mt-3 smallcta">
+                        <div className="flex justify-center mt-5 ">
                             <button
                                 onClick={onClose}
-                                className="bg-gray-300 text-gray-800 py-1 px-2 rounded mr-2 transition duration-200 hover:bg-gray-400"
+                                className="bg-gray-300 text-gray-800 btn  rounded mr-2 transition duration-200 hover:bg-gray-400"
                             >
                                 No
                             </button>
                             <button
                                 onClick={onConfirm}
-                                className="bg-red-600 text-white py-1 px-3 rounded transition duration-200 hover:bg-red-700"
+                                className="bg-red-600 text-white btn rounded transition duration-200 hover:bg-red-700"
                             >
                                 Yes
                             </button>

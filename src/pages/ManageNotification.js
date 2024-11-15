@@ -77,18 +77,20 @@ const ManageNotifications = () => {
     {
       title: 'Title',
       data: 'fld_title',
+      width: "200px",
       orderable: false
     },
     {
       title: 'Description',
       data: 'fld_description',
       orderable: false,
-      render: (data) => (data.length > 80 ? `${data.substring(0, 80)}...` : data), // Trim description
+      render: (data) => (data.length > 80 ? `<span class="text-break f-12">${data.substring(0, 80)}...</span>` : data), // Trim description
     },
     {
       title: 'Added On',
       data: 'fld_addedon',
       type: 'date',
+      width: "150px",
       render: (data) => {
           const options = { day: '2-digit', month: 'short', year: 'numeric' };
           return new Date(data).toLocaleDateString('en-GB', options).replace(',', ''); // Customize locale and remove comma
@@ -99,6 +101,7 @@ const ManageNotifications = () => {
     title: 'Due Date',
     data: 'fld_due_date',
     type: 'date',
+    width: "150px",
     render: (data) => {
         const options = { day: '2-digit', month: 'short', year: 'numeric' };
         return new Date(data).toLocaleDateString('en-GB', options).replace(',', ''); // Customize locale and remove comma
@@ -107,6 +110,7 @@ const ManageNotifications = () => {
 },
     {
       title: 'Actions',
+      width: "200px",
       render: (data, type, row) => (
         `<button class="view-btn" data-id="${row._id}">View</button>
         <button class="edit-btn" data-id="${row._id}">Edit</button>
@@ -174,7 +178,7 @@ const ManageNotifications = () => {
       <div className="flex justify-content-between mb-6 but">
         <h1 className="text-xl font-bold text-gray-800">Manage Notifications</h1>
 
-        <div className='col-md-4 flex justify-content-end'>
+        <div className='flex justify-content-end'>
           <button
             onClick={fetchNotifications}
             className="text-white text-sm py-0 px-1 rounded transition duration-200 flex items-center mr-2"

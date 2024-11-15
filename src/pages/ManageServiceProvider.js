@@ -185,7 +185,7 @@ const ManageServiceProvider = () => {
         {
             title: 'Added On',
             data: 'fld_addedon',
-            width: '80px',
+            width: '100px',
             type: 'date',
             render: (data) => {
                 const options = { day: '2-digit', month: 'short', year: 'numeric' };
@@ -198,8 +198,8 @@ const ManageServiceProvider = () => {
             width: "60px",
             render: (data, type, row) => {
                 const statusBadge = data === "Active"
-                    ? `<p style="background-color: #c7f5c7; color: green; padding: 5px; border-radius: 5px;">Active</p>`
-                    : `<p style="background-color: #ffbcbc; color: red; padding: 5px; border-radius: 5px;">Inactive</p>`;
+                    ? `<p class="n-sp-active">Active</p>`
+                    : `<p class="n-sp-inactive">Inactive</p>`;
         
                 return `
                     <div class="flex flex-col items-center">
@@ -218,11 +218,11 @@ const ManageServiceProvider = () => {
             width: '80px',
             render: (data) => {
                 return `
-                    <div class="flex flex-col">
-                        <button class="view-button text-green-500 " data-id="${data._id}">View</button>
-                        <button class="workoff-button text-blue-500 " data-id="${data._id}">Workoff</button>
-                         <button class="workdays-button text-purple-500 " data-id="${data._id}">WorkDays</button>
-                         <button class="delete-button text-red-500 " data-id="${data._id}">Delete</button>
+                    <div class="">
+                        <button class="view-button " data-id="${data._id}">View</button>
+                        <button class="workoff-button" data-id="${data._id}">Workoff</button>
+                         <button class="workdays-button " data-id="${data._id}">WorkDays</button>
+                         <button class="delete-button " data-id="${data._id}">Delete</button>
                     </div>
                 `;
             },

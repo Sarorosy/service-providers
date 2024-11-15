@@ -157,6 +157,7 @@ const UserWorkSummary = () => {
         {
             title: 'Project Title',
             data: 'fld_projectid',
+            width: '250px',
             render: (data) => {
                 const project = projects.find((proj) => proj._id == data);
                 const title = project ? project.fld_title : 'Unknown Project';
@@ -234,7 +235,7 @@ const UserWorkSummary = () => {
                 <div className="flex justify-end items-center" style={{width:"400px", }}>
                 <select
                         onChange={handleUserChange}
-                        className="border border-gray-300 rounded p-2 ml-20 "
+                        className="border border-gray-300 rounded ml-20 form-control-sm"
                         id="user-select"
                         style={{marginRight:"8px"}}
                     >
