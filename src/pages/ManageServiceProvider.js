@@ -150,7 +150,7 @@ const ManageServiceProvider = () => {
         {
             title: 'Username / Email',
             data: null, // No direct data mapping
-            width: '170px',
+            width: '200px',
 
             render: (data) => (
                 `<div style="display: flex; flex-direction: column; font-size: 13px; overflow-wrap: break-word;">
@@ -215,7 +215,7 @@ const ManageServiceProvider = () => {
         {
             title: 'Action',
             data: null,
-            width: '80px',
+            width: '70px',
             render: (data) => {
                 return `
                     <div class="">
