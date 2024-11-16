@@ -174,7 +174,7 @@ const ManageServiceProvider = () => {
         {
             title: 'Phone',
             data: 'fld_phone', // Field for the phone number
-            width: '100px',
+            width: '85px',
             render: (data) => (
                 `<div style="display: flex; flex-direction: column; font-size: 13px; overflow-wrap: break-word;">
                     <span style="font-size: 12px;">${data}</span>
@@ -215,7 +215,7 @@ const ManageServiceProvider = () => {
         {
             title: 'Action',
             data: null,
-            width: '70px',
+            width: '90px',
             render: (data) => {
                 return `
                     <div class="">
