@@ -19,7 +19,7 @@ const AddUserServiceCharge = ({ onClose, serviceProviderId }) => {
     const fetchServiceProviders = async () => {
         try {
             setLoading(true);
-            const response = await fetch('https://serviceprovidersback.onrender.com/api/users/serviceproviders');
+            const response = await fetch('http://localhost:5000/api/users/serviceproviders');
             const data = await response.json();
             setServiceProviders(data);
             const matchedProvider = data.find(provider => provider._id === serviceProviderId);
@@ -47,7 +47,7 @@ const AddUserServiceCharge = ({ onClose, serviceProviderId }) => {
                 toast.error("Value must be less than or equal to 100000");
                 return; 
             }
-            const response = await fetch('https://serviceprovidersback.onrender.com/api/servicecharge', {
+            const response = await fetch('http://localhost:5000/api/servicecharge', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),
@@ -88,21 +88,21 @@ const AddUserServiceCharge = ({ onClose, serviceProviderId }) => {
                     onClick={onClose}
                     className=" "
                 >
-                    <CircleX />
-                </button>
+                    <CircleX className='colorr'/>
+                </button >
             </div>
 
-            <form onSubmit={handleSubmit} className="">
+            <form onSubmit={handleSubmit} className="row">
                 {loading ? (
                     <RevolvingDot height="20" width="20" color="blue" ariaLabel="loading" />
                 ) : selectedProvider ? (
-                    <div className="mb-4 text-gray-700">
+                    <div className="mb-4 text-gray-700 col-md-12">
                         <label>Service Provider</label>
                         <div className="flex items-center p-2 border border-gray-300 rounded bg-gray-100">
                             <img
                                 src={
                                     selectedProvider.fld_profile_image && selectedProvider.fld_profile_image.trim() !== ""
-                                        ? `https://serviceprovidersback.onrender.com/uploads/profileimg/${selectedProvider.fld_profile_image}`
+                                        ? `http://localhost:5000/uploads/profileimg/${selectedProvider.fld_profile_image}`
                                         : "https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg"
                                 }
                                 alt="Profile"
@@ -112,10 +112,10 @@ const AddUserServiceCharge = ({ onClose, serviceProviderId }) => {
                         </div>
                     </div>
                 ) : (
-                    <div className="mb-4 text-gray-700">No matching provider found.</div>
+                    <div className="mb-4 text-gray-700 col-md-12">No matching provider found.</div>
                 )}
 
-                <div className="mb-4">
+                <div className="mb-4 col-md-6">
                     <label htmlFor="fromDate" className="block text-gray-700">From Date</label>
                     <input
                         type="date"
@@ -131,7 +131,7 @@ const AddUserServiceCharge = ({ onClose, serviceProviderId }) => {
                         required
                     />
                 </div>
-                <div className="mb-4">
+                <div className="mb-4 col-md-6">
                     <label htmlFor="toDate" className="block text-gray-700">To Date</label>
                     <input
                         type="date"

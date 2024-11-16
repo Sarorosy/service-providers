@@ -24,7 +24,7 @@ const AddProject = ({ onClose }) => {
         };
 
         try {
-            const response = await fetch('https://serviceprovidersback.onrender.com/api/projects', {
+            const response = await fetch('http://localhost:5000/api/projects', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

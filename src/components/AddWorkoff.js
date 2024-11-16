@@ -28,7 +28,7 @@ const AddWorkoff = ({ serviceProviderId, onClose }) => {
         e.preventDefault();
         setIsSubmitting(true);
         try {
-            const response = await fetch('https://serviceprovidersback.onrender.com/api/manageworkoffs', {
+            const response = await fetch('http://localhost:5000/api/manageworkoffs', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -63,7 +63,7 @@ const AddWorkoff = ({ serviceProviderId, onClose }) => {
                     <button
                         onClick={onClose}
                         className=""
-                    ><CircleX /></button>
+                    ><CircleX  className='colorr'/></button>
                 </div>
                 <div className='ad-work-h'>
                     <div className='row justify-content-center'>

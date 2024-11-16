@@ -62,7 +62,7 @@ const AddServiceProvider = ({ onClose }) => {
             formDataToSend.append(key, formData[key]);
         }
 
-        const response = await fetch('https://serviceprovidersback.onrender.com/api/users/new/', {
+        const response = await fetch('http://localhost:5000/api/users/new/', {
             method: 'POST',
             body: formDataToSend,
         });

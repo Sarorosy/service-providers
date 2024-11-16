@@ -11,7 +11,7 @@ const WorkoffView = ({ isOpen, workoffData, serviceProviders, onClose }) => {
   // Default profile image URL
   const defaultProfileImage = 'https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg'; // Replace with the actual default image path
   const profileImage = provider && provider.fld_profile_image ?
-    `https://serviceprovidersback.onrender.com/uploads/profileimg/${provider.fld_profile_image}` :
+    `http://localhost:5000/uploads/profileimg/${provider.fld_profile_image}` :
     defaultProfileImage;
 
   return (

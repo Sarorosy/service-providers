@@ -33,7 +33,7 @@ const AddWorkOffs = ({ onClose }) => {
     };
     useEffect(() => {
         const userId = sessionStorage.getItem('userId');
-        fetch(`https://serviceprovidersback.onrender.com/api/manageworkoffs/first/${userId}`)
+        fetch(`http://localhost:5000/api/manageworkoffs/first/${userId}`)
             .then(response => response.json())
             .then(data => {
                 setWorkoffs(data);
@@ -87,7 +87,7 @@ const AddWorkOffs = ({ onClose }) => {
         }
 
         try {
-            const response = await fetch('https://serviceprovidersback.onrender.com/api/workoffs', {
+            const response = await fetch('http://localhost:5000/api/workoffs', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
