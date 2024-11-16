@@ -8,7 +8,7 @@ const RecentNotification = () => {
 
     useEffect(() => {
         const userId = sessionStorage.getItem('userId');
-        fetch(`http://localhost:5000/api/notifications/user/${userId}`)
+        fetch(`https://serviceprovidersback.onrender.com/api/notifications/user/${userId}`)
             .then(response => response.json())
             .then(data => {
                 setNotifications(data);

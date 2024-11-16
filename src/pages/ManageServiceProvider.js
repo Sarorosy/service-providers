@@ -51,11 +51,11 @@ const ManageServiceProvider = () => {
         let url; // Default URL
 
         if (status === 'active' || filterActive) {
-            url = 'http://localhost:5000/api/users/activeserviceproviders';
+            url = 'https://serviceprovidersback.onrender.com/api/users/activeserviceproviders';
         } else if (status === 'inactive' || filterInactive) {
-            url = 'http://localhost:5000/api/users/inactiveserviceproviders';
+            url = 'https://serviceprovidersback.onrender.com/api/users/inactiveserviceproviders';
         } else {
-            url = 'http://localhost:5000/api/users/serviceproviders'; // Default URL for all service providers
+            url = 'https://serviceprovidersback.onrender.com/api/users/serviceproviders'; // Default URL for all service providers
         }
 
         try {
@@ -127,7 +127,7 @@ const ManageServiceProvider = () => {
             width: '50px',
             render: (data) => {
                 const imageUrl = (data && data.trim() !== "")
-                    ? `http://localhost:5000/uploads/profileimg/${data}`
+                    ? `https://serviceprovidersback.onrender.com/uploads/profileimg/${data}`
                     : "https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg";
 
                 // Return an HTML string for the image
@@ -251,7 +251,7 @@ const ManageServiceProvider = () => {
       const handleDelete = async () => {
         if (selectedUser) {
           try {
-            const response = await fetch(`http://localhost:5000/api/users/${selectedUser}`, {
+            const response = await fetch(`https://serviceprovidersback.onrender.com/api/users/${selectedUser}`, {
               method: 'DELETE',
             });
     
@@ -316,7 +316,7 @@ const ManageServiceProvider = () => {
     const confirmAction = async () => {
         const { id, currentStatus } = pendingAction;
         try {
-            const response = await fetch(`http://localhost:5000/api/users/${id}/status`, {
+            const response = await fetch(`https://serviceprovidersback.onrender.com/api/users/${id}/status`, {
                 method: 'PATCH',
             });
 

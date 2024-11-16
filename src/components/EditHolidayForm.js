@@ -24,7 +24,7 @@ const EditHolidayForm = ({ holidayId, onClose }) => {
     useEffect(() => {
         const fetchServiceProviders = async () => {
             try {
-                const response = await fetch('http://localhost:5000/api/users/activeserviceproviders');
+                const response = await fetch('https://serviceprovidersback.onrender.com/api/users/activeserviceproviders');
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -42,7 +42,7 @@ const EditHolidayForm = ({ holidayId, onClose }) => {
     useEffect(() => {
         const fetchHoliday = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/api/holidays/${holidayId}`);
+                const response = await fetch(`https://serviceprovidersback.onrender.com/api/holidays/${holidayId}`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -115,7 +115,7 @@ const EditHolidayForm = ({ holidayId, onClose }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = await fetch(`http://localhost:5000/api/holidays/${holidayId}`, {
+        const response = await fetch(`https://serviceprovidersback.onrender.com/api/holidays/${holidayId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -285,7 +285,7 @@ const EditHolidayForm = ({ holidayId, onClose }) => {
                                                     >
                                                         <img
                                                             src={provider.fld_profile_image && provider.fld_profile_image !== ""
-                                                                ? 'http://localhost:5000/uploads/profileimg/' + provider.fld_profile_image
+                                                                ? 'https://serviceprovidersback.onrender.com/uploads/profileimg/' + provider.fld_profile_image
                                                                 : "https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg"}
                                                             alt={provider.fld_username || 'No Name'}
                                                             className="w-8 h-8 rounded-full border border-gray-200 mr-2"

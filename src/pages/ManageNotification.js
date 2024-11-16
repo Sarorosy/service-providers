@@ -54,7 +54,7 @@ const ManageNotifications = () => {
   const fetchNotifications = async () => {
     setLoading(true); // Set loading to true while fetching
     try {
-      const response = await fetch('http://localhost:5000/api/notifications/');
+      const response = await fetch('https://serviceprovidersback.onrender.com/api/notifications/');
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
@@ -154,7 +154,7 @@ const ManageNotifications = () => {
   const handleDeleteConfirmation = async () => {
     if (selectedNotificationId) {
       try {
-        const response = await fetch(`http://localhost:5000/api/notifications/${selectedNotificationId}`, {
+        const response = await fetch(`https://serviceprovidersback.onrender.com/api/notifications/${selectedNotificationId}`, {
           method: 'DELETE',
         });
         if (response.ok) {

@@ -25,8 +25,8 @@ const ManageUserWorkoff = ({ onClose, serviceProviderId }) => {
         try {
 
             const [workoffResponse, serviceProviderResponse] = await Promise.all([
-                fetch(`http://localhost:5000/api/manageworkoffs/${serviceProviderId}`),
-                fetch('http://localhost:5000/api/users/serviceproviders/')
+                fetch(`https://serviceprovidersback.onrender.com/api/manageworkoffs/${serviceProviderId}`),
+                fetch('https://serviceprovidersback.onrender.com/api/users/serviceproviders/')
             ]);
 
             if (!workoffResponse.ok || !serviceProviderResponse.ok) {
@@ -87,7 +87,7 @@ const ManageUserWorkoff = ({ onClose, serviceProviderId }) => {
         if (!selectedWorkoffId) return;
 
         try {
-            const response = await fetch(`http://localhost:5000/api/manageworkoffs/${selectedWorkoffId}`, {
+            const response = await fetch(`https://serviceprovidersback.onrender.com/api/manageworkoffs/${selectedWorkoffId}`, {
                 method: 'DELETE',
             });
 
@@ -163,7 +163,7 @@ const ManageUserWorkoff = ({ onClose, serviceProviderId }) => {
                 <h1 className="text-xl font-bold text-gray-800 flex items-center">Manage <img
             src={
               getServiceProviderProfile(serviceProviderId)
-                ? `http://localhost:5000/uploads/profileimg/${getServiceProviderProfile(serviceProviderId)}`
+                ? `https://serviceprovidersback.onrender.com/uploads/profileimg/${getServiceProviderProfile(serviceProviderId)}`
                 : "https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg"
             }
             alt="Service Provider Profile"
