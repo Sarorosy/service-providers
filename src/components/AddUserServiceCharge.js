@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { CircleX, Save } from 'lucide-react';
 import { RevolvingDot } from 'react-loader-spinner';
 
-const AddUserServiceCharge = ({ onClose, serviceProviderId }) => {
+const AddUserServiceCharge = ({ onClose, serviceProviderId , after}) => {
     const [formData, setFormData] = useState({
         fld_service_provider_id: serviceProviderId,
         fld_from_date: '',
@@ -56,6 +56,8 @@ const AddUserServiceCharge = ({ onClose, serviceProviderId }) => {
             if (response.ok) {
                 toast.success('Service charge added successfully!');
                 resetForm();
+                setTimeout(()=>{onClose()},500)
+                after()
             } else {
                 toast.error('Error adding service charge!');
             }

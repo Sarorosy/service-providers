@@ -3,7 +3,7 @@ import { RevolvingDot } from 'react-loader-spinner';
 import { motion } from 'framer-motion';
 import { CircleX } from 'lucide-react';
 
-const AddWorkoff = ({ serviceProviderId, onClose }) => {
+const AddWorkoff = ({ serviceProviderId, onClose, after }) => {
     const [workoff, setWorkoff] = useState({
         fld_adminid: serviceProviderId,
         fld_workoffs_startdate: '',
@@ -41,6 +41,7 @@ const AddWorkoff = ({ serviceProviderId, onClose }) => {
             }
 
             onClose();
+            after();
         } catch (error) {
             console.error('Error adding workoff:', error);
             alert('Failed to add workoff');

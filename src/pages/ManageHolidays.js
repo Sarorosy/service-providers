@@ -42,6 +42,7 @@ const ManageHolidays = () => {
 
     const handleCloseForm = () => {
         setIsFormOpen(false);
+        
     };
 
     const handleCloseEditForm = () => {
@@ -82,11 +83,12 @@ const ManageHolidays = () => {
             title: 'Holiday Date',
             data: 'fld_holiday_date',
             type: 'date',
+            orderable: false,
             render: (data) => {
                 const options = { day: '2-digit', month: 'short', year: 'numeric' };
                 return new Date(data).toLocaleDateString('en-GB', options).replace(',', ''); // Customize locale and remove comma
             },
-            orderable: false
+            
         },
         {
             title: 'Added On',
@@ -197,14 +199,14 @@ const ManageHolidays = () => {
             </div>
 
             <AnimatePresence>
-                {isFormOpen && <AddHolidayForm onClose={handleCloseForm} />}
+                {isFormOpen && <AddHolidayForm onClose={handleCloseForm} after={fetchHolidays}/>}
                 {isViewOpen && viewHolidayData && (
                     <ViewHoliday
                         holidayId={viewHolidayData._id}
                         onClose={handleCloseView}
                     />
                 )}
-                {isEditFormOpen && <EditHolidayForm holidayId={selectedHolidayId} onClose={handleCloseEditForm} />}
+                {isEditFormOpen && <EditHolidayForm holidayId={selectedHolidayId} onClose={handleCloseEditForm} after={fetchHolidays} />}
                 {isDeleteModalOpen && (
                     <ConfirmationModal
                         isOpen={isDeleteModalOpen}
@@ -236,7 +238,7 @@ const ManageHolidays = () => {
                             paging: true,
                             ordering: true,
                             responsive: true,
-                            order: [[1, 'desc']],
+                            order: [[2, 'desc']],
                             createdRow: (row, data) => {
                                 // Attach event listeners to the buttons
                                 $(row).on('click', '.view-btn', (e) => {

@@ -6,7 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { CircleX, Save } from 'lucide-react';
 
-const EditServiceCharge = ({ onClose, id }) => {
+const EditServiceCharge = ({ onClose, id , after}) => {
     const [serviceProviders, setServiceProviders] = useState([]);
     const [formData, setFormData] = useState({
         fld_service_provider_id: '',
@@ -123,6 +123,7 @@ const EditServiceCharge = ({ onClose, id }) => {
                 setTimeout(() => {
                     onClose(); // Call onClose after 2 seconds
                 }, 1000);
+                after()
             } else {
                 toast.error('Error updating service charge!');
             }

@@ -224,8 +224,8 @@ const ManageUserServiceCharge = ({ serviceProviderId, onClose }) => {
               options={{
                 searching: false,
                 paging: true,
-                ordering: true,
-                order: [[0, 'asc']],
+                
+                
                 createdRow: (row, data) => {
                   $(row).on('click', '.edit-btn', () => handleEditButtonClick(data));
                   $(row).on('click', '.delete-btn', () => handleDeleteButtonClick(data));
@@ -234,12 +234,13 @@ const ManageUserServiceCharge = ({ serviceProviderId, onClose }) => {
             />
           )}
           <AnimatePresence>
-            {isFormOpen && <AddServiceCharge onClose={handleCloseForm} serviceProviderId={serviceProviderId} />}
+            {isFormOpen && <AddServiceCharge onClose={handleCloseForm} serviceProviderId={serviceProviderId} after={fetchData}/>}
             {isEditFormOpen && (
               <EditServiceCharge
                 id={selectedServiceCharge._id}
                 onClose={handleEditFormClose}
                 onUpdate={handleUpdateServiceCharge}
+                after={fetchData}
               />
             )}
             {isDeleteModalOpen && (

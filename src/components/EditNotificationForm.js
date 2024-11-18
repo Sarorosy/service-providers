@@ -8,7 +8,7 @@ import { motion } from 'framer-motion';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css'; // Import Quill styles
 
-const EditNotificationForm = ({ notificationId, onClose }) => {
+const EditNotificationForm = ({ notificationId, onClose , after}) => {
     const [formData, setFormData] = useState({
         fld_title: '',
         fld_description: '',
@@ -157,7 +157,9 @@ const EditNotificationForm = ({ notificationId, onClose }) => {
 
         if (response.ok) {
             toast.success("Notification updated successfully!");
+
             onClose();
+            after();
         } else {
             toast.error("Error updating notification!");
         }

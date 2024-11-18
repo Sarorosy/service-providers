@@ -196,14 +196,14 @@ const ManageNotifications = () => {
 
 
       <AnimatePresence>
-        {isFormOpen && <AddNotificationForm onClose={handleCloseForm} />}
+        {isFormOpen && <AddNotificationForm onClose={handleCloseForm} after={fetchNotifications} />}
         {isViewOpen && viewNotificationData && (
           <ViewNotification
             notificationId={viewNotificationData._id}
             onClose={handleCloseView}
           />
         )}
-        {isEditFormOpen && <EditNotificationForm notificationId={selectedNotificationId} onClose={handleCloseEditForm} />}
+        {isEditFormOpen && <EditNotificationForm notificationId={selectedNotificationId} onClose={handleCloseEditForm} after={fetchNotifications}/>}
         {isDeleteModalOpen && (
           <ConfirmationModal
             isOpen={isDeleteModalOpen} // Pass isOpen prop
@@ -234,6 +234,7 @@ const ManageNotifications = () => {
               searching: true,
               paging: true,
               ordering: true,
+              order: [[2, 'desc']],
               responsive: true,
               createdRow: (row, data) => {
                 $(row).on('click', (e) => {

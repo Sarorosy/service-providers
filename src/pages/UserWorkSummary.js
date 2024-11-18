@@ -286,7 +286,7 @@ const UserWorkSummary = () => {
                     options={{
                         searching: true,
                         paging: true,
-                        ordering: true,
+                        ordering: false,
                         order: [[3, 'desc']], // Sort by the 4th column (fld_addedon) in descending order
                         responsive: true,
                         className: 'display bg-white rounded-lg shadow-sm',

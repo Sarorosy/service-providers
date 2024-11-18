@@ -6,7 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import $ from 'jquery'; // Import jQuery
 import 'select2'; // Import Select2
 
-const AddHolidayForm = ({ onClose }) => {
+const AddHolidayForm = ({ onClose, after }) => {
   const [formData, setFormData] = useState({
     fld_title: '',
     fld_holiday_date: '',
@@ -121,6 +121,7 @@ const AddHolidayForm = ({ onClose }) => {
     if (response.ok) {
       toast.success("Holiday added successfully!");
       onClose();
+      after();
     } else {
       toast.error("Error adding holiday!");
     }

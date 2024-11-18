@@ -7,7 +7,7 @@ import { CircleX, Save } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { RevolvingDot } from 'react-loader-spinner';
 
-const EditHolidayForm = ({ holidayId, onClose }) => {
+const EditHolidayForm = ({ holidayId, onClose , after}) => {
     const [formData, setFormData] = useState({
         fld_title: '',
         fld_holiday_date: '',
@@ -126,6 +126,7 @@ const EditHolidayForm = ({ holidayId, onClose }) => {
         if (response.ok) {
             toast.success("Holiday updated successfully!");
             onClose();
+            after();
         } else {
             toast.error("Error updating holiday!");
         }

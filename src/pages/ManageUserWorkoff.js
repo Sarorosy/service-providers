@@ -231,7 +231,7 @@ const ManageUserWorkoff = ({ onClose, serviceProviderId }) => {
                         />
                     )}
                     <AnimatePresence>
-                        {isFormOpen && <AddWorkoff serviceProviderId={serviceProviderId} onClose={handleCloseForm} />}
+                        {isFormOpen && <AddWorkoff serviceProviderId={serviceProviderId} onClose={handleCloseForm} after ={fetchData}/>}
                         {isDeleteModalOpen && (
                             <ConfirmationModal
                                 isOpen={isDeleteModalOpen}

@@ -8,7 +8,7 @@ import { CircleX, Save } from 'lucide-react';
 import ReactQuill from 'react-quill'; // Import react-quill
 import 'react-quill/dist/quill.snow.css'; // Import styles
 
-const AddNotificationForm = ({ onClose }) => {
+const AddNotificationForm = ({ onClose , after}) => {
   const [formData, setFormData] = useState({
     fld_title: '',
     fld_description: '',
@@ -81,6 +81,7 @@ const AddNotificationForm = ({ onClose }) => {
       console.log('Notification created successfully');
       toast.success("Notification created successfully!");
       onClose();
+      after()
     } else {
       console.error('Error creating notification');
       toast.error("Error creating notification!");
