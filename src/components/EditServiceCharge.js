@@ -38,6 +38,7 @@ const EditServiceCharge = ({ onClose, id , after}) => {
             setSelectedProvider(provider);
         });
 
+        $('#serviceProvider').prop('disabled', true);
         return () => {
             $('#serviceProvider').select2('destroy');
         };
@@ -179,7 +180,7 @@ const EditServiceCharge = ({ onClose, id , after}) => {
                     <form onSubmit={handleSubmit} className='db'>
                         <div className="mb-3">
                             <label htmlFor="serviceProvider" className="block text-sm font-semibold">Service Provider</label>
-                            <select id="serviceProvider" className="w-full p-2 border border-gray-300 rounded form-control-sm">
+                            <select id="serviceProvider" className="w-full p-2 border border-gray-300 rounded form-control-sm" >
                                 <option value="">Select a service provider</option>
                             </select>
                         </div>

@@ -224,7 +224,7 @@ const ManageUserServiceCharge = ({ serviceProviderId, onClose }) => {
               options={{
                 searching: false,
                 paging: true,
-                
+                ordering:false,
                 
                 createdRow: (row, data) => {
                   $(row).on('click', '.edit-btn', () => handleEditButtonClick(data));

@@ -218,7 +218,7 @@ const ManageUserWorkoff = ({ onClose, serviceProviderId }) => {
                             options={{
                                 paging: true,
                                 searching: true,
-                                ordering: true,
+                                ordering: false,
                                 createdRow: (row, data) => {
                                     $(row).on('click', (e) => {
                                         const button = e.target;
