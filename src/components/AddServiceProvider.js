@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { CircleX, Save } from 'lucide-react';
+import { CircleX, Save ,Eye, EyeOff} from 'lucide-react';
 
 const AddServiceProvider = ({ onClose }) => {
     const [formData, setFormData] = useState({
@@ -30,6 +30,7 @@ const AddServiceProvider = ({ onClose }) => {
 
     const [loading, setLoading] = useState(false);
     const [adminId, setAdminId] = useState(1);
+    const [passwordVisible, setPasswordVisible] = useState(false);
     useEffect(() => {
         const storedAdminId = sessionStorage.getItem('admin_id');
         if (storedAdminId) {
@@ -159,20 +160,29 @@ const AddServiceProvider = ({ onClose }) => {
                                     </div>
                                     <div>
                                         <label className="block text-sm font-medium mb-1" htmlFor="password">Password</label>
-                                        <input
-                                            type="password"
-                                            id="password"
-                                            name="fld_password"
-                                            value={formData.fld_password}
-                                            onChange={handleChange}
-                                            className="border border-gray-300 rounded w-full text-sm form-control-sm"
-                                            required
-                                        />
+                                        <div className="relative">
+                                    <input
+                                        type={passwordVisible ? 'text' : 'password'} // Toggle between password and text input
+                                        id="password"
+                                        name="fld_password"
+                                        value={formData.fld_password}
+                                        onChange={handleChange}
+                                        className="border border-gray-300 rounded w-full text-sm form-control-sm pr-10"
+                                        required
+                                    />
+                                    <button
+                                        type="button"
+                                        className="absolute right-2 top-1/2 transform -translate-y-1/2 pt-1"
+                                        onClick={() => setPasswordVisible(!passwordVisible)} // Toggle the password visibility
+                                    >
+                                        {passwordVisible ? <EyeOff width={18} /> : <Eye width={18}/>} {/* Show eye icon based on visibility */}
+                                    </button>
+                                </div>
                                     </div>
                                     <div>
                                         <label className="block text-sm font-medium mb-1" htmlFor="confirm_password">Confirm Password</label>
                                         <input
-                                            type="password"
+                                            type={passwordVisible ? 'text' : 'password'}
                                             id="confirm_password"
                                             name=""
                                             value={formData.fld_password}
