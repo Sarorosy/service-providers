@@ -133,7 +133,7 @@ const AddWorkSummary = ({ onClose }) => {
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                         required
-                        className="border rounded p-2 w-full"
+                        className="border rounded p-2 w-full "
                         rows="4"
                     />
                 </div>

@@ -73,7 +73,7 @@ const AddProject = ({ onClose }) => {
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
                         required
-                        className="border rounded p-2 w-full"
+                        className="border rounded p-2 w-full form-control-sm"
                     />
                 </div>
                 <input type="hidden" name="fld_adminid" value={userId} />
