@@ -128,7 +128,7 @@ const ManageReports = () => {
         <div className="flex justify-end">
           <button
             onClick={fetchUsers}
-            className="text-white text-sm py-0 px-1 rounded transition duration-200 flex items-center mr-2"
+            className="text-white text-sm py-0 px-1 rounded transition duration-200 flex items-center"
           >
             Refresh <RefreshCw className="ml-2 ic" />
           </button>

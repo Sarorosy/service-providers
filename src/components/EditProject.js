@@ -58,41 +58,49 @@ const EditProject = ({ projectId, onClose }) => {
 
     return (
         <motion.div
-            initial={{ x: '100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '100%' }}
-            transition={{ duration: 0.5, ease: 'easeInOut' }}
-            className="bg-sky-50 w-full h-full p-6 fixed top-0 right-0 z-50 overflow-y-auto shadow-lg"
+            // initial={{ x: '100%' }}
+            // animate={{ x: 0 }}
+            // exit={{ x: '100%' }}
+            // transition={{ duration: 0.5, ease: 'easeInOut' }}
+            className="w-full h-full p-6 fixed top-0 right-0 z-50 shadow-lg n-pop-up"
         >
-            <h2 className="text-2xl mb-4">Edit Project</h2>
-            <button
-                onClick={onClose}
-                className="absolute top-4 right-4 bg-red-500 text-white py-2 px-2 rounded-full"
-            >
-                <CircleX />
-            </button>
-            <form onSubmit={handleSubmit}>
-                <div className="mb-4">
-                    <label htmlFor="fld_title" className="block mb-2">Project Title:</label>
-                    <input
-                        type="text"
-                        id="fld_title"
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
-                        required
-                        className="border rounded p-2 w-full"
-                    />
+            <div className="wen3 mx-auto bg-white p-6 rounded-lg shadow-md">
+                <div className='n-pop-up-head d-flex justify-content-between align-items-center mb-4 border-bottom pb-3'>
+                    <h2 className="text-2xl font-bold text-center">Edit Project</h2>
+                    <button
+                        onClick={onClose}
+                        className="text-white py-2 px-2 rounded-full"
+                    >
+                        <CircleX className='colorr' />
+                    </button>
                 </div>
-                <input type="hidden" name="fld_adminid" value={userId} />
-                <input type="hidden" name="status" value="Active" />
-                <button
-                    type="submit"
-                    className={`bg-blue-600 text-white px-4 py-2 rounded-lg ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
-                    disabled={isSubmitting}
-                >
-                    {isSubmitting ? <RevolvingDot height="20" width="20" color="white" ariaLabel="loading" /> : 'Update Project'}
-                </button>
-            </form>
+                <form onSubmit={handleSubmit}>
+                    <div className="mb-4">
+                        <label htmlFor="fld_title" className="block mb-2">Project Title:</label>
+                        <input
+                            type="text"
+                            id="fld_title"
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
+                            required
+                            className="border rounded p-2 w-full"
+                        />
+                    </div>
+                    <input type="hidden" name="fld_adminid" value={userId} />
+                    <input type="hidden" name="status" value="Active" />
+                    <div className='flex justify-end'>
+                        <div className='but'>
+                            <button
+                                type="submit"
+                                className={`bg-blue-600 text-white px-2 rounded-lg ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                disabled={isSubmitting}
+                            >
+                                {isSubmitting ? <RevolvingDot height="20" width="20" color="white" ariaLabel="loading" /> : 'Update Project'}
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </motion.div>
     );
 };

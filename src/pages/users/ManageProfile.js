@@ -141,7 +141,7 @@ const ManageProfile = () => {
     
 
     return (
-        <div className="p-6 bg-gray-100 rounded-lg shadow-md">
+        <div className="p-6 bg-white rounded-lg shadow-md mt-20 mrf">
             {loading && <LoadingModal />} 
 
            
@@ -154,7 +154,7 @@ const ManageProfile = () => {
                 </div>
             )}
 
-            <form onSubmit={handleSubmit} className="max-w-5xl mx-auto mt-2">
+            <form onSubmit={handleSubmit} className="mt-2">
                 <input
                     type="hidden"
                     id="adminid"
@@ -367,7 +367,7 @@ const ManageProfile = () => {
                                     id="profile_image"
                                     name="fld_profile_image"
                                     onChange={handleFileChange}
-                                    className="border border-gray-300 rounded p-2 w-full form-control-sm"
+                                    className="border border-gray-300 rounded p-2 w-full"
                                 />
                             )}
                         </div>
@@ -395,7 +395,7 @@ const ManageProfile = () => {
                                     id="aadharcard"
                                     name="fld_aadharcard"
                                     onChange={handleFileChange}
-                                    className="border border-gray-300 rounded p-2 w-full form-control-sm"
+                                    className="border border-gray-300 rounded p-2 w-full"
                                 />
                             )}
                         </div>
@@ -423,7 +423,7 @@ const ManageProfile = () => {
                                     id="pancard"
                                     name="fld_pancard"
                                     onChange={handleFileChange}
-                                    className="border border-gray-300 rounded p-2 w-full form-control-sm"
+                                    className="border border-gray-300 rounded p-2 w-full"
                                 />
                             )}
                         </div>
@@ -451,23 +451,24 @@ const ManageProfile = () => {
                                     id="cancelledchequeimage"
                                     name="fld_cancelledchequeimage"
                                     onChange={handleFileChange}
-                                    className="border border-gray-300 rounded p-2 w-full form-control-sm"
+                                    className="border border-gray-300 rounded p-2 w-full"
                                 />
                             )}
                         </div>
 
 
                     </div>
-
+                    <div className='flex justify-content-end'>
                         {/* Submit Button */}
-                        <div className="mt-6">
+                        <div className="">
                             <button
                                 type="submit"
-                                className="bg-blue-500 text-white font-semibold py-2 px-4 rounded"
+                                className="bg-blue-500 text-white font-semibold px-2 py-1 f-12 rounded"
                             >
                                 Update Profile
                             </button>
                         </div>
+                    </div>
                     
                     </form>
 

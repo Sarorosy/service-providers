@@ -149,7 +149,7 @@ const ManageWorkSummary = () => {
     {
       title: 'Added On',
       data: 'fld_addedon',
-      width: "70px",
+      width: "100px",
       render: (data, type) => {
         if (type === 'display') {
           return data ? new Intl.DateTimeFormat('en-GB', {
@@ -171,33 +171,36 @@ const ManageWorkSummary = () => {
       title: 'Actions',
       width: "100px",
       render: (data, type, row) => (
-        `<div style="width: 100%;display:flex;flex-direction:column;">
+        `<div style="">
            <button class="edit-btn" data-id="${row._id}">Edit</button>
-           <button class="delete-btn" data-id="${row._id}" style="margin-top: 10px;">Delete</button>
+           <button class="delete-btn" data-id="${row._id}">Delete</button>
            </div>`
       ),
     },
   ];
 
   return (
-    <div className="p-6 bg-gray-100 rounded-lg shadow-md">
-      <h2 className="text-2xl mb-4">Manage Work Summaries</h2>
-      <div className='flex float-right'>
-        <button
-          onClick={fetchData}
-          className="bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center mb-4 mr-2"
-        >
-          <RefreshCw className="mr-2" />
-          Refresh
-        </button>
-        <button
-          onClick={handleAddButtonClick}
-          className="bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center mb-4"
-        >
-          <PlusCircle className="mr-2" />
-          Add Work Summary
-        </button>
+    <div className="p-6 bg-white rounded-lg shadow-md mt-20 mrf">
+      <div className="flex justify-content-between mb-6 but">
+        <h1 className="text-xl font-bold text-gray-800 flex items-center space-x-2">Manage Work Summaries</h1>
+        <div className='flex justify-content-end'>
+          <button
+            onClick={fetchData}
+            className="text-white text-sm py-0 px-1 rounded transition duration-200 flex items-center mr-2"
+          >
+            <RefreshCw className="mr-1 ic" />
+            Refresh
+          </button>
+          <button
+            onClick={handleAddButtonClick}
+            className="text-white text-sm py-0 px-1 rounded transition duration-200 flex items-center"
+          >
+            <PlusCircle className="mr-1 ic" />
+            Add Work Summary
+          </button>
+        </div>
       </div>
+
       <AnimatePresence>
         {isFormOpen && <AddWorkSummary onClose={handleCloseForm} fetchData={fetchData} />}
         {isEditFormOpen && (

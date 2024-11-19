@@ -110,12 +110,12 @@ const ManageProjects = () => {
     {
       title: 'Project Name',
       data: 'fld_title',
-      width: "200px",
+      width: "50%",
     },
     {
         title: 'Added On',
         data: 'fld_addedon',
-        width: "70px",
+        width: "10%",
         render: (data, type) => {
           if (type === 'display') {
             return data ? new Intl.DateTimeFormat('en-GB', {
@@ -127,50 +127,52 @@ const ManageProjects = () => {
           return data ? new Date(data).getTime() : 0;
         },
       },
-    {
-        title: 'Status',
-        data: 'status',
-        width: "50px",
-        render: (data) => {
-          if (data) {
-            // For Active
-            return `<span style="background-color: lightgreen; color: green; padding: 5px; border-radius: 5px;">Active</span>`;
-          } else {
-            // For Inactive
-            return `<span style="background-color: lightcoral; color: red; padding: 5px; border-radius: 5px;">Inactive</span>`;
-          }
-        },
-      },
+    // {
+    //     title: 'Status',
+    //     data: 'status',
+    //     width: "10%",
+    //     render: (data) => {
+    //       if (data) {
+    //         // For Active
+    //         return `<p class="n-sp-active">Active</p>`;
+    //       } else {
+    //         // For Inactive
+    //         return `<p class="n-sp-inactive">Inactive</p>`;
+    //       }
+    //     },
+    //   },
     {
       title: 'Actions',
-      width: "100px",
+      width: "80px",
       render: (data, type, row) => (
-        `<div style="width: 100%;display:flex;flex-direction:column;">
+        `<div style="">
            <button class="edit-btn" data-id="${row._id}">Edit</button>
-           <button class="delete-btn" data-id="${row._id}" style="margin-top: 10px;">Delete</button>
+           <button class="delete-btn" data-id="${row._id}" >Delete</button>
            </div>`
       ),
     },
   ];
 
   return (
-    <div className="p-6 bg-gray-100 rounded-lg shadow-md">
-      <h2 className="text-2xl mb-4">Manage Projects</h2>
-      <div className='flex float-right'>
-        <button
-          onClick={fetchProjects}
-          className="bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center mb-4 mr-2"
-        >
-          <RefreshCw className="mr-2" />
-          Refresh
-        </button>
-        <button
-          onClick={handleAddButtonClick}
-          className="bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center mb-4"
-        >
-          <PlusCircle className="mr-2" />
-          Add Project
-        </button>
+    <div className="p-6 bg-white rounded-lg shadow-md mt-20 mrf">
+      <div className="flex justify-content-between mb-6 but">
+        <h1 className="text-xl font-bold text-gray-800 flex items-center space-x-2">Manage Projects</h1>
+        <div className='flex justify-content-end'>
+          <button
+            onClick={fetchProjects}
+            className="text-white text-sm py-0 px-1 rounded transition duration-200 flex items-center mr-2"
+          >
+            <RefreshCw className="mr-2 ic" />
+            Refresh
+          </button>
+          <button
+            onClick={handleAddButtonClick}
+            className="text-white text-sm py-0 px-1 rounded transition duration-200 flex items-center"
+          >
+            <PlusCircle className="mr-2 ic" />
+            Add Project
+          </button>
+        </div>
       </div>
       {loading ? (
         <div className="flex justify-center">

@@ -62,7 +62,11 @@
 
 
 
-
+.nav-logo {
+    width: 130px !important;
+    margin-left: 10px;
+    padding: 5px;
+}
 .n-nav-bg{
     background: linear-gradient(to right, #4099ff, #73b4ff) !important;
 }
@@ -274,8 +278,9 @@ p.n-sp-active {
     color: #008000;
     background: #c7f5c7;
     padding: 0px 5px;
-    font-size: 13px;
+    font-size: 12px;
     border-radius: 3px;
+        display: inline-block;
 }
 p.n-sp-inactive:hover {
     background: #ff0000;
@@ -285,6 +290,11 @@ p.n-sp-inactive {
     color: #ff0000;
     background: #ffbcbc;
     padding: 0px 5px;
-    font-size: 13px;
+    font-size: 12px;
     border-radius: 3px;
+        display: inline-block;
+}
+
+table tbody tr {
+    font-size: 12px;
 }

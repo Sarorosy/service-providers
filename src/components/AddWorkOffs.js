@@ -111,149 +111,165 @@ const AddWorkOffs = ({ onClose }) => {
 
     return (
         <motion.div
-            initial={{ x: '100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '100%' }}
-            transition={{ duration: 0.5, ease: 'easeInOut' }}
-            className="bg-sky-50 w-full h-full p-6 fixed top-0 right-0 z-50 overflow-y-auto shadow-lg"
+            // initial={{ x: '100%' }}
+            // animate={{ x: 0 }}
+            // exit={{ x: '100%' }}
+            // transition={{ duration: 0.5, ease: 'easeInOut' }}
+            className="w-full h-full p-6 fixed top-0 right-0 z-50 shadow-lg n-pop-up"
         >
-            <h2 className="text-2xl mb-4">Add Work Off</h2>
-            <button
-                onClick={onClose}
-                className="absolute top-4 right-4 bg-red-500 text-white py-2 px-2 rounded-full"
-            ><CircleX /></button>
-
-            <div className="bg-white shadow-md rounded-lg p-4 mb-5">
-                <ul className="space-y-4">
-                    <li key={workoffs._id} className="text-gray-800 border-b pb-2">
-                        <div className="flex justify-between">
-                            <div className="flex flex-col items-center w-1/3 bg-blue-100 text-blue-800 rounded-lg">
-                                <div className="p-4 w-full text-center">
-                                    Total
-                                </div>
-                                <span className="font-semibold text-2xl">{workoffs.fld_total_no_of_work_offs}</span>
-                            </div>
-                            <div className="flex flex-col items-center w-1/3 bg-green-100 text-green-800 rounded-lg">
-                                <div className="p-4 w-full text-center">
-                                    Availed
-                                </div>
-                                <span className="font-semibold text-2xl">{workoffs.fld_work_offs_availed}</span>
-                            </div>
-                            <div className="flex flex-col items-center w-1/3 bg-yellow-100 text-yellow-800 rounded-lg">
-                                <div className="p-4 w-full text-center">
-                                    Balance
-                                </div>
-                                <span className="font-semibold text-2xl">{workoffs.fld_work_offs_balance}</span>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-
-            </div>
-            <form onSubmit={handleSubmit}>
-                <input type="hidden" name="fld_adminid" value={workoff.fld_adminid} />
-
-                {/* Grid Container for Two Columns */}
-                <div className="grid grid-cols-2 gap-4 mb-4">
-
-                    {/* Start Date Field */}
-                    <div>
-                        <label htmlFor="fld_start_date" className="block mb-2">Start Date:</label>
-                        <input
-                            type="date"
-                            id="fld_start_date"
-                            name="fld_start_date"
-                            value={workoff.fld_start_date}
-                            onChange={handleChange}
-                            required
-                            className="border rounded p-2 w-full"
-                        />
-                        <select
-                            name="fld_start_half"
-                            value={workoff.fld_start_half}
-                            onChange={handleChange}
-                            className="border rounded p-2 mt-2 w-full"
-                        >
-                            <option value="First Half">First Half</option>
-                            <option value="Second Half">Second Half</option>
-                        </select>
-                    </div>
-
-                    {/* End Date Field */}
-                    <div>
-                        <label htmlFor="fld_end_date" className="block mb-2">End Date:</label>
-                        <input
-                            type="date"
-                            id="fld_end_date"
-                            name="fld_end_date"
-                            value={workoff.fld_end_date}
-                            onChange={handleChange}
-                            required
-                            className="border rounded p-2 w-full"
-                        />
-                        <select
-                            name="fld_end_half"
-                            value={workoff.fld_end_half}
-                            onChange={handleChange}
-                            className="border rounded p-2 mt-2 w-full"
-                        >
-                            <option value="First Half">First Half</option>
-                            <option value="Second Half">Second Half</option>
-                        </select>
-                    </div>
-
-                    {/* Duration Field */}
-                    <div>
-                        <label htmlFor="fld_duration" className="block mb-2">Duration (days):</label>
-                        <input
-                            type="number"
-                            id="fld_duration"
-                            name="fld_duration"
-                            value={workoff.fld_duration}
-                            readOnly
-                            className="border rounded p-2 w-full bg-gray-100"
-                        />
-                    </div>
-
-                    {/* Leave Type Field */}
-                    <div>
-                        <label htmlFor="fld_leave_type" className="block mb-2">Leave Type:</label>
-                        <select
-                            name="fld_leave_type"
-                            value={workoff.fld_leave_type}
-                            onChange={handleChange}
-                            className="border rounded p-2 w-full"
-                        >
-                            <option value="Paid">Paid</option>
-                            <option value="Unpaid">Unpaid</option>
-                        </select>
-                    </div>
-
-                    {/* Reason Field */}
-                    <div className="col-span-2"> {/* Span across both columns */}
-                        <label htmlFor="fld_reason" className="block mb-2">Reason (at least 20 words):</label>
-                        <textarea
-                            id="fld_reason"
-                            name="fld_reason"
-                            value={workoff.fld_reason}
-                            onChange={handleChange}
-                            required
-                            className={`border rounded p-2 w-full ${reasonError ? 'border-red-500' : ''}`}
-                            rows="4"
-                        />
-                        {reasonError && <p className="text-red-500">{reasonError}</p>}
-                    </div>
+            <div className="wen mx-auto bg-white p-6 rounded-lg shadow-md">
+                <div className='n-pop-up-head d-flex justify-content-between align-items-center mb-4 border-bottom pb-3'>
+                    <h2 className="text-2xl font-bold text-center">Add Work Off</h2>
+                    <button
+                        onClick={onClose}
+                        className="text-white py-2 px-2 rounded-full"
+                    >
+                        <CircleX className='colorr' />
+                    </button>
                 </div>
+            
 
-                {/* Submit Button */}
-                <button
-                    type="submit"
-                    className={`bg-blue-600 text-white px-4 py-2 rounded-lg ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
-                    disabled={isSubmitting}
-                >
-                    {isSubmitting ? <RevolvingDot height="20" width="20" color="white" ariaLabel="loading" /> : 'Add Work Off'}
-                </button>
-            </form>
+                <div className="mb-4">
+                    <ul className="">
+                        <li key={workoffs._id} className="text-gray-800 border-b pb-3">
+                            <div className="row">
+                                <div className='col-md-4'>
+                                    <div className="p-4 flex flex-col items-center bg-blue-100 text-blue-800 rounded-lg">
+                                        <div className="w-full text-center mb-2">
+                                            Total
+                                        </div>
+                                        <span className="font-semibold text-2xl">{workoffs.fld_total_no_of_work_offs}</span>
+                                    </div>
+                                </div>
+                                <div className='col-md-4'>
+                                    <div className="p-4 flex flex-col items-center bg-green-100 text-green-800 rounded-lg">
+                                        <div className="w-full text-center mb-2">
+                                            Availed
+                                        </div>
+                                        <span className="font-semibold text-2xl">{workoffs.fld_work_offs_availed}</span>
+                                    </div>
+                                </div>
+                                <div className='col-md-4'>
+                                    <div className="p-4 flex flex-col items-center bg-yellow-100 text-yellow-800 rounded-lg">
+                                        <div className="w-full text-center mb-2">
+                                            Balance
+                                        </div>
+                                        <span className="font-semibold text-2xl">{workoffs.fld_work_offs_balance}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+
+                </div>
+                <form onSubmit={handleSubmit}>
+                    <input type="hidden" name="fld_adminid" value={workoff.fld_adminid} />
+
+                    {/* Grid Container for Two Columns */}
+                    <div className="grid grid-cols-2 gap-4 mb-4">
+
+                        {/* Start Date Field */}
+                        <div>
+                            <label htmlFor="fld_start_date" className="block mb-2">Start Date:</label>
+                            <input
+                                type="date"
+                                id="fld_start_date"
+                                name="fld_start_date"
+                                value={workoff.fld_start_date}
+                                onChange={handleChange}
+                                required
+                                className="border rounded p-2 w-full"
+                            />
+                            <select
+                                name="fld_start_half"
+                                value={workoff.fld_start_half}
+                                onChange={handleChange}
+                                className="border rounded p-2 mt-2 w-full"
+                            >
+                                <option value="First Half">First Half</option>
+                                <option value="Second Half">Second Half</option>
+                            </select>
+                        </div>
+
+                        {/* End Date Field */}
+                        <div>
+                            <label htmlFor="fld_end_date" className="block mb-2">End Date:</label>
+                            <input
+                                type="date"
+                                id="fld_end_date"
+                                name="fld_end_date"
+                                value={workoff.fld_end_date}
+                                onChange={handleChange}
+                                required
+                                className="border rounded p-2 w-full"
+                            />
+                            <select
+                                name="fld_end_half"
+                                value={workoff.fld_end_half}
+                                onChange={handleChange}
+                                className="border rounded p-2 mt-2 w-full"
+                            >
+                                <option value="First Half">First Half</option>
+                                <option value="Second Half">Second Half</option>
+                            </select>
+                        </div>
+
+                        {/* Duration Field */}
+                        <div>
+                            <label htmlFor="fld_duration" className="block mb-2">Duration (days):</label>
+                            <input
+                                type="number"
+                                id="fld_duration"
+                                name="fld_duration"
+                                value={workoff.fld_duration}
+                                readOnly
+                                className="border rounded p-2 w-full bg-gray-100"
+                            />
+                        </div>
+
+                        {/* Leave Type Field */}
+                        <div>
+                            <label htmlFor="fld_leave_type" className="block mb-2">Leave Type:</label>
+                            <select
+                                name="fld_leave_type"
+                                value={workoff.fld_leave_type}
+                                onChange={handleChange}
+                                className="border rounded p-2 w-full"
+                            >
+                                <option value="Paid">Paid</option>
+                                <option value="Unpaid">Unpaid</option>
+                            </select>
+                        </div>
+
+                        {/* Reason Field */}
+                        <div className="col-span-2"> {/* Span across both columns */}
+                            <label htmlFor="fld_reason" className="block mb-2">Reason (at least 20 words):</label>
+                            <textarea
+                                id="fld_reason"
+                                name="fld_reason"
+                                value={workoff.fld_reason}
+                                onChange={handleChange}
+                                required
+                                className={`border rounded p-2 w-full ${reasonError ? 'border-red-500' : ''}`}
+                                rows="4"
+                            />
+                            {reasonError && <p className="text-red-500">{reasonError}</p>}
+                        </div>
+                    </div>
+                    <div className='flex justify-end'>
+                        <div className='but'>
+                            {/* Submit Button */}
+                            <button
+                                type="submit"
+                                className={`bg-blue-600 text-white px-2 rounded-lg ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                disabled={isSubmitting}
+                            >
+                                {isSubmitting ? <RevolvingDot height="20" width="20" color="white" ariaLabel="loading" /> : 'Add Work Off'}
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
 
         </motion.div>
     );

@@ -185,31 +185,32 @@ const ManageWorkDays = () => {
   
 
   return (
-    <div className="flex p-6 bg-sky-50 rounded-lg shadow-md h-auto">
+    <div className="flex p-6 bg-white rounded-lg shadow-md h-auto mt-20">
       <div className="flex-1">
-      <h1 className="text-3xl font-bold mb-6 text-gray-800 flex items-center">
-                {user ? (
-                    <>
-                        <img
-                            src={user.fld_profile_image && user.fld_profile_image !== ""
-                                ? 'https://serviceprovidersback.onrender.com/uploads/profileimg/' + user.fld_profile_image
-                                : "https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg"}
-                            alt={user.fld_username || 'No Name'}
-                            className="w-10 h-10 rounded-full border border-gray-200 mr-2" // Added margin to separate image and text
-                        />
-                        Your Work Days
-                    </>
-                ) : 'Loading...'}
+        <div className="flex justify-content-between mb-6 items-center border-bottom pb-3 mb-4">
+            <h1 className="text-2xl font-bold text-gray-800 flex items-center">
+              {user ? (
+                  <>
+                      <img
+                          src={user.fld_profile_image && user.fld_profile_image !== ""
+                              ? 'https://serviceprovidersback.onrender.com/uploads/profileimg/' + user.fld_profile_image
+                              : "https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg"}
+                          alt={user.fld_username || 'No Name'}
+                          className="w-10 h-10 rounded-full border border-gray-200 mr-2" // Added margin to separate image and text
+                      />
+                      Your Work Days
+                  </>
+              ) : 'Loading...'}
             </h1>
-        <div className="flex justify-end items-center mb-4">
+            <div className="flex justify-end items-center">
                 <button
                     onClick={() => navigate(-1)} // Go back to the previous page
-                    className="bg-red-500 text-white flex px-4 py-2 rounded-lg shadow-md hover:bg-red-600 transition duration-200"
+                    className="bg-red-500 text-white flex px-1 py-0 f-12 rounded-lg shadow-md hover:bg-red-600 transition duration-200 flex items-center "
                 >
-                    <ArrowLeftCircle className='mr-2' /> Back
+                    <ArrowLeftCircle className='mr-2 ic' /> Back
                 </button>
-                
             </div>
+          </div>
         {loading ? (
           <div className="flex justify-center items-center h-48">
             <RevolvingDot height="100" width="100" color="#3b82f6" ariaLabel="loading" />

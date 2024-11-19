@@ -1,7 +1,7 @@
 // src/components/Header.js
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import logo from '../assets/logo.png'; // Adjust the path as necessary
+import logo from '../assets/logo-elk.png'; // Adjust the path as necessary
 import ConfirmationModal from './ConfirmationModal'; // Import the ConfirmationModal component
 
 
@@ -24,7 +24,7 @@ const Header = () => {
         <img
           src={logo}
           alt="Company Logo"
-          className="h-12 w-auto mr-4 ml-2"
+          className="nav-logo"
         />
         {/* <h1 className="text-3xl font-bold text-black transition-colors duration-300">
           Service Providers

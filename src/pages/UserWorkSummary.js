@@ -213,6 +213,29 @@ const UserWorkSummary = () => {
             <div className='flex justify-content-between mb-6'>
                 <div className="flex items-center justify-around space-x-4 max-w-5xl">
                     <h1 className="text-xl font-bold text-gray-800 flex items-center space-x-2">
+                        Manage Reports 
+                        
+                    </h1>
+
+                    
+                </div>
+
+                <div className="flex justify-end items-center" style={{width:"400px", }}>
+               
+                    
+                    <div className='but ml-3'>
+                        <button
+                            onClick={handleRefresh}
+                            className="text-white text-sm py-1 px-1 rounded transition duration-200 flex items-center"
+                        >
+                            Refresh <RefreshCw className='ml-2 ic' />
+                        </button></div>
+                </div>
+            </div>
+            <div className='flex justify-content-between mb-6'>
+                <div className="flex items-center justify-around space-x-4 max-w-5xl">
+                    <h1 className="text-xl font-bold text-gray-800 flex items-center space-x-2">
+                        
                         {user ? (
                             <>
                                 <img
@@ -228,32 +251,22 @@ const UserWorkSummary = () => {
                             'Loading...'
                         )}
                     </h1>
-
-                    
                 </div>
 
                 <div className="flex justify-end items-center" style={{width:"400px", }}>
-                <select
-                        onChange={handleUserChange}
-                        className="border border-gray-300 rounded ml-20 form-control-sm"
-                        id="user-select"
-                        style={{marginRight:"8px"}}
-                    >
-                        <option value="">Select service provider</option>
-                        {users.map((provider) => (
-                            <option key={provider._id} value={provider._id}>
-                                {provider.fld_name}
-                            </option>
-                        ))}
-                    </select>
-                    
-                    <div className='but ml-3'>
-                        <button
-                            onClick={handleRefresh}
-                            className="text-white text-sm py-1 px-1 rounded transition duration-200 flex items-center"
+                    <select
+                            onChange={handleUserChange}
+                            className="border border-gray-300 rounded ml-20 form-control-sm"
+                            id="user-select"
+                            style={{marginRight:"8px"}}
                         >
-                            Refresh <RefreshCw className='ml-2 ic' />
-                        </button></div>
+                            <option value="">Select service provider</option>
+                            {users.map((provider) => (
+                                <option key={provider._id} value={provider._id}>
+                                    {provider.fld_name}
+                                </option>
+                            ))}
+                    </select>
                 </div>
             </div>
             {showScrollTop && (

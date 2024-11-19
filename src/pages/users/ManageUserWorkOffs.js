@@ -87,23 +87,25 @@ const ManageUserWorkOffs = () => {
   ];
 
   return (
-    <div className="p-6 bg-gray-100 rounded-lg shadow-md">
-      <h2 className="text-2xl mb-4">Manage Work Offs</h2>
-      <div className='flex float-right'>
-        <button
-          onClick={fetchData}
-          className="bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center mb-4 mr-2"
-        >
-          <RefreshCw className="mr-2" />
-          Refresh
-        </button>
-        <button
-          onClick={handleAddButtonClick}
-          className="bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center mb-4"
-        >
-          <PlusCircle className="mr-2" />
-          Add Work Off
-        </button>
+    <div className="p-6 bg-white rounded-lg shadow-md mt-20 ">
+      <div className="flex justify-content-between mb-6 but">
+        <h1 className="text-xl font-bold text-gray-800">Manage Work Offs</h1>
+        <div className='flex float-right'>
+          <button
+            onClick={fetchData}
+            className="text-white text-sm py-0 px-1 rounded transition duration-200 flex items-center mr-2"
+          >
+            <RefreshCw className="mr-2 ic" />
+            Refresh
+          </button>
+          <button
+            onClick={handleAddButtonClick}
+            className="text-white text-sm py-0 px-1 rounded transition duration-200 flex items-center"
+          >
+            <PlusCircle className="mr-2 ic" />
+            Add Work Off
+          </button>
+        </div>
       </div>
       <AnimatePresence>
         {isFormOpen && <AddWorkOff onClose={handleCloseForm} fetchData={fetchData} onWorkOffAdded={handleWorkOffAdded} />}

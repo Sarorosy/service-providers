@@ -79,44 +79,50 @@ const AddWorkSummary = ({ onClose }) => {
 
     return (
         <motion.div
-            initial={{ x: '100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '100%' }}
-            transition={{ duration: 0.5, ease: 'easeInOut' }}
-            className="bg-sky-50 w-full h-full p-6 fixed top-0 right-0 z-50 overflow-y-auto shadow-lg"
+            // initial={{ x: '100%' }}
+            // animate={{ x: 0 }}
+            // exit={{ x: '100%' }}
+            // transition={{ duration: 0.5, ease: 'easeInOut' }}
+            className="w-full h-full p-6 fixed top-0 right-0 z-50 shadow-lg n-pop-up"
         >
-            <h2 className="text-2xl mb-4">Add Work Summary</h2>
+            <div className="wen mx-auto bg-white p-6 rounded-lg shadow-md">
+            <div className='n-pop-up-head d-flex justify-content-between align-items-center mb-4 border-bottom pb-3'>
+            <h2 className="text-2xl font-bold text-center">Add Work Summary</h2>
             <button
                 onClick={onClose}
-                className="absolute top-4 right-4 bg-red-500 text-white py-2 px-2 rounded-full"
+                className="text-white py-2 px-2 rounded-full"
             >
-                <CircleX />
+                <CircleX className='colorr' />
             </button>
+            </div>
+            
             <form onSubmit={handleSubmit}>
-                <div className="mb-4">
-                    <label htmlFor="project-select" className="block mb-2">Select Project:</label>
-                    <select
-                        id="project-select"
-                        value={selectedProjectId}
-                        required
-                        className="border rounded p-2 w-full"
-                    >
-                        <option value="" disabled>Select a project</option>
-                        {projects.map((project) => (
-                            <option key={project._id} value={project._id}>
-                                {project.fld_title} {/* Adjust to your project title field */}
-                            </option>
-                        ))}
-                    </select>
-                </div>
-                <div className="mb-4">
-                    <label className="block mb-2">Added On:</label>
-                    <input
-                        type="text"
-                        value={new Date().toLocaleDateString('en-US')} // Today's date in 'MM/DD/YYYY' format
-                        readOnly
-                        className="border rounded p-2 w-full bg-gray-200"
-                    />
+                <div className='row'>
+                    <div className="mb-4 col-md-6">
+                        <label htmlFor="project-select" className="block mb-2">Select Project:</label>
+                        <select
+                            id="project-select"
+                            value={selectedProjectId}
+                            required
+                            className="border rounded p-2 w-full  form-control-sm"
+                        >
+                            <option value="" disabled>Select a project</option>
+                            {projects.map((project) => (
+                                <option key={project._id} value={project._id}>
+                                    {project.fld_title} {/* Adjust to your project title field */}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                    <div className="mb-4 col-md-6">
+                        <label className="block mb-2">Added On:</label>
+                        <input
+                            type="text"
+                            value={new Date().toLocaleDateString('en-US')} // Today's date in 'MM/DD/YYYY' format
+                            readOnly
+                            className="border rounded w-full bg-gray-200  form-control-sm"
+                        />
+                    </div>
                 </div>
                 <input type="hidden" name="fld_adminid" value={userId} />
                 <input type="hidden" name="status" value="Active" />
@@ -131,14 +137,19 @@ const AddWorkSummary = ({ onClose }) => {
                         rows="4"
                     />
                 </div>
-                <button
-                    type="submit"
-                    className={`bg-blue-600 text-white px-4 py-2 rounded-lg ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
-                    disabled={isSubmitting}
-                >
-                    {isSubmitting ? <RevolvingDot height="20" width="20" color="white" ariaLabel="loading" /> : 'Add Work Summary'}
-                </button>
+                <div className='flex justify-end'>
+                    <div className='but'>
+                        <button
+                            type="submit"
+                            className={`bg-blue-600 text-white px-1 rounded-lg ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
+                            disabled={isSubmitting}
+                        >
+                            {isSubmitting ? <RevolvingDot height="20" width="20" color="white" ariaLabel="loading" /> : 'Add Work Summary'}
+                        </button>
+                    </div>
+                </div>
             </form>
+            </div>
         </motion.div>
     );
 };

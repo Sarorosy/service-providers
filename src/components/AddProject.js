@@ -48,19 +48,22 @@ const AddProject = ({ onClose }) => {
 
     return (
         <motion.div
-            initial={{ x: '100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '100%' }}
-            transition={{ duration: 0.5, ease: 'easeInOut' }}
-            className="bg-sky-50 w-full h-full p-6 fixed top-0 right-0 z-50 overflow-y-auto shadow-lg"
+            // initial={{ x: '100%' }}
+            // animate={{ x: 0 }}
+            // exit={{ x: '100%' }}
+            // transition={{ duration: 0.5, ease: 'easeInOut' }}
+            className="w-full h-full p-6 fixed top-0 right-0 z-50 shadow-lg n-pop-up"
         >
-            <h2 className="text-2xl mb-4">Add Project</h2>
-            <button
-                onClick={onClose}
-                className="absolute top-4 right-4 bg-red-500 text-white py-2 px-2 rounded-full"
-            >
-                <CircleX />
-            </button>
+            <div className="wen3 mx-auto bg-white p-6 rounded-lg shadow-md">
+            <div className='n-pop-up-head d-flex justify-content-between align-items-center mb-4 border-bottom pb-3'>
+                <h2 className="text-2xl font-bold text-center">Add Project</h2>
+                <button
+                    onClick={onClose}
+                    className="text-white py-2 px-2 rounded-full"
+                >
+                    <CircleX className='colorr' />
+                </button>
+            </div>
             <form onSubmit={handleSubmit}>
                 <div className="mb-4">
                     <label htmlFor="fld_title" className="block mb-2">Project Title:</label>
@@ -85,14 +88,19 @@ const AddProject = ({ onClose }) => {
                         className="border rounded p-2 w-full bg-gray-200"
                     />
                 </div>
-                <button
-                    type="submit"
-                    className={`bg-blue-600 text-white px-4 py-2 rounded-lg ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
-                    disabled={isSubmitting}
-                >
-                    {isSubmitting ? <RevolvingDot height="20" width="20" color="white" ariaLabel="loading" /> : 'Add Project'}
-                </button>
+                <div className='flex justify-end'>
+                    <div className='but'>
+                        <button
+                            type="submit"
+                            className={`bg-blue-600 text-white px-2 rounded-lg ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
+                            disabled={isSubmitting}
+                        >
+                            {isSubmitting ? <RevolvingDot height="20" width="20" color="white" ariaLabel="loading" /> : 'Add Project'}
+                        </button>
+                    </div>
+                </div>
             </form>
+            </div>
         </motion.div>
     );
 };
