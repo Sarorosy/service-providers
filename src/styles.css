@@ -159,6 +159,7 @@
 }
 .n-card .card-header{
     border-bottom: 1px solid #ebedf2 !important;
+    background: #73b4ff1f !important;
 }
  .n-card .card-footer{
     border-top: 1px solid #ebedf2 !important;
@@ -297,4 +298,28 @@ p.n-sp-inactive {
 
 table tbody tr {
     font-size: 12px;
+}
+
+
+
+.rct-notify{
+    height: 310px;
+    overflow-y: scroll;
+}
+.rct-notify::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px #eff6ff;
+	background-color: #eff6ff;
+}
+
+.rct-notify::-webkit-scrollbar
+{
+	width: 5px;
+	background-color: #eff6ff;
+}
+
+.rct-notify::-webkit-scrollbar-thumb
+{
+	background-color: #bbb;
+	border: 0px solid #eff6ff;
 }

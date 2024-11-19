@@ -24,36 +24,45 @@ const ManageWorkoffs = () => {
     }
 
     return (
-        <div className="bg-white shadow-md rounded-lg p-4">
-            <h2 className="text-lg font-semibold mb-4">Manage Workoffs</h2>
-            <ul className="space-y-4">
-    
-        <li key={workoffs._id} className="text-gray-800 border-b pb-2">
-            
-            <div className="flex justify-between">
-                <div className="flex flex-col items-center w-1/3 bg-blue-100 text-blue-800 rounded-lg">
-                    <div className=" p-4  w-full text-center">
-                        Total
-                    </div>
-                    <span className="font-semibold text-2xl">{workoffs.fld_total_no_of_work_offs}</span>
-                </div>
-                <div className="flex flex-col items-center w-1/3 bg-green-100 text-green-800 rounded-lg">
-                    <div className=" p-4  w-full text-center">
-                        Availed
-                    </div>
-                    <span className="font-semibold text-2xl">{workoffs.fld_work_offs_availed}</span>
-                </div>
-                <div className="flex flex-col items-center w-1/3 bg-yellow-100 text-yellow-800 rounded-lg">
-                    <div className=" p-4  w-full text-center">
-                        Balance
-                    </div>
-                    <span className="font-semibold text-2xl">{workoffs.fld_work_offs_balance}</span>
+        <div className="card n-card round w-100">
+            <div className='card-header'>
+                <div className='d-flex align-items-center justify-content-between'>
+                    <h4 className="card-title d-flex mb-0 font-bold align-items-center f-15">
+                        Manage Workoffs
+                    </h4>
                 </div>
             </div>
-        </li>
-    
-</ul>
-
+            <div className="card-body">
+                <div key={workoffs._id} className="">
+                    
+                    <div className="row">
+                        <div className='col-md-4'>
+                        <div className="p-4 items-center text-center bg-blue-100 text-blue-800 rounded-lg">
+                            <div className="mb-2 w-full text-center">
+                                Total
+                            </div>
+                            <span className="font-semibold text-2xl">{workoffs.fld_total_no_of_work_offs}</span>
+                        </div>
+                        </div>
+                        <div className='col-md-4'>
+                        <div className="p-4 items-center text-center bg-green-100 text-green-800 rounded-lg">
+                            <div className="mb-2 w-full text-center">
+                                Availed
+                            </div>
+                            <span className="font-semibold text-2xl">{workoffs.fld_work_offs_availed}</span>
+                        </div>
+                        </div>
+                        <div className='col-md-4'>
+                        <div className="p-4 items-center text-center bg-yellow-100 text-yellow-800 rounded-lg">
+                            <div className="mb-2 w-full text-center">
+                                Balance
+                            </div>
+                            <span className="font-semibold text-2xl">{workoffs.fld_work_offs_balance}</span>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 };

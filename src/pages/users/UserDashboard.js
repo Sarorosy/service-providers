@@ -6,18 +6,21 @@ import ManageWorkoffs from './ManageWorkoffs';
 
 const UserDashboard = () => {
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6">
-            <div className="bg-white shadow-md rounded-lg p-4">
+        
+        <div className="row mt-20">
+            <div className="col-md-6">
                 <RecentNotification />
+                
             </div>
-            <div className="bg-white shadow-md rounded-lg p-4">
+            <div className="col-md-6">
                 <UpcomingHolidays />
+                
             </div>
-            <div className="bg-white shadow-md rounded-lg p-4">
-                <MyWorkoffs />
+            <div className="col-md-6 d-flex">
+            <MyWorkoffs />
             </div>
-            <div className="bg-white shadow-md rounded-lg p-4">
-                <ManageWorkoffs />
+            <div className="col-md-6 d-flex">
+            <ManageWorkoffs />
             </div>
         </div>
     );

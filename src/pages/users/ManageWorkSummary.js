@@ -139,7 +139,7 @@ const ManageWorkSummary = () => {
     {
       title: 'Project',
       data: 'fld_projectid',
-      width: "200px",
+      width: "400px",
       render: (data) => {
         const project = projects.find((proj) => proj._id == data);
         const title = project ? project.fld_title : 'Unknown Project'; 
@@ -149,7 +149,7 @@ const ManageWorkSummary = () => {
     {
       title: 'Added On',
       data: 'fld_addedon',
-      width: "100px",
+      width: "200px",
       render: (data, type) => {
         if (type === 'display') {
           return data ? new Intl.DateTimeFormat('en-GB', {

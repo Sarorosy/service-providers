@@ -25,11 +25,17 @@ const MyWorkoffs = () => {
     }
 
     return (
-        <div className="bg-white shadow-md rounded-lg p-4">
-            <h2 className="text-lg font-semibold mb-4">My Workoffs</h2>
-            <ul className="space-y-2">
+        <div className="card n-card round w-100">
+            <div className='card-header'>
+                <div className='d-flex align-items-center justify-content-between'>
+                    <h4 className="card-title d-flex mb-0 font-bold align-items-center f-15">
+                        My Workoffs
+                    </h4>
+                </div>
+            </div>
+            <div className="card-body">
                 {workoffs && workoffs.length > 0 && workoffs.map(workoff => (
-                    <li key={workoff._id} className="flex flex-col text-gray-800">
+                    <div key={workoff._id} className="flex flex-col text-gray-800">
                         <div className="flex justify-between items-start">
                             <span className="text-sm text-gray-600 flex items-center">
                                 <Calendar1 className='mr-1 text-blue-600' />
@@ -45,9 +51,9 @@ const MyWorkoffs = () => {
                             
                         </div>
                         <strong className="mt-2 text-blue-600">{workoff.fld_reason}</strong>
-                    </li>
+                    </div>
                 ))}
-            </ul>
+            </div>
         </div>
     );
 };

@@ -25,28 +25,36 @@ const UpcomingHolidays = () => {
     }
 
     return (
-        <div className="bg-white shadow-md rounded-lg p-4">
-            <div className="bg-purple-100 shadow-md rounded p-4 flex items-center">
-                <Calendar1 className="h-8 w-8 text-purple-600 mr-3" />
-                <div>
-                    <h2 className="text-xl font-bold">Upcoming Holidays</h2>
-                    <p className="text-3xl">{holidays.length}</p>
-
+        <div className="card n-card round w-100">
+            <div className='card-header'>
+                <div className='d-flex align-items-center justify-content-between'>
+                    <h4 className="card-title d-flex mb-0 font-bold align-items-center f-15">
+                        <Calendar1 className="h-6 w-6 text-info mr-3" />
+                        Upcoming Holidays
+                    </h4>
+                    <div className=""><span className='badge badge-info f-11'>{holidays.length}</span></div>
                 </div>
             </div>
-            <ul className="space-y-2">
+        
+            <div className="card-body rct-notify">
                 {holidays.map(holiday => (
-                    <li key={holiday._id} className="flex flex-col text-gray-800">
-                        <div key={holiday._id} className="bg-purple-50 p-3 rounded mt-2 shadow-md">
-                            <h3 className="text-lg font-semibold">{holiday.fld_title}</h3>
-                            <p className="text-gray-600">
-                                {/* Format the date correctly */}
-                                {new Date(holiday.fld_holiday_date).toLocaleDateString()}
-                            </p>
+                    <div className="card-list">
+                        <div className="item-list">
+                            <div className="info-user">
+                                <div key={holiday._id} className="d-flex justify-content-between bg-purple-50 p-3 rounded shadow-md">
+                                    
+                                        <h4 className="mr-2 text-blue-600 f-14">{holiday.fld_title}</h4>
+                                        <p className="text-green-600 f-12 font-bold">
+                                            {/* Format the date correctly */}
+                                            {new Date(holiday.fld_holiday_date).toLocaleDateString()}
+                                        </p>
+                                    
+                                </div>
+                            </div>
                         </div>
-                    </li>
+                    </div>
                 ))}
-            </ul>
+            </div>
         </div>
     );
 };
