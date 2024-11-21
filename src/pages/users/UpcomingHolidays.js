@@ -7,8 +7,8 @@ const UpcomingHolidays = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const userId = sessionStorage.getItem('userId');
-        fetch(`https://serviceprovidersback.onrender.com/api/holidays/user/${userId}`)
+        const locationId = sessionStorage.getItem('locationId');
+        fetch(`https://serviceprovidersback.onrender.com/api/holidays/user/${locationId}`)
             .then(response => response.json())
             .then(data => {
                 setHolidays(data);
@@ -35,25 +35,26 @@ const UpcomingHolidays = () => {
                     <div className=""><span className='badge badge-info f-11'>{holidays.length}</span></div>
                 </div>
             </div>
-        
+
             <div className="card-body rct-notify">
-                {holidays.map(holiday => (
-                    <div className="card-list">
-                        <div className="item-list">
-                            <div className="info-user">
-                                <div key={holiday._id} className="d-flex justify-content-between bg-purple-50 p-3 rounded shadow-md">
-                                    
+                {holidays.length > 0 ? (
+                    holidays.map(holiday => (
+                        <div key={holiday._id} className="card-list">
+                            <div className="item-list">
+                                <div className="info-user">
+                                    <div className="d-flex justify-content-between bg-purple-50 p-3 rounded shadow-md">
                                         <h4 className="mr-2 text-blue-600 f-14">{holiday.fld_title}</h4>
                                         <p className="text-green-600 f-12 font-bold">
-                                            {/* Format the date correctly */}
                                             {new Date(holiday.fld_holiday_date).toLocaleDateString()}
                                         </p>
-                                    
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                ))}
+                    ))
+                ) : (
+                    <p className="text-center text-gray-500">No upcoming holidays</p>
+                )}
             </div>
         </div>
     );

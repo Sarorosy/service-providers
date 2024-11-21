@@ -3,7 +3,7 @@ import React from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { CircleX, TriangleAlert } from 'lucide-react';
 
-const ConfirmationModal = ({ isOpen, onClose, onConfirm, content, isReversible = "" }) => {
+const ConfirmationModal = ({ isOpen, onClose, onConfirm, content, isReversible = "", showbuttons = "" }) => {
     return (
         <AnimatePresence>
             {isOpen && (
@@ -23,32 +23,33 @@ const ConfirmationModal = ({ isOpen, onClose, onConfirm, content, isReversible =
                         <div className='text-center smallct'>
                             <h2 className="text-lg mb-3 font-semibold">
                                 <span className=" f-20">
-                                {content}
+                                    {content}
                                 </span>
                             </h2>
-                        {isReversible && (
-                            <p className="bg-red-100 p-1 rounded flex my-2">
-                                <TriangleAlert className="mr-2 text-red-600 font-semibold ic1" />
-                                This is an irreversible process
-                            </p>
-                        )}
+                            {isReversible && (
+                                <p className="bg-red-100 p-1 rounded flex my-2">
+                                    <TriangleAlert className="mr-2 text-red-600 font-semibold ic1" />
+                                    This is an irreversible process
+                                </p>
+                            )}
                             {/* <span className="block text-gray-700">{content}</span> */}
-                            </div>
-
-                        <div className="flex justify-center mt-3 smallcta">
-                            <button
-                                onClick={onClose}
-                                className="bg-gray-300 text-gray-800 py-1 px-2 rounded mr-2 transition duration-200 hover:bg-gray-400"
-                            >
-                                No
-                            </button>
-                            <button
-                                onClick={onConfirm}
-                                className="bg-red-600 text-white py-1 px-3 rounded transition duration-200 hover:bg-red-700"
-                            >
-                                Yes
-                            </button>
                         </div>
+                        {!showbuttons && (<>
+                            <div className="flex justify-center mt-3 smallcta">
+                                <button
+                                    onClick={onClose}
+                                    className="bg-gray-300 text-gray-800 py-1 px-2 rounded mr-2 transition duration-200 hover:bg-gray-400"
+                                >
+                                    No
+                                </button>
+                                <button
+                                    onClick={onConfirm}
+                                    className="bg-red-600 text-white py-1 px-3 rounded transition duration-200 hover:bg-red-700"
+                                >
+                                    Yes
+                                </button>
+                            </div>
+                        </>)}
 
                     </motion.div>
                 </motion.div>

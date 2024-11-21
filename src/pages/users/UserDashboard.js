@@ -20,7 +20,7 @@ const UserDashboard = () => {
             <MyWorkoffs />
             </div>
             <div className="col-md-6 d-flex">
-            <ManageWorkoffs />
+            
             </div>
         </div>
     );

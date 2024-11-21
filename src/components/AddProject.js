@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { CircleX } from 'lucide-react';
 import $ from 'jquery';
 
-const AddProject = ({ onClose }) => {
+const AddProject = ({ onClose, onRefresh }) => {
     const [title, setTitle] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
     const userId = sessionStorage.getItem('userId');
@@ -24,7 +24,7 @@ const AddProject = ({ onClose }) => {
         };
 
         try {
-            const response = await fetch('https://serviceprovidersback.onrender.com/api/projects', {
+            const response = await fetch('https://serviceprovidersback.onrender.com/api/projects/new/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -37,6 +37,7 @@ const AddProject = ({ onClose }) => {
             }
 
             //alert('Project added successfully');
+            onRefresh();
             onClose(); // Close the modal upon successful submission
         } catch (error) {
             console.error('Error adding project:', error);

@@ -163,6 +163,7 @@ const UserWorkSummary = () => {
                 const title = project ? project.fld_title : 'Unknown Project';
                 return title ? `<span class="text-break f-12"> ${title}</span>` : 'No Title';
             },
+            orderable: false
         },
         {
             title: 'Description',
@@ -170,19 +171,13 @@ const UserWorkSummary = () => {
             render: (data) => {
                 return data ? data : 'No Description'; // Display 'No Description' if description is not present
             },
-        },
-        {
-            title: 'Status',
-            data: 'status',
-            width: "100px",
-            render: (data) => {
-                return data ? data : 'No Status'; // Display 'No Status' if status is not present
-            },
+            orderable: false
         },
         {
             title: 'Date Added',
             data: 'fld_addedon',
             width: "110px",
+             orderable: false,
             render: (data, type) => {
               if (type === 'display') {
                 return data
@@ -299,8 +294,8 @@ const UserWorkSummary = () => {
                     options={{
                         searching: true,
                         paging: true,
-                        ordering: false,
-                        order: [[3, 'desc']], // Sort by the 4th column (fld_addedon) in descending order
+                        ordering: true,
+                        order: [[2, 'desc']], // Sort by the 4th column (fld_addedon) in descending order
                         responsive: true,
                         className: 'display bg-white rounded-lg shadow-sm',
                     }}

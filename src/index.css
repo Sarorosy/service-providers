@@ -243,7 +243,22 @@ code {
   display: none;
   /* For Chrome, Safari, and Edge */
 }
-
+.dataTable .greenbt {
+  color: #00740FFF;
+  /* Green background for edit button */
+  background-color: #9BFFA0FF;
+  margin: 3px 0;
+  border-radius: 3px;
+  padding: 1px;
+}
+.dataTable .redbt {
+  color: #740000FF;
+  /* Green background for edit button */
+  background-color: #FF9B9BFF;
+  margin: 3px 3px;
+  border-radius: 3px;
+  padding: 1px;
+}
 /* Add this CSS to your stylesheet or in a style tag */
 .table-container {
   display: flex;

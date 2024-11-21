@@ -80,10 +80,10 @@ const ManageWorkoffs = () => {
   const columns = [
     {
       title: 'User',
-      data: 'fld_service_provider_id',
+      data: 'fld_adminid',
       width: "90px",
       render: (data) => {
-        const provider = serviceProviders.find(provider => provider._id == data); // Match by ID
+        const provider = serviceProviders.find(provider => provider._id === data); // Match by ID
         return `<div style="width: 100%; font-size: 12px;">${provider ? provider.fld_name : 'Unknown Provider'}</div>`; // Display name or fallback to 'Unknown Provider'
       },
       orderable: false

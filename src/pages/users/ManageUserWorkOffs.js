@@ -71,10 +71,6 @@ const ManageUserWorkOffs = () => {
       render: (data) => `${data} Day${data > 1 ? 's' : ''}`,
     },
     {
-      title: 'Leave Type',
-      data: 'fld_leave_type',
-    },
-    {
       title: 'Reason',
       data: 'fld_reason',
      

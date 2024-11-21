@@ -33,6 +33,8 @@ const ManageProfile = () => {
     const [adminId, setAdminId] = useState(1);
     const userId = sessionStorage.getItem('userId');
     const adminType = sessionStorage.getItem("adminType");
+    const [imagePreview, setImagePreview] = useState(null);
+    
 
     // Fetch service provider data for editing
     const fetchServiceProvider = async () => {
@@ -45,6 +47,7 @@ const ManageProfile = () => {
             if (data.fld_end_date) {
                 data.fld_end_date = data.fld_end_date.substring(0, 10); // Get the date part
             }
+            sessionStorage.setItem('profileImage',data.fld_profile_image);
             console.log(data)
             setFormData({ ...data });
         } else {
@@ -76,6 +79,7 @@ const ManageProfile = () => {
             ...prevData,
             [name]: files[0],
         }));
+        
     };
     const isFormComplete = () => {
         // List of required fields to check
@@ -114,13 +118,15 @@ const ManageProfile = () => {
             sessionStorage.setItem('accountNo', formData.fld_accountno);
             sessionStorage.setItem('branch', formData.fld_branch);
             sessionStorage.setItem('ifsc', formData.fld_ifsc);
-            
+            sessionStorage.setItem('profileImage',formData.fld_profile_image)
+            console.log("the profile image is" + response.fld_profile_image)
             
         } else {
             toast.error("Error updating Profile!");
         }
         setLoading(false);
         fetchServiceProvider();
+       
     };
     
     const LoadingModal = () => (
@@ -350,7 +356,11 @@ const ManageProfile = () => {
                             {formData.fld_profile_image ? (
                                 <div className="relative">
                                     <img
-                                        src={`https://serviceprovidersback.onrender.com/uploads/profileimg/${formData.fld_profile_image}`}
+                                         src={
+                                            formData.fld_profile_image instanceof File
+                                              ? URL.createObjectURL(formData.fld_profile_image)
+                                              : `https://serviceprovidersback.onrender.com/uploads/profileimg/${formData.fld_profile_image}`
+                                          }
                                         alt="Profile"
                                         className="border rounded p-2 w-2/3"
                                     />
@@ -378,7 +388,11 @@ const ManageProfile = () => {
                             {formData.fld_aadharcard ? (
                                 <div className="relative">
                                     <img
-                                        src={`https://serviceprovidersback.onrender.com/uploads/aadharcard/${formData.fld_aadharcard}`}
+                                        src={
+                                            formData.fld_aadharcard instanceof File
+                                              ? URL.createObjectURL(formData.fld_aadharcard)
+                                              : `https://serviceprovidersback.onrender.com/uploads/aadharcard/${formData.fld_aadharcard}`
+                                          }
                                         alt="Aadhar Card"
                                         className="border rounded p-2 w-2/3"
                                     />
@@ -406,7 +420,11 @@ const ManageProfile = () => {
                             {formData.fld_pancard ? (
                                 <div className="relative">
                                     <img
-                                        src={`https://serviceprovidersback.onrender.com/uploads/pancard/${formData.fld_pancard}`}
+                                        src={
+                                            formData.fld_pancard instanceof File
+                                              ? URL.createObjectURL(formData.fld_pancard)
+                                              : `https://serviceprovidersback.onrender.com/uploads/pancard/${formData.fld_pancard}`
+                                          }
                                         alt="PAN Card"
                                         className="border rounded p-2 w-2/3"
                                     />
@@ -434,7 +452,11 @@ const ManageProfile = () => {
                             {formData.fld_cancelledchequeimage ? (
                                 <div className="relative">
                                     <img
-                                        src={`https://serviceprovidersback.onrender.com/uploads/cancelledchequeimage/${formData.fld_cancelledchequeimage}`}
+                                        src={
+                                            formData.fld_cancelledchequeimage instanceof File
+                                              ? URL.createObjectURL(formData.fld_cancelledchequeimage)
+                                              : `https://serviceprovidersback.onrender.com/uploads/cancelledchequeimage/${formData.fld_cancelledchequeimage}`
+                                          }
                                         alt="Cancelled Cheque"
                                         className="border rounded p-2 w-2/3"
                                     />

@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useRef } from 'react';
 import { motion } from 'framer-motion';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { CircleX, Save } from 'lucide-react';
 import { RevolvingDot } from 'react-loader-spinner';
+import $ from 'jquery';
+import 'select2/dist/css/select2.css';
+import 'select2';
 
 const EditServiceProvider = ({ onClose, serviceProviderId }) => {
     const [formData, setFormData] = useState({
@@ -11,6 +14,7 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
         fld_name: '',
         fld_email: '',
         fld_phone: '',
+        location:'',
         fld_password: '',
         fld_decrypt_password: '',
         fld_address: '',
@@ -31,6 +35,8 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
 
     const [loading, setLoading] = useState(false);
     const [adminId, setAdminId] = useState(1);
+    const selectRef = useRef(null);
+    const [locations, setLocations] = useState([]);
 
     useEffect(() => {
         const storedAdminId = sessionStorage.getItem('admin_id');
@@ -69,6 +75,52 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
         }));
     };
 
+    const fetchLocations = async () => {
+        setLoading(true);
+
+        try {
+            const response = await fetch('https://serviceprovidersback.onrender.com/api/locations/');
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const data = await response.json();
+            setLocations(data);
+        } catch (error) {
+            console.error('Error fetching locations:', error);
+
+            setLocations([]);  // Clear previous data on error
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        fetchLocations();
+    }, []);
+
+    useEffect(() => {
+        if (locations.length > 0 && selectRef.current) {
+            $(selectRef.current).select2({
+                placeholder: "Select a Location", // Placeholder text
+                allowClear: true,                // Allow clearing selection
+            }).on('change', (e) => {
+                setFormData((prevData) => ({
+                    ...prevData,
+                    location: e.target.value,    // Update formData with selected location
+                }));
+            });
+        }
+    
+        // Cleanup function to destroy select2 when the component unmounts or locations change
+        return () => {
+            console.log(selectRef.current); // Log to check if it's defined
+
+            if (selectRef.current) {
+                //$(selectRef.current).select2('destroy');
+            }
+        };
+    }, [locations]);
+
     const handleFileChange = (e) => {
         const { name, files } = e.target;
         setFormData((prevData) => ({
@@ -92,7 +144,14 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
         });
 
         if (response.ok) {
-            toast.success("Service Provider updated successfully!");
+            toast.success("Service Provider updated successfully!", {
+                position: "top-left", // Positioning toast to the top-left corner
+                autoClose: 5000, // Optional: toast auto-close after 5 seconds
+                hideProgressBar: false, // Optional: hide progress bar (set to true if you want)
+                closeOnClick: true, // Optional: close toast on click
+                pauseOnHover: true, // Optional: pause toast on hover
+                draggable: true, // Optional: allow dragging the toast
+            });
             onClose();
         } else {
             toast.error("Error updating Service Provider!");
@@ -231,6 +290,23 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
                             required
                         />
                     </div>
+                    <div>
+                                    <label className="block text-sm font-medium mb-1" htmlFor="location">Location</label>
+                                    <select
+                                        id="location-select"
+                                        value={formData.location}
+                                        ref={selectRef}
+                                        name='location'
+                                        required
+                                    >
+                                        <option value="">Select a Location</option>
+                                        {locations.map((location) => (
+                                            <option key={location._id} value={location._id}>
+                                                {location.name}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
 
                     {/* Address */}
                     <div className="mb-4">
@@ -288,7 +364,7 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
                             value={formData.fld_aadhar}
                             onChange={handleChange}
                             className="border border-gray-300 rounded w-full text-sm form-control-sm"
-                            required
+                            
                         />
                     </div>
 
@@ -329,7 +405,7 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
                             value={formData.fld_bankname}
                             onChange={handleChange}
                             className="border border-gray-300 rounded w-full text-sm form-control-sm"
-                            required
+                            
                         />
                     </div>
 
@@ -343,7 +419,7 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
                             value={formData.fld_accountno}
                             onChange={handleChange}
                             className="border border-gray-300 rounded w-full text-sm form-control-sm"
-                            required
+                            
                         />
                     </div>
 
@@ -357,7 +433,7 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
                             value={formData.fld_branch}
                             onChange={handleChange}
                             className="border border-gray-300 rounded w-full text-sm form-control-sm"
-                            required
+                            
                         />
                     </div>
 
@@ -371,7 +447,7 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
                             value={formData.fld_ifsc}
                             onChange={handleChange}
                             className="border border-gray-300 rounded w-full text-sm form-control-sm"
-                            required
+                            
                         />
                     </div>
                 </div>

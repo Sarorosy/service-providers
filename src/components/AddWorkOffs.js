@@ -12,13 +12,13 @@ const AddWorkOffs = ({ onClose }) => {
         fld_end_date: '',
         fld_end_half: 'First Half', // Dropdown for half-day selection
         fld_duration: 0,
-        fld_leave_type: 'Unpaid', // Default leave type
         fld_reason: '',
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [reasonError, setReasonError] = useState('');
     const [workoffs, setWorkoffs] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [myworkoffs, setMyWorkoffs] = useState([]);
 
     useEffect(() => {
         calculateDuration();
@@ -44,6 +44,40 @@ const AddWorkOffs = ({ onClose }) => {
                 setLoading(false);
             });
     }, []);
+    useEffect(() => {
+        const userId = sessionStorage.getItem('userId');
+        fetch(`https://serviceprovidersback.onrender.com/api/workoffs/user/${userId}`)
+            .then(response => response.json())
+            .then(data => {
+                setMyWorkoffs(data);
+                setLoading(false);
+            })
+            .catch(error => {
+                console.error('Error fetching workoffs:', error);
+                setLoading(false);
+            });
+    }, []);
+    const getFormattedStartDate = () => {
+        // Step 1: Check if workoffs.fld_workoffs_startdate is available
+        const startDate = workoffs?.fld_workoffs_startdate;
+        if (startDate && startDate !== '') {
+            const date = new Date(startDate);
+            return date.toISOString().split('T')[0]; // returns the date in 'yyyy-mm-dd' format
+        }    
+
+        // Step 2: If workoffs.fld_workoffs_startdate is empty or null, check sessionStorage.startDate
+        const sessionStartDate = sessionStorage.getItem("startDate");
+        if (sessionStartDate && sessionStartDate !== '') {
+            const date = new Date(sessionStartDate);
+            return date.toISOString().split('T')[0];
+        }
+    
+        // Step 3: If both are empty or null, use today's date
+        const today = new Date();
+        return today.toISOString().split('T')[0]; 
+    };
+    
+    
 
     const calculateDuration = () => {
         if (workoff.fld_start_date && workoff.fld_end_date) {
@@ -75,7 +109,14 @@ const AddWorkOffs = ({ onClose }) => {
         }
     };
 
-
+    const handleStartDateChange = (e) => {
+        const { value } = e.target;
+        setWorkoff((prevState) => ({
+          ...prevState,
+          fld_start_date: value,
+          fld_end_date: value, // Optionally, you can set the end date to be the same as the start date
+        }));
+      };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -129,39 +170,6 @@ const AddWorkOffs = ({ onClose }) => {
                 </div>
             
 
-                <div className="mb-4">
-                    <ul className="">
-                        <li key={workoffs._id} className="text-gray-800 border-b pb-3">
-                            <div className="row">
-                                <div className='col-md-4'>
-                                    <div className="p-4 flex flex-col items-center bg-blue-100 text-blue-800 rounded-lg">
-                                        <div className="w-full text-center mb-2">
-                                            Total
-                                        </div>
-                                        <span className="font-semibold text-2xl">{workoffs.fld_total_no_of_work_offs}</span>
-                                    </div>
-                                </div>
-                                <div className='col-md-4'>
-                                    <div className="p-4 flex flex-col items-center bg-green-100 text-green-800 rounded-lg">
-                                        <div className="w-full text-center mb-2">
-                                            Availed
-                                        </div>
-                                        <span className="font-semibold text-2xl">{workoffs.fld_work_offs_availed}</span>
-                                    </div>
-                                </div>
-                                <div className='col-md-4'>
-                                    <div className="p-4 flex flex-col items-center bg-yellow-100 text-yellow-800 rounded-lg">
-                                        <div className="w-full text-center mb-2">
-                                            Balance
-                                        </div>
-                                        <span className="font-semibold text-2xl">{workoffs.fld_work_offs_balance}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-
-                </div>
                 <form onSubmit={handleSubmit}>
                     <input type="hidden" name="fld_adminid" value={workoff.fld_adminid} />
 
@@ -176,7 +184,8 @@ const AddWorkOffs = ({ onClose }) => {
                                 id="fld_start_date"
                                 name="fld_start_date"
                                 value={workoff.fld_start_date}
-                                onChange={handleChange}
+                                onChange={handleStartDateChange}
+                                min={getFormattedStartDate()}
                                 required
                                 className="border rounded p-2 w-full"
                             />
@@ -199,6 +208,7 @@ const AddWorkOffs = ({ onClose }) => {
                                 id="fld_end_date"
                                 name="fld_end_date"
                                 value={workoff.fld_end_date}
+                                min={workoff.fld_start_date}
                                 onChange={handleChange}
                                 required
                                 className="border rounded p-2 w-full"
@@ -227,19 +237,6 @@ const AddWorkOffs = ({ onClose }) => {
                             />
                         </div>
 
-                        {/* Leave Type Field */}
-                        <div>
-                            <label htmlFor="fld_leave_type" className="block mb-2">Leave Type:</label>
-                            <select
-                                name="fld_leave_type"
-                                value={workoff.fld_leave_type}
-                                onChange={handleChange}
-                                className="border rounded p-2 w-full"
-                            >
-                                <option value="Paid">Paid</option>
-                                <option value="Unpaid">Unpaid</option>
-                            </select>
-                        </div>
 
                         {/* Reason Field */}
                         <div className="col-span-2"> {/* Span across both columns */}

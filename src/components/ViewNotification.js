@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ToastContainer, toast } from 'react-toastify';
-import { CircleX } from 'lucide-react';
+import { CircleX, MapPin, Pin } from 'lucide-react';
 import 'react-toastify/dist/ReactToastify.css';
 import { RevolvingDot } from 'react-loader-spinner';
 
@@ -34,7 +34,7 @@ const ViewNotification = ({ onClose, notificationId }) => {
         const fetchServiceProviders = async () => {
             try {
                 setLoading(true)
-                const response = await fetch('https://serviceprovidersback.onrender.com/api/users/serviceproviders');
+                const response = await fetch('https://serviceprovidersback.onrender.com/api/locations');
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -52,9 +52,9 @@ const ViewNotification = ({ onClose, notificationId }) => {
     }, []);
 
     // Function to get the username by matching the ID
-    const getUsernameById = (userId) => {
+    const getLocationnameById = (userId) => {
         const user = serviceProviders.find((provider) => provider._id === userId._id); // Match based on the user object
-        return user ? user.fld_username : 'Unknown User'; // Assuming 'fld_username' is the correct field
+        return user ? user.name : 'Unknown Location'; // Assuming 'fld_username' is the correct field
     };
 
     const getProfileImage = (userId) => {
@@ -130,16 +130,12 @@ const ViewNotification = ({ onClose, notificationId }) => {
                             </div>
 
                             <div className="mb-4 fthirteen">
-                                <h3 className="text-sm font-semibold mb-4">Assigned Users: {notification.fld_userid.length}</h3>
+                                <h3 className="text-sm font-semibold mb-4">Assigned Locations: {notification.location.length}</h3>
                                 <ul className="list-disc flex flex-wrap">
-                                    {notification.fld_userid.map((user) => ( // Map over the user objects
+                                    {notification.location.map((user) => ( // Map over the user objects
                                         <li key={user._id} className="flex items-center mb-2 mr-4 border border-gray-300 rounded-full px-1 py-1 bg-white shadow-sm hover:shadow-lg transition-shadow duration-200">
-                                            <img
-                                                src={getProfileImage(user)}
-                                                alt={getUsernameById(user)}
-                                                className="w-8 h-8 rounded-full border border-gray-200 mr-2"
-                                            />
-                                            <span className="text-gray-800 font-semibold">{getUsernameById(user)}</span>
+                                            <MapPin width={18} height={18} color='#000' className='mr-1'/>
+                                            <span className="text-gray-800 font-semibold">{getLocationnameById(user)}</span>
                                         </li>
                                     ))}
                                 </ul>

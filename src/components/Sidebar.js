@@ -1,7 +1,7 @@
 // src/components/Sidebar.js
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Bell, Calendar, BarChart, Users, LogOut, FileText, Settings, LayoutDashboard, FolderClosed, UserCircle2, KeyRound, Plane, CalendarDays } from 'lucide-react';
+import { Bell, Calendar, BarChart, Users, LogOut, FileText, Settings, LayoutDashboard, FolderClosed, UserCircle2, KeyRound, Plane, CalendarDays, LocateFixed, Handshake } from 'lucide-react';
 
 const Sidebar = () => {
   // Retrieve username and profile image from local storage
@@ -74,6 +74,24 @@ const Sidebar = () => {
                 >
                   <Users className="mr-2" height="17" width="17"/>
                   Service Providers
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/manage-locations"
+                  className="flex items-center  transition duration-100 "
+                >
+                  <LocateFixed className="mr-2" height="17" width="17"/>
+                  Locations
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/manage-end-services"
+                  className="flex items-center  transition duration-100 "
+                >
+                  <Handshake className="mr-2" height="17" width="17"/>
+                  Manage End Services
                 </NavLink>
               </li>
               <li>
@@ -157,16 +175,25 @@ const Sidebar = () => {
                   className="flex items-center p-2 hover:bg-sky-200  transition duration-100 my-1  "
                 >
                   <Plane className="mr-2" height="17" width="17"/>
-                  Manage Work-Off
+                  Mark UnAvailability
                 </NavLink>
               </li>
-              <li>
+              {/* <li>
                 <NavLink
                   to="/work-days"
                   className="flex items-center p-2 hover:bg-sky-200  transition duration-100 my-1  "
                 >
                   <CalendarDays className="mr-2" height="17" width="17"/>
                   Manage Work Days
+                </NavLink>
+              </li> */}
+              <li>
+                <NavLink
+                  to="/end-services"
+                  className="flex items-center p-2 hover:bg-sky-200  transition duration-100 my-1  "
+                >
+                  <Handshake className="mr-2" height="17" width="17"/>
+                  End Services
                 </NavLink>
               </li>
             </>

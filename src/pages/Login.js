@@ -44,6 +44,7 @@ export default function Login() {
         sessionStorage.setItem('name', data.user.fld_name);
         sessionStorage.setItem('email', data.user.fld_email);
         sessionStorage.setItem('profileImage', data.user.fld_profile_image);
+        sessionStorage.setItem('locationId', data.user.location);
         sessionStorage.setItem('phone', data.user.fld_phone);
         sessionStorage.setItem('gender', data.user.fld_gender);
         sessionStorage.setItem('marital', data.user.fld_marital);

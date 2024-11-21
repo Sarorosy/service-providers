@@ -10,47 +10,47 @@ const AddHolidayForm = ({ onClose, after }) => {
   const [formData, setFormData] = useState({
     fld_title: '',
     fld_holiday_date: '',
-    selectedUsers: [], // Keep track of selected user IDs
+    selectedLocations: [], // Keep track of selected location IDs
   });
 
-  const [users, setUsers] = useState([]);
+  const [locations, setLocations] = useState([]);
   const [selectAll, setSelectAll] = useState(false);
   const selectRef = useRef(null); // Reference for the select element
   const [isSelectAll, setIsSelectAll] = useState(false);
 
   useEffect(() => {
-    const fetchUsers = async () => {
+    const fetchLocations = async () => {
       try {
-        const response = await fetch('https://serviceprovidersback.onrender.com/api/users/activeserviceproviders');
+        const response = await fetch('https://serviceprovidersback.onrender.com/api/locations/');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
         const data = await response.json();
-        setUsers(Array.isArray(data) ? data : []);
+        setLocations(Array.isArray(data) ? data : []);
       } catch (error) {
-        console.error('Error fetching users:', error);
-        setUsers([]);
+        console.error('Error fetching locations:', error);
+        setLocations([]);
       }
     };
 
-    fetchUsers();
+    fetchLocations();
   }, []);
 
   useEffect(() => {
     $(selectRef.current).select2({
-      placeholder: "Select users",
+      placeholder: "Select locations",
       allowClear: true,
     }).on('change', (e) => {
       setFormData((prevData) => ({
         ...prevData,
-        selectedUsers: Array.from(e.target.selectedOptions, option => option.value),
+        selectedLocations: Array.from(e.target.selectedOptions, option => option.value),
       }));
     });
 
     return () => {
       $(selectRef.current).select2('destroy');
     };
-  }, [users]);
+  }, [locations]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -65,16 +65,16 @@ const AddHolidayForm = ({ onClose, after }) => {
     setSelectAll(isChecked);
 
     if (isChecked) {
-      const allUserIds = users.map(user => user._id.toString());
+      const allUserIds = locations.map(location => location._id.toString());
       setFormData((prevData) => ({
         ...prevData,
-        selectedUsers: allUserIds,
+        selectedLocations: allUserIds,
       }));
       $(selectRef.current).val(allUserIds).trigger('change');
     } else {
       setFormData((prevData) => ({
         ...prevData,
-        selectedUsers: [],
+        selectedLocations: [],
       }));
       $(selectRef.current).val([]).trigger('change');
     }
@@ -85,14 +85,14 @@ const AddHolidayForm = ({ onClose, after }) => {
       // If 'Select All' is chosen, select all providers
       setFormData((prevData) => ({
         ...prevData,
-        selectedUsers: users.map(provider => provider._id.toString()),
+        selectedLocations: locations.map(provider => provider._id.toString()),
       }));
-      $(selectRef.current).val(users.map(provider => provider._id.toString())).trigger('change');
+      $(selectRef.current).val(locations.map(provider => provider._id.toString())).trigger('change');
     } else {
       // If 'Select Specific' is chosen, reset the field
       setFormData((prevData) => ({
         ...prevData,
-        selectedUsers: [],
+        selectedLocations: [],
       }));
       $(selectRef.current).val([]).trigger('change');
     }
@@ -102,8 +102,8 @@ const AddHolidayForm = ({ onClose, after }) => {
     e.preventDefault();
     const adminId = sessionStorage.getItem('admin_id').toString();
 
-    // Ensure unique selected user IDs as strings
-    const selectedUserIds = [...new Set(formData.selectedUsers.map(userId => userId.toString()))];
+    // Ensure unique selected location IDs as strings
+    const selectedUserIds = [...new Set(formData.selectedLocations.map(locationId => locationId.toString()))];
 
     const response = await fetch('https://serviceprovidersback.onrender.com/api/holidays', {
       method: 'POST',
@@ -112,7 +112,7 @@ const AddHolidayForm = ({ onClose, after }) => {
       },
       body: JSON.stringify({
         fld_adminid: adminId,
-        fld_userid: selectedUserIds, // Pass selected user IDs as an array of strings
+        location: selectedUserIds, // Pass selected location IDs as an array of strings
         fld_title: formData.fld_title,
         fld_holiday_date: formData.fld_holiday_date,
       }),
@@ -127,13 +127,13 @@ const AddHolidayForm = ({ onClose, after }) => {
     }
   };
 
-  const removeUser = (userId) => {
+  const removeUser = (locationId) => {
     setFormData((prevData) => {
-      const updatedUserIds = prevData.selectedUsers.filter(_id => _id !== userId);
+      const updatedUserIds = prevData.selectedLocations.filter(_id => _id !== locationId);
       $(selectRef.current).val(updatedUserIds).trigger('change'); // Update Select2
       return {
         ...prevData,
-        selectedUsers: updatedUserIds,
+        selectedLocations: updatedUserIds,
       };
     });
   };
@@ -195,7 +195,7 @@ const AddHolidayForm = ({ onClose, after }) => {
                   onChange={handleRadioChange}
                   className="form-radio"
                 />
-                <span className="ml-2 font-semibold text-sm">Select All Service Providers</span>
+                <span className="ml-2 font-semibold text-sm">Select All Locations</span>
               </label>
               <label className="inline-flex items-center ml-6">
                 <input
@@ -213,54 +213,48 @@ const AddHolidayForm = ({ onClose, after }) => {
 
             <div className="mb-3 col-md-12" style={{ display: isSelectAll ? 'none' : 'block' }}>
               <label className="block text-sm font-semibold mb-1" htmlFor="serviceProvider">
-                Select Users
+                Select Locations
               </label>
               <select
                 id="serviceProvider"
-                name="selectedUsers"
+                name="selectedLocations"
                 multiple
                 ref={selectRef}
                 className="border border-gray-300 rounded p-2 w-full form-control-sm w-100"
                 required
               >
-                {users.map((user) => (
-                  <option key={user._id} value={user._id}>
-                    {user.fld_name}
+                {locations.map((location) => (
+                  <option key={location._id} value={location._id}>
+                    {location.name}
                   </option>
                 ))}
               </select>
             </div>
 
-            {formData.selectedUsers.length > 0 && (
+            {formData.selectedLocations.length > 0 && (
               <div className="mb-3 max-w-5xl mx-auto fthirteen">
-                <label className="text-sm font-semibold mb-3">Selected Users</label>
+                <label className="text-sm font-semibold mb-3">Selected Locations</label>
                 <div className="flex flex-wrap mb-2 p-2 bg-gray-50 rounded-xl shadow-md">
-                  {formData.selectedUsers.map((userId) => {
-                    const user = users.find(u => u._id === userId);
+                  {formData.selectedLocations.map((locationId) => {
+                    const location = locations.find(u => u._id === locationId);
                     return (
-                      user ? (
+                      location ? (
                         <div
-                          key={user._id}
+                          key={location._id}
                           className="flex items-center mr-2 mb-2 border border-gray-300 rounded-full bg-white px-1 py-1 shadow-sm hover:shadow-lg transition-shadow"
                         >
-                          <img
-                            src={user.fld_profile_image && user.fld_profile_image !== ""
-                              ? 'https://serviceprovidersback.onrender.com/uploads/profileimg/' + user.fld_profile_image
-                              : "https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg"}
-                            alt={user.fld_username || 'No Name'}
-                            className="w-8 h-8 rounded-full border border-gray-200"
-                          />
-                          <span className="mx-2 text-gray-800 font-semibold">{user.fld_name}</span>
+                          
+                          <span className="mx-2 text-gray-800 font-semibold">{location.name}</span>
                           <button
                             type="button"
-                            onClick={() => removeUser(user._id)}
+                            onClick={() => removeUser(location._id)}
                             className="text-red-500 hover:text-red-700 transition-colors"
                           >
                             <CircleX size={15}/>
                           </button>
                         </div>
                       ) : (
-                        <span key={userId} className="mr-2 text-red-500">User with ID {userId} not found.</span>
+                        <span key={locationId} className="mr-2 text-red-500">User with ID {locationId} not found.</span>
                       )
                     );
                   })}
@@ -269,14 +263,6 @@ const AddHolidayForm = ({ onClose, after }) => {
             )}
 
             <div className="flex justify-end mt-2">
-              {/* <button
-                type="button"
-                onClick={onClose}
-                className="mr-2 bg-red-500 transition duration-300 ded
- hover:bg-red-600 hover:shadow-lg text-white py-1 px-1 rounded flex items-center"
-              >
-                <CircleX className='mr-1 ic' /> Cancel
-              </button> */}
               <div className='but'>
                 <button type="submit" className="bg-blue-600 text-white py-1 px-1 rounded flex items-center">
                   <Save className='mr-1 ic' /> Save

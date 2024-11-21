@@ -13,11 +13,12 @@ const AddNotificationForm = ({ onClose , after}) => {
     fld_title: '',
     fld_description: '',
     fld_due_date: '',
-    fld_userid: [],
+    location: [],
     fld_adminid: "1", // You can change this to a dynamic value if necessary
+    isForAll: false,
   });
 
-  const [serviceProviders, setServiceProviders] = useState([]);
+  const [locations, setLocations] = useState([]);
   const selectRef = useRef(null); // Reference for the select element
   const [selectAll, setSelectAll] = useState(false);
   const [isSelectAll, setIsSelectAll] = useState(false);
@@ -25,16 +26,16 @@ const AddNotificationForm = ({ onClose , after}) => {
   useEffect(() => {
     const fetchServiceProviders = async () => {
       try {
-        const response = await fetch('https://serviceprovidersback.onrender.com/api/users/activeserviceproviders');
+        const response = await fetch('https://serviceprovidersback.onrender.com/api/locations');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
         const data = await response.json();
-        console.log('Fetched service providers:', data);
-        setServiceProviders(Array.isArray(data) ? data : []);
+        //console.log('Fetched service providers:', data);
+        setLocations(Array.isArray(data) ? data : []);
       } catch (error) {
         console.error('Error fetching service providers:', error);
-        setServiceProviders([]); // Set to empty array on error
+        setLocations([]); // Set to empty array on error
       }
     };
 
@@ -44,12 +45,12 @@ const AddNotificationForm = ({ onClose , after}) => {
   // Initialize Select2 when the component mounts
   useEffect(() => {
     $(selectRef.current).select2({
-      placeholder: "Select providers",
+      placeholder: "Select Locations",
       allowClear: true,
     }).on('change', (e) => {
       setFormData((prevData) => ({
         ...prevData,
-        fld_userid: Array.from(e.target.selectedOptions, option => option.value),
+        location: Array.from(e.target.selectedOptions, option => option.value),
       }));
     });
 
@@ -57,7 +58,7 @@ const AddNotificationForm = ({ onClose , after}) => {
     return () => {
       $(selectRef.current).select2('destroy');
     };
-  }, [serviceProviders]);
+  }, [locations]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -96,45 +97,49 @@ const AddNotificationForm = ({ onClose , after}) => {
 
   const removeProvider = (providerId) => {
     setFormData((prevData) => {
-      const updatedUserIds = prevData.fld_userid.filter(_id => _id.toString() !== providerId.toString());
+      const updatedUserIds = prevData.location.filter(_id => _id.toString() !== providerId.toString());
       $(selectRef.current).val(updatedUserIds).trigger('change'); // Update Select2
       return {
         ...prevData,
-        fld_userid: updatedUserIds,
+        location: updatedUserIds,
       };
     });
   };
   const handleSelectAll = () => {
     if (!selectAll) {
-      const allProviderIds = serviceProviders.map(provider => provider._id.toString());
+      const allProviderIds = locations.map(provider => provider._id.toString());
       setFormData((prevData) => ({
         ...prevData,
-        fld_userid: allProviderIds,
+        location: allProviderIds,
       }));
       $(selectRef.current).val(allProviderIds).trigger('change'); // Select all in Select2
     } else {
       setFormData((prevData) => ({
         ...prevData,
-        fld_userid: [],
+        location: [],
       }));
       $(selectRef.current).val([]).trigger('change'); // Deselect all in Select2
     }
     setSelectAll(!selectAll);
   };
   const handleRadioChange = (e) => {
-    setIsSelectAll(e.target.value === "selectAll");
+    const isSelectAllChosen = e.target.value === "selectAll";
+    console.log(FormData.isForAll);
+    setIsSelectAll(isSelectAllChosen);
     if (e.target.value === "selectAll") {
       // If 'Select All' is chosen, select all providers
       setFormData((prevData) => ({
         ...prevData,
-        fld_userid: serviceProviders.map(provider => provider._id.toString()),
+        location: locations.map(provider => provider._id.toString()),
+        isForAll: isSelectAllChosen,
       }));
-      $(selectRef.current).val(serviceProviders.map(provider => provider._id.toString())).trigger('change');
+      $(selectRef.current).val(locations.map(provider => provider._id.toString())).trigger('change');
     } else {
       // If 'Select Specific' is chosen, reset the field
       setFormData((prevData) => ({
         ...prevData,
-        fld_userid: [],
+        location: [],
+        isForAll: isSelectAllChosen,
       }));
       $(selectRef.current).val([]).trigger('change');
     }
@@ -210,7 +215,7 @@ const AddNotificationForm = ({ onClose , after}) => {
                 onChange={handleRadioChange}
                 className="form-radio"
               />
-              <span className="ml-2 font-semibold text-sm">Select All Service Providers</span>
+              <span className="ml-2 font-semibold text-sm">Select All Locations</span>
             </label>
             <label className="inline-flex items-center ml-6">
               <input
@@ -228,32 +233,32 @@ const AddNotificationForm = ({ onClose , after}) => {
           
               
               <div className="mb-3" style={{ display: isSelectAll ? 'none' : 'block' }}>
-                <label className="block text-sm font-semibold mb-1" htmlFor="serviceProvider">
-                  Select Service Provider
+                <label className="block text-sm font-semibold mb-1" htmlFor="location">
+                  Select Location
                 </label>
                 <select
-                  id="serviceProvider"
-                  name="fld_userid" // Updated
+                  id="location"
+                  name="location" // Updated
                   multiple
                   ref={selectRef}
                   className="border border-gray-300 rounded p-2 w-full form-control-sm"
                   required
                 >
-                  {serviceProviders.map((provider) => (
+                  {locations.map((provider) => (
                     <option key={provider.id} value={provider._id}>
-                      {provider.fld_username}
+                      {provider.name}
                     </option>
                   ))}
                 </select>
               </div>
            
               {/* Display selected service providers */}
-              {formData.fld_userid.length > 0 && (
+              {formData.location.length > 0 && (
                 <div className="mb-3 max-w-5xl mx-auto fthirteen">
-                  <label className="text-sm font-semibold my-3">Selected Service Providers</label>
+                  <label className="text-sm font-semibold my-3">Selected Locations</label>
                   <div className="flex flex-wrap mb-2 p-2 bg-gray-50 rounded-xl shadow-md">
-                    {formData.fld_userid.map((providerId) => {
-                      const provider = serviceProviders.find(p => p._id.toString() === providerId);
+                    {formData.location.map((providerId) => {
+                      const provider = locations.find(p => p._id.toString() === providerId);
                       return (
                         provider ? (
                           <motion.div
@@ -264,14 +269,8 @@ const AddNotificationForm = ({ onClose , after}) => {
                             transition={{ duration: 0.3 }}
                             className="flex items-center mr-2 mb-2 border border-gray-300 rounded-full bg-white px-1 py-1 shadow-sm hover:shadow-lg transition-shadow"
                           >
-                            <img
-                              src={provider.fld_profile_image && provider.fld_profile_image !== ""
-                                ? 'https://serviceprovidersback.onrender.com/uploads/profileimg/' + provider.fld_profile_image
-                                : "https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg"}
-                              alt={provider.fld_username || 'No Name'}
-                              className="w-8 h-8 rounded-full border border-gray-200 mr-2"
-                            />
-                            <span className="font-semibold">{provider.fld_username || 'No Name'}</span>
+                            
+                            <span className="font-semibold">{provider.name || 'No Name'}</span>
                             <button
                               type="button"
                               onClick={() => removeProvider(provider._id)}

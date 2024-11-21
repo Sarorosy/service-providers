@@ -25,6 +25,9 @@ import ManageProfile from './pages/users/ManageProfile';
 import ChangePassword from './pages/users/ChangePassword';
 import ManageUserWorkOffs from './pages/users/ManageUserWorkOffs';
 import UserWorkDayss from './pages/users/ManageWorkDays'
+import ManageLocations from './pages/ManageLocations';
+import EndServices from './pages/users/EndServices';
+import ManageEndServices from './pages/ManageEndServices';
 
 
 function App() {
@@ -49,6 +52,8 @@ function App() {
             <Route path="/manage-work-days" element={<ManageWorkDays />} />
             <Route path="/userworkdays/:id" element={<UserWorkDays />} />
             <Route path="/manage-service-charge" element={<ManageServiceCharge />} />
+            <Route path="/manage-locations" element={<ManageLocations />} />
+            <Route path="/manage-end-services" element={<ManageEndServices />} />
             <Route path="/admindashboard" element={<AdminDashboard />} />
 
             {/* user routes below */}
@@ -59,6 +64,7 @@ function App() {
             {/* <Route path="/change-password" element={<ChangePassword />} /> */}
             <Route path="/manage-work-offs" element={<ManageUserWorkOffs />} />
             <Route path="/work-days" element={<UserWorkDayss />} />
+            <Route path="/end-services" element={<EndServices />} />
           </Route>
         </Route>
       </Routes>
