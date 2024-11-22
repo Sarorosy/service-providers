@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { RevolvingDot } from 'react-loader-spinner';
 import { motion } from 'framer-motion';
 import { CircleX } from 'lucide-react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AddWorkOffs = ({ onClose }) => {
     const [workoff, setWorkoff] = useState({
@@ -16,6 +18,7 @@ const AddWorkOffs = ({ onClose }) => {
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [reasonError, setReasonError] = useState('');
+    const [leaveBalance, setLeaveBalance] = useState(null);
     const [workoffs, setWorkoffs] = useState([]);
     const [loading, setLoading] = useState(true);
     const [myworkoffs, setMyWorkoffs] = useState([]);
@@ -23,6 +26,38 @@ const AddWorkOffs = ({ onClose }) => {
     useEffect(() => {
         calculateDuration();
     }, [workoff.fld_start_date, workoff.fld_start_half, workoff.fld_end_date, workoff.fld_end_half]);
+
+
+    useEffect(() => {
+        const fetchLeaveBalance = async () => {
+            const userId = sessionStorage.getItem('userId');
+            const formattedStartDate = getFormattedStartDate();
+
+            try {
+                const response = await fetch('https://serviceprovidersback.onrender.com/api/workoffs/calculate-leave-balance', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        fld_adminid: userId,
+                        start_date: formattedStartDate,
+                    }),
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to fetch leave balance');
+                }
+
+                const data = await response.json();
+                setLeaveBalance(data.leaveBalance);
+            } catch (error) {
+                console.error('Error fetching leave balance:', error);
+            }
+        };
+
+        fetchLeaveBalance();
+    }, []);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -123,6 +158,12 @@ const AddWorkOffs = ({ onClose }) => {
         setIsSubmitting(true);
         if (workoff.fld_reason.split(' ').length < 20) {
             setReasonError('Reason must be at least 20 words.');
+            setIsSubmitting(false);
+            return;
+        }
+
+        if (workoff.fld_duration > leaveBalance) {
+            toast.error('Duration exceeds available leave balance');
             setIsSubmitting(false);
             return;
         }
@@ -237,7 +278,16 @@ const AddWorkOffs = ({ onClose }) => {
                             />
                         </div>
 
-
+                        <div>
+                            <label htmlFor="leave_balance" className="block mb-2">Maximum Leave Available:</label>
+                            <input
+                                type="text"
+                                id="leave_balance"
+                                value={leaveBalance !== null ? leaveBalance : 'Loading...'}
+                                readOnly
+                                className="border rounded p-2 w-full bg-gray-100"
+                            />
+                        </div>
                         {/* Reason Field */}
                         <div className="col-span-2"> {/* Span across both columns */}
                             <label htmlFor="fld_reason" className="block mb-2">Reason (at least 20 words):</label>
@@ -252,6 +302,7 @@ const AddWorkOffs = ({ onClose }) => {
                             />
                             {reasonError && <p className="text-red-500">{reasonError}</p>}
                         </div>
+                        
                     </div>
                     <div className='flex justify-end'>
                         <div className='but'>
@@ -267,7 +318,7 @@ const AddWorkOffs = ({ onClose }) => {
                     </div>
                 </form>
             </div>
-
+            <ToastContainer />
         </motion.div>
     );
 };

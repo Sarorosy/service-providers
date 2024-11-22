@@ -175,6 +175,8 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
                             <div className='n-pop-up-head d-flex justify-content-between align-items-center mb-4 border-bottom pb-3'>
                                 <h2 className="f-20">Service Provider Details</h2>
                                 <div>
+                                    {(sessionStorage.getItem("adminType") === "SUPERADMIN" || sessionStorage.getItem("user_edit_access") == 'true') && (
+            
                                     <button
                                         onClick={() => handleEditClick(serviceProviderId)} // Pass the service provider ID
                                         data-id={serviceProviderId}
@@ -182,6 +184,7 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
                                     >
                                         <Pen className='edit-hover' />
                                     </button>
+                                    )}
                                     <button
                                         onClick={onClose}
                                         className="text-white mr-2 "

@@ -68,8 +68,21 @@ const ManageUserWorkOffs = () => {
     {
       title: 'Duration',
       data: 'fld_duration',
-      render: (data) => `${data} Day${data > 1 ? 's' : ''}`,
+      render: (data) => {
+        if (!data || !data.$numberDecimal) {
+          return 'Invalid data';
+        }
+        try {
+          // Access the $numberDecimal property and parse it as a float
+          const duration = parseFloat(data.$numberDecimal);
+          return `${duration} Day${duration > 1 ? 's' : ''}`;
+        } catch (error) {
+          console.error("Error parsing duration:", error);
+          return 'Invalid duration';
+        }
+      },
     },
+    
     {
       title: 'Reason',
       data: 'fld_reason',

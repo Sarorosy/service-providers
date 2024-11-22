@@ -40,7 +40,7 @@ const ManageServiceProvider = () => {
 
     const navigate = useNavigate();
     useEffect(() => {
-        if (sessionStorage.getItem("adminType") != "SUPERADMIN") {
+        if (sessionStorage.getItem("adminType") != "SUPERADMIN" && sessionStorage.getItem("adminType") !== "SUBADMIN") {
             navigate("/dashboard"); // Redirect to homepage if not SUPERADMIN
         }
     }, [navigate]);
@@ -64,7 +64,12 @@ const ManageServiceProvider = () => {
                 throw new Error('Failed to fetch service providers');
             }
             const data = await response.json();
-            setServiceProviders(data); // Set the service providers data
+            if (sessionStorage.getItem("adminType") === "SUBADMIN") {
+                const filteredData = data.filter(provider => provider.fld_admin_type !== "SUBADMIN");
+                setServiceProviders(filteredData); // Set filtered service providers data
+            } else {
+                setServiceProviders(data); // Set the service providers data without filtering
+            }
         } catch (error) {
             console.error('Error fetching service providers:', error);
             setServiceProviders([]); // Set to empty array on error
@@ -131,7 +136,7 @@ const ManageServiceProvider = () => {
                     : "https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg";
 
                 // Return an HTML string for the image
-                return `<img src="${imageUrl}" alt="Profile" class="w-10 h-10 rounded-full border border-gray-200" />`;
+                return `<img src="${imageUrl}" alt="Profile" class="w-10 h-auto rounded-full border border-gray-200" />`;
             },
             orderable: false
         },
@@ -150,7 +155,7 @@ const ManageServiceProvider = () => {
         {
             title: 'Username / Email',
             data: null, // No direct data mapping
-            width: '200px',
+            width: '180px',
 
             render: (data) => (
                 `<div style="display: flex; flex-direction: column; font-size: 13px; overflow-wrap: break-word;">
@@ -165,10 +170,32 @@ const ManageServiceProvider = () => {
             data: 'fld_decrypt_password', // Field for the password
             width: '120px',
             render: (data) => (
-                `<div style="display: flex; flex-direction: column; font-size: 13px; overflow-wrap: break-word;">
+                `<div style="display: flex; flex-direction: column; font-size: 11px; overflow-wrap: break-word;">
                     <span style="font-size: 12px;">${data}</span>
                 </div>`
             ),
+            orderable: false
+        },
+        {
+            title: 'UserType',
+            data: 'fld_admin_type', // Field for the password
+            width: '80px',
+            render: (data) => {
+                let displayValue = '';
+                
+                // Check if the value is "SERVICE_PROVIDER" and display "SP", otherwise display "SUBAdmin"
+                if (data === "SERVICE_PROVIDER") {
+                    displayValue = "SP";
+                } else {
+                    displayValue = "SUBADMIN";
+                }
+        
+                return (
+                    `<div style="display: flex; flex-direction: column; font-size: 13px; overflow-wrap: break-word;text-align:center">
+                        <span style="font-size: 12px;">${displayValue}</span>
+                    </div>`
+                );
+            },
             orderable: false
         },
         {
@@ -217,12 +244,13 @@ const ManageServiceProvider = () => {
             data: null,
             width: '90px',
             render: (data) => {
+                const canDelete = sessionStorage.getItem("adminType") === "SUPERADMIN" || sessionStorage.getItem("user_delete_access") === "true";
                 return `
                     <div class="">
                         <button class="view-button " data-id="${data._id}">View</button>
                         <button class="workoff-button" data-id="${data._id}">Workoff</button>
                          <button class="workdays-button " data-id="${data._id}">WorkDays</button>
-                         <button class="delete-button " data-id="${data._id}">Delete</button>
+                         ${canDelete ? `<button class="delete-button" data-id="${data._id}">Delete</button>` : ''}
                     </div>
                 `;
             },
@@ -353,9 +381,12 @@ const ManageServiceProvider = () => {
                     >
                         Refresh <RefreshCw className='ml-2 ic' />
                     </button>
+                    {(sessionStorage.getItem("adminType") === "SUPERADMIN" || sessionStorage.getItem("user_add_access") == 'true') && (
+            
                     <button onClick={handleAddServiceProviderClick} className="flex items-center text-white text-sm py-0 px-1 rounded transition duration-200">
                         Add Service Provider <UserPlus2 className="ml-2 ic" />
                     </button>
+                    )}
                 </div>
             </div>
             <div id="checklist">
@@ -405,7 +436,7 @@ const ManageServiceProvider = () => {
                             searching: true,
                             paging: true,
                             //ordering: true,
-                            order: [[5, 'desc']], // Sort by the "Added On" column in descending order
+                            order: [[6, 'desc']], // Sort by the "Added On" column in descending order
                             responsive: true,
                             className: 'display bg-white rounded-lg shadow-sm',
                             createdRow: (row, data) => {

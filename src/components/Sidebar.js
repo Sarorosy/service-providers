@@ -1,7 +1,7 @@
 // src/components/Sidebar.js
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Bell, Calendar, BarChart, Users, LogOut, FileText, Settings, LayoutDashboard, FolderClosed, UserCircle2, KeyRound, Plane, CalendarDays, LocateFixed, Handshake } from 'lucide-react';
+import { Bell, Calendar, BarChart, Users, LogOut, FileText, Settings, LayoutDashboard, FolderClosed, UserCircle2, KeyRound, Plane, CalendarDays, LocateFixed, Handshake, MapPin } from 'lucide-react';
 
 const Sidebar = () => {
   // Retrieve username and profile image from local storage
@@ -29,7 +29,7 @@ const Sidebar = () => {
 
       <nav className="n-nav-list-set">
         <ul className='overflow-y-scroll ul'>
-          {sessionStorage.getItem("adminType") === "SUPERADMIN" ? (
+          {(sessionStorage.getItem("adminType") === "SUPERADMIN" || sessionStorage.getItem("adminType") === "SUBADMIN") ? (
             <>
               <li>
                 <NavLink
@@ -81,10 +81,12 @@ const Sidebar = () => {
                   to="/manage-locations"
                   className="flex items-center  transition duration-100 "
                 >
-                  <LocateFixed className="mr-2" height="17" width="17"/>
+                  <MapPin className="mr-2" height="17" width="17"/>
                   Locations
                 </NavLink>
               </li>
+              {(sessionStorage.getItem("adminType") === "SUPERADMIN") && (
+                <>
               <li>
                 <NavLink
                   to="/manage-end-services"
@@ -103,6 +105,8 @@ const Sidebar = () => {
                   Work Offs
                 </NavLink>
               </li>
+              </>
+              )}
               {/* <li>
                 <NavLink
                   to="/manage-work-days"

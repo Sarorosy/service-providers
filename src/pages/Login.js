@@ -40,6 +40,18 @@ export default function Login() {
         sessionStorage.setItem('admin_id', data.user.id);
         sessionStorage.setItem('adminId', data.user.fld_adminid);
         sessionStorage.setItem('adminType', data.user.fld_admin_type);
+        sessionStorage.setItem('notification_add_access', data.user.notification_add_access);
+        sessionStorage.setItem('notification_edit_access', data.user.notification_edit_access);
+        sessionStorage.setItem('notification_delete_access', data.user.notification_delete_access);
+        sessionStorage.setItem('holiday_add_access', data.user.holiday_add_access);
+        sessionStorage.setItem('holiday_edit_access', data.user.holiday_edit_access);
+        sessionStorage.setItem('holiday_delete_access', data.user.holiday_delete_access);
+        sessionStorage.setItem('location_add_access', data.user.location_add_access);
+        sessionStorage.setItem('location_edit_access', data.user.location_edit_access);
+        sessionStorage.setItem('location_delete_access', data.user.location_delete_access);
+        sessionStorage.setItem('user_add_access', data.user.user_add_access);
+        sessionStorage.setItem('user_edit_access', data.user.user_edit_access);
+        sessionStorage.setItem('user_delete_access', data.user.user_delete_access);
         sessionStorage.setItem('username', data.user.fld_username);
         sessionStorage.setItem('name', data.user.fld_name);
         sessionStorage.setItem('email', data.user.fld_email);
@@ -67,7 +79,7 @@ export default function Login() {
 
           setTimeout(()=>{
              // Redirect or do something after successful login
-              if(sessionStorage.getItem('adminType') == "SUPERADMIN"){
+              if(sessionStorage.getItem('adminType') == "SUPERADMIN" || sessionStorage.getItem('adminType') == "SUBADMIN"){
                 navigate('/admindashboard');
               }else{
                 navigate('/dashboard');

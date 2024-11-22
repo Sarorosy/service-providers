@@ -26,7 +26,7 @@ const ManageHolidays = () => {
 
     const navigate = useNavigate();
     useEffect(() => {
-        if (sessionStorage.getItem("adminType") != "SUPERADMIN") {
+        if (sessionStorage.getItem("adminType") != "SUPERADMIN" && sessionStorage.getItem("adminType") != "SUBADMIN") {
             navigate("/dashboard"); // Redirect to homepage if not SUPERADMIN
         }
     }, [navigate]);
@@ -114,13 +114,20 @@ const ManageHolidays = () => {
         },
         {
             title: 'Actions',
-            render: (data, type, row) => (
-                `<button class="view-btn" data-id="${row._id}">View</button>
-        <button class="edit-btn" data-id="${row._id}">Edit</button>
-        <button class="delete-btn" data-id="${row._id}">Delete</button>`
-            ),
+            render: (data, type, row) => {
+              // Check if the user is a SUPERADMIN or has the respective permissions
+              const canEdit = sessionStorage.getItem("adminType") === "SUPERADMIN" || sessionStorage.getItem("holiday_edit_access") === "true";
+              const canDelete = sessionStorage.getItem("adminType") === "SUPERADMIN" || sessionStorage.getItem("holiday_delete_access") === "true";
+          
+              return `
+                <button class="view-btn" data-id="${row._id}">View</button>
+                ${canEdit ? `<button class="edit-btn" data-id="${row._id}">Edit</button>` : ''}
+                ${canDelete ? `<button class="delete-btn" data-id="${row._id}">Delete</button>` : ''}
+              `;
+            },
             orderable: false
-        },
+          },
+          
     ];
 
     const handleEditButtonClick = (e, row) => {
@@ -189,12 +196,15 @@ const ManageHolidays = () => {
                     >
                         Refresh <RefreshCw className='ml-2 ic' />
                     </button>
+                    {(sessionStorage.getItem("adminType") === "SUPERADMIN" || sessionStorage.getItem("holiday_add_access") == 'true') && (
+            
                     <button
                         onClick={handleAddHolidayClick}
                         className="text-white py-0 px-1 rounded transition duration-200 flex items-center"
                     >
                         Add Holiday <CalendarPlus className='ml-2 ic' />
                     </button>
+                    )}
                 </div>
             </div>
 

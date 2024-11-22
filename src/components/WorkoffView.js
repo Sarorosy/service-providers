@@ -6,7 +6,7 @@ const WorkoffView = ({ isOpen, workoffData, serviceProviders, onClose }) => {
   if (!isOpen || !workoffData) return null;
 
   // Find the provider details
-  const provider = serviceProviders.find(provider => provider._id.toString() === workoffData.fld_service_provider_id.toString());
+  const provider = serviceProviders.find(provider => provider._id.toString() === workoffData.fld_adminid.toString());
 
   // Default profile image URL
   const defaultProfileImage = 'https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg'; // Replace with the actual default image path
@@ -43,7 +43,7 @@ const WorkoffView = ({ isOpen, workoffData, serviceProviders, onClose }) => {
             </div>
             <div className="flex p-2 bbwd">
               <span className="font-semibold text-gray-800">Duration:&nbsp;</span>
-              <span className="text-gray-600">{workoffData.fld_duration}</span>
+              <span className="text-gray-600">{workoffData.fld_duration.$numberDecimal}</span>
             </div>
             <div className="flex p-2 bbwd">
               <span className="font-semibold text-gray-800">Added On:&nbsp;</span>

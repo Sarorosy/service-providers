@@ -17,6 +17,7 @@ const UserWorkDays = ({ serviceProviderId, onClose }) => {
   const [sidebarDetails, setSidebarDetails] = useState({ inTime: '', outTime: '' }); // State for sidebar details
   const [loading, setLoading] = useState(true); // Loading state
   const [holidayDates, setHolidayDates] = useState([]);
+  const [workoffDates, setWorkoffDates] = useState([]);
   const [user, setUser] = useState(null);
 
   const formatTime = (timeString) => {
@@ -74,7 +75,7 @@ const UserWorkDays = ({ serviceProviderId, onClose }) => {
 
       const userHolidays = holidays.filter(holiday => {
         // Check if fld_userid is defined and is an array
-        return Array.isArray(holiday.fld_userid) && holiday.fld_userid.includes(serviceProviderId);
+        return Array.isArray(holiday.location) && holiday.location.includes(user.location);
       });
 
       // Map the holidays to a format suitable for FullCalendar
@@ -104,6 +105,34 @@ const UserWorkDays = ({ serviceProviderId, onClose }) => {
     }
   };
 
+  const fetchWorkoffs = async () => {
+    try {
+      const response = await fetch(`https://serviceprovidersback.onrender.com/api/workoffs/user/${serviceProviderId}`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch workoffs');
+      }
+      const workoffs = await response.json();
+  
+      // Map workoffs to FullCalendar events
+      const workoffEvents = workoffs.map((workoff) => ({
+        title: workoff.fld_duration.$numberDecimal + 'leave' || 'Workoff', // Use reason for title
+        start: workoff.fld_start_date.split('T')[0], // Extract start date
+        end: workoff.fld_end_date.split('T')[0], // Extract end date
+        allDay: true, // Full-day event
+        backgroundColor: '#ffc107', // Assign distinct color
+        textColor: '#000', // Text color
+      }));
+  
+      // Add workoff events to existing events
+      setEvents((prevEvents) => [...prevEvents, ...workoffEvents]);
+      setWorkoffDates(workoffEvents.map((event) => event.start)); // Track workoff dates
+    } catch (error) {
+      console.error('Error fetching workoffs:', error);
+    }
+  };
+  
+
+
 
   // Fetch user by ID
   const fetchUser = async () => {
@@ -124,8 +153,10 @@ const UserWorkDays = ({ serviceProviderId, onClose }) => {
   useEffect(() => {
     const fetchData = async () => {
       await fetchLoginHistories();
-      await fetchHolidays();
       await fetchUser();
+      await fetchHolidays();
+      await fetchWorkoffs();
+      
     };
     fetchData();
   }, [serviceProviderId]);
@@ -227,14 +258,14 @@ const UserWorkDays = ({ serviceProviderId, onClose }) => {
                 if (arg.event.title.startsWith('In:')) {
                   const [inTime, outTime] = arg.event.title.split(' Out: ');
                   return (
-                    <div className="p-2">
+                    <div className="p-2 isok">
                       <div>{inTime}</div>
                       <div>Out: {outTime}</div>
                     </div>
                   );
                 }
                 return (
-                  <div className="brek">
+                  <div className="brek isok">
                     <div>{arg.event.title}</div>
                   </div>
                 );
@@ -244,11 +275,12 @@ const UserWorkDays = ({ serviceProviderId, onClose }) => {
                 // Highlight Sundays with background color #adceff
                 const day = info.date.getDay();
                 if (day === 0) {
-                  info.el.style.backgroundColor = '#adceff';
+                  // Highlight Sundays with a blue background
+                  info.el.style.backgroundColor = '#7AAFFFFF';
                 }
-
+                
               }}
-              dayCellClassNames="border border-gray-200 hover:bg-gray-100 cursor-pointer" // Make cells clickable
+              dayCellClassNames="border border-gray-200 cursor-pointer attendancegrid " // Make cells clickable
               eventClick={handleEventClick} // Use event click handler
             />
           )}

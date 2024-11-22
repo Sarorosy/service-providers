@@ -27,7 +27,7 @@ const ManageNotifications = () => {
 
   const navigate = useNavigate();
   useEffect(() => {
-    if (sessionStorage.getItem("adminType") != "SUPERADMIN") {
+    if (sessionStorage.getItem("adminType") != "SUPERADMIN" && sessionStorage.getItem("adminType") != "SUBADMIN") {
       navigate("/dashboard"); // Redirect to homepage if not SUPERADMIN
     }
   }, [navigate]);
@@ -92,32 +92,39 @@ const ManageNotifications = () => {
       type: 'date',
       width: "150px",
       render: (data) => {
-          const options = { day: '2-digit', month: 'short', year: 'numeric' };
-          return new Date(data).toLocaleDateString('en-GB', options).replace(',', ''); // Customize locale and remove comma
-      },
-      
-  },
-  {
-    title: 'Due Date',
-    data: 'fld_due_date',
-    type: 'date',
-    width: "150px",
-    render: (data) => {
         const options = { day: '2-digit', month: 'short', year: 'numeric' };
         return new Date(data).toLocaleDateString('en-GB', options).replace(',', ''); // Customize locale and remove comma
+      },
+
     },
-    orderable: false
-},
+    {
+      title: 'Due Date',
+      data: 'fld_due_date',
+      type: 'date',
+      width: "150px",
+      render: (data) => {
+        const options = { day: '2-digit', month: 'short', year: 'numeric' };
+        return new Date(data).toLocaleDateString('en-GB', options).replace(',', ''); // Customize locale and remove comma
+      },
+      orderable: false
+    },
     {
       title: 'Actions',
       width: "200px",
-      render: (data, type, row) => (
-        `<button class="view-btn" data-id="${row._id}">View</button>
-        <button class="edit-btn" data-id="${row._id}">Edit</button>
-         <button class="delete-btn" data-id="${row._id}">Delete</button>`
-      ),
+      render: (data, type, row) => {
+        // Check permissions
+        const canEdit = sessionStorage.getItem("adminType") === "SUPERADMIN" || sessionStorage.getItem("notification_edit_access") === "true";
+        const canDelete = sessionStorage.getItem("adminType") === "SUPERADMIN" || sessionStorage.getItem("notification_delete_access") === "true";
+    
+        return `
+          <button class="view-btn" data-id="${row._id}">View</button>
+          ${canEdit ? `<button class="edit-btn" data-id="${row._id}">Edit</button>` : ''}
+          ${canDelete ? `<button class="delete-btn" data-id="${row._id}">Delete</button>` : ''}
+        `;
+      },
       orderable: false
     },
+    
   ];
 
   const handleEditButtonClick = (e, row) => {
@@ -183,14 +190,16 @@ const ManageNotifications = () => {
             onClick={fetchNotifications}
             className="text-white text-sm py-0 px-1 rounded transition duration-200 flex items-center mr-2"
           >
-            Refresh <RefreshCw className='ml-2 ic'/>
+            Refresh <RefreshCw className='ml-2 ic' />
           </button>
-          <button
-            onClick={handleAddNotificationClick}
-            className="text-white text-sm py-0 px-1 rounded transition duration-200 flex items-center "
-          >
-            Add Notification <BellPlus className='ml-2 ic'/>
-          </button>
+          {(sessionStorage.getItem("adminType") === "SUPERADMIN" || sessionStorage.getItem("notification_add_access") == 'true') && (
+            <button
+              onClick={handleAddNotificationClick}
+              className="text-white text-sm py-0 px-1 rounded transition duration-200 flex items-center"
+            >
+              Add Notification <BellPlus className='ml-2 ic' />
+            </button>
+          )}
         </div>
       </div>
 
@@ -203,7 +212,7 @@ const ManageNotifications = () => {
             onClose={handleCloseView}
           />
         )}
-        {isEditFormOpen && <EditNotificationForm notificationId={selectedNotificationId} onClose={handleCloseEditForm} after={fetchNotifications}/>}
+        {isEditFormOpen && <EditNotificationForm notificationId={selectedNotificationId} onClose={handleCloseEditForm} after={fetchNotifications} />}
         {isDeleteModalOpen && (
           <ConfirmationModal
             isOpen={isDeleteModalOpen} // Pass isOpen prop

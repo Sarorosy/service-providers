@@ -22,7 +22,7 @@ const ManageLocations = () => {
 
     const navigate = useNavigate();
     useEffect(() => {
-        if (sessionStorage.getItem("adminType") !== "SUPERADMIN") {
+        if (sessionStorage.getItem("adminType") !== "SUPERADMIN" && sessionStorage.getItem("adminType") !== "SUBADMIN") {
             navigate("/dashboard"); // Redirect to dashboard if not SUPERADMIN
         }
     }, [navigate]);
@@ -85,12 +85,19 @@ const ManageLocations = () => {
         },
         {
             title: 'Actions',
-            render: (data, type, row) => (
-                `<button class="edit-btn" data-id="${row._id}">Edit</button>
-        <button class="delete-btn" data-id="${row._id}">Delete</button>`
-            ),
+            render: (data, type, row) => {
+              // Check if the user is a SUPERADMIN or has the respective permissions
+              const canEdit = sessionStorage.getItem("adminType") === "SUPERADMIN" || sessionStorage.getItem("location_edit_access") === "true";
+              const canDelete = sessionStorage.getItem("adminType") === "SUPERADMIN" || sessionStorage.getItem("location_delete_access") === "true";
+          
+              return `
+                ${canEdit ? `<button class="edit-btn" data-id="${row._id}">Edit</button>` : ''}
+                ${canDelete ? `<button class="delete-btn" data-id="${row._id}">Delete</button>` : ''}
+              `;
+            },
             orderable: false
-        },
+          },
+          
     ];
 
     const handleEditButtonClick = (e, row) => {
@@ -145,12 +152,15 @@ const ManageLocations = () => {
                     >
                         Refresh <RefreshCw className='ml-2 ic' />
                     </button>
+                    {(sessionStorage.getItem("adminType") === "SUPERADMIN" || sessionStorage.getItem("location_add_access") == 'true') && (
+            
                     <button
                         onClick={handleAddLocationClick}
                         className="text-white py-0 px-1 rounded transition duration-200 flex items-center"
                     >
                         Add Location <CalendarPlus className='ml-2 ic' />
                     </button>
+                    )}
                 </div>
             </div>
 

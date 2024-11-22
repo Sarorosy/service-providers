@@ -14,7 +14,7 @@ const ManageReports = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (sessionStorage.getItem("adminType") !== "SUPERADMIN") {
+    if (sessionStorage.getItem("adminType") !== "SUPERADMIN" && sessionStorage.getItem("adminType") !== "SUBADMIN") {
       navigate("/dashboard"); // Redirect to homepage if not SUPERADMIN
     }
   }, [navigate]);

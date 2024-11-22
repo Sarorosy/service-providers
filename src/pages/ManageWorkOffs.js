@@ -109,7 +109,7 @@ const ManageWorkoffs = () => {
       data: 'fld_duration',
       width: "80px",
       orderable: false,
-      render: (data) => `<div style="width: 100%; font-size: 12px;">${data}</div>`,
+      render: (data) => `<div style="width: 100%; font-size: 12px;">${data.$numberDecimal}</div>`,
     },
     {
       title: 'Reason',

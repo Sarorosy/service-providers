@@ -71,10 +71,11 @@ const AdminDashboard = () => {
 
   const navigate = useNavigate();
   useEffect(() => {
-    if (sessionStorage.getItem("adminType") != "SUPERADMIN") {
-      navigate("/dashboard"); // Redirect to homepage if not SUPERADMIN
+    if (sessionStorage.getItem("adminType") !== "SUPERADMIN" && sessionStorage.getItem("adminType") !== "SUBADMIN") {
+      navigate("/dashboard"); // Redirect to homepage if not SUPERADMIN or SUBADMIN
     }
   }, [navigate]);
+  
 
   // const chartData = {
   //   labels: ['Total Users', 'Active Users', 'Inactive Users', 'Notifications', 'Holidays'],

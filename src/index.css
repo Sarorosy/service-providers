@@ -1026,7 +1026,9 @@ text-align: center;
 .fc .fc-button-group>.fc-button {
   margin: 2px;
 }
-
+.fc-event{
+  max-width: 90px;
+}
 .bggrey {
   background-color: #efefef;
 }
@@ -1102,4 +1104,7 @@ table.dataTable thead>tr>th.dt-orderable-desc {
 
 .sl{
   margin-top: 2px;
+}
+.attendancegrid:not(:has(.isok)) {
+  background-color: rgb(255, 204, 204); /* Red background */
 }

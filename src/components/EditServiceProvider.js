@@ -31,6 +31,19 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
         fld_pancard: null, // For file upload
         fld_cancelledchequeimage: null, // For file upload
         fld_profile_image: null, // For file upload
+        fld_admin_type: '', // New admin type field
+        notification_add_access: false,
+        notification_edit_access: false,
+        notification_delete_access: false,
+        holiday_add_access: false,
+        holiday_edit_access: false,
+        holiday_delete_access: false,
+        location_add_access: false,
+        location_edit_access: false,
+        location_delete_access: false,
+        user_add_access: false,
+        user_edit_access: false,
+        user_delete_access: false,
     });
 
     const [loading, setLoading] = useState(false);
@@ -68,10 +81,10 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
     }, [serviceProviderId]);
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
+        const { name, value, type, checked } = e.target;
         setFormData((prevData) => ({
             ...prevData,
-            [name]: value,
+            [name]: type === 'checkbox' ? checked : value,
         }));
     };
 
@@ -307,6 +320,48 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
                                         ))}
                                     </select>
                                 </div>
+                                <div>
+                                    <label className="block text-sm font-medium mb-1" htmlFor="admin_type">Admin Type</label>
+                                    <select
+                                        id="admin_type"
+                                        name="fld_admin_type"
+                                        value={formData.fld_admin_type}
+                                        onChange={handleChange}
+                                        className="border border-gray-300 rounded w-full text-sm form-control-sm"
+                                        required
+                                    >
+                                        <option value="">Select Admin Type</option>
+                                        <option value="SERVICE_PROVIDER">Service Provider</option>
+                                        <option value="SUBADMIN">Sub Admin</option>
+                                    </select>
+                                </div>
+                                {formData.fld_admin_type === "SUBADMIN" && (
+                                    <div className="col-span-2">
+                                        <h3 className="text-lg font-semibold mb-2">Sub Admin Permissions</h3>
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                            {['notification', 'holiday', 'location', 'user'].map((section) => (
+                                                <div key={section} className="space-y-2">
+                                                    <h4 className="font-medium">{section.charAt(0).toUpperCase() + section.slice(1)} Access</h4>
+                                                    {['add', 'edit', 'delete'].map((action) => (
+                                                        <div key={`${section}_${action}`} className="flex items-center">
+                                                            <input
+                                                                type="checkbox"
+                                                                id={`${section}_${action}_access`}
+                                                                name={`${section}_${action}_access`}
+                                                                checked={formData[`${section}_${action}_access`]}
+                                                                onChange={handleChange}
+                                                                className="mr-2"
+                                                            />
+                                                            <label htmlFor={`${section}_${action}_access`} className="text-sm">
+                                                                {`${action.charAt(0).toUpperCase() + action.slice(1)} Access`}
+                                                            </label>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
 
                     {/* Address */}
                     <div className="mb-4">

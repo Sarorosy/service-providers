@@ -115,7 +115,7 @@ const ManageProjects = () => {
     {
         title: 'Added On',
         data: 'fld_addedon',
-        width: "10%",
+       // width: "120px",
         render: (data, type) => {
           if (type === 'display') {
             return data ? new Intl.DateTimeFormat('en-GB', {
@@ -143,7 +143,7 @@ const ManageProjects = () => {
     //   },
     {
       title: 'Actions',
-      width: "80px",
+      width: "120px",
       render: (data, type, row) => (
         `<div style="">
            <button class="edit-btn" data-id="${row._id}">Edit</button>
