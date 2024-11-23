@@ -278,7 +278,7 @@ const AddWorkOffs = ({ onClose }) => {
                             />
                         </div>
 
-                        <div>
+                        {/* <div>
                             <label htmlFor="leave_balance" className="block mb-2">Maximum Leave Available:</label>
                             <input
                                 type="text"
@@ -287,7 +287,7 @@ const AddWorkOffs = ({ onClose }) => {
                                 readOnly
                                 className="border rounded p-2 w-full bg-gray-100"
                             />
-                        </div>
+                        </div> */}
                         {/* Reason Field */}
                         <div className="col-span-2"> {/* Span across both columns */}
                             <label htmlFor="fld_reason" className="block mb-2">Reason (at least 20 words):</label>

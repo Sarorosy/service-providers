@@ -17,7 +17,7 @@ const UserDashboard = () => {
                 
             </div>
             <div className="col-md-6 d-flex">
-            <MyWorkoffs />
+            
             </div>
             <div className="col-md-6 d-flex">
             
