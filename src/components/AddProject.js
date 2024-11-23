@@ -67,7 +67,7 @@ const AddProject = ({ onClose, onRefresh }) => {
             </div>
             <form onSubmit={handleSubmit}>
                 <div className="mb-4">
-                    <label htmlFor="fld_title" className="block mb-2">Project Title:</label>
+                    <label htmlFor="fld_title" className="block mb-2">Project Title</label>
                     <input
                         type="text"
                         id="fld_title"

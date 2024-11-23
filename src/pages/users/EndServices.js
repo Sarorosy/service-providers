@@ -133,51 +133,58 @@ const EndServices = () => {
     const today = new Date().toISOString().split('T')[0];
 
     return (
-        <div className="w-full max-w-lg mx-auto p-6 bg-white rounded-lg shadow-md mt-20">
+        <div className="w-full mx-auto p-6 bg-white rounded-lg shadow-md mt-20">
             <h2 className="text-2xl font-semibold mb-4">End My Services</h2>
-            <form onSubmit={handleSubmit}>
-                <div className="mb-4">
-                    <label htmlFor="reason" className="block mb-2 font-medium">Reason for Ending Services</label>
-                    <textarea
-                        id="reason"
-                        value={reason}
-                        onChange={(e) => setReason(e.target.value)}
-                        required
-                        className="border rounded p-2 w-full"
-                        rows="4"
-                        placeholder="Provide your reason..."
-                    ></textarea>
-                </div>
-                <div className="mb-4">
-                    <label htmlFor="proposedEndDate" className="block mb-2 font-medium">Proposed End Date (Optional)</label>
-                    <input
-                        type="date"
-                        id="proposedEndDate"
-                        value={proposedEndDate}
-                        min={today}
-                        onChange={(e) => setProposedEndDate(e.target.value)}
-                        className="border rounded p-2 w-full"
-                    />
-                </div>
-                <div className="mb-4">
-                    <label htmlFor="comments" className="block mb-2 font-medium">Additional Comments (Optional)</label>
-                    <textarea
-                        id="comments"
-                        value={comments}
-                        onChange={(e) => setComments(e.target.value)}
-                        className="border rounded p-2 w-full"
-                        rows="3"
-                        placeholder="Provide any additional information..."
-                    ></textarea>
-                </div>
-                <button
-                    type="submit"
-                    className={`bg-blue-600 text-white px-4 py-2 rounded-lg ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
-                    disabled={isSubmitting}
-                >
-                    {isSubmitting ? 'Submitting...' : 'Submit Request'}
-                </button>
-            </form>
+            <div className='bg-light p-4'>
+                <form onSubmit={handleSubmit} className='row'>
+                    <div className="mb-4 col-md-6">
+                        <label htmlFor="reason" className="block mb-2 font-medium">Reason for Ending Services</label>
+                        <textarea
+                            id="reason"
+                            value={reason}
+                            onChange={(e) => setReason(e.target.value)}
+                            required
+                            className="border rounded p-2 w-full"
+                            rows="4"
+                            placeholder="Provide your reason..."
+                        ></textarea>
+                    </div>
+                    
+                    <div className="mb-4 col-md-6">
+                        <label htmlFor="comments" className="block mb-2 font-medium">Additional Comments (Optional)</label>
+                        <textarea
+                            id="comments"
+                            value={comments}
+                            onChange={(e) => setComments(e.target.value)}
+                            className="border rounded p-2 w-full"
+                            rows="4"
+                            placeholder="Provide any additional information..."
+                        ></textarea>
+                    </div>
+                    <div className="col-md-6">
+                        <label htmlFor="proposedEndDate" className="block mb-2 font-medium">Proposed End Date (Optional)</label>
+                        <input
+                            type="date"
+                            id="proposedEndDate"
+                            value={proposedEndDate}
+                            min={today}
+                            onChange={(e) => setProposedEndDate(e.target.value)}
+                            className="border rounded p-2 w-full form-control-sm"
+                        />
+                    </div>
+                    <div className='col-md-6 d-flex justify-content-end align-items-end'>
+                        <div className=''>
+                        <button
+                        type="submit"
+                        className={`bg-blue-600 text-white px-2 py-1 f-12 rounded-lg ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
+                        disabled={isSubmitting}
+                    >
+                        {isSubmitting ? 'Submitting...' : 'Submit Request'}
+                    </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
             <ToastContainer />
         </div>
     );

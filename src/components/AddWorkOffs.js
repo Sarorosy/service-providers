@@ -201,7 +201,7 @@ const AddWorkOffs = ({ onClose }) => {
         >
             <div className="wen mx-auto bg-white p-6 rounded-lg shadow-md">
                 <div className='n-pop-up-head d-flex justify-content-between align-items-center mb-4 border-bottom pb-3'>
-                    <h2 className="text-2xl font-bold text-center">Add Work Off</h2>
+                    <h2 className="text-2xl font-bold text-center">Add Unavailability</h2>
                     <button
                         onClick={onClose}
                         className="text-white py-2 px-2 rounded-full"
@@ -312,7 +312,7 @@ const AddWorkOffs = ({ onClose }) => {
                                 className={`bg-blue-600 text-white px-2 rounded-lg ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
                                 disabled={isSubmitting}
                             >
-                                {isSubmitting ? <RevolvingDot height="20" width="20" color="white" ariaLabel="loading" /> : 'Add Work Off'}
+                                {isSubmitting ? <RevolvingDot height="20" width="20" color="white" ariaLabel="loading" /> : 'Add Unavailability'}
                             </button>
                         </div>
                     </div>

@@ -45,7 +45,7 @@ const AddLocation = ({ onClose, after }) => {
       // transition={{ duration: 0.5, ease: 'easeInOut' }}
       className="w-full h-full p-6 fixed top-0 right-0 z-50 shadow-lg n-pop-up"
     >
-      <div className="wen mx-auto bg-white p-6 rounded-lg shadow-md">
+      <div className="wen3 mx-auto bg-white p-6 rounded-lg shadow-md">
       <div className='n-pop-up-head d-flex justify-content-between align-items-center mb-4 border-bottom pb-3'>
           <h2 className="text-2xl font-bold text-center">Add Location</h2>
           <button
@@ -67,7 +67,7 @@ const AddLocation = ({ onClose, after }) => {
                         required
                     />
                 </div>
-                <div className='but'>
+                <div className='but d-flex justify-content-end'>
                 <button type="submit" className="bg-blue-600 text-white py-1 px-1 rounded flex items-center">
                     <Save className="mr-1 ic" /> Add Location
                 </button>

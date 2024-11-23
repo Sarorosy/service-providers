@@ -177,14 +177,14 @@ const EditServiceCharge = ({ onClose, id , after}) => {
                         </div>
                     )}
 
-                    <form onSubmit={handleSubmit} className='db'>
-                        <div className="mb-3">
+                    <form onSubmit={handleSubmit} className='db row'>
+                        <div className="mb-3 col-md-6">
                             <label htmlFor="serviceProvider" className="block text-sm font-semibold">Service Provider</label>
                             <select id="serviceProvider" className="w-full p-2 border border-gray-300 rounded form-control-sm" >
                                 <option value="">Select a service provider</option>
                             </select>
                         </div>
-                        <div className="mb-3">
+                        <div className="mb-3 col-md-6">
                             <label htmlFor="fromDate" className="block text-sm font-semibold">From Date</label>
                             <input
                                 type="date"
@@ -196,19 +196,7 @@ const EditServiceCharge = ({ onClose, id , after}) => {
                                 required
                             />
                         </div>
-                        <div className="mb-3">
-                            <label htmlFor="toDate" className="block text-sm font-semibold">To Date</label>
-                            <input
-                                type="date"
-                                id="toDate"
-                                name="fld_to_date"
-                                value={formData.fld_to_date}
-                                onChange={handleInputChange}
-                                className="w-full p-2 border border-gray-300 rounded form-control-sm"
-                                required
-                            />
-                        </div>
-                        <div className="mb-4">
+                        <div className="mb-4 col-md-6">
                             <label htmlFor="serviceCharge" className="block text-sm font-semibold">Service Charge</label>
                             <input
                                 type="number"
@@ -221,6 +209,19 @@ const EditServiceCharge = ({ onClose, id , after}) => {
                                 required
                             />
                         </div>
+                        <div className="mb-3 col-md-6">
+                            <label htmlFor="toDate" className="block text-sm font-semibold">To Date</label>
+                            <input
+                                type="date"
+                                id="toDate"
+                                name="fld_to_date"
+                                value={formData.fld_to_date}
+                                onChange={handleInputChange}
+                                className="w-full p-2 border border-gray-300 rounded form-control-sm"
+                                required
+                            />
+                        </div>
+                        
 
                     </form>
 
