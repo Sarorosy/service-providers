@@ -104,7 +104,7 @@ const AddWorkSummary = ({ onClose }) => {
                             id="project-select"
                             value={selectedProjectId}
                             required
-                            className="border rounded p-2 w-full  form-control-sm"
+                            className="border rounded p-2 w-full"
                         >
                             <option value="" disabled>Select a project</option>
                             {projects.map((project) => (

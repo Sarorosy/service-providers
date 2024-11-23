@@ -21,7 +21,7 @@ const ConfirmationModal = ({ isOpen, onClose, onConfirm, content, isReversible =
                         exit={{ scale: 0.8 }}
                     >
                         <div className='text-center smallct'>
-                            <h2 className="text-lg mb-3 font-semibold">
+                            <h2 className="text-lg mb-0 font-semibold">
                                 <span className=" f-20">
                                     {content}
                                 </span>

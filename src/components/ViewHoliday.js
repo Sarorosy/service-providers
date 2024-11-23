@@ -64,7 +64,7 @@ const ViewHoliday = ({ onClose, holidayId }) => {
             // transition={{ duration: 0.5, ease: 'easeInOut' }}
             className="w-full h-full p-6 fixed top-0 right-0 z-50 shadow-lg n-pop-up"
         >
-            <div className="wen mx-auto bg-white p-6 rounded-lg shadow-md">
+            <div className="wen2 mx-auto bg-white p-6 rounded-lg shadow-md">
                 {!holiday ? (<div className="bg-white p-6 rounded shadow-lg text-center flex items-center justify-center">
                     <RevolvingDot
                         height={24}
@@ -86,7 +86,7 @@ const ViewHoliday = ({ onClose, holidayId }) => {
                     </div>
                     <div className='db'>
 
-                        <div className="n-popup-body">
+                        <div className="n-popup-body n-vw-hlyd-pop-h">
                             <h2 className="text-md font-bold mb-3">Holiday Details</h2>
 
                             <div className="flex flex-wrap -mx-4 mb-2">

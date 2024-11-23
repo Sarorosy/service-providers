@@ -1070,6 +1070,16 @@ div.dt-container .dt-paging .dt-paging-button {
   width: 25%;
 }
 
+.mang-pr-tbl-set table.dataTable thead th:nth-child(1) {
+  width: 70%;
+}
+.mang-pr-tbl-set table.dataTable thead th:nth-child(2) {
+  width: 15%;
+}
+.mang-pr-tbl-set table.dataTable thead th:nth-child(3) {
+  width: 15%;
+}
+
 .dbox {
   height: 9.7rem;
   width: 18rem;

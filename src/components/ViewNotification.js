@@ -98,7 +98,7 @@ const ViewNotification = ({ onClose, notificationId }) => {
             ) : (
                 <>
                     <div className='db'>
-                    <div className=' n-popup-body'>
+                    <div className=' n-popup-body vw-ntf-pop-h'>
                         <div className="">
                             <h2 className="font-bold mb-3">Notification Details</h2>
 

@@ -248,7 +248,7 @@ const UserWorkSummary = () => {
                     </h1>
                 </div>
 
-                <div className="flex justify-end items-center" style={{width:"400px", }}>
+                <div className="flex justify-end items-center" style={{width:"260px", }}>
                     <select
                             onChange={handleUserChange}
                             className="border border-gray-300 rounded ml-20 form-control-sm"

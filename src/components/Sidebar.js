@@ -179,7 +179,7 @@ const Sidebar = () => {
                   className="flex items-center p-2 hover:bg-sky-200  transition duration-100 my-1  "
                 >
                   <Plane className="mr-2" height="17" width="17"/>
-                  Mark UnAvailability
+                  Mark Unavailability
                 </NavLink>
               </li>
               {/* <li>

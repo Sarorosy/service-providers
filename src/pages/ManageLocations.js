@@ -85,6 +85,7 @@ const ManageLocations = () => {
         },
         {
             title: 'Actions',
+            width: '150px',
             render: (data, type, row) => {
               // Check if the user is a SUPERADMIN or has the respective permissions
               const canEdit = sessionStorage.getItem("adminType") === "SUPERADMIN" || sessionStorage.getItem("location_edit_access") === "true";

@@ -205,7 +205,7 @@ const AddNotificationForm = ({ onClose , after}) => {
                   required
                 />
               </div>
-              <div className="mb-3 flex items-center justify-around">
+              <div className="mb-3 flex items-center">
             <label className="inline-flex items-center mr-6">
               <input
                 type="radio"

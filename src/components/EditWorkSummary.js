@@ -102,7 +102,7 @@ const EditWorkSummary = ({ workSummaryId, onClose }) => {
             // transition={{ duration: 0.5, ease: 'easeInOut' }}
             className="w-full h-full p-6 fixed top-0 right-0 z-50 shadow-lg n-pop-up"
         >
-            <div className="wen2 mx-auto bg-white p-6 rounded-lg shadow-md">
+            <div className="wen mx-auto bg-white p-6 rounded-lg shadow-md">
             <div className='n-pop-up-head d-flex justify-content-between align-items-center mb-4 border-bottom pb-3'>
                 <h2 className="text-2xl font-bold text-center">Edit Work Summary</h2>
                 <button
@@ -120,7 +120,7 @@ const EditWorkSummary = ({ workSummaryId, onClose }) => {
                             id="project-select"
                             value={selectedProjectId}
                             required
-                            className="border rounded w-full form-control-sm"
+                            className="border rounded p-2 w-full "
                         >
                             <option value="" disabled>Select a project</option>
                             {projects.map((project) => (

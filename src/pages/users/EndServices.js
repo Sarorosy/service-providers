@@ -138,7 +138,7 @@ const EndServices = () => {
             <div className='bg-light p-4'>
                 <form onSubmit={handleSubmit} className='row'>
                     <div className="mb-4 col-md-6">
-                        <label htmlFor="reason" className="block mb-2 font-medium">Reason for Ending Services</label>
+                        <label htmlFor="reason" className="block text-sm font-medium mb-1">Reason for Ending Services</label>
                         <textarea
                             id="reason"
                             value={reason}
@@ -151,7 +151,7 @@ const EndServices = () => {
                     </div>
                     
                     <div className="mb-4 col-md-6">
-                        <label htmlFor="comments" className="block mb-2 font-medium">Additional Comments (Optional)</label>
+                        <label htmlFor="comments" className="block text-sm font-medium mb-1 ">Additional Comments (Optional)</label>
                         <textarea
                             id="comments"
                             value={comments}
@@ -162,7 +162,7 @@ const EndServices = () => {
                         ></textarea>
                     </div>
                     <div className="col-md-6">
-                        <label htmlFor="proposedEndDate" className="block mb-2 font-medium">Proposed End Date (Optional)</label>
+                        <label htmlFor="proposedEndDate" className="block text-sm font-medium mb-1">Proposed End Date (Optional)</label>
                         <input
                             type="date"
                             id="proposedEndDate"

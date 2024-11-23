@@ -142,8 +142,8 @@ const ManageEndServices = () => {
             if (row.status === 'Pending') {
               return `
                 <div>
-                  <button class="approve-btn greenbt" data-id="${row._id}">Approve</button>
-                  <button class="reject-btn redbt" data-id="${row._id}">Reject</button>
+                  <button class="approve-btn greenbt px-1" data-id="${row._id}">Approve</button>
+                  <button class="reject-btn redbt px-1" data-id="${row._id}">Reject</button>
                 </div>
               `;
             } else {
@@ -196,27 +196,33 @@ const ManageEndServices = () => {
                         showbuttons='no'
                         content={
                             <>
-                                <div className="mb-4">
-                                    <button
-                                        onClick={() => setIsModalOpen(false)}
-                                        className="text-white py-2 px-2 rounded-full float-right"
-                                    >
-                                        <CircleX className='colorr' />
-                                    </button>
-                                    <br/>
-                                    <label htmlFor="adminComments" className="block mb-2 font-medium">Admin Comments</label>
-                                    <textarea
-                                        id="adminComments"
-                                        value={adminComments}
-                                        onChange={(e) => setAdminComments(e.target.value)}
-                                        className="border rounded p-2 w-full"
-                                        rows="4"
-                                    />
+                                <div className="mb-3">
+                                    <div className='d-flex justify-content-end'>
+                                        <div>
+                                            <button
+                                                onClick={() => setIsModalOpen(false)}
+                                                className="text-white py-2 px-2 rounded-full"
+                                            >
+                                            <CircleX className='colorr' />
+                                        </button>
+                                        </div>
+                                        
+                                    </div>
+                                    <div>
+                                        <label htmlFor="adminComments" className="block mb-0 text-left f-16">Admin Comments</label>
+                                        <textarea
+                                            id="adminComments"
+                                            value={adminComments}
+                                            onChange={(e) => setAdminComments(e.target.value)}
+                                            className="border rounded p-2 w-full"
+                                            rows="3"
+                                        />
+                                    </div>
                                 </div>
-                                <div className="flex justify-center space-x-4">
+                                <div className="flex justify-end space-x-4">
                                     <button
                                         onClick={handleModalSubmit}
-                                        className="bg-green-600 text-white px-2 py-1 rounded-md"
+                                        className="bg-green-600 text-white px-2 py-0 f-12 rounded-md"
                                     >
                                         Submit
                                     </button>

@@ -195,7 +195,7 @@ const EditNotificationForm = ({ notificationId, onClose, after }) => {
                     </button>
                 </div>
                 <div className='db'>
-                    <div className=' n-popup-body'>
+                    <div className=' n-popup-body edit-ntf-pop-h'>
                         <form onSubmit={handleSubmit} className=''>
                             <div className='mx-auto bg-white p-6 rounded-lg '>
                                 <div className='flex w-full justify-center'>

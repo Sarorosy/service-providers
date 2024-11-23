@@ -110,12 +110,12 @@ const ManageProjects = () => {
     {
       title: 'Project Name',
       data: 'fld_title',
-      width: "50%",
+      width: "70%",
     },
     {
         title: 'Added On',
         data: 'fld_addedon',
-       // width: "120px",
+       width: "20%",
         render: (data, type) => {
           if (type === 'display') {
             return data ? new Intl.DateTimeFormat('en-GB', {
@@ -143,7 +143,7 @@ const ManageProjects = () => {
     //   },
     {
       title: 'Actions',
-      width: "120px",
+      width: "10%",
       render: (data, type, row) => (
         `<div style="">
            <button class="edit-btn" data-id="${row._id}">Edit</button>
@@ -174,6 +174,7 @@ const ManageProjects = () => {
           </button>
         </div>
       </div>
+      <div className='mang-pr-tbl-set'>
       {loading ? (
         <div className="flex justify-center">
           <RevolvingDot height="30" width="30" color="#3b82f6" ariaLabel="loading" />
@@ -195,6 +196,7 @@ const ManageProjects = () => {
           }}
         />
       )}
+      </div>
       <AnimatePresence>
         {isFormOpen && <AddProject onClose={handleCloseForm} onRefresh={fetchProjects} />}
         {isEditFormOpen && (

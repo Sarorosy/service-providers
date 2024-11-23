@@ -170,7 +170,7 @@ const EditHolidayForm = ({ holidayId, onClose, after }) => {
             // transition={{ duration: 0.5, ease: 'easeInOut' }}
             className="w-full h-full p-6 fixed top-0 right-0 z-50 shadow-lg n-pop-up"
         >
-            <div className="wen mx-auto bg-white p-6 rounded-lg shadow-md">
+            <div className="wen2 mx-auto bg-white p-6 rounded-lg shadow-md">
                 <div className='n-pop-up-head d-flex justify-content-between align-items-center mb-4 border-bottom pb-3'>
                     <h2 className="text-2xl font-bold text-center">Edit Holiday</h2>
                     <button
@@ -193,7 +193,7 @@ const EditHolidayForm = ({ holidayId, onClose, after }) => {
                 ) : (
                     <div className='db'>
 
-                        <div className='n-popup-body'>
+                        <div className='n-popup-body edt-hldy-pop-h'>
                             <form onSubmit={handleSubmit} className='mx-auto mt-2'>
                                 <div className='flex w-full justify-center'>
                                     <div className="mb-4 w-1/2 mx-1">
@@ -223,7 +223,7 @@ const EditHolidayForm = ({ holidayId, onClose, after }) => {
                                     </div>
                                 </div>
 
-                                <div className="mb-3 flex items-center justify-around">
+                                <div className="mb-3 flex items-center">
                                     <label className="inline-flex items-center mr-6">
                                         <input
                                             type="radio"

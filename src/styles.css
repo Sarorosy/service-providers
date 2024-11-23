@@ -5,6 +5,9 @@
 .f-20 {
     font-size: 20px;
 }
+.f-16 {
+    font-size: 16px;
+}
 .f-15 {
     font-size: 15px;
 }
@@ -232,7 +235,7 @@
     height: 31vh;
 }
 .n-popup-body.ad-notf-h {
-    height: 55vh;
+    height: 56vh;
 }
 .n-popup-body.serv-pop-h {
     height: 60vh !important;
@@ -242,6 +245,18 @@
 }
 .n-popup-body.wor-dy-pop-h {
     height: 70vh !important;
+}
+.n-popup-body.edit-ntf-pop-h {
+    height: 70vh !important;
+}
+.n-popup-body.vw-ntf-pop-h {
+    height: 48vh !important;
+}
+.n-popup-body.n-vw-hlyd-pop-h {
+    height: 25vh !important;
+}
+.n-popup-body.edt-hldy-pop-h {
+    height: 38vh !important;
 }
 
 
@@ -322,4 +337,10 @@ table tbody tr {
 {
 	background-color: #bbb;
 	border: 0px solid #eff6ff;
+}
+
+
+
+.n-wen {
+    width: 23rem;
 }

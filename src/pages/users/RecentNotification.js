@@ -43,9 +43,9 @@ const RecentNotification = () => {
                                 <div className="info-user">
                                     <div className="d-flex justify-content-between">
                                         <h4 className="mr-2 text-blue-600 f-12">{notification.fld_title}</h4>
-                                        <div className="font-bold f-10 w-50 text-right">
-                                            Due Date:<br />
-                                            <span className="text-green-600 f-10">
+                                        <div className="font-bold f-10 w-50 text-right mb-2">
+                                            Due Date: 
+                                            <span className="text-black-600 f-10 ml-2">
                                                 {new Intl.DateTimeFormat('en-GB', {
                                                     day: '2-digit',
                                                     month: 'short',
