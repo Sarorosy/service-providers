@@ -302,8 +302,8 @@ const AddServiceProvider = ({ onClose }) => {
                                     </select>
                                 </div>
                                 {formData.fld_admin_type === "SUBADMIN" && (
-                                    <div className="col-span-2">
-                                        <h3 className="text-lg font-semibold">Sub Admin Permissions</h3>
+                                    <div className="col-span-2 bg-light p-3">
+                                        <h3 className="text-lg font-semibold mb-3">Sub Admin Permissions</h3>
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                             {['notification', 'holiday', 'location', 'user'].map((section) => (
                                                 <div key={section} className="space-y-2">
@@ -318,7 +318,7 @@ const AddServiceProvider = ({ onClose }) => {
                                                                 onChange={handleChange}
                                                                 className="mr-2"
                                                             />
-                                                            <label htmlFor={`${section}_${action}_access`} className="text-sm">
+                                                            <label htmlFor={`${section}_${action}_access`} className="text-sm mb-0">
                                                                 {`${action.charAt(0).toUpperCase() + action.slice(1)} Access`}
                                                             </label>
                                                         </div>
