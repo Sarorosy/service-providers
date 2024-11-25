@@ -206,6 +206,7 @@ const EditServiceCharge = ({ onClose, id , after}) => {
                                 onChange={handleInputChange}
                                 className="w-full p-2 border border-gray-300 rounded form-control-sm"
                                 max={100000}
+                                min={100}
                                 required
                             />
                         </div>

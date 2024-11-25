@@ -226,7 +226,7 @@ const AddWorkOffs = ({ onClose }) => {
                                 name="fld_start_date"
                                 value={workoff.fld_start_date}
                                 onChange={handleStartDateChange}
-                                min={getFormattedStartDate()}
+                                min={new Date().toISOString().split('T')[0]}
                                 required
                                 className="border rounded  w-full form-control-sm"
                             />

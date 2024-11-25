@@ -5,7 +5,7 @@ import { CircleX } from 'lucide-react';
 import $ from 'jquery';
 import 'select2';
 
-const EditWorkSummary = ({ workSummaryId, onClose }) => {
+const EditWorkSummary = ({ workSummary, onClose , after}) => {
     const [projects, setProjects] = useState([]);
     const [selectedProjectId, setSelectedProjectId] = useState('');
     const [description, setDescription] = useState('');
@@ -44,7 +44,7 @@ const EditWorkSummary = ({ workSummaryId, onClose }) => {
     useEffect(() => {
         const fetchWorkSummary = async () => {
             try {
-                const response = await fetch(`https://serviceprovidersback.onrender.com/api/worksummaries/${workSummaryId}`);
+                const response = await fetch(`https://serviceprovidersback.onrender.com/api/worksummaries/${workSummary._id}`);
                 const data = await response.json();
 
                 if (data) {
@@ -57,7 +57,7 @@ const EditWorkSummary = ({ workSummaryId, onClose }) => {
         };
 
         fetchWorkSummary();
-    }, [workSummaryId]);
+    }, [workSummary]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -72,7 +72,7 @@ const EditWorkSummary = ({ workSummaryId, onClose }) => {
         };
 
         try {
-            const response = await fetch(`https://serviceprovidersback.onrender.com/api/worksummaries/${workSummaryId}`, {
+            const response = await fetch(`https://serviceprovidersback.onrender.com/api/worksummaries/${workSummary._id}`, {
                 method: 'PUT', // Use PUT for updating
                 headers: {
                     'Content-Type': 'application/json',
@@ -86,6 +86,7 @@ const EditWorkSummary = ({ workSummaryId, onClose }) => {
 
             alert('Work summary updated successfully');
             onClose(); // Close the modal upon successful submission
+            after();
         } catch (error) {
             console.error('Error updating work summary:', error);
             alert('Failed to update work summary');

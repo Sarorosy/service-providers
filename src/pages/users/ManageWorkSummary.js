@@ -208,6 +208,7 @@ const ManageWorkSummary = () => {
             onClose={handleEditFormClose}
             fetchData={fetchData}
             workSummary={selectedWorkSummary}
+            after={fetchData}
             onUpdate={handleUpdateWorkSummary}
           />
         )}
