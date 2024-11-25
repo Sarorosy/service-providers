@@ -197,7 +197,7 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
             // transition={{ duration: 0.5, ease: 'easeInOut' }}
             className="w-full h-full p-6 fixed top-0 right-0 z-50 shadow-lg n-pop-up"
         >
-            <div className='went mx-auto bg-white p-6 rounded-lg shadow-md'>
+            <div className='wen mx-auto bg-white p-6 rounded-lg shadow-md'>
             <div className='n-pop-up-head d-flex justify-content-between align-items-center mb-4 border-bottom pb-3'>
             <h2 className="text-xl font-bold text-gray-800">Edit Service Provider</h2>
             {loading && <LoadingModal />} 
@@ -219,7 +219,7 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
                     className="border border-gray-300 rounded w-full text-sm form-control-sm"
                     required
                 />
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-2">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     {/* Username */}
                     <div className="mb-4">
                         <label className="block text-sm font-medium mb-1" htmlFor="username">Username</label>
@@ -303,13 +303,14 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
                             required
                         />
                     </div>
-                    <div>
+                    <div className="mb-4">
                                     <label className="block text-sm font-medium mb-1" htmlFor="location">Location</label>
                                     <select
                                         id="location-select"
                                         value={formData.location}
                                         ref={selectRef}
                                         name='location'
+                                        className="border border-gray-300 rounded w-full text-sm form-control-sm"
                                         required
                                     >
                                         <option value="">Select a Location</option>
@@ -320,7 +321,7 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
                                         ))}
                                     </select>
                                 </div>
-                                <div>
+                                <div className="mb-4">
                                     <label className="block text-sm font-medium mb-1" htmlFor="admin_type">Admin Type</label>
                                     <select
                                         id="admin_type"
@@ -507,7 +508,7 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
                     </div>
                 </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-4 gap-1 mb-6 edit-i-s">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6 edit-i-s">
 
                         {/* Profile Image */}
                         <div className="mb-4">

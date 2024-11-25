@@ -38,7 +38,7 @@ const RecentNotification = () => {
             <div className="card-body rct-notify">
                 {notifications.length > 0 ? (
                     notifications.map(notification => (
-                        <div key={notification._id} className="card-list">
+                        <div key={notification._id} className="user-card-list p-2 pb-3 border-bottom mb-2">
                             <div className="item-list">
                                 <div className="info-user">
                                     <div className="d-flex justify-content-between">

@@ -1118,3 +1118,6 @@ table.dataTable thead>tr>th.dt-orderable-desc {
 .attendancegrid:not(:has(.isok)) {
   background-color: rgb(255, 204, 204); /* Red background */
 }
+.lh-0 {
+  line-height: normal;
+}

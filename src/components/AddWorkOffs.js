@@ -201,7 +201,7 @@ const AddWorkOffs = ({ onClose }) => {
         >
             <div className="wen mx-auto bg-white p-6 rounded-lg shadow-md">
                 <div className='n-pop-up-head d-flex justify-content-between align-items-center mb-4 border-bottom pb-3'>
-                    <h2 className="text-2xl font-bold text-center">Add Unavailability</h2>
+                    <h2 className="text-2xl font-bold text-center f-20">Add Unavailability</h2>
                     <button
                         onClick={onClose}
                         className="text-white py-2 px-2 rounded-full"
@@ -219,7 +219,7 @@ const AddWorkOffs = ({ onClose }) => {
 
                         {/* Start Date Field */}
                         <div>
-                            <label htmlFor="fld_start_date" className="block mb-2">Start Date:</label>
+                            <label htmlFor="fld_start_date" className="block text-sm font-medium mb-1">Start Date:</label>
                             <input
                                 type="date"
                                 id="fld_start_date"
@@ -228,13 +228,13 @@ const AddWorkOffs = ({ onClose }) => {
                                 onChange={handleStartDateChange}
                                 min={getFormattedStartDate()}
                                 required
-                                className="border rounded p-2 w-full"
+                                className="border rounded  w-full form-control-sm"
                             />
                             <select
                                 name="fld_start_half"
                                 value={workoff.fld_start_half}
                                 onChange={handleChange}
-                                className="border rounded p-2 mt-2 w-full"
+                                className="border rounded  mt-2 w-full form-control-sm"
                             >
                                 <option value="First Half">First Half</option>
                                 <option value="Second Half">Second Half</option>
@@ -243,7 +243,7 @@ const AddWorkOffs = ({ onClose }) => {
 
                         {/* End Date Field */}
                         <div>
-                            <label htmlFor="fld_end_date" className="block mb-2">End Date:</label>
+                            <label htmlFor="fld_end_date" className="block text-sm font-medium mb-1">End Date:</label>
                             <input
                                 type="date"
                                 id="fld_end_date"
@@ -252,13 +252,13 @@ const AddWorkOffs = ({ onClose }) => {
                                 min={workoff.fld_start_date}
                                 onChange={handleChange}
                                 required
-                                className="border rounded p-2 w-full"
+                                className="border rounded form-control-sm w-full"
                             />
                             <select
                                 name="fld_end_half"
                                 value={workoff.fld_end_half}
                                 onChange={handleChange}
-                                className="border rounded p-2 mt-2 w-full"
+                                className="border rounded form-control-sm mt-2 w-full"
                             >
                                 <option value="First Half">First Half</option>
                                 <option value="Second Half">Second Half</option>
@@ -267,14 +267,14 @@ const AddWorkOffs = ({ onClose }) => {
 
                         {/* Duration Field */}
                         <div>
-                            <label htmlFor="fld_duration" className="block mb-2">Duration (days):</label>
+                            <label htmlFor="fld_duration" className="block text-sm font-medium mb-1">Duration (days):</label>
                             <input
                                 type="number"
                                 id="fld_duration"
                                 name="fld_duration"
                                 value={workoff.fld_duration}
                                 readOnly
-                                className="border rounded p-2 w-full bg-gray-100"
+                                className="border rounded form-control-sm w-full bg-gray-100"
                             />
                         </div>
 
@@ -290,14 +290,14 @@ const AddWorkOffs = ({ onClose }) => {
                         </div> */}
                         {/* Reason Field */}
                         <div className="col-span-2"> {/* Span across both columns */}
-                            <label htmlFor="fld_reason" className="block mb-2">Reason (at least 20 words):</label>
+                            <label htmlFor="fld_reason" className="block text-sm font-medium mb-1">Reason (at least 20 words):</label>
                             <textarea
                                 id="fld_reason"
                                 name="fld_reason"
                                 value={workoff.fld_reason}
                                 onChange={handleChange}
                                 required
-                                className={`border rounded p-2 w-full ${reasonError ? 'border-red-500' : ''}`}
+                                className={`border rounded form-control w-full ${reasonError ? 'border-red-500' : ''}`}
                                 rows="4"
                             />
                             {reasonError && <p className="text-red-500">{reasonError}</p>}

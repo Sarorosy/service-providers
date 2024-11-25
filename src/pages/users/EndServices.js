@@ -134,56 +134,65 @@ const EndServices = () => {
 
     return (
         <div className="w-full mx-auto p-6 bg-white rounded-lg shadow-md mt-20">
-            <h2 className="text-2xl font-semibold mb-4">End My Services</h2>
-            <div className='bg-light p-4'>
-                <form onSubmit={handleSubmit} className='row'>
-                    <div className="mb-4 col-md-6">
-                        <label htmlFor="reason" className="block text-sm font-medium mb-1">Reason for Ending Services</label>
-                        <textarea
-                            id="reason"
-                            value={reason}
-                            onChange={(e) => setReason(e.target.value)}
-                            required
-                            className="border rounded p-2 w-full"
-                            rows="4"
-                            placeholder="Provide your reason..."
-                        ></textarea>
+            <h2 className="text-2xl font-semibold mb-4 f-20">End My Services</h2>
+            <div className='row justify-content-start'>
+                <div className='col-md-12'>
+                    <div className='bg-light p-4 '>
+                        <form onSubmit={handleSubmit} className='row'>
+                            <div className="col-md-6">
+                                <div className="mb-4">
+                                    <label htmlFor="proposedEndDate" className="block text-sm font-medium mb-1">Proposed End Date (Optional)</label>
+                                    <input
+                                        type="date"
+                                        id="proposedEndDate"
+                                        value={proposedEndDate}
+                                        min={today}
+                                        onChange={(e) => setProposedEndDate(e.target.value)}
+                                        className="border rounded p-2 w-full form-control-sm"
+                                    />
+                                </div>
+                                <div className="">
+                                    <label htmlFor="reason" className="block text-sm font-medium mb-1">Reason for Ending Services</label>
+                                    <textarea
+                                        id="reason"
+                                        value={reason}
+                                        onChange={(e) => setReason(e.target.value)}
+                                        required
+                                        className="border rounded p-2 w-full"
+                                        rows="2"
+                                        placeholder="Provide your reason..."
+                                    ></textarea>
+                                </div>
+                            </div>
+                            
+                            <div className="col-md-6">
+                                <div className="mb-4">
+                                    <label htmlFor="comments" className="block text-sm font-medium mb-1 ">Additional Comments (Optional)</label>
+                                    <textarea
+                                        id="comments"
+                                        value={comments}
+                                        onChange={(e) => setComments(e.target.value)}
+                                        className="border rounded p-2 w-full"
+                                        rows="3"
+                                        placeholder="Provide any additional information..."
+                                    ></textarea>
+                                </div>
+                            
+                                <div className='d-flex justify-content-end align-items-end'>
+                                    <div className=''>
+                                        <button
+                                        type="submit"
+                                        className={`bg-blue-600 text-white px-2 py-1 f-12 rounded-lg ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                        disabled={isSubmitting}
+                                        >
+                                            {isSubmitting ? 'Submitting...' : 'Submit Request'}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                    
-                    <div className="mb-4 col-md-6">
-                        <label htmlFor="comments" className="block text-sm font-medium mb-1 ">Additional Comments (Optional)</label>
-                        <textarea
-                            id="comments"
-                            value={comments}
-                            onChange={(e) => setComments(e.target.value)}
-                            className="border rounded p-2 w-full"
-                            rows="4"
-                            placeholder="Provide any additional information..."
-                        ></textarea>
-                    </div>
-                    <div className="col-md-6">
-                        <label htmlFor="proposedEndDate" className="block text-sm font-medium mb-1">Proposed End Date (Optional)</label>
-                        <input
-                            type="date"
-                            id="proposedEndDate"
-                            value={proposedEndDate}
-                            min={today}
-                            onChange={(e) => setProposedEndDate(e.target.value)}
-                            className="border rounded p-2 w-full form-control-sm"
-                        />
-                    </div>
-                    <div className='col-md-6 d-flex justify-content-end align-items-end'>
-                        <div className=''>
-                        <button
-                        type="submit"
-                        className={`bg-blue-600 text-white px-2 py-1 f-12 rounded-lg ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
-                        disabled={isSubmitting}
-                    >
-                        {isSubmitting ? 'Submitting...' : 'Submit Request'}
-                    </button>
-                        </div>
-                    </div>
-                </form>
+                </div>
             </div>
             <ToastContainer />
         </div>

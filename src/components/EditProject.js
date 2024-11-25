@@ -66,7 +66,7 @@ const EditProject = ({ projectId, onClose }) => {
         >
             <div className="n-wen mx-auto bg-white p-6 rounded-lg shadow-md">
                 <div className='n-pop-up-head d-flex justify-content-between align-items-center mb-4 border-bottom pb-3'>
-                    <h2 className="text-2xl font-bold text-center">Edit Project</h2>
+                    <h2 className="text-2xl font-bold text-center f-20">Edit Project</h2>
                     <button
                         onClick={onClose}
                         className="text-white py-2 px-2 rounded-full"
@@ -76,14 +76,14 @@ const EditProject = ({ projectId, onClose }) => {
                 </div>
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4">
-                        <label htmlFor="fld_title" className="block mb-2">Project Title:</label>
+                        <label htmlFor="fld_title" className="block text-sm font-medium mb-1">Project Title:</label>
                         <input
                             type="text"
                             id="fld_title"
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
                             required
-                            className="border rounded p-2 w-full"
+                            className="border rounded p-2 w-full form-control-sm"
                         />
                     </div>
                     <input type="hidden" name="fld_adminid" value={userId} />

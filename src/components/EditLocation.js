@@ -70,7 +70,7 @@ const EditLocation = ({ locationId,onClose,after }) => {
             <div className="wen3 mx-auto bg-white p-6 rounded-lg shadow-md">
 
             <div className='n-pop-up-head d-flex justify-content-between align-items-center mb-4 border-bottom pb-3'>
-                    <h2 className="text-2xl font-bold text-center">Edit Location</h2>   
+                    <h2 className="text-2xl font-bold text-center f-20">Edit Location</h2>   
                     <button
                         onClick={onClose}
                         className="text-white py-2 px-2 rounded-full"
@@ -80,13 +80,13 @@ const EditLocation = ({ locationId,onClose,after }) => {
                 </div>
             <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="form-group">
-                    <label className="block">Location Name</label>
+                    <label className="block text-sm font-medium mb-1">Location Name</label>
                     <input
                         type="text"
                         name="name"
                         value={formData.name}
                         onChange={handleChange}
-                        className="border p-2 w-full"
+                        className="border border-gray-300 rounded w-full text-sm form-control-sm"
                         required
                     />
                 </div>

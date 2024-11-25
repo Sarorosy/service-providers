@@ -41,10 +41,10 @@ const UpcomingHolidays = () => {
       <div className="card-body rct-notify">
         {holidays.length > 0 ? (
           holidays.map((holiday) => (
-            <div key={holiday._id} className="card-list">
+            <div key={holiday._id} className="u-card-list border-bottom p-2 mb-2">
               <div className="item-list">
                 <div className="info-user">
-                  <div className="d-flex justify-content-between bg-purple-50 p-3 rounded shadow-md">
+                  <div className="d-flex justify-content-between">
                     <h4 className="mr-2 text-blue-600 f-14">
                       {holiday.fld_title}
                     </h4>

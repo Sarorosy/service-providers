@@ -18,6 +18,7 @@ const ManageEndServices = () => {
     const [adminComments, setAdminComments] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [status, setStatus] = useState('');
+    const [formname, setFormName] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -72,12 +73,14 @@ const ManageEndServices = () => {
     };
     const handleApproveClick = (request) => {
         setSelectedRequest(request);
+        setFormName('Approve Form');
         setStatus('Approved'); // Set status as "Approve"
         setIsModalOpen(true); // Open modal
     };
 
     const handleRejectClick = (request) => {
         setSelectedRequest(request);
+        setFormName('Reject Form');
         setStatus('Rejected'); // Set status as "Reject"
         setIsModalOpen(true); // Open modal
     };
@@ -197,11 +200,14 @@ const ManageEndServices = () => {
                         content={
                             <>
                                 <div className="mb-3">
-                                    <div className='d-flex justify-content-end'>
+                                    <div className='d-flex justify-content-between align-items-center mb-4 border-bottom pb-2'>
+                                        <div className='f-20'>
+                                            {formname}
+                                        </div>
                                         <div>
                                             <button
                                                 onClick={() => setIsModalOpen(false)}
-                                                className="text-white py-2 px-2 rounded-full"
+                                                className="text-white py-2 rounded-full"
                                             >
                                             <CircleX className='colorr' />
                                         </button>
@@ -209,20 +215,20 @@ const ManageEndServices = () => {
                                         
                                     </div>
                                     <div>
-                                        <label htmlFor="adminComments" className="block mb-0 text-left f-16">Admin Comments</label>
+                                        <label htmlFor="adminComments" className="block mb-0 text-left f-15">Admin Comments</label>
                                         <textarea
                                             id="adminComments"
                                             value={adminComments}
                                             onChange={(e) => setAdminComments(e.target.value)}
                                             className="border rounded p-2 w-full"
-                                            rows="3"
+                                            rows="2"
                                         />
                                     </div>
                                 </div>
                                 <div className="flex justify-end space-x-4">
                                     <button
                                         onClick={handleModalSubmit}
-                                        className="bg-green-600 text-white px-2 py-0 f-12 rounded-md"
+                                        className="bg-green-600 text-white px-2 py-1 f-12 rounded-md lh-0"
                                     >
                                         Submit
                                     </button>

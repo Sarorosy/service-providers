@@ -74,10 +74,11 @@ const ManageReports = () => {
       `,
       orderable: false
     },
-    { title: 'Name', data: 'fld_name', orderable: false },
+    { title: 'Name', data: 'fld_name',width: "200px", orderable: false },
     {
       title: 'Last Report',
       data: 'lastReportDesc',
+      width: "500px",
       render: (data) => {
         return data && data.length > 50 ? `${data.substring(0, 50)}...` : data;
       },
@@ -86,6 +87,7 @@ const ManageReports = () => {
     {
       title: 'Added On', // New column for added date
       data: 'lastReportDate', // The fld_addedon value
+      width: "100px",
       render: (data, type) => {
         if (type === 'display') {
           return data

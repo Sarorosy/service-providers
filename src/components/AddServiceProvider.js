@@ -275,6 +275,7 @@ const AddServiceProvider = ({ onClose }) => {
                                         value={formData.location}
                                         ref={selectRef}
                                         name='location'
+                                        className="border border-gray-300 rounded w-full text-sm form-control-sm"
                                         required
                                     >
                                         <option value="">Select a Location</option>

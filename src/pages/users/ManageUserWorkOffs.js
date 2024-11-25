@@ -112,7 +112,7 @@ const ManageUserWorkOffs = () => {
             className="text-white text-sm py-0 px-1 rounded transition duration-200 flex items-center"
           >
             <PlusCircle className="mr-2 ic" />
-            Add Work Off
+            Add Unavailability
           </button>
         </div>
       </div>
