@@ -48,7 +48,7 @@ const UpcomingHolidays = () => {
                     <h4 className="mr-2 text-blue-600 f-14">
                       {holiday.fld_title}
                     </h4>
-                    <p className="text-green-600 f-12 font-bold">
+                    <p className="text-black-600 f-12 font-bold">
                       {new Date(holiday.fld_holiday_date).toLocaleDateString(
                         "en-GB",
                         {
