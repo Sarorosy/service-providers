@@ -73,23 +73,25 @@ const EndServices = () => {
         const request = existingRequest[0]; // Access the first item in the array
 
         return (
-            <div className="w-full max-w-lg mx-auto p-6 bg-indigo-50 rounded-lg shadow-lg mt-20">
-                <h2 className="text-3xl font-bold text-indigo-600 mb-6 border-b pb-2">Your Existing End Service Request</h2>
+            <div className="w-full mx-auto p-6 bg-white rounded-lg shadow-md mt-20">
+                <h2 className="text-2xl font-semibold mb-4 f-20">Your Existing End Service Request</h2>
+            <div className="w-full max-w-lg mx-auto p-6 bg-indigo-50 rounded-lg shadow-md">
+                {/* <h2 className="text-3xl font-bold text-black-600 mb-6 border-b pb-2 f-20">Your Existing End Service Request</h2> */}
 
                 <div className="space-y-4">
                     <div>
                         <p className="text-gray-700 text-sm font-medium">Reason</p>
-                        <p className="text-gray-900 font-semibold">{request.reason}</p>
+                        <p className="text-gray-900 ">{request.reason}</p>
                     </div>
                     <div>
                         <p className="text-gray-700 text-sm font-medium">Proposed End Date</p>
-                        <p className="text-gray-900 font-semibold">
+                        <p className="text-gray-900 ">
                             {new Date(request.proposed_end_date).toLocaleDateString()}
                         </p>
                     </div>
                     <div>
                         <p className="text-gray-700 text-sm font-medium">Comments</p>
-                        <p className="text-gray-900 font-semibold">{request.comments || 'N/A'}</p>
+                        <p className="text-gray-900 ">{request.comments || 'N/A'}</p>
                     </div>
                     <div>
                         <p className="text-gray-700 text-sm font-medium">Status</p>
@@ -100,7 +102,7 @@ const EndServices = () => {
                                     : request.status === 'Approved'
                                         ? 'green !important'
                                         : 'red !important',
-                                fontWeight: '600',
+                                fontWeight: '400',
                                 
                             }}
                         >
@@ -109,16 +111,16 @@ const EndServices = () => {
 
                     </div>
                     {request.status === 'Approved' || request.status === 'Rejected' ? (
-                    <div className="mt-6 bg-blue-50 border-l-4 border-blue-500 p-4 rounded-md">
+                    <div className="mt-6 bg-blue-50 border-l-4 border-blue-500 p-2 rounded-md">
                         <p className="text-gray-700 text-sm font-medium">Admin comments</p>
-                        <p className="text-gray-900 font-semibold">{request.admin_comments || 'N/A'}</p>
+                        <p className="text-gray-900 ">{request.admin_comments || 'N/A'}</p>
                     </div>
                 ) : null}
 
                 </div>
 
                 {request.status === 'Pending' || request.status === 'Approved' ? (
-                    <div className="mt-6 bg-blue-50 border-l-4 border-blue-500 p-4 rounded-md">
+                    <div className="mt-6 bg-blue-50 border-l-4 border-blue-500 p-2 rounded-md">
                         <p className="text-blue-600 text-sm font-medium">
                             You cannot submit a new request until the current one is resolved.
                         </p>
@@ -126,6 +128,7 @@ const EndServices = () => {
                 ) : null}
 
                 <ToastContainer />
+            </div>
             </div>
         );
     }

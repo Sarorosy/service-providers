@@ -344,3 +344,10 @@ table tbody tr {
 .n-wen {
     width: 23rem;
 }
+
+
+
+
+.sub-hover:hover{
+    background: #008000;
+}

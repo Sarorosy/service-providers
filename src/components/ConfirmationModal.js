@@ -15,7 +15,7 @@ const ConfirmationModal = ({ isOpen, onClose, onConfirm, content, isReversible =
                     transition={{ duration: 0.5, ease: 'easeInOut' }}
                 >
                     <motion.div
-                        className="bg-white p-6 rounded-lg shadow-lg border border-red-600 sure-popup-set "
+                        className="bg-white p-3 py-2 rounded-lg shadow-lg border border-red-600 sure-popup-set "
                         initial={{ scale: 0.8 }}
                         animate={{ scale: 1 }}
                         exit={{ scale: 0.8 }}

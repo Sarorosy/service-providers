@@ -73,14 +73,14 @@ const ManageEndServices = () => {
     };
     const handleApproveClick = (request) => {
         setSelectedRequest(request);
-        setFormName('Approve Form');
+        setFormName('Approve Request');
         setStatus('Approved'); // Set status as "Approve"
         setIsModalOpen(true); // Open modal
     };
 
     const handleRejectClick = (request) => {
         setSelectedRequest(request);
-        setFormName('Reject Form');
+        setFormName('Reject Request');
         setStatus('Rejected'); // Set status as "Reject"
         setIsModalOpen(true); // Open modal
     };
@@ -159,7 +159,8 @@ const ManageEndServices = () => {
 
     return (
         <div className="p-6 bg-white rounded-lg shadow-md mt-20">
-            <div className="flex justify-end but">
+            <div className="d-flex justify-content-between align-items-center but">
+                <h2 className="text-xl font-bold text-gray-800 mb-4">Manage End Service Requests</h2>
                     <button
                         onClick={()=> {fetchServiceRequests() }}
                         className="text-white py-0 px-1 rounded transition duration-200 flex items-center mr-2"
@@ -168,7 +169,6 @@ const ManageEndServices = () => {
                     </button>
                     
                 </div>
-            <h2 className="text-xl font-bold text-gray-800 mb-4">Manage End Service Requests</h2>
             {loading ? (
                 <div className="flex justify-center">
                     <RevolvingDot height="10" width="10" color="#3b82f6" ariaLabel="loading" />
@@ -200,7 +200,7 @@ const ManageEndServices = () => {
                         content={
                             <>
                                 <div className="mb-3">
-                                    <div className='d-flex justify-content-between align-items-center mb-4 border-bottom pb-2'>
+                                    <div className='d-flex justify-content-between align-items-center mb-2 border-bottom pb-2'>
                                         <div className='f-20'>
                                             {formname}
                                         </div>
@@ -220,15 +220,15 @@ const ManageEndServices = () => {
                                             id="adminComments"
                                             value={adminComments}
                                             onChange={(e) => setAdminComments(e.target.value)}
-                                            className="border rounded p-2 w-full"
-                                            rows="2"
+                                            className="border rounded p-2 w-full f-14"
+                                            rows="1"
                                         />
                                     </div>
                                 </div>
                                 <div className="flex justify-end space-x-4">
                                     <button
                                         onClick={handleModalSubmit}
-                                        className="bg-green-600 text-white px-2 py-1 f-12 rounded-md lh-0"
+                                        className="bg-green-600 text-white px-2 py-1 f-12 rounded-md sub-hover lh-0"
                                     >
                                         Submit
                                     </button>
