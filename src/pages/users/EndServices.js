@@ -139,7 +139,7 @@ const EndServices = () => {
         <div className="w-full mx-auto p-6 bg-white rounded-lg shadow-md mt-20">
             <h2 className="text-2xl font-semibold mb-4 f-20">End My Services</h2>
             <div className='row justify-content-center'>
-                <div className='col-md-6'>
+                <div className='col-md-5'>
                     <div className='bg-light p-4 '>
                         <form onSubmit={handleSubmit} className='row'>
                             <div className="col-md-12">

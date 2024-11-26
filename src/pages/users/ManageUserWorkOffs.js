@@ -59,6 +59,7 @@ const ManageUserWorkOffs = () => {
     {
       title: 'Work Offs Date',
       data: null,
+      width: '200px',
       render: (row) => {
         const startDate = formatDate(row.fld_start_date);
         const endDate = formatDate(row.fld_end_date);
@@ -68,6 +69,7 @@ const ManageUserWorkOffs = () => {
     {
       title: 'Duration',
       data: 'fld_duration',
+      width: '150px',
       render: (data) => {
         if (!data || !data.$numberDecimal) {
           return 'Invalid data';
@@ -91,6 +93,7 @@ const ManageUserWorkOffs = () => {
     {
       title: 'Added On',
       data: 'fld_addedon',
+      width: '100px',
       render: (data) => (data ? formatDate(data) : 'No Date'),
     },
   ];
