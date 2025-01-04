@@ -25,7 +25,7 @@ const EditNotificationForm = ({ notificationId, onClose, after }) => {
     useEffect(() => {
         const fetchServiceProviders = async () => {
             try {
-                const response = await fetch('https://serviceprovidersback.onrender.com/api/locations');
+                const response = await fetch('https://elementk.in/spbackend/api/locations');
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -43,7 +43,7 @@ const EditNotificationForm = ({ notificationId, onClose, after }) => {
     useEffect(() => {
         const fetchNotification = async () => {
             try {
-                const response = await fetch(`https://serviceprovidersback.onrender.com/api/notifications/${notificationId}`);
+                const response = await fetch(`https://elementk.in/spbackend/api/notifications/${notificationId}`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -147,7 +147,7 @@ const EditNotificationForm = ({ notificationId, onClose, after }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = await fetch(`https://serviceprovidersback.onrender.com/api/notifications/${notificationId}`, {
+        const response = await fetch(`https://elementk.in/spbackend/api/notifications/${notificationId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

@@ -34,7 +34,7 @@ const AddWorkOffs = ({ onClose }) => {
             const formattedStartDate = getFormattedStartDate();
 
             try {
-                const response = await fetch('https://serviceprovidersback.onrender.com/api/workoffs/calculate-leave-balance', {
+                const response = await fetch('https://elementk.in/spbackend/api/workoffs/calculate-leave-balance', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -68,7 +68,7 @@ const AddWorkOffs = ({ onClose }) => {
     };
     useEffect(() => {
         const userId = sessionStorage.getItem('userId');
-        fetch(`https://serviceprovidersback.onrender.com/api/manageworkoffs/first/${userId}`)
+        fetch(`https://elementk.in/spbackend/api/manageworkoffs/first/${userId}`)
             .then(response => response.json())
             .then(data => {
                 setWorkoffs(data);
@@ -81,7 +81,7 @@ const AddWorkOffs = ({ onClose }) => {
     }, []);
     useEffect(() => {
         const userId = sessionStorage.getItem('userId');
-        fetch(`https://serviceprovidersback.onrender.com/api/workoffs/user/${userId}`)
+        fetch(`https://elementk.in/spbackend/api/workoffs/user/${userId}`)
             .then(response => response.json())
             .then(data => {
                 setMyWorkoffs(data);
@@ -169,7 +169,7 @@ const AddWorkOffs = ({ onClose }) => {
         }
 
         try {
-            const response = await fetch('https://serviceprovidersback.onrender.com/api/workoffs', {
+            const response = await fetch('https://elementk.in/spbackend/api/workoffs', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

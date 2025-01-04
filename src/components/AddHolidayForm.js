@@ -21,7 +21,7 @@ const AddHolidayForm = ({ onClose, after }) => {
   useEffect(() => {
     const fetchLocations = async () => {
       try {
-        const response = await fetch('https://serviceprovidersback.onrender.com/api/locations/');
+        const response = await fetch('https://elementk.in/spbackend/api/locations/');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -105,7 +105,7 @@ const AddHolidayForm = ({ onClose, after }) => {
     // Ensure unique selected location IDs as strings
     const selectedUserIds = [...new Set(formData.selectedLocations.map(locationId => locationId.toString()))];
 
-    const response = await fetch('https://serviceprovidersback.onrender.com/api/holidays', {
+    const response = await fetch('https://elementk.in/spbackend/api/holidays', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

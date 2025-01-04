@@ -25,8 +25,8 @@ const ManageUserWorkoff = ({ onClose, serviceProviderId }) => {
         try {
 
             const [workoffResponse, serviceProviderResponse] = await Promise.all([
-                fetch(`https://serviceprovidersback.onrender.com/api/manageworkoffs/${serviceProviderId}`),
-                fetch('https://serviceprovidersback.onrender.com/api/users/serviceproviders/')
+                fetch(`https://elementk.in/spbackend/api/manageworkoffs/${serviceProviderId}`),
+                fetch('https://elementk.in/spbackend/api/users/serviceproviders/')
             ]);
 
             if (!workoffResponse.ok || !serviceProviderResponse.ok) {
@@ -87,7 +87,7 @@ const ManageUserWorkoff = ({ onClose, serviceProviderId }) => {
         if (!selectedWorkoffId) return;
 
         try {
-            const response = await fetch(`https://serviceprovidersback.onrender.com/api/manageworkoffs/${selectedWorkoffId}`, {
+            const response = await fetch(`https://elementk.in/spbackend/api/manageworkoffs/${selectedWorkoffId}`, {
                 method: 'DELETE',
             });
 
@@ -108,15 +108,24 @@ const ManageUserWorkoff = ({ onClose, serviceProviderId }) => {
             data: 'fld_workoffs_startdate',
             width: "125px",
             orderable: false,
-            render: (data) => `<div style="width: 100%; font-size: 12px;">${new Date(data).toLocaleDateString()}</div>`,
+            render: (data) => {
+                const date = new Date(data);
+                const formattedDate = date.toLocaleDateString('en-GB'); // 'en-GB' ensures dd/MM/yyyy format
+                return `<div style="width: 100%; font-size: 12px;">${formattedDate}</div>`;
+            },
         },
         {
             title: 'Workoff End Date',
             data: 'fld_workoffs_enddate',
             width: "125px",
             orderable: false,
-            render: (data) => `<div style="width: 100%; font-size: 12px;">${new Date(data).toLocaleDateString()}</div>`,
+            render: (data) => {
+                const date = new Date(data);
+                const formattedDate = date.toLocaleDateString('en-GB'); // 'en-GB' ensures dd/MM/yyyy format
+                return `<div style="width: 100%; font-size: 12px;">${formattedDate}</div>`;
+            },
         },
+        
         {
             title: 'Total Workoffs',
             data: 'fld_total_no_of_work_offs',
@@ -163,7 +172,7 @@ const ManageUserWorkoff = ({ onClose, serviceProviderId }) => {
                 <h1 className="text-xl font-bold text-gray-800 flex items-center">Manage <img
             src={
               getServiceProviderProfile(serviceProviderId)
-                ? `https://serviceprovidersback.onrender.com/uploads/profileimg/${getServiceProviderProfile(serviceProviderId)}`
+                ? `https://elementk.in/spbackend/uploads/profileimg/${getServiceProviderProfile(serviceProviderId)}`
                 : "https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg"
             }
             alt="Service Provider Profile"

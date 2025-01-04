@@ -260,9 +260,11 @@
 }
 
 
-
+.fc-today-button{
+    display: none !important;
+}
 .edit-i-s img {
-    height: 110px;
+    width: 110px;
 }
 
 

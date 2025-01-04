@@ -4,6 +4,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { CircleX, Save } from 'lucide-react';
 import { RevolvingDot } from 'react-loader-spinner';
+import axios from 'axios';
 
 const ManageProfile = () => {
     const [formData, setFormData] = useState({
@@ -34,11 +35,14 @@ const ManageProfile = () => {
     const userId = sessionStorage.getItem('userId');
     const adminType = sessionStorage.getItem("adminType");
     const [imagePreview, setImagePreview] = useState(null);
-    
+    const [aadharaccess, setAadharAccess] = useState(0);
+    const [pancardaccess, setPancardAccess] = useState(0);
+    const [chequeaccess, setChequeAccess] = useState(0);
+
 
     // Fetch service provider data for editing
     const fetchServiceProvider = async () => {
-        const response = await fetch(`https://serviceprovidersback.onrender.com/api/users/find/${userId}`);
+        const response = await fetch(`https://elementk.in/spbackend/api/users/find/${userId}`);
         if (response.ok) {
             const data = await response.json();
             if (data.fld_start_date) {
@@ -47,9 +51,12 @@ const ManageProfile = () => {
             if (data.fld_end_date) {
                 data.fld_end_date = data.fld_end_date.substring(0, 10); // Get the date part
             }
-            sessionStorage.setItem('profileImage',data.fld_profile_image);
+            sessionStorage.setItem('profileImage', data.fld_profile_image);
             console.log(data)
             setFormData({ ...data });
+            setAadharAccess(data.aadharaccess);
+            setPancardAccess(data.pancardaccess);
+            setChequeAccess(data.chequeaccess);
         } else {
             toast.error("Error fetching service provider data!");
         }
@@ -61,8 +68,8 @@ const ManageProfile = () => {
             setAdminId(parseInt(storedAdminId, 10)); // Convert to number if necessary
         }
 
-            fetchServiceProvider();
-        
+        fetchServiceProvider();
+
     }, []);
 
     const handleChange = (e) => {
@@ -79,16 +86,16 @@ const ManageProfile = () => {
             ...prevData,
             [name]: files[0],
         }));
-        
+
     };
     const isFormComplete = () => {
         // List of required fields to check
         const requiredFields = ['fld_username', 'fld_name', 'fld_email', 'fld_phone', 'fld_gender', 'fld_address', 'fld_designation', 'fld_aadhar', 'fld_bankname', 'fld_accountno', 'fld_branch', 'fld_ifsc'];
-        
+
         // Check if any required field is empty or null
         return requiredFields.every(field => formData[field] !== '' && formData[field] !== null);
     };
-    
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -99,7 +106,7 @@ const ManageProfile = () => {
             formDataToSend.append(key, formData[key]);
         }
 
-        const response = await fetch(`https://serviceprovidersback.onrender.com/api/users/${userId}`, {
+        const response = await fetch(`https://elementk.in/spbackend/api/users/${userId}`, {
             method: 'PUT',
             body: formDataToSend,
         });
@@ -118,17 +125,17 @@ const ManageProfile = () => {
             sessionStorage.setItem('accountNo', formData.fld_accountno);
             sessionStorage.setItem('branch', formData.fld_branch);
             sessionStorage.setItem('ifsc', formData.fld_ifsc);
-            sessionStorage.setItem('profileImage',formData.fld_profile_image)
+            sessionStorage.setItem('profileImage', formData.fld_profile_image)
             console.log("the profile image is" + response.fld_profile_image)
-            
+
         } else {
             toast.error("Error updating Profile!");
         }
         setLoading(false);
         fetchServiceProvider();
-       
+
     };
-    
+
     const LoadingModal = () => (
         <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 w-screen h-screen z-50">
             <div className="bg-white p-6 rounded shadow-lg text-center">
@@ -144,17 +151,34 @@ const ManageProfile = () => {
             </div>
         </div>
     );
-    
+
+    const fileRequest = async (serviceProviderId, fileType, code) => {
+        try {
+            const response = await axios.post("https://elementk.in/spbackend/api/users/filerequest", {
+                serviceProviderId,
+                fileType,
+                code
+            });
+            if (response.status) {
+                toast.success(response.data.message); // Display success toast
+                console.log("File approved:", response.data);
+                fetchServiceProvider();
+            }
+        } catch (error) {
+            
+            console.error("Error approving file:", error);
+        }
+    };
 
     return (
         <div className="p-6 bg-white rounded-lg shadow-md mt-20 mrf">
-            {loading && <LoadingModal />} 
+            {loading && <LoadingModal />}
 
-           
-        
+
+
             <h2 className="text-2xl font-bold mb-4">Edit Profile</h2>
 
-            { adminType == "SERVICE_PROVIDER" && !isFormComplete() && (
+            {adminType == "SERVICE_PROVIDER" && !isFormComplete() && (
                 <div className="p-4 mb-4 text-red-700 bg-red-100 rounded-lg">
                     <p>Please fill all the details to access other pages.</p>
                 </div>
@@ -227,7 +251,7 @@ const ManageProfile = () => {
                         />
                     </div>
 
-                   
+
 
                     {/* Address */}
                     <div className="mb-4">
@@ -289,7 +313,7 @@ const ManageProfile = () => {
                         />
                     </div>
 
-                    
+
 
                     {/* Bank Name */}
                     <div className="mb-4">
@@ -348,155 +372,223 @@ const ManageProfile = () => {
                     </div>
                 </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-4 gap-1 mb-6">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-1 mb-6">
 
-                        {/* Profile Image */}
-                        <div className="mb-4">
-                            <label className="block text-sm font-medium mb-1" htmlFor="profile_image">Profile Image</label>
-                            {formData.fld_profile_image ? (
-                                <div className="relative">
-                                    <img
-                                         src={
-                                            formData.fld_profile_image instanceof File
-                                              ? URL.createObjectURL(formData.fld_profile_image)
-                                              : `https://serviceprovidersback.onrender.com/uploads/profileimg/${formData.fld_profile_image}`
-                                          }
-                                        alt="Profile"
-                                        className="border rounded p-2 w-2/3"
-                                    />
-                                    <button
-                                        className="absolute top-2 left-2 bg-red-500 text-white p-1 rounded"
-                                        onClick={() => setFormData({ ...formData, fld_profile_image: null })}
-                                    >
-                                        <CircleX />
-                                    </button>
-                                </div>
-                            ) : (
-                                <input
-                                    type="file"
-                                    id="profile_image"
-                                    name="fld_profile_image"
-                                    onChange={handleFileChange}
-                                    className="border border-gray-300 rounded p-2 w-full"
+                    {/* Profile Image */}
+                    <div className="mb-4">
+                        <label className="block text-sm font-medium mb-1" htmlFor="profile_image">Profile Image</label>
+                        {formData.fld_profile_image ? (
+                            <div className="relative">
+                                <img
+                                    src={
+                                        formData.fld_profile_image instanceof File
+                                            ? URL.createObjectURL(formData.fld_profile_image)
+                                            : `https://elementk.in/spbackend/uploads/profileimg/${formData.fld_profile_image}`
+                                    }
+                                    alt="Profile"
+                                    className="border rounded p-2 w-2/3"
                                 />
-                            )}
-                        </div>
+                                <button
+                                    className="absolute top-2 left-2 bg-red-500 text-white p-1 rounded"
+                                    onClick={() => setFormData({ ...formData, fld_profile_image: null })}
+                                >
+                                    <CircleX />
+                                </button>
+                            </div>
+                        ) : (
+                            <input
+                                type="file"
+                                id="profile_image"
+                                name="fld_profile_image"
+                                onChange={handleFileChange}
+                                className="border border-gray-300 rounded p-2 w-full"
+                            />
+                        )}
+                    </div>
 
-                        {/* Aadhar Card */}
-                        <div className="mb-4">
-                            <label className="block text-sm font-medium mb-1" htmlFor="aadharcard">Upload Aadhar Card</label>
-                            {formData.fld_aadharcard ? (
+                    {/* Aadhar Card */}
+                    <div className="mb-4">
+                        <label className="block text-sm font-medium mb-1" htmlFor="aadharcard">Upload Aadhar Card</label>
+                        {formData.fld_aadharcard ? (
+                            <>
                                 <div className="relative">
                                     <img
                                         src={
                                             formData.fld_aadharcard instanceof File
-                                              ? URL.createObjectURL(formData.fld_aadharcard)
-                                              : `https://serviceprovidersback.onrender.com/uploads/aadharcard/${formData.fld_aadharcard}`
-                                          }
+                                                ? URL.createObjectURL(formData.fld_aadharcard)
+                                                : `https://elementk.in/spbackend/uploads/aadharcard/${formData.fld_aadharcard}`
+                                        }
                                         alt="Aadhar Card"
                                         className="border rounded p-2 w-2/3"
                                     />
-                                    <button
-                                        className="absolute top-2 left-2 bg-red-500 text-white p-1 rounded"
-                                        onClick={() => setFormData({ ...formData, fld_aadharcard: null })}
-                                    >
-                                        <CircleX />
-                                    </button>
-                                </div>
-                            ) : (
-                                <input
-                                    type="file"
-                                    id="aadharcard"
-                                    name="fld_aadharcard"
-                                    onChange={handleFileChange}
-                                    className="border border-gray-300 rounded p-2 w-full"
-                                />
-                            )}
-                        </div>
+                                    {aadharaccess == 2 && (
+                                        <button
+                                            className="absolute top-2 left-2 bg-red-500 text-white p-1 rounded"
+                                            onClick={() => setFormData({ ...formData, fld_aadharcard: null })}
+                                        >
+                                            <CircleX />
+                                        </button>
+                                    )}
+                                    {aadharaccess == 0 && (
+                                        <button
+                                            onClick={() => { fileRequest(userId, "aadhar",1) }}
+                                            className="p-1 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition ease-in-out duration-300"
+                                            style={{fontSize:"12px"}}
+                                        >
+                                            Send Edit Request
+                                        </button>
+                                    )}
+                                    {
+                                        aadharaccess == 1 && (
+                                            <span className='bg-yellow-100 p-1 rounded text-yellow-700'>Request Pending</span>
+                                        )
+                                    }
 
-                        {/* PAN Card */}
-                        <div className="mb-4">
-                            <label className="block text-sm font-medium mb-1" htmlFor="pancard">Upload PAN Card</label>
-                            {formData.fld_pancard ? (
+                                </div>
+                                <span className={`px-2 py-2 rounded-lg 
+                                        ${!(formData.fld_aadharcard instanceof File) && formData.aadharapproved === true ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+                                    {!(formData.fld_aadharcard instanceof File) && formData.aadharapproved === true ? "Approved" : "Waiting For Approval"}
+                                </span>
+
+                            </>
+                        ) : (
+                            <input
+                                type="file"
+                                id="aadharcard"
+                                name="fld_aadharcard"
+                                onChange={handleFileChange}
+                                className="border border-gray-300 rounded p-2 w-full"
+                            />
+                        )}
+                    </div>
+
+                    {/* PAN Card */}
+                    <div className="mb-4">
+                        <label className="block text-sm font-medium mb-1" htmlFor="pancard">Upload PAN Card</label>
+                        {formData.fld_pancard ? (
+                            <>
                                 <div className="relative">
                                     <img
                                         src={
                                             formData.fld_pancard instanceof File
-                                              ? URL.createObjectURL(formData.fld_pancard)
-                                              : `https://serviceprovidersback.onrender.com/uploads/pancard/${formData.fld_pancard}`
-                                          }
+                                                ? URL.createObjectURL(formData.fld_pancard)
+                                                : `https://elementk.in/spbackend/uploads/pancard/${formData.fld_pancard}`
+                                        }
                                         alt="PAN Card"
                                         className="border rounded p-2 w-2/3"
                                     />
-                                    <button
-                                        className="absolute top-2 left-2 bg-red-500 text-white p-1 rounded"
-                                        onClick={() => setFormData({ ...formData, fld_pancard: null })}
-                                    >
-                                        <CircleX />
-                                    </button>
+                                    {pancardaccess == 2 && (
+                                        <button
+                                            className="absolute top-2 left-2 bg-red-500 text-white p-1 rounded"
+                                            onClick={() => setFormData({ ...formData, fld_pancard: null })}
+                                        >
+                                            <CircleX />
+                                        </button>
+                                    )}
+                                    {pancardaccess == 0 && (
+                                        <button
+                                            onClick={() => { fileRequest(userId, "pancard",1) }}
+                                            className="p-1 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition ease-in-out duration-300"
+                                            style={{fontSize:"12px"}}
+                                        >
+                                            Send Edit Request
+                                        </button>
+                                    )}
+                                    {
+                                        pancardaccess == 1 && (
+                                            <span className='bg-yellow-100 p-1 rounded text-yellow-700'>Request Pending</span>
+                                        )
+                                    }
                                 </div>
-                            ) : (
-                                <input
-                                    type="file"
-                                    id="pancard"
-                                    name="fld_pancard"
-                                    onChange={handleFileChange}
-                                    className="border border-gray-300 rounded p-2 w-full"
-                                />
-                            )}
-                        </div>
+                                <span className={`px-2 py-2 rounded-lg 
+                                        ${!(formData.fld_pancard instanceof File) && formData.pancardapproved === true ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+                                    {!(formData.fld_pancard instanceof File) && formData.pancardapproved === true ? "Approved" : "Waiting For Approval"}
+                                </span>
+                            </>
+                        ) : (
+                            <input
+                                type="file"
+                                id="pancard"
+                                name="fld_pancard"
+                                onChange={handleFileChange}
+                                className="border border-gray-300 rounded p-2 w-full"
+                            />
+                        )}
+                    </div>
 
-                        {/* Cancelled Cheque Image */}
-                        <div className="mb-4">
-                            <label className="block text-sm font-medium mb-1" htmlFor="cancelledchequeimage">Upload Cancelled Cheque</label>
-                            {formData.fld_cancelledchequeimage ? (
-                                <div className="relative">
+                    {/* Cancelled Cheque Image */}
+                    <div className="mb-4">
+                        <label className="block text-sm font-medium mb-1" htmlFor="cancelledchequeimage">Upload Cancelled Cheque</label>
+                        {formData.fld_cancelledchequeimage ? (
+                            <>
+                                <div className="relative justify-center">
                                     <img
                                         src={
                                             formData.fld_cancelledchequeimage instanceof File
-                                              ? URL.createObjectURL(formData.fld_cancelledchequeimage)
-                                              : `https://serviceprovidersback.onrender.com/uploads/cancelledchequeimage/${formData.fld_cancelledchequeimage}`
-                                          }
+                                                ? URL.createObjectURL(formData.fld_cancelledchequeimage)
+                                                : `https://elementk.in/spbackend/uploads/cancelledchequeimage/${formData.fld_cancelledchequeimage}`
+                                        }
                                         alt="Cancelled Cheque"
                                         className="border rounded p-2 w-2/3"
                                     />
-                                    <button
-                                        className="absolute top-2 left-2 bg-red-500 text-white p-1 rounded"
-                                        onClick={() => setFormData({ ...formData, fld_cancelledchequeimage: null })}
-                                    >
-                                        <CircleX />
-                                    </button>
+                                    {chequeaccess == 2 && (
+                                        <button
+                                            className="absolute top-2 left-2 bg-red-500 text-white p-1 rounded"
+                                            onClick={() => setFormData({ ...formData, fld_cancelledchequeimage: null })}
+                                        >
+                                            <CircleX />
+                                        </button>
+                                    )}
+                                    {chequeaccess == 0 && (
+                                        <button
+                                            onClick={() => { fileRequest(userId, "cancelledcheque",1) }}
+                                            className="p-1 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition ease-in-out duration-300"
+                                            style={{fontSize:"12px"}}
+                                        >
+                                            Send Edit Request
+                                        </button>
+                                    )}
+                                    {
+                                        chequeaccess == 1 && (
+                                            <span className='bg-yellow-100 p-1 rounded text-yellow-700'>Request Pending</span>
+                                        )
+                                    }
                                 </div>
-                            ) : (
-                                <input
-                                    type="file"
-                                    id="cancelledchequeimage"
-                                    name="fld_cancelledchequeimage"
-                                    onChange={handleFileChange}
-                                    className="border border-gray-300 rounded p-2 w-full"
-                                />
-                            )}
-                        </div>
-
-
+                                <span className={`px-2 mx-auto py-2 rounded-lg 
+                                    ${!(formData.fld_cancelledchequeimage instanceof File) && formData.cancelledchequeapproved === true ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+                                    {!(formData.fld_cancelledchequeimage instanceof File) && formData.cancelledchequeapproved === true ? "Approved" : "Waiting For Approval"}
+                                </span>
+                            </>
+                        ) : (
+                            <input
+                                type="file"
+                                id="cancelledchequeimage"
+                                name="fld_cancelledchequeimage"
+                                onChange={handleFileChange}
+                                className="border border-gray-300 rounded p-2 w-full"
+                            />
+                        )}
                     </div>
-                    <div className='flex justify-content-end'>
-                        {/* Submit Button */}
-                        <div className="">
-                            <button
-                                type="submit"
-                                className="bg-blue-500 text-white font-semibold px-2 py-1 f-12 rounded"
-                            >
-                                Update Profile
-                            </button>
-                        </div>
-                    </div>
-                    
-                    </form>
 
-                    <ToastContainer />
+
                 </div>
-                );
+                <div className='flex justify-content-end'>
+                    {/* Submit Button */}
+                    <div className="">
+                        <button
+                            type="submit"
+                            className="bg-blue-500 text-white font-semibold px-2 py-1 f-12 rounded"
+                        >
+                            Update Profile
+                        </button>
+                    </div>
+                </div>
+
+            </form>
+
+            <ToastContainer />
+        </div>
+    );
 };
 
-                export default ManageProfile;
+export default ManageProfile;

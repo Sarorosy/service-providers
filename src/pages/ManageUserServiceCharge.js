@@ -46,8 +46,8 @@ const ManageUserServiceCharge = ({ serviceProviderId, onClose }) => {
     setLoading(true);
     try {
       const [serviceChargeResponse, serviceProviderResponse] = await Promise.all([
-        fetch(`https://serviceprovidersback.onrender.com/api/servicecharge/user/${serviceProviderId}`),
-        fetch('https://serviceprovidersback.onrender.com/api/users/serviceproviders/')
+        fetch(`https://elementk.in/spbackend/api/servicecharge/user/${serviceProviderId}`),
+        fetch('https://elementk.in/spbackend/api/users/serviceproviders/')
       ]);
 
       if (!serviceChargeResponse.ok || !serviceProviderResponse.ok) {
@@ -100,7 +100,7 @@ const ManageUserServiceCharge = ({ serviceProviderId, onClose }) => {
   const handleDelete = async () => {
     if (selectedServiceCharge) {
       try {
-        const response = await fetch(`https://serviceprovidersback.onrender.com/api/servicecharge/${selectedServiceCharge._id}`, {
+        const response = await fetch(`https://elementk.in/spbackend/api/servicecharge/${selectedServiceCharge._id}`, {
           method: 'DELETE',
         });
 
@@ -178,7 +178,7 @@ const ManageUserServiceCharge = ({ serviceProviderId, onClose }) => {
           <h1 className="text-xl font-bold text-gray-800 flex items-center">Manage <img
             src={
               getServiceProviderProfile(serviceProviderId)
-                ? `https://serviceprovidersback.onrender.com/uploads/profileimg/${getServiceProviderProfile(serviceProviderId)}`
+                ? `https://elementk.in/spbackend/uploads/profileimg/${getServiceProviderProfile(serviceProviderId)}`
                 : "https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg"
             }
             alt="Service Provider Profile"

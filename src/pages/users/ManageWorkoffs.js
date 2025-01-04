@@ -7,7 +7,7 @@ const ManageWorkoffs = () => {
 
     useEffect(() => {
         const userId = sessionStorage.getItem('userId');
-        fetch(`https://serviceprovidersback.onrender.com/api/manageworkoffs/first/${userId}`)
+        fetch(`https://elementk.in/spbackend/api/manageworkoffs/first/${userId}`)
             .then(response => response.json())
             .then(data => {
                 setWorkoffs(data);

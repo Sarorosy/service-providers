@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { RevolvingDot } from 'react-loader-spinner';
 import { motion } from 'framer-motion';
 import { CircleX } from 'lucide-react';
+import DatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css";
 
 const AddWorkoff = ({ serviceProviderId, onClose, after }) => {
     const [workoff, setWorkoff] = useState({
@@ -24,11 +26,19 @@ const AddWorkoff = ({ serviceProviderId, onClose, after }) => {
         }));
     };
 
+    const handleDateChange = (date, fieldName) => {
+        setWorkoff((prev) => ({
+            ...prev,
+            [fieldName]: date,
+        }));
+    };
+    
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsSubmitting(true);
         try {
-            const response = await fetch('https://serviceprovidersback.onrender.com/api/manageworkoffs', {
+            const response = await fetch('https://elementk.in/spbackend/api/manageworkoffs', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -72,30 +82,23 @@ const AddWorkoff = ({ serviceProviderId, onClose, after }) => {
                             <form onSubmit={handleSubmit} className='row'>
                                 <div className="mb-4 col-md-6">
                                     <label htmlFor="fld_workoffs_start_date" className="block mb-2">Start Date:</label>
-                                    <input
-                                        type="date"
-                                        id="fld_workoffs_start_date"
-                                        name="fld_workoffs_startdate"
-                                        value={workoff.fld_workoffs_start_date}
-                                        onChange={(e) => {
-                                            handleChange(e); 
-                                            document.getElementById('fld_workoffs_end_date').min = e.target.value; // Update end date min
-                                        }}
+                                    <DatePicker
+                                        selected={workoff.fld_workoffs_startdate}
+                                        onChange={(date) => handleDateChange(date, 'fld_workoffs_startdate')}
+                                        dateFormat="dd/MM/yyyy"
+                                        className="form-control-sm w-full"
                                         required
-                                        min={new Date().toISOString().split('T')[0]} 
-                                        className="border rounded w-full form-control-sm"
                                     />
                                 </div>
                                 <div className="mb-4 col-md-6">
                                     <label htmlFor="fld_workoffs_end_date" className="block mb-2">End Date:</label>
-                                    <input
-                                        type="date"
-                                        id="fld_workoffs_end_date"
-                                        name="fld_workoffs_enddate"
-                                        value={workoff.fld_workoffs_end_date}
-                                        onChange={handleChange}
+                                    <DatePicker
+                                        selected={workoff.fld_workoffs_enddate}
+                                        onChange={(date) => handleDateChange(date, 'fld_workoffs_enddate')}
+                                        dateFormat="dd/MM/yyyy"
+                                        className="form-control-sm w-full"
+                                        minDate={workoff.fld_workoffs_startdate}
                                         required
-                                        className="border rounded w-full form-control-sm"
                                     />
                                 </div>
                                 <div className="mb-4 col-md-12">

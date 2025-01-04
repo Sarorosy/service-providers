@@ -8,7 +8,7 @@ import $ from 'jquery';
 import 'select2/dist/css/select2.css';
 import 'select2';
 
-const EditServiceProvider = ({ onClose, serviceProviderId }) => {
+const EditServiceProvider = ({ onClose, serviceProviderId, after }) => {
     const [formData, setFormData] = useState({
         fld_username: '',
         fld_name: '',
@@ -59,7 +59,7 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
 
         // Fetch service provider data for editing
         const fetchServiceProvider = async () => {
-            const response = await fetch(`https://serviceprovidersback.onrender.com/api/users/find/${serviceProviderId}`);
+            const response = await fetch(`https://elementk.in/spbackend/api/users/find/${serviceProviderId}`);
             if (response.ok) {
                 const data = await response.json();
                 if (data.fld_start_date) {
@@ -87,12 +87,18 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
             [name]: type === 'checkbox' ? checked : value,
         }));
     };
+    const close = () => {
+        onClose();
+        if(after){
+            after();
+        }
+    }
 
     const fetchLocations = async () => {
         setLoading(true);
 
         try {
-            const response = await fetch('https://serviceprovidersback.onrender.com/api/locations/');
+            const response = await fetch('https://elementk.in/spbackend/api/locations/');
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
@@ -151,7 +157,7 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
             formDataToSend.append(key, formData[key]);
         }
 
-        const response = await fetch(`https://serviceprovidersback.onrender.com/api/users/${serviceProviderId}`, {
+        const response = await fetch(`https://elementk.in/spbackend/api/users/${serviceProviderId}`, {
             method: 'PUT',
             body: formDataToSend,
         });
@@ -202,7 +208,7 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
             <h2 className="text-xl font-bold text-gray-800">Edit Service Provider</h2>
             {loading && <LoadingModal />} 
             <button
-                onClick={onClose}
+                onClick={close}
                 className=""
             >
                 <CircleX />
@@ -516,7 +522,7 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
                             {formData.fld_profile_image ? (
                                 <div className="relative">
                                     <img
-                                        src={`https://serviceprovidersback.onrender.com/uploads/profileimg/${formData.fld_profile_image}`}
+                                        src={`https://elementk.in/spbackend/uploads/profileimg/${formData.fld_profile_image}`}
                                         alt="Profile"
                                         className="border rounded p-2 w-2/3"
                                     />
@@ -544,7 +550,7 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
                             {formData.fld_aadharcard ? (
                                 <div className="relative">
                                     <img
-                                        src={`https://serviceprovidersback.onrender.com/uploads/aadharcard/${formData.fld_aadharcard}`}
+                                        src={`https://elementk.in/spbackend/uploads/aadharcard/${formData.fld_aadharcard}`}
                                         alt="Aadhar Card"
                                         className="border rounded p-2 w-2/3"
                                     />
@@ -572,7 +578,7 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
                             {formData.fld_pancard ? (
                                 <div className="relative">
                                     <img
-                                        src={`https://serviceprovidersback.onrender.com/uploads/pancard/${formData.fld_pancard}`}
+                                        src={`https://elementk.in/spbackend/uploads/pancard/${formData.fld_pancard}`}
                                         alt="PAN Card"
                                         className="border rounded p-2 w-2/3"
                                     />
@@ -600,7 +606,7 @@ const EditServiceProvider = ({ onClose, serviceProviderId }) => {
                             {formData.fld_cancelledchequeimage ? (
                                 <div className="relative">
                                     <img
-                                        src={`https://serviceprovidersback.onrender.com/uploads/cancelledchequeimage/${formData.fld_cancelledchequeimage}`}
+                                        src={`https://elementk.in/spbackend/uploads/cancelledchequeimage/${formData.fld_cancelledchequeimage}`}
                                         alt="Cancelled Cheque"
                                         className="border rounded p-2 w-2/3"
                                     />

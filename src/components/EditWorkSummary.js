@@ -15,7 +15,7 @@ const EditWorkSummary = ({ workSummary, onClose , after}) => {
     useEffect(() => {
         const fetchProjects = async () => {
             try {
-                const response = await fetch(`https://serviceprovidersback.onrender.com/api/projects/user/${userId}`);
+                const response = await fetch(`https://elementk.in/spbackend/api/projects/user/${userId}`);
                 const data = await response.json();
                 setProjects(data); // Assuming the API returns a list of projects
             } catch (error) {
@@ -44,7 +44,7 @@ const EditWorkSummary = ({ workSummary, onClose , after}) => {
     useEffect(() => {
         const fetchWorkSummary = async () => {
             try {
-                const response = await fetch(`https://serviceprovidersback.onrender.com/api/worksummaries/${workSummary._id}`);
+                const response = await fetch(`https://elementk.in/spbackend/api/worksummaries/${workSummary._id}`);
                 const data = await response.json();
 
                 if (data) {
@@ -72,7 +72,7 @@ const EditWorkSummary = ({ workSummary, onClose , after}) => {
         };
 
         try {
-            const response = await fetch(`https://serviceprovidersback.onrender.com/api/worksummaries/${workSummary._id}`, {
+            const response = await fetch(`https://elementk.in/spbackend/api/worksummaries/${workSummary._id}`, {
                 method: 'PUT', // Use PUT for updating
                 headers: {
                     'Content-Type': 'application/json',

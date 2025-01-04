@@ -19,7 +19,7 @@ const AddUserServiceCharge = ({ onClose, serviceProviderId , after}) => {
     const fetchServiceProviders = async () => {
         try {
             setLoading(true);
-            const response = await fetch('https://serviceprovidersback.onrender.com/api/users/serviceproviders');
+            const response = await fetch('https://elementk.in/spbackend/api/users/serviceproviders');
             const data = await response.json();
             setServiceProviders(data);
             const matchedProvider = data.find(provider => provider._id === serviceProviderId);
@@ -47,7 +47,7 @@ const AddUserServiceCharge = ({ onClose, serviceProviderId , after}) => {
                 toast.error("Value must be less than or equal to 100000");
                 return; 
             }
-            const response = await fetch('https://serviceprovidersback.onrender.com/api/servicecharge', {
+            const response = await fetch('https://elementk.in/spbackend/api/servicecharge', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),
@@ -104,7 +104,7 @@ const AddUserServiceCharge = ({ onClose, serviceProviderId , after}) => {
                             <img
                                 src={
                                     selectedProvider.fld_profile_image && selectedProvider.fld_profile_image.trim() !== ""
-                                        ? `https://serviceprovidersback.onrender.com/uploads/profileimg/${selectedProvider.fld_profile_image}`
+                                        ? `https://elementk.in/spbackend/uploads/profileimg/${selectedProvider.fld_profile_image}`
                                         : "https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg"
                                 }
                                 alt="Profile"

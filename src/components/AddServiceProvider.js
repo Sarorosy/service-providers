@@ -78,7 +78,7 @@ const AddServiceProvider = ({ onClose }) => {
         setLoading(true);
 
         try {
-            const response = await fetch('https://serviceprovidersback.onrender.com/api/locations/');
+            const response = await fetch('https://elementk.in/spbackend/api/locations/');
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
@@ -138,7 +138,7 @@ const AddServiceProvider = ({ onClose }) => {
             formDataToSend.append(key, formData[key]);
         }
 
-        const response = await fetch('https://serviceprovidersback.onrender.com/api/users/new/', {
+        const response = await fetch('https://elementk.in/spbackend/api/users/new/', {
             method: 'POST',
             body: formDataToSend,
         });
@@ -393,7 +393,7 @@ const AddServiceProvider = ({ onClose }) => {
                                         required
                                     />
                                 </div>
-                                <div>
+                                <div className='hidden'>
                                     <label className="block text-sm font-medium mb-1" htmlFor="end_date">End Date</label>
                                     <input
                                         type="date"

@@ -24,7 +24,7 @@ const AddProject = ({ onClose, onRefresh }) => {
         };
 
         try {
-            const response = await fetch('https://serviceprovidersback.onrender.com/api/projects/new/', {
+            const response = await fetch('https://elementk.in/spbackend/api/projects/new/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

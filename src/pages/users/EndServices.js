@@ -12,7 +12,7 @@ const EndServices = () => {
 
     const fetchExistingRequest = async () => {
         try {
-            const response = await fetch(`https://serviceprovidersback.onrender.com/api/endservices/user/${userId}`);
+            const response = await fetch(`https://elementk.in/spbackend/api/endservices/user/${userId}`);
             if (response.ok) {
                 const data = await response.json();
                 setExistingRequest(data);
@@ -34,7 +34,7 @@ const EndServices = () => {
         setIsSubmitting(true);
 
         try {
-            const response = await fetch('https://serviceprovidersback.onrender.com/api/endservices/submit', {
+            const response = await fetch('https://elementk.in/spbackend/api/endservices/submit', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

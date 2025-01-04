@@ -31,12 +31,14 @@ const ManageEndServices = () => {
     const fetchServiceRequests = async () => {
         setLoading(true);
         try {
-            const response = await fetch('https://serviceprovidersback.onrender.com/api/endservices/requests');
+            const response = await fetch('https://elementk.in/spbackend/api/endservices/requests');
             const data = await response.json();
             setServiceRequests(data);
 
         } catch (error) {
             console.error('Error fetching service requests:', error);
+        }finally{
+            setLoading(false);
         }
     };
     useEffect(() => {
@@ -48,7 +50,7 @@ const ManageEndServices = () => {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await fetch('https://serviceprovidersback.onrender.com/api/users/serviceproviders');
+                const response = await fetch('https://elementk.in/spbackend/api/users/serviceproviders');
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -92,7 +94,7 @@ const ManageEndServices = () => {
         };
 
         try {
-            const response = await fetch(`https://serviceprovidersback.onrender.com/api/endservices/update/${selectedRequest._id}`, {
+            const response = await fetch(`https://elementk.in/spbackend/api/endservices/update/${selectedRequest._id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -120,7 +122,7 @@ const ManageEndServices = () => {
         {
           title: 'Name',
           data: 'sp_id',
-          render: (data) => `<div>${getusernameById(data._id)}</div>`,
+          render: (data) => `<div>${getusernameById(data)}</div>`,
         },
         {
           title: 'Reason',

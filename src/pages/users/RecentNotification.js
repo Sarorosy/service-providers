@@ -8,7 +8,7 @@ const RecentNotification = () => {
 
     useEffect(() => {
         const locationId = sessionStorage.getItem('locationId');
-        fetch(`https://serviceprovidersback.onrender.com/api/notifications/user/${locationId}`)
+        fetch(`https://elementk.in/spbackend/api/notifications/user/${locationId}`)
             .then(response => response.json())
             .then(data => {
                 setNotifications(data);

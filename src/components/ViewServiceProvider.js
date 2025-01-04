@@ -10,7 +10,7 @@ import EditServiceProvider from '../components/EditServiceProvider';
 import { AnimatePresence } from 'framer-motion';
 import ManageUserWorkoff from '../pages/ManageUserWorkoff';
 import ManageUserServiceCharge from '../pages/ManageUserServiceCharge';
-
+import axios from 'axios';
 
 const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
     const { id } = useParams(); // Get the service provider ID from URL params
@@ -25,22 +25,23 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
     const [isServiceChargeOpen, setIsServiceChargeOpen] = useState(false);
     const [location, setLocation] = useState(null);
 
-    useEffect(() => {
-        const fetchServiceProvider = async () => {
-            try {
-                const response = await fetch(`https://serviceprovidersback.onrender.com/api/users/find/${serviceProviderId}`);
-                if (!response.ok) {
-                    throw new Error('Failed to fetch User');
-                }
-                const data = await response.json();
-                setServiceProvider(data);
-                setLoading(false);
-            } catch (error) {
-                console.error('Error fetching service provider:', error);
-                setError('Failed to load service provider details.');
-                setLoading(false);
+    const fetchServiceProvider = async () => {
+        try {
+            const response = await fetch(`https://elementk.in/spbackend/api/users/find/${serviceProviderId}`);
+            if (!response.ok) {
+                throw new Error('Failed to fetch User');
             }
-        };
+            const data = await response.json();
+            setServiceProvider(data);
+            setLoading(false);
+        } catch (error) {
+            console.error('Error fetching service provider:', error);
+            setError('Failed to load service provider details.');
+            setLoading(false);
+        }
+    };
+    useEffect(() => {
+       
 
         fetchServiceProvider();
     }, [id, serviceProviderId]);
@@ -48,7 +49,7 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
         const fetchLocation = async () => {
             try {
                 if (serviceProvider && serviceProvider.location) {
-                    const response = await fetch(`https://serviceprovidersback.onrender.com/api/locations/${serviceProvider.location}`);
+                    const response = await fetch(`https://elementk.in/spbackend/api/locations/${serviceProvider.location}`);
                     if (!response.ok) {
                         throw new Error('Failed to fetch location');
                     }
@@ -65,7 +66,7 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
 
     useEffect(() => {
         setLoading(true);
-        fetch(`https://serviceprovidersback.onrender.com/api/manageworkoffs/first/${serviceProviderId}`)
+        fetch(`https://elementk.in/spbackend/api/manageworkoffs/first/${serviceProviderId}`)
             .then(response => response.json())
             .then(data => {
                 setWorkoffs(data);
@@ -81,7 +82,7 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
         const fetchServiceCharges = async () => {
             try {
                 setLoading(true);
-                const response = await fetch(`https://serviceprovidersback.onrender.com/api/servicecharge/user/${serviceProviderId}`);
+                const response = await fetch(`https://elementk.in/spbackend/api/servicecharge/user/${serviceProviderId}`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch service charges');
                 }
@@ -101,6 +102,40 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
     }, [serviceProviderId]);
 
 
+    const approveFile = async (serviceProviderId, fileType) => {
+        try {
+            const response = await axios.post("https://elementk.in/spbackend/api/users/approvefiles", {
+                serviceProviderId,
+                fileType
+            });
+            if (response.status) {
+                toast.success(response.data.message); // Display success toast
+                console.log("File approved:", response.data);
+                fetchServiceProvider();
+            }
+        } catch (error) {
+            toast.error("Error approving file");
+            console.error("Error approving file:", error);
+        }
+    };
+    const approveEditRequest = async (serviceProviderId, fileType, code) => {
+        try {
+            const response = await axios.post("https://elementk.in/spbackend/api/users/filerequest", {
+                serviceProviderId,
+                fileType,
+                code
+            });
+            if (response.status) {
+                toast.success(response.data.message); 
+                console.log("File approved:", response.data);
+                fetchServiceProvider();
+            }
+        } catch (error) {
+            toast.error("Error approving file");
+            console.error("Error approving file:", error);
+        }
+    };
+
 
     if (error) {
         return <div>{error}</div>;
@@ -108,7 +143,7 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
 
     const imageUrl = (type, fileName) => {
         return fileName && fileName !== ''
-            ? `https://serviceprovidersback.onrender.com/uploads/${type}/${fileName}`
+            ? `https://elementk.in/spbackend/uploads/${type}/${fileName}`
             : null;
     };
     const handleEditClick = (id) => {
@@ -144,6 +179,7 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
                     <EditServiceProvider
                         serviceProviderId={selectedServiceProviderId}
                         onClose={() => setIsEditOpen(false)} // Close the edit form
+                        after={fetchServiceProvider}
                     />
                 )}
                 {isManageWorkOffOpen && (
@@ -176,14 +212,14 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
                                 <h2 className="f-20">Service Provider Details</h2>
                                 <div>
                                     {(sessionStorage.getItem("adminType") === "SUPERADMIN" || sessionStorage.getItem("user_edit_access") == 'true') && (
-            
-                                    <button
-                                        onClick={() => handleEditClick(serviceProviderId)} // Pass the service provider ID
-                                        data-id={serviceProviderId}
-                                        className="mr-2 px-2 py-1 CircleX-edit rounded"
-                                    >
-                                        <Pen className='edit-hover' />
-                                    </button>
+
+                                        <button
+                                            onClick={() => handleEditClick(serviceProviderId)} // Pass the service provider ID
+                                            data-id={serviceProviderId}
+                                            className="mr-2 px-2 py-1 CircleX-edit rounded"
+                                        >
+                                            <Pen className='edit-hover' />
+                                        </button>
                                     )}
                                     <button
                                         onClick={onClose}
@@ -258,7 +294,7 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
                                                 <img
                                                     src={
                                                         serviceProvider.fld_profile_image && serviceProvider.fld_profile_image.trim() !== ""
-                                                            ? `https://serviceprovidersback.onrender.com/uploads/profileimg/${serviceProvider.fld_profile_image}`
+                                                            ? `https://elementk.in/spbackend/uploads/profileimg/${serviceProvider.fld_profile_image}`
                                                             : "https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg"
                                                     }
                                                     alt="Profile"
@@ -374,30 +410,87 @@ const ViewServiceProvider = ({ serviceProviderId, onClose }) => {
                                             <div className="p-3">
                                                 <h3 className="text-md font-semibold mb-2 text-gray-700">Aadhar Card</h3>
                                                 <img
-                                                    src={`https://serviceprovidersback.onrender.com/uploads/aadharcard/${serviceProvider.fld_aadharcard}`}
+                                                    src={`https://elementk.in/spbackend/uploads/aadharcard/${serviceProvider.fld_aadharcard}`}
                                                     alt="Aadhar Card"
                                                     className="object-cover rounded-lg shadow-md"
                                                 />
+                                                {!serviceProvider.aadharapproved ? (
+                                                    <button
+                                                        onClick={() => approveFile(serviceProvider._id, "aadhar")}
+                                                        className="mt-2 p-1 bg-green-600 text-white rounded-lg"
+                                                    >
+                                                        Approve Aadhar Card
+                                                    </button>
+                                                ) : (
+                                                    <p className='bg-green-100 px-2 py-1 rounded-xl'>Approved</p>
+                                                )}
+                                                {serviceProvider.aadharaccess == 1 && (
+                                                    <button
+                                                    onClick={() => approveEditRequest(serviceProvider._id, "aadhar", 2)}
+                                                    className="mt-2 p-1 bg-green-600 text-white rounded-lg"
+                                                    style={{fontSize:"12px"}}
+                                                >
+                                                    Approve Aadhar Edit Request
+                                                </button>
+                                                )}
                                             </div>
                                         )}
                                         {serviceProvider.fld_pancard && (
                                             <div className="p-3">
                                                 <h3 className="text-md font-semibold mb-2 text-gray-700">PAN Card</h3>
                                                 <img
-                                                    src={`https://serviceprovidersback.onrender.com/uploads/pancard/${serviceProvider.fld_pancard}`}
+                                                    src={`https://elementk.in/spbackend/uploads/pancard/${serviceProvider.fld_pancard}`}
                                                     alt="PAN Card"
                                                     className="object-cover rounded-lg shadow-md"
                                                 />
+                                                {!serviceProvider.pancardapproved ? (
+                                                    <button
+                                                        onClick={() => approveFile(serviceProvider._id, "pancard")}
+                                                        className="mt-2 p-1 bg-green-600 text-white rounded-lg"
+                                                    >
+                                                        Approve PAN Card
+                                                    </button>
+                                                ) : (
+                                                    <p className='bg-green-100 px-2 py-1 rounded-xl'>Approved</p>
+                                                )}
+                                                {serviceProvider.pancardaccess == 1 && (
+                                                    <button
+                                                    onClick={() => approveEditRequest(serviceProvider._id, "pancard", 2)}
+                                                    className="mt-2 p-1 bg-green-600 text-white rounded-lg"
+                                                    style={{fontSize:"12px"}}
+                                                >
+                                                    Approve Pancard Edit Request
+                                                </button>
+                                                )}
                                             </div>
                                         )}
                                         {serviceProvider.fld_cancelledchequeimage && (
                                             <div className="p-3">
                                                 <h3 className="text-md font-semibold mb-2 text-gray-700">Cancelled Cheque</h3>
                                                 <img
-                                                    src={`https://serviceprovidersback.onrender.com/uploads/cancelledchequeimage/${serviceProvider.fld_cancelledchequeimage}`}
+                                                    src={`https://elementk.in/spbackend/uploads/cancelledchequeimage/${serviceProvider.fld_cancelledchequeimage}`}
                                                     alt="Cancelled Cheque"
                                                     className="object-cover rounded-lg shadow-md"
                                                 />
+                                                {!serviceProvider.cancelledchequeapproved ? (
+                                                    <button
+                                                        onClick={() => approveFile(serviceProvider._id, "cancelledcheque")}
+                                                        className="mt-2 p-1 bg-green-600 text-white rounded-lg"
+                                                    >
+                                                        Approve Cheque
+                                                    </button>
+                                                ) : (
+                                                    <p className='bg-green-100 px-2 py-1 rounded-xl'>Approved</p>
+                                                )}
+                                                {serviceProvider.chequeaccess == 1 && (
+                                                    <button
+                                                    onClick={() => approveEditRequest(serviceProvider._id, "cancelledcheque", 2)}
+                                                    className="mt-2 p-1 bg-green-600 text-white rounded-lg"
+                                                    style={{fontSize:"12px"}}
+                                                >
+                                                    Approve Cheque Edit Request
+                                                </button>
+                                                )}
                                             </div>
                                         )}
                                     </div>

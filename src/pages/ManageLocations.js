@@ -49,7 +49,7 @@ const ManageLocations = () => {
     const fetchLocations = async () => {
         setLoading(true);
         try {
-            const response = await fetch('https://serviceprovidersback.onrender.com/api/locations/');
+            const response = await fetch('https://elementk.in/spbackend/api/locations/');
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
@@ -122,7 +122,7 @@ const ManageLocations = () => {
     const handleDeleteConfirmation = async () => {
         if (selectedLocationId) {
             try {
-                const response = await fetch(`https://serviceprovidersback.onrender.com/api/locations/${selectedLocationId}`, {
+                const response = await fetch(`https://elementk.in/spbackend/api/locations/${selectedLocationId}`, {
                     method: 'DELETE',
                 });
                 if (response.ok) {

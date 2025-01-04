@@ -26,7 +26,7 @@ const AddNotificationForm = ({ onClose , after}) => {
   useEffect(() => {
     const fetchServiceProviders = async () => {
       try {
-        const response = await fetch('https://serviceprovidersback.onrender.com/api/locations');
+        const response = await fetch('https://elementk.in/spbackend/api/locations');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -70,7 +70,7 @@ const AddNotificationForm = ({ onClose , after}) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch('https://serviceprovidersback.onrender.com/api/notifications', {
+    const response = await fetch('https://elementk.in/spbackend/api/notifications', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

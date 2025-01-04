@@ -29,12 +29,12 @@ import ManageLocations from './pages/ManageLocations';
 import EndServices from './pages/users/EndServices';
 import ManageEndServices from './pages/ManageEndServices';
 
-
+//basename="/service-providers-panel"
 function App() {
 
   const adminType = sessionStorage.getItem("adminType");
   return (
-    <Router>
+    <Router basename="/service-providers-panel">
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<PrivateRoute />}>
@@ -72,7 +72,7 @@ function App() {
   );
 }
 
-// Create a private route component to handle authentication https://serviceprovidersback.onrender.com/
+// Create a private route component to handle authentication https://elementk.in/spbackend/
 const PrivateRoute = () => {
   const navigate = useNavigate();
   useEffect(() => {

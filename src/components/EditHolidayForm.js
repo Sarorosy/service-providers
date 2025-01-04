@@ -24,7 +24,7 @@ const EditHolidayForm = ({ holidayId, onClose, after }) => {
     useEffect(() => {
         const fetchLocations = async () => {
             try {
-                const response = await fetch('https://serviceprovidersback.onrender.com/api/locations');
+                const response = await fetch('https://elementk.in/spbackend/api/locations');
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -42,7 +42,7 @@ const EditHolidayForm = ({ holidayId, onClose, after }) => {
     useEffect(() => {
         const fetchHoliday = async () => {
             try {
-                const response = await fetch(`https://serviceprovidersback.onrender.com/api/holidays/${holidayId}`);
+                const response = await fetch(`https://elementk.in/spbackend/api/holidays/${holidayId}`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -115,7 +115,7 @@ const EditHolidayForm = ({ holidayId, onClose, after }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = await fetch(`https://serviceprovidersback.onrender.com/api/holidays/${holidayId}`, {
+        const response = await fetch(`https://elementk.in/spbackend/api/holidays/${holidayId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

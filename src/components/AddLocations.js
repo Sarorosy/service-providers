@@ -20,7 +20,7 @@ const AddLocation = ({ onClose, after }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = await fetch('https://serviceprovidersback.onrender.com/api/locations/new', {
+        const response = await fetch('https://elementk.in/spbackend/api/locations/new', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

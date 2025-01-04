@@ -8,7 +8,7 @@ const UpcomingHolidays = () => {
 
   useEffect(() => {
     const locationId = sessionStorage.getItem("locationId");
-    fetch(`https://serviceprovidersback.onrender.com/api/holidays/user/${locationId}`)
+    fetch(`https://elementk.in/spbackend/api/holidays/user/${locationId}`)
       .then((response) => response.json())
       .then((data) => {
         setHolidays(data);

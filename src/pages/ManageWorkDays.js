@@ -22,7 +22,7 @@ const ManageWorkDays = () => {
   const fetchServiceProviders = async () => {
     try {
       setLoading(true);
-      const response = await fetch('https://serviceprovidersback.onrender.com/api/users/serviceproviders'); // API endpoint
+      const response = await fetch('https://elementk.in/spbackend/api/users/serviceproviders'); // API endpoint
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
@@ -51,7 +51,7 @@ const ManageWorkDays = () => {
       data: 'fld_profile_image',
       width: "100px",
       render: (data) => `
-          <img src="${data && data.trim() !== "" ? `https://serviceprovidersback.onrender.com/uploads/profileimg/${data}` : 'https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg'}" 
+          <img src="${data && data.trim() !== "" ? `https://elementk.in/spbackend/uploads/profileimg/${data}` : 'https://i.pinimg.com/736x/cb/45/72/cb4572f19ab7505d552206ed5dfb3739.jpg'}" 
           alt="Profile" style="width: 40px; height: auto; object-fit: cover;border-radius:50%" />
       `,
     },

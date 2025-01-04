@@ -15,7 +15,7 @@ const EditLocation = ({ locationId,onClose,after }) => {
     useEffect(() => {
         const fetchLocation = async () => {
             try {
-                const response = await fetch(`https://serviceprovidersback.onrender.com/api/locations/${locationId}`);
+                const response = await fetch(`https://elementk.in/spbackend/api/locations/${locationId}`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -42,7 +42,7 @@ const EditLocation = ({ locationId,onClose,after }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = await fetch(`https://serviceprovidersback.onrender.com/api/locations/${locationId}`, {
+        const response = await fetch(`https://elementk.in/spbackend/api/locations/${locationId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
